@@ -1,4 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Linking } from "react-native";
 
 type ActionResult<T extends object = {}> = {
   ok: boolean;
@@ -80,7 +82,18 @@ export const isSupabaseConfigured = Boolean(
     !supabaseAnonKey.includes("paste-your")
 );
 
-const supabase = isSupabaseConfigured ? createClient(supabaseUrl!, supabaseAnonKey!) : null;
+const oauthRedirectTo = "catapp://auth/callback";
+
+const supabase = isSupabaseConfigured
+  ? createClient(supabaseUrl!, supabaseAnonKey!, {
+      auth: {
+        storage: AsyncStorage,
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: false,
+      },
+    })
+  : null;
 
 async function selectTable<T>(table: string, fallback: T[] = []): Promise<T[] | null> {
   if (!supabase) return null;
@@ -210,6 +223,30 @@ export async function signInWithEmail(email: string, password: string): Promise<
   if (!supabase) return { ok: false, message: "Supabase Auth is not configured." };
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   return error ? { ok: false, message: error.message } : { ok: true, message: "Signed in." };
+}
+
+export async function signInWithGoogle(): Promise<ActionResult> {
+  if (!supabase) return { ok: false, message: "Supabase Auth is not configured." };
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: oauthRedirectTo,
+      skipBrowserRedirect: true,
+    },
+  });
+  if (error) return { ok: false, message: error.message };
+  if (!data.url) return { ok: false, message: "Google sign-in URL was not returned." };
+  await Linking.openURL(data.url);
+  return { ok: true, message: "Opening Google sign-in..." };
+}
+
+export async function handleSupabaseAuthCallback(url: string): Promise<ActionResult> {
+  if (!supabase || !url.startsWith(oauthRedirectTo)) return { ok: false, message: "No Supabase auth callback to handle." };
+  const parsed = new URL(url);
+  const code = parsed.searchParams.get("code");
+  if (!code) return { ok: false, message: "Google sign-in did not return an auth code." };
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  return error ? { ok: false, message: error.message } : { ok: true, message: "Signed in with Google." };
 }
 
 export async function signUpWithEmail(email: string, password: string, fullName: string): Promise<ActionResult> {

@@ -3,6 +3,7 @@
     "name": "CatApp",
     "owner": "guyxander",
     "slug": "catapp",
+    "scheme": "catapp",
     "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/catapp-logo.png",

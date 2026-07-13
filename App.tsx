@@ -24,8 +24,10 @@ import {
   incrementCommunityReaction,
   runAdminModuleAction,
   signInWithEmail,
+  signInWithGoogle,
   signOut,
   signUpWithEmail,
+  handleSupabaseAuthCallback,
   submitHymnCorrection,
   submitIdentityVerification,
   updateCurrentUserProfile,
@@ -92,6 +94,8 @@ type Novena = {
   feast: string;
   sourceUrl: string;
   sourceName: string;
+  days?: Array<{ title?: string; intention?: string; prayer?: string; reflection?: string }>;
+  prayer?: string;
 };
 
 type ReadingSection = {
@@ -278,34 +282,36 @@ const nigeriaOrdo2026 = nigeriaOrdo2026Data as Array<{
 const novenas = novenasData as Novena[];
 const prayers = prayersData as Prayer[];
 
-const communityPosts = [
-  {
-    author: "Fr. Jude Okonkwo",
-    badge: "Verified Priest",
-    title: "Reflections on the Sunday Gospel: The Bread of Life",
-    body:
-      "As we reflect on today's readings, let us remember that spiritual nourishment is the foundation of daily strength.",
-    comments: 24,
-    featured: false,
-  },
-  {
-    author: "Chioma Adeyemi",
-    title: "Asking for prayers for my grandmother",
-    body:
-      "Please join me in praying for my grandmother who is undergoing a minor surgery tomorrow morning.",
-    comments: 112,
-    featured: false,
-  },
-  {
-    author: "Sr. Mary Immaculata",
-    badge: "Verified Religious",
-    title: "Upcoming Parish Youth Retreat",
-    body:
-      "Registration is open for our annual retreat. This year's theme is Radiant Hearts.",
-    comments: 45,
-    featured: true,
-  },
-];
+const communityPosts: Array<{ author: string; badge?: string; title: string; body: string; comments: number; featured: boolean }> = [];
+
+function matchesSearchText(text: string, query: string) {
+  const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  if (!terms.length) return true;
+  const haystack = text.toLowerCase();
+  return terms.every((term) => haystack.includes(term));
+}
+
+function novenaSearchText(novena: Novena) {
+  return [
+    novena.title,
+    novena.month,
+    novena.starts,
+    novena.feast,
+    novena.sourceName,
+    novena.prayer,
+    ...(novena.days ?? []).flatMap((day) => [day.title, day.intention, day.prayer, day.reflection]),
+  ].filter(Boolean).join(" ");
+}
+
+function novenaDayEntries(novena: Novena) {
+  if (novena.days?.length) return novena.days.slice(0, 9);
+  return Array.from({ length: 9 }, (_, index) => ({
+    title: `Day ${index + 1}`,
+    intention: `${novena.title} intention for day ${index + 1}.`,
+    prayer: novena.prayer ?? `Pray ${novena.title}, asking God for grace through this nine-day devotion. Keep the feast of ${novena.feast} in view and entrust the day's intention to the Lord.`,
+    reflection: "Spend a quiet moment with the intention, then close with an Our Father, Hail Mary, and Glory Be.",
+  }));
+}
 
 function approvedLocalReadingForDate(date: string) {
   const parsed = new Date(`${date}T00:00:00Z`);
@@ -850,13 +856,13 @@ function LibraryScreen() {
   const [hymnCorrection, setHymnCorrection] = useState("");
   const [hymnCorrectionSubmit, setHymnCorrectionSubmit] = useState<SubmitState>("idle");
   const visibleHymns = libraryHymns.filter((hymn) =>
-    `${hymn.number} ${hymn.title} ${hymn.firstLine} ${hymn.tag}`.toLowerCase().includes(query.toLowerCase())
+    matchesSearchText(`${hymn.number} ${hymn.title} ${hymn.firstLine} ${hymn.tag} ${hymn.verses.join(" ")}`, query)
   );
   const visiblePrayers = libraryPrayers.filter((prayer) =>
-    `${prayer.title} ${prayer.category} ${prayer.body}`.toLowerCase().includes(query.toLowerCase())
+    matchesSearchText(`${prayer.title} ${prayer.category} ${prayer.body}`, query)
   );
   const visibleNovenas = novenas.filter((novena) =>
-    `${novena.title} ${novena.month} ${novena.starts} ${novena.feast}`.toLowerCase().includes(query.toLowerCase())
+    matchesSearchText(novenaSearchText(novena), query)
   );
   const shownHymns = visibleHymns.slice(0, visibleLimit);
   const shownNovenas = visibleNovenas.slice(0, visibleLimit);
@@ -1013,6 +1019,7 @@ function LibraryScreen() {
   }
 
   if (selectedNovena) {
+    const days = novenaDayEntries(selectedNovena);
     return (
       <View style={styles.stackLarge}>
         <Pressable style={styles.backButton} onPress={() => setSelectedNovena(null)}>
@@ -1032,13 +1039,15 @@ function LibraryScreen() {
             <InfoRow icon="flag-outline" label="Feast" value={selectedNovena.feast} />
             <InfoRow icon="link-outline" label="Source" value={selectedNovena.sourceName} />
             <View style={styles.noticeBox}>
-              <Text style={styles.postBody}>Pray this novena for nine days. Open the full text once, then return here each day to keep your place.</Text>
+              <Text style={styles.postBody}>Pray this novena for nine days. Each day includes an intention, prayer, and closing reflection.</Text>
             </View>
-            {Array.from({ length: 9 }, (_, index) => (
+            {days.map((day, index) => (
               <View key={`${selectedNovena.id}-day-${index + 1}`} style={styles.rosaryMysteryCard}>
                 <Text style={styles.overlinePurple}>Day {index + 1}</Text>
-                <Text style={styles.hymnTitle}>{selectedNovena.title}</Text>
-                <Text style={styles.mutedText}>Pray the day {index + 1} intention and prayer from Intercede, then mark this day in your personal prayer routine.</Text>
+                <Text style={styles.hymnTitle}>{day.title ?? selectedNovena.title}</Text>
+                <Text style={styles.postBody}>{day.intention}</Text>
+                <Text style={styles.readingText}>{day.prayer}</Text>
+                {day.reflection ? <Text style={styles.mutedText}>{day.reflection}</Text> : null}
               </View>
             ))}
             <Pressable style={styles.secondaryButton} onPress={() => Linking.openURL(selectedNovena.sourceUrl)}>
@@ -1374,6 +1383,14 @@ function CommunityScreen() {
           </View>
         </Pressable>
       ))}
+      {!communityFeed.length ? (
+        <SectionCard>
+          <View style={styles.cardBody}>
+            <Text style={styles.cardTitle}>No community posts yet</Text>
+            <Text style={styles.mutedText}>Create the first parish notice, prayer request, or reflection for CatApp.</Text>
+          </View>
+        </SectionCard>
+      ) : null}
       {composerOpen ? (
         <SectionCard>
           <View style={styles.cardHeader}>
@@ -1727,9 +1744,28 @@ function ProfileScreen({
   const [adminOverview, setAdminOverview] = useState<any | null>(null);
   const [signInSubmit, setSignInSubmit] = useState<SubmitState>("idle");
   const [signUpSubmit, setSignUpSubmit] = useState<SubmitState>("idle");
+  const [googleSubmit, setGoogleSubmit] = useState<SubmitState>("idle");
   const [profileSubmit, setProfileSubmit] = useState<SubmitState>("idle");
   const [identitySubmit, setIdentitySubmit] = useState<SubmitState>("idle");
   const [adminSubmit, setAdminSubmit] = useState<SubmitState>("idle");
+
+  useEffect(() => {
+    const finishAuth = async (url: string | null) => {
+      if (!url) return;
+      const result = await handleSupabaseAuthCallback(url);
+      if (!result.ok) return;
+      const record = await getCurrentUserProfile();
+      if (!record?.user) return;
+      setIsAuthenticated(true);
+      setEmail(record.user.email || email);
+      setFullName((current) => record.profile?.display_name || record.user.user_metadata?.full_name || current);
+      setProfileStatus(result.message);
+    };
+
+    Linking.getInitialURL().then(finishAuth);
+    const subscription = Linking.addEventListener("url", ({ url }) => finishAuth(url));
+    return () => subscription.remove();
+  }, []);
 
   useEffect(() => {
     if (!showAdmin) return;
@@ -1789,6 +1825,13 @@ function ProfileScreen({
           <View style={styles.cardBody}>
             <TextInput value={authEmail} onChangeText={setAuthEmail} autoCapitalize="none" keyboardType="email-address" style={styles.searchInputBox} placeholder="Email address" placeholderTextColor="#77717d" />
             <TextInput value={authPassword} onChangeText={setAuthPassword} secureTextEntry style={styles.searchInputBox} placeholder="Password" placeholderTextColor="#77717d" />
+            <SubmitButton icon="logo-google" label="Continue with Google" successLabel="Opening Google" state={googleSubmit} variant="secondary" onPress={async () => {
+              setGoogleSubmit("saving");
+              const result = await signInWithGoogle();
+              setProfileStatus(result.message);
+              setGoogleSubmit(result.ok ? "success" : "idle");
+              if (result.ok) setTimeout(() => setGoogleSubmit("idle"), 1800);
+            }} />
             <SubmitButton icon="mail-outline" label="Sign In" successLabel="Signed In" state={signInSubmit} variant="secondary" onPress={async () => {
               setSignInSubmit("saving");
               const result = await signInWithEmail(authEmail, authPassword);
