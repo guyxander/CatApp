@@ -84,7 +84,9 @@ export async function getLocalParishes(): Promise<LocalParish[]> {
 
 export async function saveLocalParish(parish: LocalParish) {
   const parishes = await getLocalParishes();
-  await writeJson("parishes:local", [parish, ...parishes.filter((item) => item.id !== parish.id)]);
+  const parishKey = (item: LocalParish) => (item.id || item.name).trim().toLowerCase();
+  const key = parishKey(parish);
+  await writeJson("parishes:local", [parish, ...parishes.filter((item) => parishKey(item) !== key)]);
 }
 
 export function getSavedItems(): SavedItem[] {

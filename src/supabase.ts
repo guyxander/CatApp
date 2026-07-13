@@ -281,9 +281,60 @@ export async function updateCurrentUserProfile(input: Record<string, any>): Prom
 }
 
 export async function updateParishDetails(input: Record<string, any>): Promise<ActionResult<{ parish?: ParishRecord }>> {
-  if (!supabase) return { ok: false, message: "Parish update saved locally until Supabase is configured." };
-  const { data, error } = await supabase.from("parish_update_requests").insert(input).select("*").maybeSingle();
-  return error ? { ok: false, message: error.message } : { ok: true, message: "Parish update submitted.", parish: data as ParishRecord };
+  const parishName = String(input.parishName || input.homeParish || "").trim();
+  const parish: ParishRecord = {
+    name: parishName,
+    address: String(input.proposedAddress || input.homeParishAddress || "").trim() || undefined,
+    phone: String(input.proposedPhone || input.homeParishPhone || "").trim() || undefined,
+    mass_times: String(input.proposedMassTimes || input.homeParishMassTimes || "").trim()
+      ? [{ times: [String(input.proposedMassTimes || input.homeParishMassTimes).trim()] }]
+      : undefined,
+    confession_times: String(input.proposedConfessionTimes || input.homeParishConfessionTimes || "").trim()
+      ? [{ times: [String(input.proposedConfessionTimes || input.homeParishConfessionTimes).trim()] }]
+      : undefined,
+    data_quality_notes: String(input.note || "").trim() || undefined,
+    last_confirmed_at: new Date().toISOString(),
+  };
+  if (input.parishId && !String(input.parishId).startsWith("local-")) parish.id = input.parishId;
+  Object.keys(parish).forEach((key) => parish[key] === undefined && delete parish[key]);
+
+  if (!parishName) return { ok: false, message: "Add a parish name before saving parish details." };
+  if (!supabase) return { ok: false, message: "Parish saved locally until Supabase is configured.", parish };
+
+  await supabase.from("parish_update_requests").insert(input);
+
+  if (input.parishId && !String(input.parishId).startsWith("local-")) {
+    const { data, error } = await supabase
+      .from("parishes")
+      .update(parish)
+      .eq("id", input.parishId)
+      .select("*")
+      .maybeSingle();
+    if (!error && data) return { ok: true, message: "Parish database updated.", parish: data as ParishRecord };
+  }
+
+  const { data: existing } = await supabase
+    .from("parishes")
+    .select("id")
+    .ilike("name", parishName)
+    .maybeSingle();
+
+  if (existing?.id) {
+    const { data, error } = await supabase
+      .from("parishes")
+      .update(parish)
+      .eq("id", existing.id)
+      .select("*")
+      .maybeSingle();
+    return error
+      ? { ok: false, message: error.message, parish }
+      : { ok: true, message: "Parish database updated.", parish: data as ParishRecord };
+  }
+
+  const { data, error } = await supabase.from("parishes").insert(parish).select("*").maybeSingle();
+  return error
+    ? { ok: false, message: error.message, parish }
+    : { ok: true, message: "Parish added to the parish database.", parish: data as ParishRecord };
 }
 
 export async function submitIdentityVerification(input: Record<string, any>): Promise<ActionResult> {

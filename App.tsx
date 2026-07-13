@@ -329,7 +329,7 @@ function isPlaceholderCommunityPost(post: any) {
 function mergeUniqueById<T extends { id?: string; name?: string; title?: string }>(items: T[]) {
   const seen = new Set<string>();
   return items.filter((item) => {
-    const key = item.id ?? item.name ?? item.title;
+    const key = (item.name ?? item.title ?? item.id)?.trim().toLowerCase();
     if (!key || seen.has(key)) return false;
     seen.add(key);
     return true;
@@ -1598,12 +1598,12 @@ function formatParishRecord(record: any, index = 0, userCoords?: { latitude: num
     id: record.id,
     name: record.name,
     diocese: record.diocese,
-    mass: record.mass_times?.[0]?.times?.[0] ?? "Schedule pending",
-    distance: distanceKm === null ? `${(index + 1) * 2}.0 km` : `${distanceKm.toFixed(1)} km`,
+    mass: record.mass_times?.[0]?.times?.[0] ?? record.massTimes?.[0]?.times?.[0] ?? record.mass ?? "Schedule pending",
+    distance: record.distance ?? (distanceKm === null ? `${(index + 1) * 2}.0 km` : `${distanceKm.toFixed(1)} km`),
     distanceKm,
-    address: record.address,
-    confession: record.confession_times?.[0]?.times?.[0] ?? "By appointment",
-    verified: record.last_confirmed_at ? `Verified ${new Date(record.last_confirmed_at).toLocaleDateString()}` : "Verified parish",
+    address: record.address ?? record.location ?? "Address pending",
+    confession: record.confession_times?.[0]?.times?.[0] ?? record.confessionTimes?.[0]?.times?.[0] ?? record.confession ?? "By appointment",
+    verified: record.verified ?? (record.last_confirmed_at ? `Verified ${new Date(record.last_confirmed_at).toLocaleDateString()}` : "Verified parish"),
     phone: record.phone,
     dataQualityNotes: record.data_quality_notes,
     latitude: record.latitude,
@@ -1627,7 +1627,7 @@ function ParishesScreen() {
   const [rawParishRecords, setRawParishRecords] = useState<any[]>([]);
   const [parishSubmit, setParishSubmit] = useState<SubmitState>("idle");
   const searchSource = query.trim() ? allDirectoryParishes : directoryParishes;
-  const visibleParishes = searchSource.filter((parish) => `${parish.name} ${parish.diocese} ${parish.address}`.toLowerCase().includes(query.toLowerCase()));
+  const visibleParishes = searchSource.filter((parish) => `${parish.name ?? ""} ${parish.diocese ?? ""} ${parish.address ?? ""}`.toLowerCase().includes(query.toLowerCase()));
 
   useEffect(() => {
     const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
@@ -1650,13 +1650,18 @@ function ParishesScreen() {
     Promise.all([fetchVerifiedParishes(), getLocalParishes()]).then(([records, localRecords]) => {
       if (!isMounted) return;
 
-      const mergedRecords = mergeUniqueById([...(localRecords ?? []), ...(records ?? [])]);
+      const remoteRecords = records?.length ? records : [];
+      const mergedRecords = mergeUniqueById([...(localRecords ?? []), ...remoteRecords, ...parishes]);
       setRawParishRecords(mergedRecords);
       const mapped = mergedRecords.map((record, index) => formatParishRecord(record, index));
       setAllDirectoryParishes(mapped);
       setDirectoryParishes(mapped);
       if (localRecords.length) {
         setParishStatus(`${localRecords.length} saved parish${localRecords.length === 1 ? "" : "es"} available offline. Showing Lagos reference distances.`);
+      } else if (remoteRecords.length) {
+        setParishStatus(`${remoteRecords.length} parish${remoteRecords.length === 1 ? "" : "es"} loaded from the database. Showing Lagos reference distances.`);
+      } else {
+        setParishStatus("Showing the bundled parish directory. Saved profile parishes and database updates will appear here.");
       }
     });
 
@@ -1752,16 +1757,16 @@ function ParishesScreen() {
                       note: editorNote || "Structured parish update submitted from the parish detail screen.",
                     });
                     setParishStatus(result.message);
-                    if (result.ok && result.parish) {
+                    if (result.parish) {
                       const parish = result.parish;
-                      const updatedParish = formatParishRecord(parish);
-                      setRawParishRecords((records) => records.map((record) => record.id === parish.id ? parish : record));
-                      setAllDirectoryParishes((records) => records.map((record) => record.id === parish.id ? updatedParish : record));
-                      setDirectoryParishes((records) => records.map((record) => record.id === parish.id ? updatedParish : record));
-                      setSelectedParish(updatedParish);
+                      await saveLocalParish(parish as any);
+                      setRawParishRecords((records) => mergeUniqueById([parish, ...records]));
+                      setAllDirectoryParishes((records) => mergeUniqueById([formatParishRecord(parish), ...records]));
+                      setDirectoryParishes((records) => mergeUniqueById([formatParishRecord(parish), ...records]));
+                      setSelectedParish(formatParishRecord(parish));
                     }
-                    setParishSubmit(result.ok ? "success" : "idle");
-                    if (result.ok) {
+                    setParishSubmit(result.ok || result.parish ? "success" : "idle");
+                    if (result.ok || result.parish) {
                       setTimeout(() => {
                         setEditorAddress("");
                         setEditorPhone("");
@@ -2249,16 +2254,18 @@ function ProfileScreen({
                 homeParishMassTimes,
                 homeParishConfessionTimes,
               });
-              const result = await updateParishDetails({
-                parishName: homeParish,
-                submittedByName: fullName,
-                proposedAddress: homeParishAddress,
-                proposedPhone: homeParishPhone,
-                proposedMassTimes: homeParishMassTimes,
-                proposedConfessionTimes: homeParishConfessionTimes,
-                sourceContext: "profile_home_parish",
-                note: `Home parish details updated from ${fullName || email || "a CatApp user"}'s profile.`,
-              });
+              const result = localParish
+                ? await updateParishDetails({
+                    parishName: homeParish,
+                    submittedByName: fullName,
+                    proposedAddress: homeParishAddress,
+                    proposedPhone: homeParishPhone,
+                    proposedMassTimes: homeParishMassTimes,
+                    proposedConfessionTimes: homeParishConfessionTimes,
+                    sourceContext: "profile_home_parish",
+                    note: `Home parish details updated from ${fullName || email || "a CatApp user"}'s profile.`,
+                  })
+                : { ok: true, message: "Profile saved." };
               setProfileStatus(profileResult.ok ? result.message : `${profileResult.message} Local profile saved.`);
               setProfileSubmit("success");
               setTimeout(() => {
