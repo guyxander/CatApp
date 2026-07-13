@@ -28,6 +28,8 @@ import {
   signOut,
   signUpWithEmail,
   handleSupabaseAuthCallback,
+  syncUserCollectionItem,
+  syncUserSettings,
   submitHymnCorrection,
   submitIdentityVerification,
   updateCurrentUserProfile,
@@ -53,6 +55,7 @@ import {
   setAppSetting,
   setOfflineCache,
 } from "./src/offlineCache";
+import type { AppSettings } from "./src/offlineCache";
 import { cancelPrayerReminders, requestCurrentLocation, scheduleDailyPrayerReminder } from "./src/nativeServices";
 import {
   BackHandler,
@@ -301,6 +304,7 @@ function matchesSearchText(text: string, query: string) {
 }
 
 function novenaSearchText(novena: Novena) {
+  const fullText = novenaFullPrayer(novena);
   return [
     novena.title,
     novena.month,
@@ -308,18 +312,40 @@ function novenaSearchText(novena: Novena) {
     novena.feast,
     novena.sourceName,
     novena.prayer,
+    fullText,
     ...(novena.days ?? []).flatMap((day) => [day.title, day.intention, day.prayer, day.reflection]),
   ].filter(Boolean).join(" ");
 }
 
+function normalizeTitle(value: string) {
+  return value.toLowerCase().replace(/\bst\.?\b/g, "saint").replace(/[^a-z0-9]+/g, " ").replace(/\b(novena|to|the|of|and)\b/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function novenaFullPrayer(novena: Novena) {
+  if (novena.prayer?.trim()) return novena.prayer.trim();
+  const target = normalizeTitle(novena.title);
+  const match = prayers.find((prayer) => {
+    if (!prayer.title.toLowerCase().includes("novena")) return false;
+    const source = normalizeTitle(prayer.title);
+    return source === target || source.includes(target) || target.includes(source);
+  });
+  return match?.body?.trim() ?? "";
+}
+
 function novenaDayEntries(novena: Novena) {
   if (novena.days?.length) return novena.days.slice(0, 9);
-  return Array.from({ length: 9 }, (_, index) => ({
-    title: `Day ${index + 1}`,
-    intention: `${novena.title} intention for day ${index + 1}.`,
-    prayer: novena.prayer ?? `Pray ${novena.title}, asking God for grace through this nine-day devotion. Keep the feast of ${novena.feast} in view and entrust the day's intention to the Lord.`,
-    reflection: "Spend a quiet moment with the intention, then close with an Our Father, Hail Mary, and Glory Be.",
-  }));
+  return [];
+}
+
+async function syncSetting<K extends keyof AppSettings>(key: K, value: AppSettings[K]) {
+  await setAppSetting(key, value);
+  syncUserSettings({ [key]: value }).catch(() => undefined);
+}
+
+function saveAndSyncCollectionItem(type: string, id: string, title: string, collection: "saved" | "recent") {
+  const items = collection === "saved" ? saveLocalItem(type, id, title) : recordRecentItem(type, id, title);
+  syncUserCollectionItem({ type, itemId: id, title, collection }).catch(() => undefined);
+  return items;
 }
 
 function isPlaceholderCommunityPost(post: any) {
@@ -786,7 +812,7 @@ function TodayScreen() {
         </Pressable>
         <Pressable style={[styles.dateButton, bookmarked && styles.dateButtonActive]} accessibilityLabel="Save today's readings" onPress={() => {
           setBookmarked((value) => !value);
-          saveLocalItem("reading", selectedDate, `Readings for ${selectedDate}`);
+          saveAndSyncCollectionItem("reading", selectedDate, `Readings for ${selectedDate}`, "saved");
         }}>
           <Ionicons color={colors.primary} name={bookmarked ? "bookmark" : "bookmark-outline"} size={18} />
           <Text style={styles.dateButtonText}>{bookmarked ? "Saved" : "Save"}</Text>
@@ -1029,7 +1055,7 @@ function LibraryScreen() {
             {selectedHymn.verses.map((line, index) => (
               <HymnTextLine key={`${selectedHymn.number}-${index}-${line}`} line={line} />
             ))}
-            <Pressable style={styles.secondaryButton} accessibilityLabel="Save hymn to favourites" onPress={() => setSavedItems(saveLocalItem("hymn", selectedHymn.number, selectedHymn.title))}>
+            <Pressable style={styles.secondaryButton} accessibilityLabel="Save hymn to favourites" onPress={() => setSavedItems(saveAndSyncCollectionItem("hymn", selectedHymn.number, selectedHymn.title, "saved"))}>
               <Ionicons color={colors.primary} name="heart-outline" size={18} />
               <Text style={styles.secondaryButtonText}>Save Hymn</Text>
             </Pressable>
@@ -1092,7 +1118,7 @@ function LibraryScreen() {
           </View>
           <View style={styles.cardBody}>
             <Text style={styles.readingText}>{selectedPrayer.body}</Text>
-            <Pressable style={styles.secondaryButton} accessibilityLabel="Save prayer to favourites" onPress={() => setSavedItems(saveLocalItem("prayer", selectedPrayer.title, selectedPrayer.title))}>
+            <Pressable style={styles.secondaryButton} accessibilityLabel="Save prayer to favourites" onPress={() => setSavedItems(saveAndSyncCollectionItem("prayer", selectedPrayer.title, selectedPrayer.title, "saved"))}>
               <Ionicons color={colors.primary} name="heart-outline" size={18} />
               <Text style={styles.secondaryButtonText}>Save Prayer</Text>
             </Pressable>
@@ -1107,6 +1133,7 @@ function LibraryScreen() {
 
   if (selectedNovena) {
     const days = novenaDayEntries(selectedNovena);
+    const fullPrayer = novenaFullPrayer(selectedNovena);
     return (
       <View style={styles.stackLarge}>
         <Pressable style={styles.backButton} onPress={() => setSelectedNovena(null)}>
@@ -1125,10 +1152,14 @@ function LibraryScreen() {
             <InfoRow icon="calendar-outline" label="Starts" value={selectedNovena.starts} />
             <InfoRow icon="flag-outline" label="Feast" value={selectedNovena.feast} />
             <InfoRow icon="link-outline" label="Source" value={selectedNovena.sourceName} />
-            <View style={styles.noticeBox}>
-              <Text style={styles.postBody}>Pray this novena for nine days. Each day includes an intention, prayer, and closing reflection.</Text>
-            </View>
-            {days.map((day, index) => (
+            {fullPrayer ? (
+              <Text style={styles.readingText}>{fullPrayer}</Text>
+            ) : (
+              <View style={styles.noticeBox}>
+                <Text style={styles.postBody}>The full prayer text for this novena has not been imported yet. Use the source link below for the verified novena text.</Text>
+              </View>
+            )}
+            {days.length ? days.map((day, index) => (
               <View key={`${selectedNovena.id}-day-${index + 1}`} style={styles.rosaryMysteryCard}>
                 <Text style={styles.overlinePurple}>Day {index + 1}</Text>
                 <Text style={styles.hymnTitle}>{day.title ?? selectedNovena.title}</Text>
@@ -1136,7 +1167,7 @@ function LibraryScreen() {
                 <Text style={styles.readingText}>{day.prayer}</Text>
                 {day.reflection ? <Text style={styles.mutedText}>{day.reflection}</Text> : null}
               </View>
-            ))}
+            )) : null}
             <Pressable style={styles.secondaryButton} onPress={() => Linking.openURL(selectedNovena.sourceUrl)}>
               <Ionicons color={colors.primary} name="open-outline" size={18} />
               <Text style={styles.secondaryButtonText}>Read Full Novena</Text>
@@ -1190,7 +1221,7 @@ function LibraryScreen() {
         </View> : null}
         {libraryMode === "hymns" ? shownHymns.map((hymn) => (
             <Pressable key={hymn.number} style={styles.hymnRow} accessibilityLabel={`Open hymn ${hymn.number} ${hymn.title}`} onPress={() => {
-              setRecentItems(recordRecentItem("hymn", hymn.number, hymn.title));
+              setRecentItems(saveAndSyncCollectionItem("hymn", hymn.number, hymn.title, "recent"));
               setSelectedHymn(hymn);
             }}>
               <Text style={styles.hymnNumber}>{hymn.number}</Text>
@@ -1202,7 +1233,7 @@ function LibraryScreen() {
             </Pressable>
           )) : libraryMode === "prayers" ? shownPrayers.map((prayer) => (
             <Pressable key={prayer.title} style={styles.hymnRow} accessibilityLabel={`Open prayer ${prayer.title}`} onPress={() => {
-              setRecentItems(recordRecentItem("prayer", prayer.title, prayer.title));
+              setRecentItems(saveAndSyncCollectionItem("prayer", prayer.title, prayer.title, "recent"));
               setSelectedPrayer(prayer);
             }}>
               <Ionicons color={colors.secondary} name="sparkles-outline" size={22} />
@@ -1214,7 +1245,7 @@ function LibraryScreen() {
             </Pressable>
           )) : libraryMode === "novenas" ? shownNovenas.map((novena) => (
             <Pressable key={novena.id} style={styles.hymnRow} accessibilityLabel={`Open novena ${novena.title}`} onPress={() => {
-              setRecentItems(recordRecentItem("novena", novena.id, novena.title));
+              setRecentItems(saveAndSyncCollectionItem("novena", novena.id, novena.title, "recent"));
               setSelectedNovena(novena);
             }}>
               <Ionicons color={colors.secondary} name="sparkles-outline" size={22} />
@@ -1858,6 +1889,7 @@ function ProfileScreen({
   const [authFullName, setAuthFullName] = useState("");
   const [authEmail, setAuthEmail] = useState("");
   const [authPassword, setAuthPassword] = useState("");
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [isAdmin, setIsAdmin] = useState(false);
   const [profileRole, setProfileRole] = useState("Guest");
   const [homeParish, setHomeParish] = useState("Holy Cross Cathedral, Lagos");
@@ -1998,64 +2030,91 @@ function ProfileScreen({
         </View>
         <SectionCard>
           <View style={styles.cardHeader}>
-            <Text style={styles.cardTitle}>Account</Text>
-            <Text style={styles.smallBadge}>Supabase Auth</Text>
+            <Text style={styles.cardTitle}>Google Account</Text>
+            <Text style={styles.smallBadge}>OAuth</Text>
           </View>
           <View style={styles.cardBody}>
-            <TextInput value={authEmail} onChangeText={setAuthEmail} autoCapitalize="none" keyboardType="email-address" style={styles.searchInputBox} placeholder="Email address" placeholderTextColor="#77717d" />
-            <TextInput value={authPassword} onChangeText={setAuthPassword} secureTextEntry style={styles.searchInputBox} placeholder="Password" placeholderTextColor="#77717d" />
-            <SubmitButton icon="logo-google" label="Continue with Google" successLabel="Opening Google" state={googleSubmit} variant="secondary" onPress={async () => {
+            <SubmitButton icon="logo-google" label="Continue with Google" successLabel="Opening Google" state={googleSubmit} variant="primary" onPress={async () => {
               setGoogleSubmit("saving");
               const result = await signInWithGoogle();
               setProfileStatus(result.message);
               setGoogleSubmit(result.ok ? "success" : "idle");
               if (result.ok) setTimeout(() => setGoogleSubmit("idle"), 1800);
             }} />
-            <SubmitButton icon="mail-outline" label="Sign In" successLabel="Signed In" state={signInSubmit} variant="secondary" onPress={async () => {
-              setSignInSubmit("saving");
-              const result = await signInWithEmail(authEmail, authPassword);
-              setProfileStatus(result.message);
-              const profile = await getCurrentUserProfile();
-              if (!profile?.user) {
-                setSignInSubmit("idle");
-                return;
-              }
-              setIsAuthenticated(true);
-              const authRole = profile.user.app_metadata?.role;
-              setIsAdmin(Boolean(profile.profile?.is_admin || authRole === "superadmin"));
-              setProfileRole(authRole === "superadmin" ? "Superadmin" : profile.profile?.is_admin ? "Admin" : profile.profile?.verification_status || "Member");
-              setFullName(profile.profile?.display_name || profile.user.user_metadata?.full_name || authFullName);
-              setEmail(profile.user.email || authEmail);
-              setHomeParish(profile.user.user_metadata?.home_parish || homeParish);
-              setHomeParishAddress(profile.user.user_metadata?.home_parish_address || homeParishAddress);
-              setHomeParishPhone(profile.user.user_metadata?.home_parish_phone || homeParishPhone);
-              setHomeParishMassTimes(profile.user.user_metadata?.home_parish_mass_times || homeParishMassTimes);
-              setHomeParishConfessionTimes(profile.user.user_metadata?.home_parish_confession_times || homeParishConfessionTimes);
-              if (profile.user.user_metadata?.home_parish) setProfileCompleted(true);
-              setAuthPassword("");
-              setSignInSubmit("success");
-              setTimeout(() => setSignInSubmit("idle"), 1800);
-            }} />
-            <View style={styles.noticeBox}>
-              <TextInput value={authFullName} onChangeText={setAuthFullName} style={styles.searchInputBox} placeholder="Full name for new account" placeholderTextColor="#77717d" />
-              <SubmitButton icon="person-add-outline" label="Create Account" successLabel="Account Created" state={signUpSubmit} variant="secondary" onPress={async () => {
-              setSignUpSubmit("saving");
-              const result = await signUpWithEmail(authEmail, authPassword, authFullName);
-              setProfileStatus(result.message);
-              const profile = await getCurrentUserProfile();
-              if (!profile?.user) {
-                setSignUpSubmit("idle");
-                return;
-              }
-              setIsAuthenticated(true);
-              setFullName(profile.profile?.display_name || profile.user.user_metadata?.full_name || authFullName);
-              setEmail(profile.user.email || authEmail);
-              setProfileRole(profile.profile?.verification_status || "Member");
-              setAuthPassword("");
-              setSignUpSubmit("success");
-              setTimeout(() => setSignUpSubmit("idle"), 1800);
-              }} />
+          </View>
+        </SectionCard>
+        <SectionCard>
+          <View style={styles.cardHeader}>
+            <Text style={styles.cardTitle}>Email Account</Text>
+            <Text style={styles.smallBadge}>{authMode === "signin" ? "Sign in" : "Create"}</Text>
+          </View>
+          <View style={styles.cardBody}>
+            <View style={styles.authToggle}>
+              <Pressable style={[styles.authToggleButton, authMode === "signin" && styles.authToggleButtonActive]} onPress={() => setAuthMode("signin")}>
+                <Text style={[styles.authToggleText, authMode === "signin" && styles.authToggleTextActive]}>Sign In</Text>
+              </Pressable>
+              <Pressable style={[styles.authToggleButton, authMode === "signup" && styles.authToggleButtonActive]} onPress={() => setAuthMode("signup")}>
+                <Text style={[styles.authToggleText, authMode === "signup" && styles.authToggleTextActive]}>Create Account</Text>
+              </Pressable>
             </View>
+            {authMode === "signup" ? (
+              <TextInput value={authFullName} onChangeText={setAuthFullName} style={styles.searchInputBox} placeholder="Full name" placeholderTextColor="#77717d" />
+            ) : null}
+            <TextInput value={authEmail} onChangeText={setAuthEmail} autoCapitalize="none" keyboardType="email-address" style={styles.searchInputBox} placeholder="Email address" placeholderTextColor="#77717d" />
+            <TextInput value={authPassword} onChangeText={setAuthPassword} secureTextEntry style={styles.searchInputBox} placeholder="Password" placeholderTextColor="#77717d" />
+            {authMode === "signin" ? (
+              <SubmitButton icon="mail-outline" label="Sign In with Email" successLabel="Signed In" state={signInSubmit} variant="secondary" onPress={async () => {
+                if (!authEmail.trim() || !authPassword.trim()) {
+                  setProfileStatus("Enter your email and password to sign in.");
+                  return;
+                }
+                setSignInSubmit("saving");
+                const result = await signInWithEmail(authEmail, authPassword);
+                setProfileStatus(result.message);
+                const profile = await getCurrentUserProfile();
+                if (!profile?.user) {
+                  setSignInSubmit("idle");
+                  return;
+                }
+                setIsAuthenticated(true);
+                const authRole = profile.user.app_metadata?.role;
+                setIsAdmin(Boolean(profile.profile?.is_admin || authRole === "superadmin"));
+                setProfileRole(authRole === "superadmin" ? "Superadmin" : profile.profile?.is_admin ? "Admin" : profile.profile?.verification_status || "Member");
+                setFullName(profile.profile?.display_name || profile.user.user_metadata?.full_name || authFullName);
+                setEmail(profile.user.email || authEmail);
+                setHomeParish(profile.user.user_metadata?.home_parish || homeParish);
+                setHomeParishAddress(profile.user.user_metadata?.home_parish_address || homeParishAddress);
+                setHomeParishPhone(profile.user.user_metadata?.home_parish_phone || homeParishPhone);
+                setHomeParishMassTimes(profile.user.user_metadata?.home_parish_mass_times || homeParishMassTimes);
+                setHomeParishConfessionTimes(profile.user.user_metadata?.home_parish_confession_times || homeParishConfessionTimes);
+                if (profile.user.user_metadata?.home_parish) setProfileCompleted(true);
+                setAuthPassword("");
+                setSignInSubmit("success");
+                setTimeout(() => setSignInSubmit("idle"), 1800);
+              }} />
+            ) : (
+              <SubmitButton icon="person-add-outline" label="Create Email Account" successLabel="Account Created" state={signUpSubmit} variant="secondary" onPress={async () => {
+                if (!authFullName.trim() || !authEmail.trim() || !authPassword.trim()) {
+                  setProfileStatus("Enter your name, email and password to create an account.");
+                  return;
+                }
+                setSignUpSubmit("saving");
+                const result = await signUpWithEmail(authEmail, authPassword, authFullName);
+                setProfileStatus(result.message);
+                const profile = await getCurrentUserProfile();
+                if (!profile?.user) {
+                  setSignUpSubmit("idle");
+                  return;
+                }
+                setIsAuthenticated(true);
+                setFullName(profile.profile?.display_name || profile.user.user_metadata?.full_name || authFullName);
+                setEmail(profile.user.email || authEmail);
+                setProfileRole(profile.profile?.verification_status || "Member");
+                setAuthPassword("");
+                setSignUpSubmit("success");
+                setTimeout(() => setSignUpSubmit("idle"), 1800);
+              }} />
+            )}
           </View>
         </SectionCard>
       </View>
@@ -2233,7 +2292,7 @@ function ProfileScreen({
                 homeParishMassTimes,
                 homeParishConfessionTimes,
               }) : null;
-              await setAppSetting("profile", {
+              await syncSetting("profile", {
                 fullName,
                 email,
                 homeParish,
@@ -2348,13 +2407,13 @@ function ProfileScreen({
               if (!enabled) {
                 const result = await cancelPrayerReminders();
                 setPrayerReminder(false);
-                await setAppSetting("prayerReminder", false);
+                await syncSetting("prayerReminder", false);
                 setProfileStatus(result.message);
                 return;
               }
               const result = await scheduleDailyPrayerReminder(6, 30);
               setPrayerReminder(result.ok);
-              await setAppSetting("prayerReminder", result.ok);
+              await syncSetting("prayerReminder", result.ok);
               setProfileStatus(result.message);
             }}
             thumbColor="#ffffff"
@@ -2370,7 +2429,7 @@ function ProfileScreen({
           <Switch
             onValueChange={async (enabled) => {
               setOfflineDownloads(enabled);
-              await setAppSetting("offlineDownloads", enabled);
+              await syncSetting("offlineDownloads", enabled);
               if (!enabled) {
                 setProfileStatus("Offline downloads turned off. Already cached items remain on this device.");
                 return;
@@ -2400,13 +2459,13 @@ function ProfileScreen({
             onValueChange={async (enabled) => {
               if (!enabled) {
                 setPrivacyLocation(false);
-                await setAppSetting("shareLocation", false);
+                await syncSetting("shareLocation", false);
                 setProfileStatus("Location sharing turned off.");
                 return;
               }
               const result = await requestCurrentLocation();
               setPrivacyLocation(result.ok);
-              await setAppSetting("shareLocation", result.ok);
+              await syncSetting("shareLocation", result.ok);
               setProfileStatus(result.ok ? "Location sharing is on for parish distance." : result.message);
             }}
             thumbColor="#ffffff"
@@ -2422,7 +2481,7 @@ function ProfileScreen({
           <Switch
             onValueChange={async (enabled) => {
               setPrivacyActivity(enabled);
-              await setAppSetting("showActivity", enabled);
+              await syncSetting("showActivity", enabled);
               setProfileStatus(enabled ? "Profile activity can be shown." : "Profile activity is hidden.");
             }}
             thumbColor="#ffffff"
@@ -2438,7 +2497,7 @@ function ProfileScreen({
           <Switch
             onValueChange={async (enabled) => {
               setDarkMode(enabled);
-              await setAppSetting("darkMode", enabled);
+              await syncSetting("darkMode", enabled);
               setProfileStatus(enabled ? "Dark theme turned on." : "Light theme turned on.");
             }}
             thumbColor="#ffffff"
@@ -2948,6 +3007,11 @@ const styles = StyleSheet.create({
   infoRow: { alignItems: "flex-start", flexDirection: "row", gap: 12 },
   infoValue: { color: colors.text, fontSize: 17, lineHeight: 25 },
   centered: { alignItems: "center" },
+  authToggle: { backgroundColor: colors.surfaceLow, borderColor: colors.outline, borderRadius: 12, borderWidth: 1, flexDirection: "row", padding: 4 },
+  authToggleButton: { alignItems: "center", borderRadius: 8, flex: 1, paddingVertical: 10 },
+  authToggleButtonActive: { backgroundColor: colors.primary },
+  authToggleText: { color: colors.primary, fontSize: 14, fontWeight: "800" },
+  authToggleTextActive: { color: "#ffffff" },
   identityHeader: { alignItems: "center", flexDirection: "row", gap: 14, padding: 16 },
   goldIcon: { alignItems: "center", backgroundColor: colors.tertiaryFixed, borderRadius: 10, height: 48, justifyContent: "center", width: 48 },
   progressTrack: { backgroundColor: colors.surfaceContainer, borderRadius: 5, height: 8, width: 82 },

@@ -201,13 +201,18 @@ export async function incrementCommunityReaction(postId: string, reaction: strin
 
 export async function reportCommunityPost(postId: string, note: string): Promise<ActionResult> {
   if (!supabase) return { ok: false, message: "Report saved locally until Supabase is configured." };
-  const { error } = await supabase.from("community_reports").insert({ post_id: postId, note });
+  const { error } = await supabase.from("community_reports").insert({ post_id: postId, reason: note });
   return error ? { ok: false, message: error.message } : { ok: true, message: "Post reported for review." };
 }
 
 export async function submitHymnCorrection(input: Record<string, any>): Promise<ActionResult> {
   if (!supabase) return { ok: false, message: "Hymn correction saved locally until Supabase is configured." };
-  const { error } = await supabase.from("hymn_corrections").insert(input);
+  const { error } = await supabase.from("hymn_correction_requests").insert({
+    hymn_code: input.hymnCode,
+    hymn_title: input.hymnTitle,
+    proposed_text: input.proposedText,
+    note: input.note,
+  });
   return error ? { ok: false, message: error.message } : { ok: true, message: "Hymn correction submitted." };
 }
 
@@ -265,8 +270,15 @@ export async function signOut(): Promise<ActionResult> {
   return error ? { ok: false, message: error.message } : { ok: true, message: "Signed out." };
 }
 
+async function currentUserId() {
+  if (!supabase) return null;
+  const { data } = await supabase.auth.getUser();
+  return data.user?.id ?? null;
+}
+
 export async function updateCurrentUserProfile(input: Record<string, any>): Promise<ActionResult> {
   if (!supabase) return { ok: false, message: "Supabase profile sync is not configured." };
+  const userId = await currentUserId();
   const { error } = await supabase.auth.updateUser({
     data: {
       full_name: input.fullName,
@@ -277,14 +289,65 @@ export async function updateCurrentUserProfile(input: Record<string, any>): Prom
       home_parish_confession_times: input.homeParishConfessionTimes,
     },
   });
-  return error ? { ok: false, message: error.message } : { ok: true, message: "Profile synced." };
+  if (error) return { ok: false, message: error.message };
+  if (userId) {
+    const { error: profileError } = await supabase.from("profiles").upsert({
+      id: userId,
+      display_name: input.fullName,
+      email: input.email,
+      home_parish: input.homeParish,
+      home_parish_address: input.homeParishAddress,
+      home_parish_phone: input.homeParishPhone,
+      home_parish_mass_times: input.homeParishMassTimes,
+      home_parish_confession_times: input.homeParishConfessionTimes,
+      updated_at: new Date().toISOString(),
+    });
+    if (profileError) return { ok: false, message: profileError.message };
+  }
+  return { ok: true, message: "Profile synced to the database." };
+}
+
+export async function syncUserSettings(settings: Record<string, any>): Promise<ActionResult> {
+  const userId = await currentUserId();
+  if (!supabase || !userId) return { ok: false, message: "Settings saved locally until you sign in." };
+  await supabase.from("notification_preferences").upsert({
+    user_id: userId,
+    morning_prayer: Boolean(settings.prayerReminder),
+    daily_readings: Boolean(settings.offlineDownloads),
+    parish_updates: Boolean(settings.shareLocation),
+    updated_at: new Date().toISOString(),
+  });
+  const { error } = await supabase.from("user_settings").upsert({
+    user_id: userId,
+    settings,
+    updated_at: new Date().toISOString(),
+  });
+  return error ? { ok: false, message: error.message } : { ok: true, message: "Settings synced to the database." };
+}
+
+export async function syncUserCollectionItem(input: { type: string; itemId: string; title: string; collection: "saved" | "recent" }): Promise<ActionResult> {
+  const userId = await currentUserId();
+  if (!supabase || !userId) return { ok: false, message: "Item saved locally until you sign in." };
+  const itemType = input.type === "novena" ? "resource" : input.type;
+  const table = input.collection === "saved" ? "user_saved_items" : "recent_items";
+  const timestampColumn = input.collection === "saved" ? "created_at" : "viewed_at";
+  const { error } = await supabase.from(table).upsert({
+    user_id: userId,
+    item_type: itemType,
+    item_id: input.itemId,
+    item_title: input.title,
+    metadata: input.type === "novena" ? { kind: "novena" } : {},
+    [timestampColumn]: new Date().toISOString(),
+  });
+  return error ? { ok: false, message: error.message } : { ok: true, message: "Item synced to the database." };
 }
 
 export async function updateParishDetails(input: Record<string, any>): Promise<ActionResult<{ parish?: ParishRecord }>> {
   const parishName = String(input.parishName || input.homeParish || "").trim();
   const parish: ParishRecord = {
     name: parishName,
-    address: String(input.proposedAddress || input.homeParishAddress || "").trim() || undefined,
+    diocese: input.diocese || "Community submitted",
+    address: String(input.proposedAddress || input.homeParishAddress || "").trim() || "Address pending",
     phone: String(input.proposedPhone || input.homeParishPhone || "").trim() || undefined,
     mass_times: String(input.proposedMassTimes || input.homeParishMassTimes || "").trim()
       ? [{ times: [String(input.proposedMassTimes || input.homeParishMassTimes).trim()] }]
@@ -294,6 +357,7 @@ export async function updateParishDetails(input: Record<string, any>): Promise<A
       : undefined,
     data_quality_notes: String(input.note || "").trim() || undefined,
     last_confirmed_at: new Date().toISOString(),
+    verification_status: "candidate",
   };
   if (input.parishId && !String(input.parishId).startsWith("local-")) parish.id = input.parishId;
   Object.keys(parish).forEach((key) => parish[key] === undefined && delete parish[key]);
@@ -301,7 +365,17 @@ export async function updateParishDetails(input: Record<string, any>): Promise<A
   if (!parishName) return { ok: false, message: "Add a parish name before saving parish details." };
   if (!supabase) return { ok: false, message: "Parish saved locally until Supabase is configured.", parish };
 
-  await supabase.from("parish_update_requests").insert(input);
+  await supabase.from("parish_edit_requests").insert({
+    parish_id: input.parishId && !String(input.parishId).startsWith("local-") ? input.parishId : null,
+    parish_name: parishName,
+    submitted_by_name: input.submittedByName || "CatApp User",
+    proposed_address: input.proposedAddress,
+    proposed_phone: input.proposedPhone,
+    proposed_mass_times: input.proposedMassTimes ? [{ times: [input.proposedMassTimes] }] : [],
+    proposed_confession_times: input.proposedConfessionTimes ? [{ times: [input.proposedConfessionTimes] }] : [],
+    source_context: input.sourceContext,
+    note: input.note,
+  });
 
   if (input.parishId && !String(input.parishId).startsWith("local-")) {
     const { data, error } = await supabase
@@ -339,7 +413,12 @@ export async function updateParishDetails(input: Record<string, any>): Promise<A
 
 export async function submitIdentityVerification(input: Record<string, any>): Promise<ActionResult> {
   if (!supabase) return { ok: false, message: "Identity verification requires Supabase configuration." };
-  const { error } = await supabase.from("identity_verifications").insert(input);
+  const { error } = await supabase.from("identity_verification_requests").insert({
+    full_name: input.fullName,
+    email: input.email,
+    parish_name: input.parishName,
+    document_note: input.documentNote,
+  });
   return error ? { ok: false, message: error.message } : { ok: true, message: "Verification request submitted." };
 }
 
