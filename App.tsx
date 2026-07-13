@@ -39,6 +39,7 @@ import {
   getLocalCommunityComments,
   getLocalCommunityPosts,
   getLocalCommunityReactions,
+  getLocalParishes,
   getPersistedOfflineCache,
   getRecentItems,
   getSavedItems,
@@ -47,18 +48,21 @@ import {
   saveLocalCommunityComment,
   saveLocalCommunityPost,
   saveLocalCommunityReactions,
+  saveLocalParish,
   saveLocalItem,
   setAppSetting,
   setOfflineCache,
 } from "./src/offlineCache";
 import { cancelPrayerReminders, requestCurrentLocation, scheduleDailyPrayerReminder } from "./src/nativeServices";
 import {
+  BackHandler,
   ImageBackground,
   Image,
   ActivityIndicator,
   Linking,
   Platform,
   Pressable,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -283,6 +287,11 @@ const novenas = novenasData as Novena[];
 const prayers = prayersData as Prayer[];
 
 const communityPosts: Array<{ author: string; badge?: string; title: string; body: string; comments: number; featured: boolean }> = [];
+const placeholderPostTitles = new Set([
+  "Reflections on the Sunday Gospel: The Bread of Life",
+  "Asking for prayers for my grandmother",
+  "Upcoming Parish Youth Retreat",
+]);
 
 function matchesSearchText(text: string, query: string) {
   const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
@@ -311,6 +320,44 @@ function novenaDayEntries(novena: Novena) {
     prayer: novena.prayer ?? `Pray ${novena.title}, asking God for grace through this nine-day devotion. Keep the feast of ${novena.feast} in view and entrust the day's intention to the Lord.`,
     reflection: "Spend a quiet moment with the intention, then close with an Our Father, Hail Mary, and Glory Be.",
   }));
+}
+
+function isPlaceholderCommunityPost(post: any) {
+  return placeholderPostTitles.has(post.title) || ["Fr. Jude Okonkwo", "Chioma Adeyemi", "Sr. Mary Immaculata"].includes(post.author_name);
+}
+
+function mergeUniqueById<T extends { id?: string; name?: string; title?: string }>(items: T[]) {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    const key = item.id ?? item.name ?? item.title;
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function localParishFromProfile(profile: {
+  fullName?: string;
+  homeParish: string;
+  homeParishAddress?: string;
+  homeParishPhone?: string;
+  homeParishMassTimes?: string;
+  homeParishConfessionTimes?: string;
+}) {
+  const id = `local-profile-${profile.homeParish.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+  return {
+    id,
+    name: profile.homeParish.trim(),
+    diocese: "Saved Parish",
+    address: profile.homeParishAddress?.trim() || "Address pending",
+    phone: profile.homeParishPhone?.trim() || "",
+    mass_times: profile.homeParishMassTimes?.trim() ? [{ times: [profile.homeParishMassTimes.trim()] }] : [],
+    confession_times: profile.homeParishConfessionTimes?.trim() ? [{ times: [profile.homeParishConfessionTimes.trim()] }] : [],
+    data_quality_notes: `Saved locally from ${profile.fullName || "your"} profile.`,
+    last_confirmed_at: new Date().toISOString(),
+    latitude: null,
+    longitude: null,
+  };
 }
 
 function approvedLocalReadingForDate(date: string) {
@@ -485,26 +532,66 @@ const parishes = [
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabKey>("today");
+  const [tabHistory, setTabHistory] = useState<TabKey[]>([]);
   const [darkMode, setDarkMode] = useState(false);
+  const [communityRefreshToken, setCommunityRefreshToken] = useState(0);
+  const [communityRefreshing, setCommunityRefreshing] = useState(false);
   const title = useMemo(() => tabs.find((tab) => tab.key === activeTab)?.label ?? "CatApp", [activeTab]);
 
   useEffect(() => {
     getAppSettings().then((settings) => setDarkMode(settings.darkMode));
   }, []);
 
+  useEffect(() => {
+    const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
+      if (tabHistory.length) {
+        const previous = tabHistory[tabHistory.length - 1];
+        setTabHistory((history) => history.slice(0, -1));
+        setActiveTab(previous);
+        return true;
+      }
+      if (activeTab !== "today") {
+        setActiveTab("today");
+        return true;
+      }
+      return false;
+    });
+    return () => subscription.remove();
+  }, [activeTab, tabHistory]);
+
+  const changeTab = (tab: TabKey) => {
+    if (tab === activeTab) return;
+    setTabHistory((history) => [...history, activeTab].slice(-8));
+    setActiveTab(tab);
+  };
+
   return (
     <SafeAreaView style={[styles.safeArea, darkMode && styles.safeAreaDark]}>
       <StatusBar style={darkMode ? "light" : "dark"} backgroundColor={darkMode ? colors.primary : colors.background} />
       <View style={[styles.app, darkMode && styles.appDark]}>
         <Header title={activeTab === "today" ? "CatApp" : title} darkMode={darkMode} />
-        <ScrollView contentContainerStyle={styles.screen} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          contentContainerStyle={styles.screen}
+          refreshControl={activeTab === "community" ? (
+            <RefreshControl
+              colors={[colors.primary]}
+              onRefresh={() => {
+                setCommunityRefreshing(true);
+                setCommunityRefreshToken((token) => token + 1);
+              }}
+              refreshing={communityRefreshing}
+              tintColor={colors.primary}
+            />
+          ) : undefined}
+          showsVerticalScrollIndicator={false}
+        >
           {activeTab === "today" && <TodayScreen />}
           {activeTab === "library" && <LibraryScreen />}
-          {activeTab === "community" && <CommunityScreen />}
+          {activeTab === "community" && <CommunityScreen refreshToken={communityRefreshToken} setRefreshing={setCommunityRefreshing} />}
           {activeTab === "parishes" && <ParishesScreen />}
           {activeTab === "profile" && <ProfileScreen darkMode={darkMode} setDarkMode={setDarkMode} />}
         </ScrollView>
-        <BottomTabs activeTab={activeTab} onChange={setActiveTab} />
+        <BottomTabs activeTab={activeTab} onChange={changeTab} />
       </View>
     </SafeAreaView>
   );
@@ -1183,20 +1270,18 @@ function LibraryScreen() {
   );
 }
 
-function CommunityScreen() {
+function CommunityScreen({
+  refreshToken,
+  setRefreshing,
+}: {
+  refreshToken: number;
+  setRefreshing: (value: boolean) => void;
+}) {
   const [composerOpen, setComposerOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState<any | null>(null);
   const [draft, setDraft] = useState("");
   const [draftTitle, setDraftTitle] = useState("");
-  const [communityFeed, setCommunityFeed] = useState<any[]>(communityPosts.map((post) => ({
-    id: post.title,
-    author_name: post.author,
-    author_badge: post.badge ?? null,
-    title: post.title,
-    body: post.body,
-    comment_count: post.comments,
-    featured: post.featured,
-  })));
+  const [communityFeed, setCommunityFeed] = useState<any[]>([]);
   const [comments, setComments] = useState<any[]>([]);
   const [commentDraft, setCommentDraft] = useState("");
   const [communityStatus, setCommunityStatus] = useState(isSupabaseConfigured ? "Loading live community..." : "Local community preview");
@@ -1230,15 +1315,34 @@ function CommunityScreen() {
   );
 
   useEffect(() => {
+    const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
+      if (selectedPost) {
+        setSelectedPost(null);
+        return true;
+      }
+      if (composerOpen) {
+        setComposerOpen(false);
+        return true;
+      }
+      return false;
+    });
+    return () => subscription.remove();
+  }, [composerOpen, selectedPost]);
+
+  useEffect(() => {
     let isMounted = true;
-    Promise.all([fetchCommunityPosts(), getLocalCommunityPosts(), getLocalCommunityReactions()]).then(async ([records, localPosts, reactions]) => {
+
+    const loadCommunity = async () => {
+      setCommunityStatus(isSupabaseConfigured ? "Loading live community..." : "Local community preview");
+      const [records, localPosts, reactions] = await Promise.all([fetchCommunityPosts(), getLocalCommunityPosts(), getLocalCommunityReactions()]);
       if (!isMounted) return;
-      const remotePosts = records ?? [];
+      const remotePosts = (records ?? []).filter((post) => !isPlaceholderCommunityPost(post));
+      const devicePosts = localPosts.filter((post) => !isPlaceholderCommunityPost(post));
       const mergedPosts = [
-        ...localPosts,
-        ...remotePosts.filter((remote) => !localPosts.some((local) => local.id === remote.id)),
+        ...devicePosts,
+        ...remotePosts.filter((remote) => !devicePosts.some((local) => local.id === remote.id)),
       ];
-      if (mergedPosts.length) setCommunityFeed(mergedPosts);
+      setCommunityFeed(mergedPosts);
       const remoteReactions = await fetchCommunityReactions(mergedPosts.map((post) => post.id));
       const mergedReactions = { ...reactions };
       for (const item of remoteReactions ?? []) {
@@ -1248,16 +1352,22 @@ function CommunityScreen() {
         };
       }
       setPostReactions(mergedReactions);
-      setCommunityStatus("Live Supabase community");
-    }).finally(() => {
-      if (isMounted && isSupabaseConfigured) {
-        setCommunityStatus((status) => status === "Loading live community..." ? "Live community is ready for instant posts" : status);
+      setCommunityStatus(mergedPosts.length ? "Live Supabase community" : "No community posts yet.");
+    };
+
+    loadCommunity().finally(() => {
+      if (isMounted) {
+        setRefreshing(false);
+        if (isSupabaseConfigured) {
+          setCommunityStatus((status) => status === "Loading live community..." ? "Live community is ready for instant posts" : status);
+        }
       }
     });
+
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [refreshToken, setRefreshing]);
 
   useEffect(() => {
     if (!selectedPost?.id) return;
@@ -1520,15 +1630,34 @@ function ParishesScreen() {
   const visibleParishes = searchSource.filter((parish) => `${parish.name} ${parish.diocese} ${parish.address}`.toLowerCase().includes(query.toLowerCase()));
 
   useEffect(() => {
+    const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
+      if (editorOpen) {
+        setEditorOpen(false);
+        return true;
+      }
+      if (selectedParish) {
+        setSelectedParish(null);
+        return true;
+      }
+      return false;
+    });
+    return () => subscription.remove();
+  }, [editorOpen, selectedParish]);
+
+  useEffect(() => {
     let isMounted = true;
 
-    fetchVerifiedParishes().then((records) => {
-      if (!isMounted || !records?.length) return;
+    Promise.all([fetchVerifiedParishes(), getLocalParishes()]).then(([records, localRecords]) => {
+      if (!isMounted) return;
 
-      setRawParishRecords(records);
-      const mapped = records.map((record, index) => formatParishRecord(record, index));
+      const mergedRecords = mergeUniqueById([...(localRecords ?? []), ...(records ?? [])]);
+      setRawParishRecords(mergedRecords);
+      const mapped = mergedRecords.map((record, index) => formatParishRecord(record, index));
       setAllDirectoryParishes(mapped);
       setDirectoryParishes(mapped);
+      if (localRecords.length) {
+        setParishStatus(`${localRecords.length} saved parish${localRecords.length === 1 ? "" : "es"} available offline. Showing Lagos reference distances.`);
+      }
     });
 
     return () => {
@@ -1733,6 +1862,7 @@ function ProfileScreen({
   const [homeParishConfessionTimes, setHomeParishConfessionTimes] = useState("");
   const [profileCompleted, setProfileCompleted] = useState(false);
   const [profileEditing, setProfileEditing] = useState(false);
+  const [profileHydrated, setProfileHydrated] = useState(false);
   const [documentNote, setDocumentNote] = useState("");
   const [profileStatus, setProfileStatus] = useState("Sign in or create an account to complete your Catholic profile.");
   const [adminStatus, setAdminStatus] = useState("");
@@ -1773,7 +1903,31 @@ function ProfileScreen({
   }, [showAdmin]);
 
   useEffect(() => {
-    getAppSettings().then((settings) => {
+    const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
+      if (selectedAdminModule) {
+        setSelectedAdminModule(null);
+        return true;
+      }
+      if (showAdmin) {
+        setShowAdmin(false);
+        return true;
+      }
+      if (profileEditing) {
+        setProfileEditing(false);
+        return true;
+      }
+      return false;
+    });
+    return () => subscription.remove();
+  }, [profileEditing, selectedAdminModule, showAdmin]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const hydrateProfile = async () => {
+      const [settings, record] = await Promise.all([getAppSettings(), getCurrentUserProfile()]);
+      if (!isMounted) return;
+
       setPrayerReminder(settings.prayerReminder);
       setOfflineDownloads(settings.offlineDownloads);
       setPrivacyLocation(settings.shareLocation);
@@ -1789,25 +1943,45 @@ function ProfileScreen({
         setHomeParishConfessionTimes(settings.profile.homeParishConfessionTimes || "");
         setProfileCompleted(Boolean(settings.profile.completed));
       }
+
+      if (record?.user) {
+        setIsAuthenticated(true);
+        setEmail(record.user.email || settings.profile?.email || "");
+        setFullName((current) => record.profile?.display_name || record.user.user_metadata?.full_name || current);
+        setHomeParish((current) => record.user.user_metadata?.home_parish || current);
+        setHomeParishAddress((current) => record.user.user_metadata?.home_parish_address || current);
+        setHomeParishPhone((current) => record.user.user_metadata?.home_parish_phone || current);
+        setHomeParishMassTimes((current) => record.user.user_metadata?.home_parish_mass_times || current);
+        setHomeParishConfessionTimes((current) => record.user.user_metadata?.home_parish_confession_times || current);
+        if (record.user.user_metadata?.home_parish) setProfileCompleted(true);
+        const authRole = record.user.app_metadata?.role;
+        setIsAdmin(Boolean(record.profile?.is_admin || authRole === "superadmin"));
+        setProfileRole(authRole === "superadmin" ? "Superadmin" : record.profile?.is_admin ? "Admin" : record.profile?.verification_status || "Member");
+        setProfileStatus("Signed in with Supabase Auth.");
+      }
+
+      setProfileHydrated(true);
+    };
+
+    hydrateProfile().catch(() => {
+      if (isMounted) setProfileHydrated(true);
     });
 
-    getCurrentUserProfile().then((record) => {
-      if (!record?.user) return;
-      setIsAuthenticated(true);
-      setEmail(record.user.email || email);
-      setFullName((current) => record.profile?.display_name || record.user.user_metadata?.full_name || current);
-      setHomeParish((current) => record.user.user_metadata?.home_parish || current);
-      setHomeParishAddress((current) => record.user.user_metadata?.home_parish_address || current);
-      setHomeParishPhone((current) => record.user.user_metadata?.home_parish_phone || current);
-      setHomeParishMassTimes((current) => record.user.user_metadata?.home_parish_mass_times || current);
-      setHomeParishConfessionTimes((current) => record.user.user_metadata?.home_parish_confession_times || current);
-      if (record.user.user_metadata?.home_parish) setProfileCompleted(true);
-      const authRole = record.user.app_metadata?.role;
-      setIsAdmin(Boolean(record.profile?.is_admin || authRole === "superadmin"));
-      setProfileRole(authRole === "superadmin" ? "Superadmin" : record.profile?.is_admin ? "Admin" : record.profile?.verification_status || "Member");
-      setProfileStatus("Signed in with Supabase Auth.");
-    });
+    return () => {
+      isMounted = false;
+    };
   }, []);
+
+  if (!profileHydrated) {
+    return (
+      <View style={styles.stackLarge}>
+        <View style={styles.centered}>
+          <ActivityIndicator color={colors.primary} />
+          <Text style={styles.mutedText}>Loading profile...</Text>
+        </View>
+      </View>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -2046,6 +2220,14 @@ function ProfileScreen({
               }
 
               setProfileSubmit("saving");
+              const localParish = homeParish.trim() ? localParishFromProfile({
+                fullName,
+                homeParish,
+                homeParishAddress,
+                homeParishPhone,
+                homeParishMassTimes,
+                homeParishConfessionTimes,
+              }) : null;
               await setAppSetting("profile", {
                 fullName,
                 email,
@@ -2056,6 +2238,7 @@ function ProfileScreen({
                 homeParishConfessionTimes,
                 completed: true,
               });
+              if (localParish) await saveLocalParish(localParish);
 
               const profileResult = await updateCurrentUserProfile({
                 fullName,

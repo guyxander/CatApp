@@ -16,6 +16,20 @@ export type AppSettings = {
   profile?: Record<string, any>;
 };
 
+export type LocalParish = {
+  id: string;
+  name: string;
+  diocese?: string;
+  address?: string;
+  phone?: string;
+  mass_times?: Array<{ times: string[] }>;
+  confession_times?: Array<{ times: string[] }>;
+  data_quality_notes?: string;
+  last_confirmed_at?: string;
+  latitude?: number | null;
+  longitude?: number | null;
+};
+
 const defaults: AppSettings = {
   darkMode: false,
   prayerReminder: false,
@@ -62,6 +76,15 @@ export async function getPersistedOfflineCache<T>(key: string): Promise<T | null
 
 export async function setOfflineCache<T>(key: string, value: T) {
   await writeJson(`cache:${key}`, value);
+}
+
+export async function getLocalParishes(): Promise<LocalParish[]> {
+  return readJson<LocalParish[]>("parishes:local", []);
+}
+
+export async function saveLocalParish(parish: LocalParish) {
+  const parishes = await getLocalParishes();
+  await writeJson("parishes:local", [parish, ...parishes.filter((item) => item.id !== parish.id)]);
 }
 
 export function getSavedItems(): SavedItem[] {
