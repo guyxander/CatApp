@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Spiritual Classics - CatApp Library</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdea4",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e7e2d9",
+                    "inverse-surface": "#32302a",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-background": "#1d1b16",
+                    "inverse-primary": "#fdb0d0",
+                    "surface-container-low": "#f9f3ea",
+                    "on-surface-variant": "#514348",
+                    "on-tertiary-fixed": "#261900",
+                    "on-secondary-fixed": "#33053b",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "on-error": "#ffffff",
+                    "tertiary": "#1f1400",
+                    "inverse-on-surface": "#f6f0e7",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#ede7df",
+                    "surface-bright": "#fff9ef",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "outline-variant": "#d5c2c7",
+                    "secondary": "#7e4c83",
+                    "error": "#ba1a1a",
+                    "primary-container": "#4a1731",
+                    "surface": "#fff9ef",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#b58a2c",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "on-surface": "#1d1b16",
+                    "surface-dim": "#dfd9d1",
+                    "outline": "#837378",
+                    "on-primary-fixed": "#380822",
+                    "background": "#fff9ef",
+                    "on-primary-container": "#c27c9a",
+                    "primary": "#30021c",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#382700"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-tablet": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px",
+                    "unit": "4px",
+                    "stack-lg": "24px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Work Sans"],
+                    "title-lg": ["Work Sans"],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "label-md": ["Work Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrim-overlay {
+            background: linear-gradient(0deg, rgba(48, 2, 28, 0.8) 0%, rgba(48, 2, 28, 0) 100%);
+        }
+        .active-nav-pill {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        body {
+            background-color: #fff9ef;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased pb-24">
+<!-- Top AppBar -->
+<header class="sticky top-0 z-50 bg-surface dark:bg-surface-dim flex justify-between items-center w-full px-margin-mobile py-stack-md">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-150 text-primary p-2 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-primary">Library</h1>
+</div>
+<div class="flex items-center">
+<button class="active:scale-95 transition-transform duration-150 text-primary p-2 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</div>
+</header>
+<main class="max-w-screen-xl mx-auto">
+<!-- Hero Header -->
+<section class="relative h-[320px] md:h-[450px] w-full overflow-hidden mb-stack-lg">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A cinematic, high-resolution photograph of an ancient, sun-drenched monastic library in Nigeria. Warm light streams through tall windows, illuminating rows of leather-bound sacred texts and polished mahogany shelves. The atmosphere is quiet, dignified, and contemplative, with a color palette of deep burgundy, warm gold, and aged parchment. The focus is soft on the background, creating a sacred, scholarly mood." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXzh7v73swWTYQCYHiOWqChZVf1MaQeaG4UtAzS8lYsyXxzSSk7ZqBEM3_QvQhb_EWPFYXgIo2DU35SCQYsE7wCxMjfsLfkjizvQCfdLPpOiFm7ZGtGqorOxn2XvgKVO1LHqnC4B7xPI6L0R9CvbQbxsNOxWpTXVkERyJfg7sQTxn7HlwSC2U4gKfEHEeJT-u0CQkWiZTrmuhq9nsTrl2EtEg2QsZ9O09dH8O6zhnsQnYQg5kYInxZ')"></div>
+<div class="absolute inset-0 scrim-overlay flex flex-col justify-end p-margin-mobile md:p-margin-desktop">
+<nav class="flex mb-stack-sm text-on-primary/80 font-label-md text-label-md items-center gap-2">
+<span>Library</span>
+<span class="material-symbols-outlined text-[12px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-primary">Resources</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg md:text-display-lg text-white mb-2">Spiritual Classics</h2>
+<div class="w-16 h-1 bg-tertiary-fixed rounded-full mb-4"></div>
+</div>
+</section>
+<!-- Intro Text -->
+<section class="px-margin-mobile md:px-margin-desktop mb-stack-lg max-w-[720px]">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed italic">
+                "To be ignorant of what occurred before you were born is to remain always a child." These timeless words invite us to drink from the deep wells of the Church's wisdom. Discover the writings of saints and scholars whose spirits continue to guide the Nigerian faithful toward grace and peace.
+            </p>
+</section>
+<!-- Category: Patristic Writings -->
+<section class="px-margin-mobile md:px-margin-desktop mb-stack-lg">
+<div class="flex justify-between items-end mb-stack-md border-b border-outline-variant pb-2">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Patristic Writings</h3>
+<a class="font-label-md text-label-md text-secondary font-semibold uppercase tracking-wider" href="#">See All</a>
+</div>
+<!-- Bento-ish Grid for Books -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Book Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container-high hover:shadow-md transition-shadow flex gap-4">
+<div class="w-24 h-36 flex-shrink-0 bg-primary-container rounded shadow-inner overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A premium book cover for 'The Confessions of St. Augustine' featuring a stylized, gold-leaf profile of the saint against a deep burgundy background. The typography is elegant serif, reflecting a modern-corporate yet sacred aesthetic, consistent with high-quality liturgical publishing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6_HPx_Y-jiFGH8YaZ4dRKWNzXJkbeB1F0GDB-A6v56jlDed5T10Kpkmbu5RBaOyoSIU2p5kBYFE0ZNxZbyPLU6PWJAJRkcAUpgFV2e-V2ePnMMDT2PrSrb_tlgp-xfInrTactGunGubAn6mIgJdwrdHbdqXBf14BqQVnZfoJCDUVrGM5JcAGOQ362jb0KEJSLF-Hc2aQPSlOg5RdeNL0i9Dpio9VoTVal9ESdm9suz086dTHLgOjz"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface line-clamp-2">The Confessions</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">St. Augustine</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full active:scale-95 transition-all">Read Now</button>
+<button class="text-primary p-2 rounded-full hover:bg-secondary-container/10">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Book Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container-high hover:shadow-md transition-shadow flex gap-4">
+<div class="w-24 h-36 flex-shrink-0 bg-primary-container rounded shadow-inner overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A book cover for 'On the Incarnation' by St. Athanasius. The design uses a minimalist white background with a central gold-foiled cross symbol and bold, deep burgundy serif typography. The style is clean, modern, and high-end, evoking spiritual clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP0SOjxikb8PfGGGos7WZrBM6kdK3zKrrZKh4idkhVpB9nRKqawtRr0elra3-_CgU3tmzNxiGKsX4_7xSFLKKH51_cRKC_Hp5eXV9OQc7Togy5JXnV6bfkt_gYqh_fj5VBlK1xgK35JPs-DK2kYgTPLlYVlmpg-1Q8ZaMp89lbwIFrR06jh9ddPCBEwkoTTt2lS3cV3Hhm0rdeI-Bbmf_8rPYw5qkpQ5tTGdNz09xo8dCJUptEKhj_"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface line-clamp-2">On the Incarnation</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">St. Athanasius</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full active:scale-95 transition-all">Read Now</button>
+<button class="text-primary p-2 rounded-full hover:bg-secondary-container/10">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Book Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container-high hover:shadow-md transition-shadow flex gap-4">
+<div class="w-24 h-36 flex-shrink-0 bg-primary-container rounded shadow-inner overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Book cover for 'The Sayings of the Desert Fathers'. The artwork features an abstract sun setting over a stylized Nigerian savanna in muted purples and golds. The typography is modern and spaced generously, conveying a sense of ancient wisdom meeting contemporary design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3ZPp82cwNCdhxr4tmuF9dkqf4rUgnwwXvARBgclJdcii0AuD5BDMfJdSTFCyaKIdlClzV6dYDvkeoqbrET6UvQO8Hm5sUSi6XhNnJHetnv8TJGC_6fhQmDg7XVNBwQeaEcTDIgNHNA2-IFYCcZ8lSmicxwWBETZVAk_oWl-Cey3gh3QYUmC9mRXRwIJDMvD0dyQIjrtqEyk3lv-RO7dO8XA3Zv_8sbqPL62IWnJrv4OxBAtltWHxy"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface line-clamp-2">The Desert Fathers</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Anonymous</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full active:scale-95 transition-all">Read Now</button>
+<button class="text-primary p-2 rounded-full hover:bg-secondary-container/10">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Category: Modern Classics -->
+<section class="px-margin-mobile md:px-margin-desktop mb-stack-lg pb-12">
+<div class="flex justify-between items-end mb-stack-md border-b border-outline-variant pb-2">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Modern Classics</h3>
+<a class="font-label-md text-label-md text-secondary font-semibold uppercase tracking-wider" href="#">See All</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Book Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container-high hover:shadow-md transition-shadow flex gap-4">
+<div class="w-24 h-36 flex-shrink-0 bg-primary-container rounded shadow-inner overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A delicate book cover for 'Story of a Soul' by St. Therese of Lisieux. The design features soft watercolor roses in muted pinks and greens on a cream background, with elegant hand-lettered gold title text. The style is feminine, dignified, and contemplatively beautiful." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz12e525IOtv44V0FEp7lHwkNI9ARRdk4-_Ka8KxLn48kYMkjMtcAtmpSnsx8hTULOAqcLzAKJLIfrDAk2agGKzBYrNYpGBXjSxeVALSmTyXHpPC2Jo8mqa_ElfLBtppPBD7LHc59x_1lR7DQxze4N3m9P8Jsk-8_EJKVk8lmmTb2-mVEx3kiJbGAOyYy3HpkWapvNOkNqhllMvlY8TbmUTX3-4CTjDa1D7v_wqDmncQww5F2GuqI9"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface line-clamp-2">Story of a Soul</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">St. Thérèse</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full active:scale-95 transition-all">Read Now</button>
+<button class="text-primary p-2 rounded-full hover:bg-secondary-container/10">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Book Card 5 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container-high hover:shadow-md transition-shadow flex gap-4">
+<div class="w-24 h-36 flex-shrink-0 bg-primary-container rounded shadow-inner overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sophisticated book cover for 'Dark Night of the Soul' by St. John of the Cross. The cover uses a deep midnight blue gradient with a single, glowing star symbol. The typography is a sharp, white sans-serif, giving it a modern-corporate feel while respecting the deep spiritual subject matter." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7Nij80uy5HSkgMgnI_fuEkQnvr02_4SK6m1lFlBTMN2RzYM5k7lnhJWYzM8zYF9VTzw2uKFNhm5xEcoLofSoRDT08g-x1ylJ_BrcTzEj7uSrYnP83PjXnk2vkFC_MSXU6ghhOFRtkl9YqX0lem1oirygwLC-E8NRTgrPgl6RYwvAN8u1PvBo6Lv7N0NqtbJQGYMXzHZ8zTwKAw64elEVyYJynsJtYHaWbdPOu9KlkKYjbLLyLE9je"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface line-clamp-2">Dark Night of the Soul</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">St. John of the Cross</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full active:scale-95 transition-all">Read Now</button>
+<button class="text-primary p-2 rounded-full hover:bg-secondary-container/10">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Book Card 6 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container-high hover:shadow-md transition-shadow flex gap-4">
+<div class="w-24 h-36 flex-shrink-0 bg-primary-container rounded shadow-inner overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Book cover for 'The Seven Storey Mountain' by Thomas Merton. The design is modernist, featuring a geometric mountain peaks graphic in earth tones (brown, sienna, gold). The typography is bold and grounded, reflecting the journey of a modern monk." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIjlZhdzGFJGVETAtdabdXrJhtDTGsTkY1jAF3T1uDb4sDVllWgA9TUNRvJ77Azu4vgQiVOdXux86XNAR7ytHbZ45QwnqM36PGLuupBUfyh1Ogrr-tztDGwR23dlf6-89-pvjYyUQZ6N8-Y2o_bi97uvEyROIz1ZxthKDsfsTRM1z3pPVoJIQBCNryg5JvEoS_8z9CxnvJdgwyM6-drfaYgCwiSDrUwk3Qj3P9cnCfNDl2Gvyc27GF"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface line-clamp-2">Seven Storey Mountain</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Thomas Merton</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full active:scale-95 transition-all">Read Now</button>
+<button class="text-primary p-2 rounded-full hover:bg-secondary-container/10">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile py-2 bg-surface-container dark:bg-surface-container-low rounded-t-xl shadow-md border-t border-transparent">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 px-5 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="today">today</span>
+<span class="font-label-md text-label-md">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container/20 text-primary rounded-full px-5 py-1 scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="local_library" style="font-variation-settings: 'FILL' 1;">local_library</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 px-5 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 px-5 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="church">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.bg-surface-container-lowest').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

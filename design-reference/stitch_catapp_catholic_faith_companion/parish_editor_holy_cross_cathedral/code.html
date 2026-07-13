@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Parish Editor | Diocese Admin Portal</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-dim": "#dfd9d1",
+                "on-tertiary-fixed": "#261900",
+                "on-error-container": "#93000a",
+                "primary-container": "#4a1731",
+                "secondary-container": "#fec0ff",
+                "on-secondary-container": "#7b4980",
+                "on-primary": "#ffffff",
+                "inverse-on-surface": "#f6f0e7",
+                "tertiary": "#1f1400",
+                "surface-tint": "#884b67",
+                "surface-bright": "#fff9ef",
+                "primary": "#30021c",
+                "on-surface-variant": "#514348",
+                "on-secondary": "#ffffff",
+                "on-background": "#1d1b16",
+                "inverse-primary": "#fdb0d0",
+                "background": "#fff9ef",
+                "primary-fixed-dim": "#fdb0d0",
+                "tertiary-fixed": "#ffdea4",
+                "secondary-fixed": "#ffd6fd",
+                "on-primary-fixed-variant": "#6d344f",
+                "outline-variant": "#d5c2c7",
+                "on-surface": "#1d1b16",
+                "surface-variant": "#e7e2d9",
+                "outline": "#837378",
+                "error": "#ba1a1a",
+                "secondary-fixed-dim": "#efb2f1",
+                "surface-container-low": "#f9f3ea",
+                "secondary": "#7e4c83",
+                "on-secondary-fixed": "#33053b",
+                "on-error": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "surface-container-high": "#ede7df",
+                "inverse-surface": "#32302a",
+                "surface": "#fff9ef",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-fixed-variant": "#5d4200",
+                "tertiary-fixed-dim": "#f0bf5c",
+                "surface-container-highest": "#e7e2d9",
+                "on-tertiary-container": "#b58a2c",
+                "tertiary-container": "#382700",
+                "primary-fixed": "#ffd8e6",
+                "error-container": "#ffdad6",
+                "on-primary-container": "#c27c9a",
+                "on-secondary-fixed-variant": "#64346a",
+                "surface-container": "#f3ede4",
+                "on-primary-fixed": "#380822"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "unit": "4px",
+                "margin-mobile": "16px",
+                "margin-desktop": "32px",
+                "stack-sm": "8px",
+                "margin-tablet": "24px",
+                "gutter": "16px",
+                "stack-md": "16px",
+                "stack-lg": "24px"
+            },
+            "fontFamily": {
+                "label-md": ["Work Sans"],
+                "headline-lg-mobile": ["\"Source Serif 4\""],
+                "title-lg": ["Work Sans"],
+                "display-lg": ["\"Source Serif 4\""],
+                "headline-lg": ["\"Source Serif 4\""],
+                "body-md": ["Work Sans"],
+                "body-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff9ef; /* background */
+            color: #1d1b16; /* on-background */
+        }
+        .form-input-custom {
+            @apply block w-full rounded-lg border-outline-variant bg-surface-container-lowest text-on-surface focus:border-primary focus:ring-primary font-body-md text-body-md py-3 px-4;
+        }
+        .section-card {
+            @apply bg-surface-container-lowest rounded-xl p-stack-lg border border-outline-variant/20 shadow-sm transition-all;
+        }
+        .sidebar-active {
+            @apply bg-secondary-container text-on-secondary-container rounded-full mx-2 px-4 py-3 flex items-center gap-3 transition-transform active:scale-95;
+        }
+        .sidebar-inactive {
+            @apply text-on-surface-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant transition-all;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+<!-- Navigation Drawer (Desktop) -->
+<aside class="hidden md:flex flex-col py-stack-lg gap-unit fixed left-0 top-0 h-full w-72 bg-surface-container-low border-r border-outline-variant/30 z-40">
+<div class="px-6 pb-stack-lg">
+<h1 class="font-headline-lg text-primary">Diocese Management</h1>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="sidebar-inactive" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="sidebar-active" href="#">
+<span class="material-symbols-outlined">edit_calendar</span>
+<span class="font-label-md text-label-md">Parish Editor</span>
+</a>
+<a class="sidebar-inactive" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Clergy Directory</span>
+</a>
+<a class="sidebar-inactive" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md">Discovery Map</span>
+</a>
+</nav>
+</aside>
+<!-- Top App Bar (Mobile & Desktop Content Anchor) -->
+<header class="md:ml-72 fixed top-0 right-0 left-0 md:left-72 z-30 bg-surface h-16 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Holy Cross Cathedral</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-variant rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold">
+                AP
+            </div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-72 mt-16 pb-24 md:pb-8 px-margin-mobile md:px-margin-desktop pt-stack-lg bg-surface">
+<div class="max-w-5xl mx-auto space-y-stack-lg">
+<!-- Hero Header Section -->
+<div class="relative h-48 md:h-64 w-full rounded-2xl overflow-hidden mb-stack-lg">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="An expansive, high-angle interior photograph of a majestic Nigerian Catholic Cathedral. The lighting is soft and natural, streaming through stained glass windows to illuminate the dark mahogany pews and cream-colored stone pillars. The aesthetic is clean and dignified, adhering to a light-mode corporate palette with warm earthy tones and deep burgundy accents. The mood is one of peace and sacred reverence within a modern architectural context." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3O68htxxaiotwhmokTqzFg6rJC60SxZxaRFaadRCZYn6V8Yt8dDiMFpERg4dNbUg0itdw73X05uVgR6v7VedBqy0J9CMJzzn3hi4wn5OZiNPkR8j13FtkzZOD4PSzkBaCDxIL_NsUrkqEGdP4a8nqf3mgzARyaE3X73U6YuB_BpighBzg5b0ime8ee7M_mHpL_xfYYLF42Ah-fR9ne-r6Qr5TiNpmBfme3WiXA-iVLrTfHMC1TBle')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-on-primary">
+<p class="font-label-md text-label-md opacity-80 uppercase tracking-widest">Parish Administration</p>
+<h3 class="font-headline-lg text-white">Holy Cross Cathedral, Lagos</h3>
+</div>
+<div class="absolute top-4 right-4">
+<button class="bg-primary hover:bg-primary/90 text-on-primary px-6 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm">save</span>
+                        Save Changes
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout for Editor Sections -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Section: Core Details (Asymmetric large box) -->
+<section class="md:col-span-8 section-card">
+<div class="flex items-center gap-2 mb-stack-md border-b border-outline-variant/30 pb-4">
+<span class="material-symbols-outlined text-primary">info</span>
+<h4 class="font-title-lg text-title-lg text-primary">Core Information</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant">Parish Name</label>
+<input class="form-input-custom" type="text" value="Holy Cross Cathedral"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant">Dedication Feast</label>
+<input class="form-input-custom" type="text" value="September 14th"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="font-label-md text-on-surface-variant">Physical Address</label>
+<textarea class="form-input-custom" rows="3">4 Catholic Mission St, Lagos Island 102273, Lagos, Nigeria</textarea>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant">Contact Email</label>
+<input class="form-input-custom" type="email" value="admin@holycrosscathedral.ng"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant">Phone Number</label>
+<input class="form-input-custom" type="tel" value="+234 1 234 5678"/>
+</div>
+</div>
+</section>
+<!-- Section: Map Location (Small context box) -->
+<section class="md:col-span-4 section-card flex flex-col">
+<div class="flex items-center gap-2 mb-stack-md border-b border-outline-variant/30 pb-4">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<h4 class="font-title-lg text-title-lg text-primary">Map Reference</h4>
+</div>
+<div class="flex-1 rounded-lg overflow-hidden bg-surface-variant min-h-[200px]">
+<div class="w-full h-full bg-cover bg-center" data-location="Lagos, Nigeria" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACMpW4DYLL3p6-cKvj9j4_4PknbskaxmnGYA2E7HQc_lepUWHIJWvyEWh7nQeikG09ZQiTwq2eZwj4NWNhDSOOj5VGGr6m17lX_WQ3lBoOYRhjDtYWktNO3iyoxa_rJhjPAmEgQ3F6YTanvQDmUEHjTkwrtlYhRgZGhFUmMEsc6_XrKP5GcWdxorkwIbEqnSUYdTWJhrGMzNZ-AaEK78zguJ8SV0tx-TSbmmA_H1bMgyUuilvB30CP')"></div>
+</div>
+<button class="mt-4 w-full py-2 border border-outline text-primary rounded-lg font-label-md text-label-md hover:bg-surface-variant transition-colors">
+                        Update Geolocation
+                    </button>
+</section>
+<!-- Section: Liturgical Schedule (Large structured table) -->
+<section class="md:col-span-12 section-card">
+<div class="flex justify-between items-center mb-stack-md border-b border-outline-variant/30 pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<h4 class="font-title-lg text-title-lg text-primary">Liturgical Schedule</h4>
+</div>
+<button class="text-primary flex items-center gap-1 font-label-md text-label-md hover:underline">
+<span class="material-symbols-outlined text-base">add</span> Add Row
+                        </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant/20">
+<th class="py-3 px-4 font-label-md text-on-surface-variant">Day</th>
+<th class="py-3 px-4 font-label-md text-on-surface-variant">Mass Times</th>
+<th class="py-3 px-4 font-label-md text-on-surface-variant">Confession</th>
+<th class="py-3 px-4 font-label-md text-on-surface-variant">Adoration</th>
+<th class="py-3 px-4 font-label-md text-on-surface-variant">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-on-surface">
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-bold">Sundays</td>
+<td class="py-4 px-4">6:30am, 8:30am, 10:30am</td>
+<td class="py-4 px-4">After 8:30am Mass</td>
+<td class="py-4 px-4">5:00pm - 6:00pm</td>
+<td class="py-4 px-4 text-primary">
+<button class="material-symbols-outlined">edit</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-bold">Weekdays</td>
+<td class="py-4 px-4">6:00am, 12:15pm, 6:00pm</td>
+<td class="py-4 px-4">30 mins before Mass</td>
+<td class="py-4 px-4">—</td>
+<td class="py-4 px-4 text-primary">
+<button class="material-symbols-outlined">edit</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-bold">Saturdays</td>
+<td class="py-4 px-4">6:30am, 10:00am</td>
+<td class="py-4 px-4">4:00pm - 5:30pm</td>
+<td class="py-4 px-4">—</td>
+<td class="py-4 px-4 text-primary">
+<button class="material-symbols-outlined">edit</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Section: Resources & Bulletins (Bento medium) -->
+<section class="md:col-span-7 section-card">
+<div class="flex items-center gap-2 mb-stack-md border-b border-outline-variant/30 pb-4">
+<span class="material-symbols-outlined text-primary">article</span>
+<h4 class="font-title-lg text-title-lg text-primary">Parish Bulletins</h4>
+</div>
+<div class="space-y-stack-sm">
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg border border-outline-variant/20 group hover:border-primary transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">picture_as_pdf</span>
+<div>
+<p class="font-body-md font-semibold">Weekly Bulletin - Oct 22, 2023</p>
+<p class="text-xs text-on-surface-variant">Uploaded 2 days ago • 1.4 MB</p>
+</div>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-variant rounded-full text-on-surface-variant"><span class="material-symbols-outlined">download</span></button>
+<button class="p-2 hover:bg-error-container rounded-full text-error"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg border border-outline-variant/20 group hover:border-primary transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">picture_as_pdf</span>
+<div>
+<p class="font-body-md font-semibold">Weekly Bulletin - Oct 15, 2023</p>
+<p class="text-xs text-on-surface-variant">Uploaded 9 days ago • 1.2 MB</p>
+</div>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-variant rounded-full text-on-surface-variant"><span class="material-symbols-outlined">download</span></button>
+<button class="p-2 hover:bg-error-container rounded-full text-error"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+<div class="pt-4">
+<label class="w-full h-32 flex flex-col items-center justify-center border-2 border-dashed border-outline-variant rounded-xl cursor-pointer hover:bg-surface-variant/20 transition-all">
+<span class="material-symbols-outlined text-outline-variant text-4xl mb-2">upload_file</span>
+<span class="font-label-md text-on-surface-variant">Click to upload new PDF Bulletin</span>
+<input class="hidden" type="file"/>
+</label>
+</div>
+</div>
+</section>
+<!-- Section: Staff & Clergy (Bento side) -->
+<section class="md:col-span-5 section-card">
+<div class="flex items-center gap-2 mb-stack-md border-b border-outline-variant/30 pb-4">
+<span class="material-symbols-outlined text-primary">person_pin</span>
+<h4 class="font-title-lg text-title-lg text-primary">Assigned Clergy</h4>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant">
+<div class="w-full h-full bg-cover bg-center" data-alt="A portrait of a senior Catholic Priest in a black clerical shirt and white Roman collar. He has a dignified and warm expression, set against a blurred background of a traditional church interior. The photography is professional with soft, warm lighting that emphasizes a trustworthy and experienced presence, fitting the corporate religious admin aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCSVKgj3-s3WjZbJ7FL4slaXB1UCt-l-dhRdqeJo7EYkEVeQehsTVeqsQFqLqIklhAKr-ybtE6GJG0nJMI4KeERhAcFp1Mk93RN98CcpZxwswknob9TqpYqlpG-iH0BiiWcrl1LuVjLwW0A_5ES1w4Xhe9Emj07VeuwuuSlTPwVaN7gHdqDhU2ZIyOy1yvh0I1BOowi2X9hPtC3E-R8BC-KhU8dtjr277tmNgoUloHxIINdjS9x3Z22')"></div>
+</div>
+<div class="flex-1">
+<p class="font-body-md font-bold">Rev. Msgr. Anthony Obinna</p>
+<p class="text-xs text-on-surface-variant">Parish Priest / Administrator</p>
+</div>
+<button class="text-on-surface-variant material-symbols-outlined">settings</button>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant">
+<div class="w-full h-full bg-cover bg-center" data-alt="A portrait of a young Catholic Priest in clerical attire. He has a friendly and approachable smile, reflecting a modern and community-focused ministry. The lighting is bright and clean, consistent with a professional diocese administration portal. The overall aesthetic is dignified and contemporary." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlb8GgSEZfqyoqN8QdrH__l6LUfFntYOROzhg_T-_5DEJeQhWDI88SVBEXsqwXk6qyYICEwCrGoXfGcJuqC8mXsAcSs0Md4zkllbgCBHyEMWNc69FyJGVqu5ANfaiZqur6nQ-NFjnaQ8oT2r2BcGmEHWEF_Pr0TKCJGrfIUyAaNlpTruVhIBFHKRBq8ZnyRs3sF9X8MsnDZ6gGUJnc-k77Ou4x3UTs_fWRPlPz6-YIdwnhdDTL30hT')"></div>
+</div>
+<div class="flex-1">
+<p class="font-body-md font-bold">Rev. Fr. Jude Eze</p>
+<p class="text-xs text-on-surface-variant">Assistant Parish Priest</p>
+</div>
+<button class="text-on-surface-variant material-symbols-outlined">settings</button>
+</div>
+<button class="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-full bg-secondary/10 text-secondary font-label-md text-label-md hover:bg-secondary/20 transition-all">
+<span class="material-symbols-outlined text-sm">person_add</span>
+                            Assign New Clergy
+                        </button>
+</div>
+</section>
+</div>
+<!-- Footer Controls -->
+<footer class="flex justify-between items-center py-stack-lg border-t border-outline-variant/30">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md">
+<span class="material-symbols-outlined text-sm">history</span>
+                    Last updated: Oct 24, 2023 by Admin Profile
+                </div>
+<div class="flex gap-stack-md">
+<button class="px-8 py-3 rounded-full border border-outline text-primary font-label-md text-label-md hover:bg-surface-variant transition-all">
+                        Discard Changes
+                    </button>
+<button class="px-8 py-3 rounded-full bg-primary text-on-primary font-label-md text-label-md hover:bg-primary/90 shadow-md transition-all active:scale-95">
+                        Publish Changes
+                    </button>
+</div>
+</footer>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface flex justify-around items-center px-margin-mobile pb-safe h-20 border-t border-outline-variant/30 shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-md text-label-md">Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary/20 text-primary rounded-2xl px-6 py-1" href="#">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-md text-label-md">Clergy</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1" href="#">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-label-md text-label-md">Map</span>
+</a>
+</nav>
+<script>
+        // Simple form interaction simulation
+        document.querySelectorAll('.form-input-custom').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('scale-[1.01]');
+                input.parentElement.style.transition = 'transform 0.2s ease-in-out';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Toggle state layer for save buttons
+        const saveButtons = document.querySelectorAll('button:contains("Save"), button:contains("Publish")');
+        saveButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Saving...';
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Saved';
+                    btn.classList.replace('bg-primary', 'bg-tertiary-container');
+                    btn.classList.replace('text-on-primary', 'text-on-tertiary-container');
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        btn.classList.replace('bg-tertiary-container', 'bg-primary');
+                        btn.classList.replace('text-on-tertiary-container', 'text-on-primary');
+                    }, 2000);
+                }, 1200);
+            });
+        });
+    </script>
+</body></html>

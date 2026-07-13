@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Invite Admin - Role &amp; Parish | Diocese of Lagos</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#261900",
+                        "on-surface-variant": "#514348",
+                        "on-background": "#1d1b16",
+                        "inverse-primary": "#fdb0d0",
+                        "secondary-fixed": "#ffd6fd",
+                        "surface-container-low": "#f9f3ea",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e7e2d9",
+                        "inverse-surface": "#32302a",
+                        "tertiary-fixed": "#ffdea4",
+                        "outline-variant": "#d5c2c7",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "secondary": "#7e4c83",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f6f0e7",
+                        "surface-bright": "#fff9ef",
+                        "surface-container-high": "#ede7df",
+                        "tertiary": "#1f1400",
+                        "on-secondary-fixed": "#33053b",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "on-secondary-container": "#7b4980",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "on-tertiary-container": "#b58a2c",
+                        "surface-tint": "#884b67",
+                        "surface": "#fff9ef",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-container": "#4a1731",
+                        "on-primary-container": "#c27c9a",
+                        "tertiary-container": "#382700",
+                        "primary": "#30021c",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dfd9d1",
+                        "outline": "#837378",
+                        "on-primary-fixed": "#380822",
+                        "background": "#fff9ef",
+                        "on-surface": "#1d1b16",
+                        "surface-variant": "#e7e2d9",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffd8e6",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "surface-container": "#f3ede4",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#fec0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "24px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "margin-tablet": "24px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "label-md": ["Work Sans"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fff9ef; /* background token */
+            color: #1d1b16; /* on-background token */
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for better visual harmony */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f3ede4; }
+        ::-webkit-scrollbar-thumb { background: #d5c2c7; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #837378; }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen flex flex-col">
+<!-- TopAppBar - Using JSON Blueprint -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline h-16">
+<div class="flex items-center justify-between px-margin-mobile h-full w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A dignified close-up portrait of a Catholic Church administrator in Nigeria, wearing clerical attire. The lighting is soft and natural, reflecting a contemplative and professional atmosphere. The background is a blurred view of a warm, traditional Lagos church office with wooden textures and religious icons." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7M4kEJ_AkLCYHoHXhoJWVO0MTxbUBPTYzoUsDFjZdVw54SgyyyUPErG5OaAArAaK4tancDhMYyyZ8vLLx0fQVrsIHwy55c7cOBUCFtIqBQ2y960-_5YmueLmopQpIN1KidxFNIJH7oRuowGBWh0cA93HhAvf4DD3I2wPatiurH5BM0f8x6Iwg13w8wnLVHBQC3s1zMhXhucrnBD5ztrNTs7Hl82AZRr4DYvYazQUt1RqOwqBlQLUv"/>
+</div>
+<h1 class="font-title-lg text-title-lg font-bold text-primary dark:text-primary-fixed-dim">Diocese of Lagos</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary dark:text-primary-fixed-dim hover:bg-surface-variant/50 transition-colors active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow pt-20 pb-24 px-margin-mobile max-w-2xl mx-auto w-full">
+<!-- Stepper Indicator -->
+<div class="mb-stack-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-md">1</div>
+<div class="h-1 w-8 bg-primary rounded-full"></div>
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-md">2</div>
+<div class="h-1 w-8 bg-surface-container-highest rounded-full"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">3</div>
+</div>
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider">Step 2 of 3</span>
+</div>
+<section class="mb-stack-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Role &amp; Parish</h2>
+<p class="font-body-md text-on-surface-variant">Define the administrative scope and local community for the new invitation.</p>
+</section>
+<!-- Form Cards -->
+<div class="flex flex-col gap-stack-md">
+<!-- Role Selection -->
+<div class="bg-surface-container-lowest rounded-xl p-stack-md border border-outline-variant shadow-sm transition-all hover:shadow-md">
+<label class="block font-label-md text-on-surface-variant mb-2 ml-1" for="role-select">Primary Role</label>
+<div class="relative group">
+<select class="appearance-none w-full bg-surface rounded-lg border border-outline px-4 py-3 pr-10 focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" id="role-select" onchange="updateRoleDescription()">
+<option value="content_manager">Content Manager</option>
+<option selected="" value="moderator">Moderator</option>
+<option value="parish_admin">Parish Admin</option>
+<option value="financial_overseer">Financial Overseer</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+<!-- Dynamic Role Description -->
+<div class="mt-4 p-4 rounded-lg bg-secondary-container/20 border-l-4 border-secondary transition-opacity duration-300" id="role-info">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary">info</span>
+<div>
+<p class="font-title-lg text-secondary text-sm font-bold mb-1" id="role-desc-title">Moderator</p>
+<p class="font-body-md text-on-secondary-container text-sm leading-relaxed" id="role-desc-text">
+                                Manages community discussions, prayer requests, and ensures all interactions align with diocesan values. Can flag or remove content and manage user reporting.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Parish Selection -->
+<div class="bg-surface-container-lowest rounded-xl p-stack-md border border-outline-variant shadow-sm transition-all hover:shadow-md">
+<label class="block font-label-md text-on-surface-variant mb-2 ml-1" for="parish-search">Assigned Parish</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-outline">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-surface rounded-lg border border-outline pl-10 pr-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" id="parish-search" placeholder="Search parishes..." type="text"/>
+</div>
+<!-- Parish Chips / Quick Select (Bento Style) -->
+<div class="mt-4 flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed border border-primary/10 font-label-md flex items-center gap-1 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">church</span>
+                        Holy Cross Cathedral
+                    </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-variant/40 text-on-surface-variant border border-outline-variant font-label-md flex items-center gap-1 hover:bg-surface-variant/80 active:scale-95 transition-all">
+                        St. Leo's Ikeja
+                    </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-variant/40 text-on-surface-variant border border-outline-variant font-label-md flex items-center gap-1 hover:bg-surface-variant/80 active:scale-95 transition-all">
+                        Our Lady of Victories
+                    </button>
+</div>
+</div>
+<!-- Visual Context Image - Non-functional decorative element to enhance UI -->
+<div class="mt-4 rounded-2xl overflow-hidden relative h-40 group border border-outline-variant">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A cinematic, high-quality photograph of the interior of Holy Cross Cathedral in Lagos, Nigeria. The image captures the majestic stained-glass windows and architectural details with a warm, divine glow. The scene is peaceful and dignified, representing the spiritual weight of diocesan administration. Professional lighting and shallow depth of field create a premium, corporate atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxWxfd2p2aEo1Wa90ekbJyicJMxcsx7G7AMrRbuM9uvJK1ONafa4E237OGWRaNMzK4JW9nb7WJ4lNMkqdGJNu42BDTd3kVVOHTnbqwQqQNeqU9W_TtfWkvbA8CGlaogwhjIH2MK2Zkc856ipVrghpW1ZlkXZ2Sc1ybbW3MIXk-3N_Vyt3OU7zIv7HyMfJtP17BTede_AK-XCrkj_YhUqihXmBcKpTa4LqmFys3Hj-q-f94wulZXRU6')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-4">
+<p class="text-white font-title-lg text-sm italic">"Service in Christ for the people of Lagos."</p>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-stack-lg flex gap-4">
+<button class="flex-1 py-4 px-6 rounded-full border-2 border-primary text-primary font-bold transition-all hover:bg-primary/5 active:scale-[0.98]">
+                Back
+            </button>
+<button class="flex-[2] py-4 px-6 rounded-full bg-primary text-on-primary font-bold shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:opacity-90 active:scale-[0.98]">
+                Continue
+            </button>
+</div>
+</main>
+<!-- BottomNavBar - Using JSON Blueprint -->
+<!-- Determined 'Dashboard' is active state for an Admin/Management flow -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container dark:bg-surface-container-low shadow-[0_-1px_3px_0_rgba(0,0,0,0.05)] rounded-t-xl z-50">
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-5 py-1 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface/5 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-md text-label-md">Content</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface/5 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Calendar</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface/5 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Stats</span>
+</button>
+</nav>
+<script>
+        const roleData = {
+            content_manager: {
+                title: "Content Manager",
+                text: "Responsible for uploading daily readings, liturgical reflections, and community announcements. Has full access to the diocesan media library and newsletter tools."
+            },
+            moderator: {
+                title: "Moderator",
+                text: "Manages community discussions, prayer requests, and ensures all interactions align with diocesan values. Can flag or remove content and manage user reporting."
+            },
+            parish_admin: {
+                title: "Parish Admin",
+                text: "Maintains local parish details, schedules Mass times, and manages parish-specific member lists. Restricted to editing information for their assigned parish only."
+            },
+            financial_overseer: {
+                title: "Financial Overseer",
+                text: "Tracks donations, tithes, and special project funds. Can generate financial reports for diocesan audit and manage payment gateway integrations."
+            }
+        };
+
+        function updateRoleDescription() {
+            const select = document.getElementById('role-select');
+            const infoBox = document.getElementById('role-info');
+            const title = document.getElementById('role-desc-title');
+            const text = document.getElementById('role-desc-text');
+            const role = select.value;
+
+            // Simple transition effect
+            infoBox.style.opacity = '0';
+            setTimeout(() => {
+                title.innerText = roleData[role].title;
+                text.innerText = roleData[role].text;
+                infoBox.style.opacity = '1';
+            }, 150);
+        }
+
+        // Search highlight mock interaction
+        const parishSearch = document.getElementById('parish-search');
+        parishSearch.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            const chips = document.querySelectorAll('.mt-4.flex.flex-wrap button');
+            chips.forEach(chip => {
+                if(chip.innerText.toLowerCase().includes(val)) {
+                    chip.style.opacity = '1';
+                    chip.style.transform = 'scale(1)';
+                } else {
+                    chip.style.opacity = '0.4';
+                    chip.style.transform = 'scale(0.95)';
+                }
+            });
+        });
+    </script>
+</body></html>

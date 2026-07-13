@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Saints - CatApp</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#7b4980",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f6f0e7",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface-container-highest": "#e7e2d9",
+                    "on-secondary-fixed": "#33053b",
+                    "inverse-primary": "#fdb0d0",
+                    "surface-container": "#f3ede4",
+                    "on-tertiary-fixed": "#261900",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "surface-dim": "#dfd9d1",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-primary-container": "#c27c9a",
+                    "surface-variant": "#e7e2d9",
+                    "primary-fixed": "#ffd8e6",
+                    "primary": "#30021c",
+                    "on-surface": "#1d1b16",
+                    "inverse-surface": "#32302a",
+                    "on-tertiary-container": "#b58a2c",
+                    "outline": "#837378",
+                    "on-error-container": "#93000a",
+                    "background": "#fff9ef",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "surface": "#fff9ef",
+                    "surface-container-low": "#f9f3ea",
+                    "surface-tint": "#884b67",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#d5c2c7",
+                    "surface-container-high": "#ede7df",
+                    "on-surface-variant": "#514348",
+                    "secondary-container": "#fec0ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#ffdea4",
+                    "secondary": "#7e4c83",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "on-primary-fixed": "#380822",
+                    "on-background": "#1d1b16",
+                    "tertiary": "#1f1400",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#382700",
+                    "primary-container": "#4a1731",
+                    "surface-bright": "#fff9ef",
+                    "secondary-fixed-dim": "#efb2f1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "32px",
+                    "stack-md": "16px",
+                    "unit": "4px",
+                    "stack-lg": "24px",
+                    "margin-tablet": "24px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "label-md": ["Work Sans"],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "body-md": ["Work Sans"],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "title-lg": ["Work Sans"],
+                    "body-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .saint-card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(48, 2, 28, 0.08);
+        }
+
+        .gold-border-gradient {
+            border: 1px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(to right, #ffdea4, #f0bf5c) border-box;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface flex items-center justify-between px-margin-mobile h-16 transition-colors duration-200 ease-in-out">
+<div class="flex items-center gap-4">
+<button class="text-primary hover:bg-surface-container-high p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">Saints</h1>
+</div>
+<div class="h-10 w-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional and warm profile portrait of a Nigerian man in a clean white shirt, smiling gently. The lighting is soft and natural, emphasizing a sense of community and peace. The background is a blurred warm-toned office space, maintaining the modern corporate aesthetic of the app with subtle burgundy accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2yKEK3chEB4xz5oJsm29Zaohp6J0plg53W_CDoizOojwZ_bwdOjqr9dvm4S5KGxdIyw8WjC5b3hHwHHGM6EQibWjMooaU4xbjWB0XDgywMijofqWRLSnYplJiODBtthJ8MiErxO7hnp_HNuQsA_xeeYM_EPriGz0oxyrgMZI7ZB011eBWRk_ZYeuWaWhHg48NvWgFZ6Lpy3SFTgEZPCaLj77EZVauzB6O-RR8ysZqe80F7eC1KyK2"/>
+</div>
+</header>
+<main class="flex-1 pb-24 max-w-[720px] mx-auto w-full px-margin-mobile">
+<!-- Search Bar -->
+<section class="mt-stack-md">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-4 pl-12 pr-4 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-on-surface-variant font-label-md text-body-md" placeholder="Search for a Saint or Feast Day..." type="text"/>
+</div>
+</section>
+<!-- Today's Saint Featured Card -->
+<section class="mt-stack-lg">
+<div class="bg-white rounded-[24px] overflow-hidden saint-card-shadow gold-border-gradient flex flex-col">
+<div class="relative h-72">
+<img class="w-full h-full object-cover" data-alt="A dignified and high-quality oil painting style portrait of Saint Anthony of Padua holding the Christ child and a lily. The style is classic Catholic iconography but with a modern, clean digital finish. The color palette features deep burgundy robes, warm golden halos, and a soft cream background, perfectly matching the Sacred Grace design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCNxztVyEnm8zpzSNTX_CP2lYKntq9TdPTkmqmRkVnhcEIQDcYSzIXVOim2Rhj4CWIA_LYNOrHrY6Ap8fvgSFKi7D9y4-MDad5o_Y5HrkqJaah_5JtpEJdaxXmmdJRXGqmdMlAT7a9Q6KwF89E7-ncOwF51sEd2qnegyhuGAo4PBcDZ-YTDeedRIjhS2gJOhFJVd2qZF5Gi5Jxr6dTk5EpIAonxMWl4HV12qAXFrrYgxobP58zvM7H"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary text-on-primary font-label-md text-label-md px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">Today's Saint</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-white">Saint Anthony of Padua</h2>
+<p class="text-white/80 font-label-md text-label-md">Feast Day: June 13</p>
+</div>
+</div>
+<div class="p-6">
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed italic mb-4">
+                        "The man who is filled with the Holy Spirit speaks in different languages. These different languages are different ways of witnessing to Christ."
+                    </p>
+<p class="text-on-surface-variant line-clamp-3 mb-6">
+                        Known as the "Evangelical Doctor" and the patron saint of lost things, St. Anthony was a powerful Franciscan preacher and teacher. Born in Lisbon, his life was marked by a deep devotion to the Eucharist and a miraculous ability to reach the hearts of the most hardened sinners.
+                    </p>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-title-lg text-body-md hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span>Read Full Life &amp; Prayer</span>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Upcoming Saints / Weekly Calendar -->
+<section class="mt-stack-lg">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-lg-mobile text-title-lg text-primary">Coming Soon</h3>
+<button class="text-secondary font-label-md text-label-md font-medium hover:underline">View Calendar</button>
+</div>
+<div class="space-y-stack-md">
+<!-- Saint Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-tertiary-fixed flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A clean digital illustration of Saint Aloysius Gonzaga in a traditional black cassock with a white surplice. The style is minimalist and modern, set against a soft cream background. The portrait uses deep burgundy and muted purple tones to align with the CatApp brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASzmQM-HOB5ws5tMS6EshezYdF0bG9roZBrw_LarImPjFP2gxBu0PhjwQuu88T25Qvn-hPhrLN0Vf8CaUaoSIWDLDssqoLSvYkPcnvJi7nlNx0qMvSHFkMLLavyOrgrzirsaql6iiEoDCvrXOM71vEIbngOYGe9xHRYCFQs9UOCJEn8si1r-piDHprs1IKR_7fjS9Xuc1EDorCd_gVINkWkSC5BvdjA0MfDkbigIxBWryW6Ecto7VM"/>
+</div>
+<div class="flex-1">
+<h4 class="font-title-lg text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">St. Aloysius Gonzaga</h4>
+<p class="text-on-surface-variant font-label-md text-label-md">Friday, June 21 • Religious</p>
+</div>
+<div class="text-right">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">event</span>
+</div>
+</div>
+<!-- Saint Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-tertiary-fixed flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A modern digital painting of Saint John the Baptist in the wilderness. He is depicted with natural, rugged features, wearing camel's hair. The lighting is golden and dramatic, creating a spiritual and contemplative atmosphere. The background uses earth tones with subtle gold highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHftgpYOP2h9Xg4q3SAYDnYJWRf8eL-kTK4V_2sUy_8qQ3x0pnE2hJYMg61KjO01Y9IX463dTmO57PgKeIfSQyVbl7Wp2zwgsA0E1Q8BuLVgAlAqdF2kDFhfhh2UCv8fjpSA5ttW4TNXbsZr2vNAXnXtwAIb2WJNqDFW5GpVvNhyUTpasYEz0T5dHpE3xG1Um-evx10itIzVhwaPwhVHhFti9xrHdUQwuJrGGPHL710bCvDYKCBPY2"/>
+</div>
+<div class="flex-1">
+<h4 class="font-title-lg text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">Nativity of St. John the Baptist</h4>
+<p class="text-on-surface-variant font-label-md text-label-md">Monday, June 24 • Solemnity</p>
+</div>
+<div class="text-right">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">event</span>
+</div>
+</div>
+<!-- Saint Item 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-tertiary-fixed flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A beautiful digital icon of Saints Peter and Paul together. Peter holds the keys and Paul holds a sword. The style is contemporary yet respectful of Byzantine roots, using a rich color palette of deep burgundy, vibrant gold, and soft cream." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBISSMVRk4-3Uf1DcW2S_l3nV0WAulA4sFnlzL1B22XIGw7mwsqbnWiT4PEcMVrL24BX1A7furj5qe_y_COnRddbpbsDLU5z76eyjJURC5zyvC0QSj5BlZm1P0lyzlfRRcqxCqX0FsUVHanhNSVn6ofNYvQD9X7WLHu2aFQtXWKlbXddiLmgQ3as9RNnwrVLSpIQF3F1o6xP9B9Y5dD2fmEbIeAhTXLWqfRSbLg1d69uVdQxhsMNCDG"/>
+</div>
+<div class="flex-1">
+<h4 class="font-title-lg text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">Sts. Peter and Paul</h4>
+<p class="text-on-surface-variant font-label-md text-label-md">Saturday, June 29 • Solemnity</p>
+</div>
+<div class="text-right">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">event</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Patron Saint Categories (Bento Style) -->
+<section class="mt-stack-lg pb-10">
+<h3 class="font-headline-lg-mobile text-title-lg text-primary mb-4">Find Your Patron</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-secondary-container/20 border border-secondary-container p-4 rounded-2xl flex flex-col justify-between aspect-square group cursor-pointer hover:bg-secondary-container/30 transition-all">
+<span class="material-symbols-outlined text-secondary text-3xl">medical_services</span>
+<div>
+<p class="font-title-lg text-body-md font-bold text-secondary">Healers</p>
+<p class="text-on-surface-variant text-[12px]">Physicians &amp; Nurses</p>
+</div>
+</div>
+<div class="bg-tertiary-fixed/20 border border-tertiary-fixed p-4 rounded-2xl flex flex-col justify-between aspect-square group cursor-pointer hover:bg-tertiary-fixed/30 transition-all">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-3xl">school</span>
+<div>
+<p class="font-title-lg text-body-md font-bold text-tertiary-fixed-dim">Students</p>
+<p class="text-on-surface-variant text-[12px]">Youth &amp; Scholars</p>
+</div>
+</div>
+<div class="bg-primary-container/10 border border-primary-container/30 p-4 rounded-2xl flex flex-col justify-between aspect-square group cursor-pointer hover:bg-primary-container/20 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl">family_restroom</span>
+<div>
+<p class="font-title-lg text-body-md font-bold text-primary">Families</p>
+<p class="text-on-surface-variant text-[12px]">Mothers &amp; Fathers</p>
+</div>
+</div>
+<div class="bg-on-secondary-container/10 border border-on-secondary-container/30 p-4 rounded-2xl flex flex-col justify-between aspect-square group cursor-pointer hover:bg-on-secondary-container/20 transition-all">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl">shield</span>
+<div>
+<p class="font-title-lg text-body-md font-bold text-on-secondary-container">Protection</p>
+<p class="text-on-surface-variant text-[12px]">Workers &amp; Travelers</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-2 bg-surface-container-low border-t border-outline-variant shadow-sm z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome_motion</span>
+<span class="font-label-md text-label-md mt-1">Saints</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-md text-label-md mt-1">Reflections</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple search interaction
+        const searchInput = document.querySelector('input');
+        searchInput.addEventListener('input', (e) => {
+            console.log('Searching for:', e.target.value);
+            // Dynamic filtering logic would go here
+        });
+
+        // Scroll shadow for TopAppBar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-md');
+                header.classList.remove('shadow-none');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.add('shadow-none');
+            }
+        });
+    </script>
+</body></html>

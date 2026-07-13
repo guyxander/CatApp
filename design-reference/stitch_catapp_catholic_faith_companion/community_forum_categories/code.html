@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CatApp Community Forum</title>
+<!-- Fonts: Source Serif 4 for serifs, Work Sans for sans-serif -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .sacred-gradient {
+            background: linear-gradient(135deg, rgba(48, 2, 28, 0.05) 0%, rgba(255, 249, 239, 0) 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(213, 194, 199, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#32302a",
+                      "surface-container-high": "#ede7df",
+                      "secondary-fixed-dim": "#efb2f1",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#f9f3ea",
+                      "secondary": "#7e4c83",
+                      "on-secondary-fixed": "#33053b",
+                      "on-primary-container": "#c27c9a",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#64346a",
+                      "on-primary-fixed": "#380822",
+                      "surface-container": "#f3ede4",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#fff9ef",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "surface-container-highest": "#e7e2d9",
+                      "on-tertiary-container": "#b58a2c",
+                      "tertiary-fixed-dim": "#f0bf5c",
+                      "primary-fixed": "#ffd8e6",
+                      "tertiary-container": "#382700",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#fec0ff",
+                      "on-secondary-container": "#7b4980",
+                      "inverse-on-surface": "#f6f0e7",
+                      "surface-tint": "#884b67",
+                      "tertiary": "#1f1400",
+                      "surface-dim": "#dfd9d1",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed": "#261900",
+                      "primary-container": "#4a1731",
+                      "secondary-fixed": "#ffd6fd",
+                      "on-primary-fixed-variant": "#6d344f",
+                      "outline-variant": "#d5c2c7",
+                      "on-surface": "#1d1b16",
+                      "surface-variant": "#e7e2d9",
+                      "outline": "#837378",
+                      "primary": "#30021c",
+                      "on-surface-variant": "#514348",
+                      "surface-bright": "#fff9ef",
+                      "background": "#fff9ef",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#1d1b16",
+                      "inverse-primary": "#fdb0d0",
+                      "tertiary-fixed": "#ffdea4",
+                      "primary-fixed-dim": "#fdb0d0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "margin-tablet": "24px",
+                      "gutter": "16px",
+                      "stack-md": "16px",
+                      "stack-lg": "24px",
+                      "unit": "4px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px"
+              },
+              "fontFamily": {
+                      "label-md": ["Work Sans"],
+                      "headline-lg-mobile": ["\"Source Serif 4\""],
+                      "title-lg": ["Work Sans"],
+                      "display-lg": ["\"Source Serif 4\""],
+                      "headline-lg": ["\"Source Serif 4\""],
+                      "body-md": ["Work Sans"],
+                      "body-lg": ["\"Source Serif 4\""]
+              },
+              "fontSize": {
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex items-center justify-between px-margin-mobile w-full h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young Nigerian man with a warm, welcoming expression, wearing a stylish modern shirt. The background is a soft-focus interior with warm ambient lighting and elegant traditional Nigerian art on the wall. The image is bright, high-quality, and follows a light-mode aesthetic with warm cream tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBScZbTM2bOuX7aXGhhAdCa6ClVUOwkIlQNWDjaNPU1u6DUOnjd66VcNp7XzGkB21npmq71XG-ilLCRSf3AnUInYhomGKvuTfabGEZDPaxxLAjg9K89Or44CE_SEQ3E_aydTNK9Z6jVnthiMMc6obCwXCIrb-i5CLacZCROLHQIfqg9XWYiLxVoo-zI9_dRD8ZTuUVLmGTrni7qDO1uBmjGB8udUxHalQ9R-sl66vMAZ0-KM23ilzrE"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim">CatApp</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary">search</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-24 px-margin-mobile max-w-screen-md mx-auto min-h-screen">
+<!-- Welcome Header -->
+<div class="mb-stack-lg">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-1">Community Forum</h2>
+<p class="font-body-md text-on-surface-variant italic">Reflecting together in faith and fellowship.</p>
+</div>
+<!-- Featured Discussion Card -->
+<section class="mb-stack-lg">
+<div class="relative overflow-hidden rounded-xl bg-primary text-on-primary p-6 shadow-sm border border-primary-container">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-secondary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Featured</span>
+</div>
+<div class="max-w-[80%]">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile mb-2">The Role of Lagos Youth in Synodality</h3>
+<p class="font-body-md opacity-90 mb-4">How can our local parishes better engage the energetic spirit of the youth in decision-making processes?</p>
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A profile photo of a smiling Nigerian woman in her late 20s wearing a colorful headwrap. Soft, natural lighting. Professional digital portrait style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5uHIUwc0kD_D7Y80WgFs8cX9FPSOkGRx0H4_IPTcA6rbERIqWxQXPWxP04087wiaScFrJX0cfcwGp6bgQQ-tI5wim0TOTWu40vAURQB8tSb7trXpkH2gm3mZe81RpiTJt3riGBsq4VEN5KghbvFz93diPu50dpUyUB1CGT8v-vovMGT1a2CudNSWN0ehRqwiEt0_RBMQroaGj3xjRO8RtFS6_ezdWQcdZU1mWM_8SI8zqLU5FGw03"/>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A profile photo of a distinguished older Nigerian gentleman in a crisp white shirt. Warm lighting, studio setting. High quality portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbAUX09Px8SpRygRyM2h0WVq7pV3ktCt3WzKdQyn7N-ipQ0w0YimvD1pFql-X_Nm_lUv-s9E5X9Ku22l7jHrdzM3iFtKijoNIKO_9oKW0wLJ7Zs5xcUD7f7rm-xFQs6lvARum4Lx6zz5uE9lKotD4HCorhzJzOeOqfAj9bSkL-Q3NXbl_jDmMD7Ql4cv9zjc9sQkXROURMRGbWaefOV3iuiSaETinhlbMnOo-dEehIs3oVUVpQkB-t"/>
+</div>
+</div>
+<span class="text-[12px] font-label-md">124 participants joined today</span>
+</div>
+</div>
+<!-- Subtle Texture/Shader Background Overlay -->
+<div class="absolute -bottom-10 -right-10 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[160px]" style="font-variation-settings: 'FILL' 1;">church</span>
+</div>
+</div>
+</section>
+<!-- Categories Bento-ish Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- General Discussion -->
+<div class="glass-card p-stack-md rounded-xl hover:shadow-md transition-all cursor-pointer group border-l-4 border-l-secondary">
+<div class="flex justify-between items-start mb-2">
+<div class="p-2 bg-secondary/10 rounded-lg group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<span class="text-label-md text-on-surface-variant font-medium">1.2k threads</span>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">General Discussion</h4>
+<p class="font-body-md text-on-surface-variant text-sm mb-4">Everyday faith, community news, and general fellowship.</p>
+<div class="pt-3 border-t border-outline-variant flex items-center justify-between">
+<span class="text-[11px] font-label-md text-on-surface-variant">LATEST: Parish Bazaar Dates...</span>
+<span class="text-[11px] font-label-md text-secondary">2m ago</span>
+</div>
+</div>
+<!-- Prayer Requests (Urgent Highlight) -->
+<div class="relative bg-surface-container-low p-stack-md rounded-xl border-2 border-error/20 hover:border-error transition-all cursor-pointer overflow-hidden">
+<div class="absolute top-0 right-0">
+<div class="bg-error text-white text-[10px] px-3 py-1 rounded-bl-xl font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+                        URGENT
+                    </div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<div class="p-2 bg-error/10 text-error rounded-lg">
+<span class="material-symbols-outlined">prayer_times</span>
+</div>
+<span class="text-label-md text-on-surface-variant font-medium">456 threads</span>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">Prayer Requests</h4>
+<div class="bg-white/50 p-3 rounded-lg mb-4 border border-error/10">
+<p class="text-[13px] font-body-md text-on-surface italic">"Please pray for the recovery of Father Jude after his surgery..."</p>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-label-md text-on-surface-variant">89 praying now</span>
+<button class="text-error text-sm font-label-md flex items-center gap-1 hover:underline">
+                        Join in Prayer <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Youth Ministry -->
+<div class="glass-card p-stack-md rounded-xl hover:shadow-md transition-all cursor-pointer group border-l-4 border-l-tertiary-container">
+<div class="flex justify-between items-start mb-2">
+<div class="p-2 bg-tertiary-container/10 text-tertiary-container rounded-lg group-hover:bg-tertiary-container group-hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined">volunteer_activism</span>
+</div>
+<span class="text-label-md text-on-surface-variant font-medium">328 threads</span>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">Youth Ministry</h4>
+<p class="font-body-md text-on-surface-variant text-sm mb-4">Engaging the next generation through action and word.</p>
+<div class="pt-3 border-t border-outline-variant flex items-center justify-between">
+<span class="text-[11px] font-label-md text-on-surface-variant">LATEST: Retreat Photos</span>
+<span class="text-[11px] font-label-md text-tertiary-container font-semibold">New Post</span>
+</div>
+</div>
+<!-- Liturgical Music -->
+<div class="glass-card p-stack-md rounded-xl hover:shadow-md transition-all cursor-pointer group border-l-4 border-l-secondary-container">
+<div class="flex justify-between items-start mb-2">
+<div class="p-2 bg-secondary-container/20 text-on-secondary-container rounded-lg group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined">music_note</span>
+</div>
+<span class="text-label-md text-on-surface-variant font-medium">215 threads</span>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">Liturgical Music</h4>
+<p class="font-body-md text-on-surface-variant text-sm mb-4">Chants, hymns, and choir coordination for mass.</p>
+<div class="pt-3 border-t border-outline-variant flex items-center justify-between">
+<span class="text-[11px] font-label-md text-on-surface-variant">LATEST: Easter Hymn Sheet</span>
+<span class="text-[11px] font-label-md text-on-surface-variant">1h ago</span>
+</div>
+</div>
+</div>
+<!-- Quote of the Day / Atmosphere -->
+<div class="mt-stack-lg p-6 text-center border-t border-outline-variant/30">
+<span class="material-symbols-outlined text-tertiary/20 text-4xl mb-2">format_quote</span>
+<p class="font-body-lg text-body-lg text-primary italic leading-relaxed">
+                "Where two or three are gathered in my name, I am there among them."
+            </p>
+<p class="text-[12px] font-label-md text-on-surface-variant mt-2 tracking-widest uppercase">— Matthew 18:20</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-safe px-2 bg-surface-container-low dark:bg-surface-container-high border-t border-outline-variant shadow-sm rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1">
+<span class="material-symbols-outlined">today</span>
+<span class="font-label-md text-label-md">Today</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-md text-label-md">Library</span>
+</div>
+<!-- Active Tab: Community -->
+<div class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-fixed-dim text-on-secondary-container dark:text-on-secondary-fixed-variant rounded-full px-5 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+<!-- Floating Action Button: Post New Discussion -->
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+<script>
+        // Micro-interaction for cards
+        document.querySelectorAll('.glass-card, .bg-surface-container-low').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add a subtle ripple effect style interaction
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement("span");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add("ripple");
+
+            const ripple = button.getElementsByClassName("ripple")[0];
+            if (ripple) { ripple.remove(); }
+            button.appendChild(circle);
+        }
+
+        // Apply to main interactive elements
+        document.querySelectorAll('.glass-card').forEach(b => b.addEventListener('click', createRipple));
+    </script>
+<style>
+        /* Ripple styles */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 600ms linear;
+            background-color: rgba(48, 2, 28, 0.1);
+        }
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        /* Custom safe area padding for modern iPhones */
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 16px);
+        }
+    </style>
+</body></html>

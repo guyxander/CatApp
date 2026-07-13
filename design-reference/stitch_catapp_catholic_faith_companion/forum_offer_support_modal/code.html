@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Offer Your Support - Catholic Fellowship</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#380822",
+                      "primary-container": "#4a1731",
+                      "background": "#fff9ef",
+                      "tertiary-container": "#382700",
+                      "surface-container": "#f3ede4",
+                      "on-surface-variant": "#514348",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#32302a",
+                      "tertiary-fixed-dim": "#f0bf5c",
+                      "surface-dim": "#dfd9d1",
+                      "on-primary-fixed-variant": "#6d344f",
+                      "secondary": "#7e4c83",
+                      "surface-tint": "#884b67",
+                      "on-tertiary-fixed": "#261900",
+                      "secondary-fixed-dim": "#efb2f1",
+                      "on-secondary-fixed-variant": "#64346a",
+                      "tertiary": "#1f1400",
+                      "surface-container-high": "#ede7df",
+                      "on-surface": "#1d1b16",
+                      "inverse-on-surface": "#f6f0e7",
+                      "on-error-container": "#93000a",
+                      "outline-variant": "#d5c2c7",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#fec0ff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#c27c9a",
+                      "primary-fixed-dim": "#fdb0d0",
+                      "surface-container-low": "#f9f3ea",
+                      "outline": "#837378",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#33053b",
+                      "surface-bright": "#fff9ef",
+                      "primary-fixed": "#ffd8e6",
+                      "primary": "#30021c",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#fdb0d0",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "surface-variant": "#e7e2d9",
+                      "surface-container-highest": "#e7e2d9",
+                      "secondary-fixed": "#ffd6fd",
+                      "on-tertiary-container": "#b58a2c",
+                      "on-background": "#1d1b16",
+                      "surface": "#fff9ef",
+                      "on-secondary-container": "#7b4980",
+                      "tertiary-fixed": "#ffdea4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-lg": "24px",
+                      "margin-desktop": "32px",
+                      "unit": "4px",
+                      "stack-md": "16px",
+                      "margin-tablet": "24px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "body-md": ["Work Sans"],
+                      "label-md": ["Work Sans"],
+                      "display-lg": ["\"Source Serif 4\""],
+                      "body-lg": ["\"Source Serif 4\""],
+                      "headline-lg-mobile": ["\"Source Serif 4\""],
+                      "headline-lg": ["\"Source Serif 4\""],
+                      "title-lg": ["Work Sans"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-mesh {
+            background-color: #fff9ef;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(126, 76, 131, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 222, 164, 0.1) 0px, transparent 50%);
+        }
+        .bottom-sheet-transition {
+            transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .chip-active {
+            background-color: #4a1731 !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-x-hidden">
+<!-- Mock Background Content (Community Feed) -->
+<main class="flex-grow w-full max-w-[720px] mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg bg-mesh">
+<header class="mb-stack-lg">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Prayer Intentions</h1>
+<p class="text-on-surface-variant font-body-md mt-2 italic">"For where two or three are gathered in my name, I am there among them."</p>
+</header>
+<section class="space-y-stack-md">
+<!-- Feed Item -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Chinonso O.</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Lagos, Nigeria • 2h ago</p>
+</div>
+</div>
+<p class="text-body-md font-body-md text-on-surface mb-4">Please pray for my mother who is undergoing surgery tomorrow morning. We trust in the Divine Physician for a successful procedure and quick recovery.</p>
+<div class="flex items-center gap-stack-md pt-3 border-t border-surface-variant/20">
+<button class="flex items-center gap-2 text-primary font-label-md hover:opacity-80 transition-opacity" onclick="openModal()">
+<span class="material-symbols-outlined">volunteer_activism</span>
+                        Offer a Prayer
+                    </button>
+<button class="flex items-center gap-2 text-on-surface-variant font-label-md hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">chat_bubble</span>
+                        Reply
+                    </button>
+</div>
+</div>
+<!-- Feed Item 2 -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Mary A.</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Abuja, Nigeria • 5h ago</p>
+</div>
+</div>
+<p class="text-body-md font-body-md text-on-surface mb-4">Giving thanks to God for a successful job interview today. Asking for your prayers as I await the final decision.</p>
+<div class="flex items-center gap-stack-md pt-3 border-t border-surface-variant/20">
+<button class="flex items-center gap-2 text-primary font-label-md" onclick="openModal()">
+<span class="material-symbols-outlined">volunteer_activism</span>
+                        Offer a Prayer
+                    </button>
+<button class="flex items-center gap-2 text-on-surface-variant font-label-md">
+<span class="material-symbols-outlined">chat_bubble</span>
+                        Reply
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] opacity-0 pointer-events-none transition-opacity duration-300 flex items-end md:items-center justify-center" id="modalBackdrop">
+<!-- Bottom Sheet / Modal Container -->
+<div class="bottom-sheet-transition translate-y-full md:translate-y-0 md:scale-95 bg-surface-bright w-full max-w-[500px] rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]" id="modalSheet">
+<!-- Handle for Mobile -->
+<div class="w-12 h-1.5 bg-outline-variant/50 rounded-full mx-auto my-4 md:hidden"></div>
+<!-- Header -->
+<div class="px-margin-mobile py-4 flex items-center justify-between border-b border-surface-variant/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Offer Your Support</h2>
+</div>
+<button class="p-2 hover:bg-surface-variant/30 rounded-full transition-colors" onclick="closeModal()">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+</div>
+<!-- Content -->
+<div class="p-margin-mobile flex-grow overflow-y-auto space-y-stack-lg">
+<!-- Quick Spiritual Encouragement Chips -->
+<section>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-stack-sm px-1">Spiritual Encouragement</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface font-label-md transition-all active:scale-95 hover:border-primary" onclick="toggleChip(this, 'Praying for you')">
+                            Praying for you
+                        </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface font-label-md transition-all active:scale-95 hover:border-primary" onclick="toggleChip(this, 'Sending light')">
+                            Sending light
+                        </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface font-label-md transition-all active:scale-95 hover:border-primary" onclick="toggleChip(this, 'Amen')">
+                            Amen
+                        </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface font-label-md transition-all active:scale-95 hover:border-primary" onclick="toggleChip(this, 'God bless you')">
+                            God bless you
+                        </button>
+</div>
+</section>
+<!-- Text Area -->
+<section>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-stack-sm px-1" for="prayerMessage">Your Prayer or Message</label>
+<div class="relative group">
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-4 font-body-md text-on-surface focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-outline italic" id="prayerMessage" placeholder="Write a message of comfort or a brief prayer..." rows="4"></textarea>
+<div class="absolute bottom-3 right-3 text-label-md text-outline">
+<span id="charCount">0</span>/300
+                        </div>
+</div>
+</section>
+<!-- Anonymous Toggle -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-surface-variant/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">visibility_off</span>
+<div>
+<p class="font-body-md font-medium text-on-surface">Post Anonymously</p>
+<p class="text-label-md text-on-surface-variant">Your name will be hidden from the feed.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-margin-mobile bg-surface-container-lowest border-t border-surface-variant/20 flex flex-col gap-3">
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-title-lg text-title-lg flex items-center justify-center gap-2 shadow-lg hover:brightness-110 active:scale-[0.98] transition-all" onclick="submitPrayer()">
+<span class="material-symbols-outlined">send</span>
+                    Share Prayer
+                </button>
+<p class="text-center text-label-md text-on-surface-variant px-4">
+                    Your prayer will be visible to the community to offer collective support.
+                </p>
+</div>
+</div>
+</div>
+<!-- Success Toast (Hidden by default) -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 z-[100] bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-full font-label-md flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300 translate-y-4" id="toast">
+<span class="material-symbols-outlined text-secondary-fixed">check_circle</span>
+        Prayer shared successfully. God bless you.
+    </div>
+<script>
+        const backdrop = document.getElementById('modalBackdrop');
+        const sheet = document.getElementById('modalSheet');
+        const textarea = document.getElementById('prayerMessage');
+        const charCount = document.getElementById('charCount');
+        const toast = document.getElementById('toast');
+
+        function openModal() {
+            backdrop.classList.remove('opacity-0', 'pointer-events-none');
+            backdrop.classList.add('opacity-100');
+            sheet.classList.remove('translate-y-full', 'md:scale-95');
+            sheet.classList.add('translate-y-0', 'md:scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            backdrop.classList.remove('opacity-100');
+            backdrop.classList.add('opacity-0', 'pointer-events-none');
+            sheet.classList.add('translate-y-full', 'md:scale-95');
+            sheet.classList.remove('translate-y-0', 'md:scale-100');
+            document.body.style.overflow = '';
+        }
+
+        function toggleChip(btn, text) {
+            // Unselect others (optional logic, but typically chips here could be multi-select or single)
+            // For this UI, let's make it add/replace text in the textarea
+            const currentVal = textarea.value.trim();
+            if (currentVal.length > 0) {
+                textarea.value = currentVal + ' ' + text;
+            } else {
+                textarea.value = text;
+            }
+            
+            // Visual feedback
+            btn.classList.toggle('chip-active');
+            updateCharCount();
+            
+            // Temporary visual pulse
+            setTimeout(() => {
+                btn.classList.remove('chip-active');
+            }, 500);
+        }
+
+        function updateCharCount() {
+            const length = textarea.value.length;
+            charCount.textContent = length;
+            if (length > 300) {
+                charCount.classList.add('text-error');
+            } else {
+                charCount.classList.remove('text-error');
+            }
+        }
+
+        textarea.addEventListener('input', updateCharCount);
+
+        function submitPrayer() {
+            if (textarea.value.trim() === '') {
+                textarea.classList.add('border-error');
+                setTimeout(() => textarea.classList.remove('border-error'), 1000);
+                return;
+            }
+
+            // Simulate loading
+            const btn = event.currentTarget;
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = `<span class="animate-spin material-symbols-outlined">progress_activity</span> Sending...`;
+            btn.disabled = true;
+
+            setTimeout(() => {
+                closeModal();
+                showToast();
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                textarea.value = '';
+                updateCharCount();
+            }, 1200);
+        }
+
+        function showToast() {
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 3000);
+        }
+
+        // Close on backdrop click
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) closeModal();
+        });
+
+        // Initialize with modal closed
+    </script>
+</body></html>

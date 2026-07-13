@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sacred-gradient {
+            background: linear-gradient(135deg, #fff9ef 0%, #f9f3ea 100%);
+        }
+        .prayer-card-shadow {
+            box-shadow: 0 2px 12px -2px rgba(48, 2, 28, 0.04);
+        }
+        .amen-active {
+            font-variation-settings: 'FILL' 1;
+            color: #efb2f1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "on-error": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "inverse-surface": "#32302a",
+                "surface-container-high": "#ede7df",
+                "secondary-fixed-dim": "#efb2f1",
+                "error": "#ba1a1a",
+                "surface-container-low": "#f9f3ea",
+                "secondary": "#7e4c83",
+                "on-secondary-fixed": "#33053b",
+                "on-primary-container": "#c27c9a",
+                "error-container": "#ffdad6",
+                "on-secondary-fixed-variant": "#64346a",
+                "on-primary-fixed": "#380822",
+                "surface-container": "#f3ede4",
+                "surface-container-lowest": "#ffffff",
+                "surface": "#fff9ef",
+                "on-tertiary-fixed-variant": "#5d4200",
+                "surface-container-highest": "#e7e2d9",
+                "on-tertiary-container": "#b58a2c",
+                "tertiary-fixed-dim": "#f0bf5c",
+                "primary-fixed": "#ffd8e6",
+                "tertiary-container": "#382700",
+                "on-primary": "#ffffff",
+                "secondary-container": "#fec0ff",
+                "on-secondary-container": "#7b4980",
+                "inverse-on-surface": "#f6f0e7",
+                "surface-tint": "#884b67",
+                "tertiary": "#1f1400",
+                "surface-dim": "#dfd9d1",
+                "on-error-container": "#93000a",
+                "on-tertiary-fixed": "#261900",
+                "primary-container": "#4a1731",
+                "secondary-fixed": "#ffd6fd",
+                "on-primary-fixed-variant": "#6d344f",
+                "outline-variant": "#d5c2c7",
+                "on-surface": "#1d1b16",
+                "surface-variant": "#e7e2d9",
+                "outline": "#837378",
+                "primary": "#30021c",
+                "on-surface-variant": "#514348",
+                "surface-bright": "#fff9ef",
+                "background": "#fff9ef",
+                "on-secondary": "#ffffff",
+                "on-background": "#1d1b16",
+                "inverse-primary": "#fdb0d0",
+                "tertiary-fixed": "#ffdea4",
+                "primary-fixed-dim": "#fdb0d0"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+              "spacing": {
+                "stack-sm": "8px",
+                "margin-tablet": "24px",
+                "gutter": "16px",
+                "stack-md": "16px",
+                "stack-lg": "24px",
+                "unit": "4px",
+                "margin-mobile": "16px",
+                "margin-desktop": "32px"
+              },
+              "fontFamily": {
+                "label-md": ["Work Sans"],
+                "headline-lg-mobile": ["\"Source Serif 4\""],
+                "title-lg": ["Work Sans"],
+                "display-lg": ["\"Source Serif 4\""],
+                "headline-lg": ["\"Source Serif 4\""],
+                "body-md": ["Work Sans"],
+                "body-lg": ["\"Source Serif 4\""]
+              },
+              "fontSize": {
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex items-center justify-between px-margin-mobile h-16 transition-colors duration-200 ease-in-out">
+<div class="flex items-center gap-stack-md">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A close-up high-quality portrait of a smiling Nigerian woman in her late 30s wearing a subtle liturgical accessory, set against a softly blurred warm cream background with gentle morning light. The style is clean, modern, and professional, reflecting a sense of peace and communal belonging in a contemporary digital space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW12PVZiOGW-R3BosZLzGXaRzwNGPwH-R8hupWIw5VbCjYh6X9xR-ap3KKl5J4nXSs91exP6sjdmW7qpsl3SmJgBO0ThCMeVr_OBNXH_dkeg0AB_2H469ydrBW2njEGBOILlua4tNhkvRfmalvmsI2aXyWUMY8nKpG9Fcc8VviSJV1fPPz3XNZGbqCm_XSUjSIQLAi2vsBuVq5nE5fy_TXu8UMH4nLz1C2Z7h4f2ecK3NU8u3Y1zT3"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim tracking-tight">CatApp</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<main class="pt-20 pb-28 px-margin-mobile max-w-[720px] mx-auto space-y-stack-lg">
+<!-- Header Section -->
+<section class="space-y-unit">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Prayer Requests</h2>
+<p class="font-body-md text-on-surface-variant">"Carry each other's burdens, and in this way you will fulfill the law of Christ."</p>
+</section>
+<!-- Discussion Thread List (Asymmetric / Modern Bento-ish List) -->
+<div class="space-y-stack-md">
+<!-- Thread 1 -->
+<article class="bg-surface-container-lowest rounded-xl p-stack-md prayer-card-shadow border border-surface-container active:scale-[0.98] transition-transform duration-150 cursor-pointer group">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3 mb-stack-sm">
+<img class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of an elderly religious sister with a kind expression, wearing a simple habit. The lighting is soft and golden, suggesting a sacred and contemplative atmosphere. High-resolution digital photography style consistent with a modern corporate Catholic app interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJQFmI2eZNv12ZfDraFN9rwLTdxNR7KKreMZrQU_aQwF1HfkDEKbYt7pTxz-xEece5u2MEnr7gjVSzmfsVV5LdR9BN5_3gBBQm6zt-sfbxnuSKLRE55fn3lu1izW_qegOqAUFk-xR9WgwrMjp7sS6S7nWGZPI7wTmDCCIX_gacpYUj4WaYG0-ygdM0bCgMSbxL3SIT0p-GoMfH7qCcppi2earsTf3O9gg16WgNwvX1KYFBhsw8vI2w"/>
+<div>
+<span class="block font-label-md text-on-surface leading-tight">Father Jude</span>
+<span class="block text-[10px] text-on-surface-variant uppercase tracking-wider">2 hours ago</span>
+</div>
+</div>
+<div class="px-3 py-1 bg-tertiary-container/10 rounded-full">
+<span class="font-label-md text-on-tertiary-fixed-variant text-[10px] uppercase font-bold tracking-widest">Urgent</span>
+</div>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-2 leading-snug">Healing for Sister Maria</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-stack-md">Please join us in interceding for Sister Maria who is undergoing a critical surgery tomorrow morning. We ask for the Lord's healing hand...</p>
+<div class="flex items-center justify-between border-t border-surface-container pt-stack-sm">
+<div class="flex items-center gap-1 text-secondary">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-secondary-container/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-md text-[14px]">124 Amen</span>
+</button>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-secondary-fixed"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-primary-fixed"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-tertiary-fixed"></div>
+</div>
+</div>
+</article>
+<!-- Thread 2 -->
+<article class="bg-surface-container-lowest rounded-xl p-stack-md prayer-card-shadow border border-surface-container active:scale-[0.98] transition-transform duration-150 cursor-pointer">
+<div class="flex items-center gap-3 mb-stack-sm">
+<img class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A sharp, modern portrait of a young Nigerian professional man in his late 20s, looking hopeful yet humble. Soft natural light illuminates his face, set against a backdrop of a modern minimalist office space with warm wooden accents. Part of a high-end UI design for a Catholic community application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDrzbk_YhEg3k5ZxvNNvb7EE7n-MRaNHNi40tMuxzNyJp-PPm3ZnWlCkl0AtuToSE8YG4Yq6lSh2PbYJTSBr7ENvCpBduTm2XT8yjzoKiPzVdLlKXtxHxHSawzngRb5wb_7e5VFvbS9rRquB8tFymRQX7-wvWrDsnSwD3mn6UfF3UKF7i4boMe70DxVsuT7MtkvIJCfpQP7TT1BaVQP1TNYhEI0_7YsrYhkiklE4fGnJLzAwz0DtDs"/>
+<div>
+<span class="block font-label-md text-on-surface leading-tight">Chidi O.</span>
+<span class="block text-[10px] text-on-surface-variant uppercase tracking-wider">5 hours ago</span>
+</div>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-2 leading-snug">Job search support</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-stack-md">After 6 months of searching, I have a final interview this Friday. Praying for clarity of mind and that God's will be done for my family's provision.</p>
+<div class="flex items-center justify-between border-t border-surface-container pt-stack-sm">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-secondary-container/20 transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:text-secondary">favorite</span>
+<span class="font-label-md text-[14px]">89 Amen</span>
+</button>
+</div>
+<span class="font-label-md text-on-surface-variant/60 text-[12px]">12 comments</span>
+</div>
+</article>
+<!-- Thread 3 (Featured Style) -->
+<article class="relative overflow-hidden bg-primary rounded-xl p-stack-md shadow-lg active:scale-[0.98] transition-transform duration-150 cursor-pointer">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-primary-fixed/20 text-6xl">church</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-stack-sm">
+<div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold text-xs">P</div>
+<div>
+<span class="block font-label-md text-primary-fixed leading-tight">St. Peters Parish</span>
+<span class="block text-[10px] text-primary-fixed/70 uppercase tracking-wider">Yesterday</span>
+</div>
+</div>
+<h3 class="font-headline-lg-mobile text-[24px] text-white mb-2 leading-tight">Grace for our Parish</h3>
+<p class="font-body-md text-primary-fixed-dim/90 line-clamp-2 mb-stack-md">Praying for the success of our upcoming youth retreat and for the spiritual renewal of all our parishioners this liturgical season.</p>
+<div class="flex items-center justify-between border-t border-primary-container pt-stack-sm">
+<div class="flex items-center gap-1 text-primary-fixed">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-md text-[14px]">456 Amen</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Thread 4 -->
+<article class="bg-surface-container-lowest rounded-xl p-stack-md prayer-card-shadow border border-surface-container active:scale-[0.98] transition-transform duration-150 cursor-pointer">
+<div class="flex items-center gap-3 mb-stack-sm">
+<img class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A warm and detailed portrait of a middle-aged Nigerian woman with a serene and faithful expression. She is captured in a soft-focus garden setting during the golden hour. The visual aesthetic is dignified, clean, and optimized for a modern Material 3 mobile interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARQi4AGfxTVTYHjxRm6HbkWqiYbAiLc312jmXsbajJCF4ckDxKfXVJA7sLg3_gRqm_3czNDRxjT6nQ2yglA4GyzB48g332iauBqbHvH0mlE_uBXty9RwuhrxDyKjGbH3UJbRU0pNBspOnjamVvWVjA2n1pBNXgrkCgn71VaytPyivyR-qEDaXMgZdjfEqhz8Dq8ueI8M_vgl8TuySQUFW0Xk8dtH42S77FqW1PKrmRjq0wmwbc_1CY"/>
+<div>
+<span class="block font-label-md text-on-surface leading-tight">Amaka E.</span>
+<span class="block text-[10px] text-on-surface-variant uppercase tracking-wider">1 day ago</span>
+</div>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-2 leading-snug">Thanksgiving for Safe Travel</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-stack-md">God is good! My children arrived safely from their long journey. Thank you all for your previous prayers for their safety.</p>
+<div class="flex items-center justify-between border-t border-surface-container pt-stack-sm">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-secondary-container/20 transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:text-secondary">favorite</span>
+<span class="font-label-md text-[14px]">210 Amen</span>
+</button>
+</div>
+<span class="font-label-md text-on-surface-variant/60 text-[12px]">3 comments</span>
+</div>
+</article>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+<span class="sr-only">Post a Request</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-low border-t border-outline-variant shadow-sm flex justify-around items-center pt-2 pb-6 px-2 h-20">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1">
+<span class="material-symbols-outlined">today</span>
+<span class="font-label-md text-label-md">Today</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-md text-label-md">Library</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+<script>
+        // Simple micro-interaction for Amen button
+        document.querySelectorAll('button').forEach(btn => {
+            if(btn.innerText.includes('Amen')) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const icon = this.querySelector('.material-symbols-outlined');
+                    const text = this.querySelector('span:last-child');
+                    const currentCount = parseInt(text.innerText);
+                    
+                    if (icon.style.fontVariationSettings.includes("'FILL' 1")) {
+                        icon.style.fontVariationSettings = "'FILL' 0";
+                        this.classList.remove('text-secondary');
+                        text.innerText = (currentCount - 1) + ' Amen';
+                    } else {
+                        icon.style.fontVariationSettings = "'FILL' 1";
+                        this.classList.add('text-secondary');
+                        text.innerText = (currentCount + 1) + ' Amen';
+                        
+                        // Small bounce effect
+                        this.classList.add('scale-110');
+                        setTimeout(() => this.classList.remove('scale-110'), 200);
+                    }
+                });
+            }
+        });
+
+        // Mock Navigation active state ripple or transition could be added here
+    </script>
+</body></html>

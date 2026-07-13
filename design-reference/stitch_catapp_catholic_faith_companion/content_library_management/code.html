@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Content Library Management - Catholic Connect</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Source Serif 4 & Work Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60;400;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "surface-variant": "#e7e2d9",
+                    "on-secondary-fixed": "#33053b",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#1d1b16",
+                    "on-surface": "#1d1b16",
+                    "surface-dim": "#dfd9d1",
+                    "background": "#fff9ef",
+                    "surface-container-high": "#ede7df",
+                    "primary-container": "#4a1731",
+                    "on-primary-fixed": "#380822",
+                    "on-secondary-container": "#7b4980",
+                    "surface-container-low": "#f9f3ea",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "secondary": "#7e4c83",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#c27c9a",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#b58a2c",
+                    "primary": "#30021c",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface": "#fff9ef",
+                    "outline": "#837378",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f6f0e7",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#fdb0d0",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#ffdea4",
+                    "surface-container-highest": "#e7e2d9",
+                    "surface-container": "#f3ede4",
+                    "surface-bright": "#fff9ef",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "on-surface-variant": "#514348",
+                    "outline-variant": "#d5c2c7",
+                    "inverse-surface": "#32302a",
+                    "on-tertiary-fixed": "#261900",
+                    "secondary-container": "#fec0ff",
+                    "tertiary-container": "#382700",
+                    "surface-tint": "#884b67",
+                    "primary-fixed": "#ffd8e6",
+                    "tertiary": "#1f1400",
+                    "on-primary-fixed-variant": "#6d344f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "margin-desktop": "32px",
+                    "margin-tablet": "24px",
+                    "margin-mobile": "16px",
+                    "unit": "4px",
+                    "gutter": "16px",
+                    "stack-md": "16px",
+                    "stack-lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "body-md": ["Work Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "title-lg": ["Work Sans"],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        -webkit-tap-highlight-color: transparent;
+        background-color: #fff9ef;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .custom-shadow {
+        box-shadow: 0 4px 12px rgba(48, 2, 28, 0.04);
+      }
+    </style>
+</head>
+<body class="font-body-md text-on-surface bg-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-4 h-16">
+<div class="flex items-center gap-4">
+<button class="text-primary hover:bg-primary/8 p-2 rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Catholic Connect</h1>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a dignified Nigerian priest or lay administrator, captured in soft, natural window light. The background is a blurred study with shelves of leather-bound liturgical books. The aesthetic is warm, corporate, and trustworthy, with a subtle color palette of deep burgundy and cream tones that align with the brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv-khA3WeDO37o9KCsGjzhsaRoKtCDdiSurXgN6iQlH40l1CN6dyYuNGV5e5e6ArgCiaZKjNSF9ecdlOwC9l5Z6OIPMkfpo_k_8sr_-Fu7Folh-d2wwjHBN0hFXnqU74YNVtvGnetcKLDg5DxmWA5CIklQIhqW8b3Av-9QezUey-ueg56IT5GIFrx504VoaJy8FyYizgDF4Oww5CSZfN3ebUNMaOoXap0CrEuUcICTAC5T0AajHLSN"/>
+</div>
+</header>
+<main class="px-margin-mobile pt-stack-md">
+<!-- Library Stats: Bento-ish Mini Cards -->
+<section class="grid grid-cols-2 gap-4 mb-stack-lg">
+<div class="bg-surface-container-low p-stack-md rounded-xl custom-shadow border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary text-sm">inventory_2</span>
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider">Total Items</span>
+</div>
+<p class="font-headline-lg-mobile text-primary">1,248</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-green-700 text-xs">trending_up</span>
+<span class="text-[10px] text-on-surface-variant">+12 this week</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-stack-md rounded-xl custom-shadow border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-tertiary-container text-sm">cloud_queue</span>
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider">Storage</span>
+</div>
+<p class="font-headline-lg-mobile text-primary">8.4<span class="text-lg"> GB</span></p>
+<div class="w-full bg-outline-variant/30 h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-tertiary-fixed-dim h-full" style="width: 65%;"></div>
+</div>
+</div>
+</section>
+<!-- Search and Filter Bar -->
+<section class="mb-stack-lg">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface border border-outline-variant rounded-full text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all duration-200" placeholder="Search library items..." type="text"/>
+<button class="absolute right-3 p-2 text-on-surface-variant hover:bg-surface-variant rounded-full">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+<!-- Category Chips -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar mt-4">
+<button class="bg-primary-container text-on-primary-fixed-variant px-4 py-2 rounded-full font-label-md transition-all duration-200 shadow-sm">All</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-md border border-outline-variant/30 hover:bg-surface-variant">Readings</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-md border border-outline-variant/30 hover:bg-surface-variant">Prayers</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-md border border-outline-variant/30 hover:bg-surface-variant">Audio</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-md border border-outline-variant/30 hover:bg-surface-variant">Video</button>
+</div>
+</section>
+<!-- Tabbed Navigation -->
+<section class="mb-stack-md">
+<div class="flex border-b border-outline-variant/30">
+<button class="flex-1 py-3 text-center font-label-md text-primary border-b-2 border-primary">Active Content</button>
+<button class="flex-1 py-3 text-center font-label-md text-on-surface-variant hover:text-primary transition-colors">Drafts &amp; Scheduled</button>
+</div>
+</section>
+<!-- Content List -->
+<section class="space-y-4">
+<!-- Item 1: Audio -->
+<div class="bg-white p-4 rounded-2xl border border-outline-variant/20 custom-shadow flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-12 h-12 bg-secondary-container/30 rounded-xl flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">mic</span>
+</div>
+<div>
+<h3 class="font-title-lg text-primary leading-tight">Sorrowful Mysteries</h3>
+<p class="font-label-md text-on-surface-variant">Rosary Audio • 18:42 mins</p>
+</div>
+</div>
+<span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">Published</span>
+</div>
+<div class="flex items-center justify-between mt-1 pt-3 border-t border-outline-variant/10">
+<p class="text-[11px] text-on-surface-variant italic">Updated 2h ago</p>
+<div class="flex gap-1">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-2 text-primary hover:bg-primary/5 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="p-2 text-error hover:bg-error/5 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">archive</span></button>
+</div>
+</div>
+</div>
+<!-- Item 2: Reading -->
+<div class="bg-white p-4 rounded-2xl border border-outline-variant/20 custom-shadow flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-12 h-12 bg-tertiary-fixed/30 rounded-xl flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div>
+<h3 class="font-title-lg text-primary leading-tight">Daily Reading: Oct 24</h3>
+<p class="font-label-md text-on-surface-variant">Daily Mass Reading • Liturgical</p>
+</div>
+</div>
+<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">Scheduled</span>
+</div>
+<div class="flex items-center justify-between mt-1 pt-3 border-t border-outline-variant/10">
+<p class="text-[11px] text-on-surface-variant italic">Scheduled for 10/24 06:00</p>
+<div class="flex gap-1">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-2 text-primary hover:bg-primary/5 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="p-2 text-error hover:bg-error/5 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</div>
+</div>
+</div>
+<!-- Item 3: Video -->
+<div class="bg-white p-4 rounded-2xl border border-outline-variant/20 custom-shadow flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-12 h-12 bg-primary-fixed/30 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">movie</span>
+</div>
+<div>
+<h3 class="font-title-lg text-primary leading-tight">Sunday Homily - Fr. Okafor</h3>
+<p class="font-label-md text-on-surface-variant">Video • 12:15 mins</p>
+</div>
+</div>
+<span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">Published</span>
+</div>
+<div class="flex items-center justify-between mt-1 pt-3 border-t border-outline-variant/10">
+<p class="text-[11px] text-on-surface-variant italic">Updated Oct 20</p>
+<div class="flex gap-1">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-2 text-primary hover:bg-primary/5 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="p-2 text-error hover:bg-error/5 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">archive</span></button>
+</div>
+</div>
+</div>
+<!-- Item 4: Prayer -->
+<div class="bg-white p-4 rounded-2xl border border-outline-variant/20 custom-shadow flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-12 h-12 bg-secondary-fixed/30 rounded-xl flex items-center justify-center text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-title-lg text-primary leading-tight">Prayer for the Sick</h3>
+<p class="font-label-md text-on-surface-variant">Traditional Prayer • Community</p>
+</div>
+</div>
+<span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">Published</span>
+</div>
+<div class="flex items-center justify-between mt-1 pt-3 border-t border-outline-variant/10">
+<p class="text-[11px] text-on-surface-variant italic">Updated Sept 15</p>
+<div class="flex gap-1">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-2 text-primary hover:bg-primary/5 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="p-2 text-error hover:bg-error/5 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">archive</span></button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed right-6 bottom-24 bg-primary-container text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-150 z-50">
+<span class="material-symbols-outlined text-white text-[28px]">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile py-2 bg-surface-container-low">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-1 rounded-lg">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">Pray</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-1 rounded-lg">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md">Formation</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-1 rounded-lg">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container/20 text-on-secondary-container rounded-full px-5 py-1">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span class="font-label-md text-label-md">Admin</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-1 rounded-lg">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction for content list items
+        document.querySelectorAll('.custom-shadow').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.classList.add('bg-primary/5');
+            });
+            card.addEventListener('touchend', () => {
+                card.classList.remove('bg-primary/5');
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>

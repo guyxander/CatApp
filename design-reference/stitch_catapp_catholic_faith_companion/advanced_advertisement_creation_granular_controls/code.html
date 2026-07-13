@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add New Advertisement | Sacred Grace Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e7e2d9",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#33053b",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dfd9d1",
+                        "on-surface": "#1d1b16",
+                        "on-background": "#1d1b16",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ede7df",
+                        "primary-container": "#4a1731",
+                        "on-primary-fixed": "#380822",
+                        "background": "#fff9ef",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f9f3ea",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "secondary": "#7e4c83",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#c27c9a",
+                        "on-secondary-container": "#7b4980",
+                        "primary": "#30021c",
+                        "on-tertiary-container": "#b58a2c",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "error-container": "#ffdad6",
+                        "surface": "#fff9ef",
+                        "outline": "#837378",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f6f0e7",
+                        "tertiary-fixed": "#ffdea4",
+                        "surface-container-highest": "#e7e2d9",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#fdb0d0",
+                        "surface-bright": "#fff9ef",
+                        "surface-container": "#f3ede4",
+                        "outline-variant": "#d5c2c7",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "on-surface-variant": "#514348",
+                        "on-tertiary-fixed": "#261900",
+                        "inverse-surface": "#32302a",
+                        "primary-fixed": "#ffd8e6",
+                        "tertiary-container": "#382700",
+                        "surface-tint": "#884b67",
+                        "secondary-container": "#fec0ff",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "tertiary": "#1f1400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-desktop": "32px",
+                        "margin-tablet": "24px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Work Sans"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-md": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-lg-mobile": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5c2c7;
+            border-radius: 10px;
+        }
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-variant/50 p-2 rounded-full transition-colors">menu</span>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary">Sacred Grace Admin</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-on-surface-variant font-label-md hidden md:block">Ad Management</span>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged Nigerian administrator with a warm, welcoming expression. He is wearing a clean white shirt, and the background is a soft-focus office with warm mahogany wooden panels and subtle golden accents, reflecting the Sacred Grace brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC1EMTFejL-wotGvTHkLOSCJfHqudBR9Y0dvzao89bG3936x49boIXdBPJ8i5cdCk5R4BV8_41eaoEFBuXNzb990-YKFetXvo0hVyNwhAmtYNoBr8uRhV3uYJn3ahZpERPRQM4FoWGPwKS5L-UiiAT_ztHr3WKNUmE1VX4bNAADy3s3Q31k5WGlMB05OzjXj8mOhnHGDiPsXI3rhaVigxdg8jj7pw2bG6e3IH0MsOC6lWzrWrl2odK"/>
+</div>
+</div>
+</header>
+<!-- Side Navigation Anchor -->
+<nav class="fixed left-0 top-0 h-full z-40 hidden md:flex flex-col bg-surface shadow-sm w-80 pt-20">
+<div class="px-6 mb-8">
+<h2 class="font-title-lg text-title-lg text-primary">Portal Menu</h2>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 mx-2 scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md">Content Manager</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md">Community</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md">Liturgical Calendar</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:pl-80 pt-20 pb-24 md:pb-8 px-margin-mobile md:px-margin-desktop min-h-screen">
+<div class="max-w-4xl mx-auto">
+<!-- Header Section -->
+<div class="mb-stack-lg animate-fade-in">
+<button class="flex items-center gap-2 text-primary hover:underline mb-2 transition-all">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+<span class="font-label-md">Back to Ads Manager</span>
+</button>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Create New Advertisement</h2>
+<p class="text-on-surface-variant font-body-md">Configure your campaign parameters and visual assets.</p>
+</div>
+<!-- Multi-step Progress Indicator -->
+<div class="flex items-center justify-between mb-10 px-2">
+<div class="flex flex-col items-center gap-2 group cursor-pointer" onclick="scrollToSection('basics')">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold shadow-md transition-all">1</div>
+<span class="font-label-md text-primary font-bold">Basics</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant mx-4"></div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer" onclick="scrollToSection('media')">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold transition-all">2</div>
+<span class="font-label-md text-on-surface-variant">Media</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant mx-4"></div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer" onclick="scrollToSection('targeting')">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold transition-all">3</div>
+<span class="font-label-md text-on-surface-variant">Targeting</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant mx-4"></div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer" onclick="scrollToSection('budget')">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold transition-all">4</div>
+<span class="font-label-md text-on-surface-variant">Budget</span>
+</div>
+</div>
+<div class="space-y-stack-lg">
+<!-- Section 1: Campaign Basics -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md" id="basics">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">info</span>
+<h3 class="font-title-lg text-title-lg text-primary">Campaign Basics</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant">Ad Name</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body-md" placeholder="e.g. Easter Youth Retreat 2024" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant">Advertiser Name</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body-md" placeholder="St. Jude's Catholic Parish" type="text"/>
+</div>
+<div class="md:col-span-2 flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant">Link URL (Destination)</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">link</span>
+<input class="w-full bg-surface border border-outline-variant rounded-lg pl-12 pr-4 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body-md" placeholder="https://sacredgrace.ng/events/retreat" type="url"/>
+</div>
+</div>
+<div class="md:col-span-2 flex flex-col gap-2 mt-2"><label class="font-label-md text-on-surface-variant">Sponsorship Level</label><div class="grid grid-cols-1 md:grid-cols-3 gap-3"><label class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-high transition-colors"><input checked="" class="w-4 h-4 text-primary focus:ring-primary" name="sponsorship" type="radio"/><div class="flex flex-col"><span class="font-label-md font-bold text-on-surface">Standard</span><span class="text-[10px] text-on-surface-variant">Regular rotation</span></div></label><label class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-high transition-colors"><input class="w-4 h-4 text-primary focus:ring-primary" name="sponsorship" type="radio"/><div class="flex flex-col"><span class="font-label-md font-bold text-on-surface">Premium</span><span class="text-[10px] text-on-surface-variant">Increased visibility</span></div></label><label class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-high transition-colors"><input class="w-4 h-4 text-primary focus:ring-primary" name="sponsorship" type="radio"/><div class="flex flex-col"><span class="font-label-md font-bold text-on-surface">Diocesan Priority</span><span class="text-[10px] text-on-surface-variant">Top of feed</span></div></label></div></div></div>
+</section>
+<!-- Section 2: Media Upload -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md" id="media">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">image</span>
+<h3 class="font-title-lg text-title-lg text-primary">Media Upload</h3>
+</div>
+<div class="bg-surface-container border-2 border-dashed border-outline-variant rounded-xl p-10 flex flex-col items-center justify-center gap-4 group hover:border-primary transition-colors cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<div class="text-center">
+<p class="font-title-lg text-on-surface mb-1">Drag and drop banner here</p>
+<p class="font-label-md text-on-surface-variant">Required dimensions: <span class="text-primary font-bold">1200 x 200 px</span></p>
+<p class="font-label-md text-on-surface-variant mt-1">PNG, JPG, or WEBP up to 2MB</p>
+</div>
+<button class="mt-2 bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:bg-primary-container transition-colors shadow-sm">Browse Files</button>
+</div>
+</section>
+<!-- Section 3: Targeting & Schedule -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md" id="targeting">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">target</span>
+<h3 class="font-title-lg text-title-lg text-primary">Targeting &amp; Schedule</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col gap-4">
+<label class="font-label-md text-on-surface-variant">Campaign Duration</label>
+<div class="flex items-center gap-4">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant">calendar_today</span>
+<input class="w-full bg-surface border border-outline-variant rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body-md" onfocus="(this.type='date')" placeholder="Start Date" type="text"/>
+</div>
+<span class="text-outline">to</span>
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant">calendar_today</span>
+<input class="w-full bg-surface border border-outline-variant rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body-md" onfocus="(this.type='date')" placeholder="End Date" type="text"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<label class="font-label-md text-on-surface-variant">Target Audience</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-primary bg-primary text-on-primary font-label-md flex items-center gap-2">
+                                    Everyone <span class="material-symbols-outlined text-sm">close</span>
+</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:bg-surface-container-high transition-all">
+                                    Youth
+                                </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:bg-surface-container-high transition-all">
+                                    Parish Leaders
+                                </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:bg-surface-container-high transition-all">
+                                    Women Guild
+                                </button>
+<button class="w-8 h-8 rounded-full border border-outline-variant text-on-surface-variant flex items-center justify-center hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-2 flex flex-col gap-4 pt-4 border-t border-outline-variant/30"><label class="font-label-md text-on-surface-variant">Geographic Targeting (Parishes &amp; Deaneries)</label><div class="relative"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span><input class="w-full bg-surface border border-outline-variant rounded-lg pl-12 pr-4 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body-md" placeholder="Search for specific parishes or deaneries..." type="text"/></div><div class="flex flex-wrap gap-2"><span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] flex items-center gap-1">Lagos Island Deanery <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span></span><span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] flex items-center gap-1">St. Gregory's <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span></span></div></div></div>
+</section>
+<!-- Section 4: Budget & Placement -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm transition-all hover:shadow-md" id="budget">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">payments</span>
+<h3 class="font-title-lg text-title-lg text-primary">Placement &amp; Priority</h3>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4"><label class="cursor-pointer group"><input class="hidden peer" name="placement" type="radio"/><div class="h-full border border-outline-variant rounded-xl p-4 peer-checked:border-primary peer-checked:bg-primary-container/10 transition-all flex flex-col gap-3"><div class="flex justify-between items-start"><span class="material-symbols-outlined text-primary">web_asset</span><span class="text-[10px] font-bold px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full">HIGH IMPACT</span></div><div><p class="font-title-lg text-on-surface text-lg">Home Banner</p><p class="font-label-md text-on-surface-variant">Primary visibility on the main dashboard.</p></div></div></label><label class="cursor-pointer group"><input checked="" class="hidden peer" name="placement" type="radio"/><div class="h-full border border-outline-variant rounded-xl p-4 peer-checked:border-primary peer-checked:bg-primary-container/10 transition-all flex flex-col gap-3"><div class="flex justify-between items-start"><span class="material-symbols-outlined text-primary">side_navigation</span><span class="text-[10px] font-bold px-2 py-0.5 bg-surface-container-highest text-on-surface-variant rounded-full">SUBTLE</span></div><div><p class="font-title-lg text-on-surface text-lg">Library Sidebar</p><p class="font-label-md text-on-surface-variant">Contextual placement in resource views.</p></div></div></label><label class="cursor-pointer group"><input class="hidden peer" name="placement" type="radio"/><div class="h-full border border-outline-variant rounded-xl p-4 peer-checked:border-primary peer-checked:bg-primary-container/10 transition-all flex flex-col gap-3"><div class="flex justify-between items-start"><span class="material-symbols-outlined text-primary">ads_click</span><span class="text-[10px] font-bold px-2 py-0.5 bg-primary-container text-on-primary-container rounded-full">MAX REACH</span></div><div><p class="font-title-lg text-on-surface text-lg">Interstitial</p><p class="font-label-md text-on-surface-variant">Full-screen transition between sections.</p></div></div></label></div>
+<div class="flex flex-col gap-2 pb-4"><label class="font-label-md text-on-surface-variant">Frequency Cap</label><div class="flex items-center gap-4"><select class="bg-surface border border-outline-variant rounded-lg px-4 py-2 focus:outline-none focus:border-primary text-on-surface font-body-md"><option>3 times</option><option>5 times</option><option>Unlimited</option></select><span class="text-on-surface-variant font-label-md">per user per day</span></div></div><div class="flex flex-col gap-2 pt-4 border-t border-outline-variant">
+<label class="font-label-md text-on-surface-variant">Budget Allocation (Optional)</label>
+<div class="relative w-full md:w-1/3">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface font-bold">₦</span>
+<input class="w-full bg-surface border border-outline-variant rounded-lg pl-8 pr-4 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body-md" placeholder="50,000" type="number"/>
+</div>
+<p class="font-label-md text-on-surface-variant italic">Estimation: ~15,000 potential impressions in Lagos Diocese.</p>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<div class="mt-8 p-4 bg-surface-container-low border border-outline-variant/20 rounded-lg flex gap-3 items-start"><span class="material-symbols-outlined text-primary">verified_user</span><p class="text-on-surface-variant font-label-md italic">Note: Advertisements from external partners or non-parish entities require final administrative review and approval before going live. Estimated review time: 24-48 hours.</p></div><div class="flex flex-col md:flex-row items-center justify-end gap-4 mt-12 pb-16">
+<button class="w-full md:w-auto px-10 py-4 text-primary font-bold hover:bg-surface-variant/30 rounded-full transition-all order-2 md:order-1">
+                        Save as Draft
+                    </button>
+<button class="w-full md:w-auto px-10 py-4 bg-primary text-on-primary font-bold rounded-full shadow-lg hover:bg-primary-container hover:scale-[1.02] active:scale-95 transition-all order-1 md:order-2 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">rocket_launch</span>
+                        Launch Campaign
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden bg-surface-container-low">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container/20 text-primary rounded-full px-6 py-1 scale-110 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-md">Content</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-md">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const offset = 80;
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = element.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Simple scroll spy for progress indicator (Visual only)
+        window.addEventListener('scroll', () => {
+            const sections = ['basics', 'media', 'targeting', 'budget'];
+            const navItems = document.querySelectorAll('.flex.flex-col.items-center.gap-2.group.cursor-pointer');
+            
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 150 && rect.bottom >= 150) {
+                        // Reset all
+                        navItems.forEach(item => {
+                            const circle = item.querySelector('.w-10');
+                            const label = item.querySelector('span');
+                            circle.classList.remove('bg-primary', 'text-on-primary');
+                            circle.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+                            label.classList.remove('text-primary', 'font-bold');
+                            label.classList.add('text-on-surface-variant');
+                        });
+                        // Set active
+                        const activeItem = navItems[index];
+                        const circle = activeItem.querySelector('.w-10');
+                        const label = activeItem.querySelector('span');
+                        circle.classList.add('bg-primary', 'text-on-primary');
+                        circle.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+                        label.classList.add('text-primary', 'font-bold');
+                        label.classList.remove('text-on-surface-variant');
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

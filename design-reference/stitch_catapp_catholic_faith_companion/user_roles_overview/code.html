@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Portal - User Roles Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrolled-header {
+            @apply shadow-md bg-surface-container-low transition-all duration-300;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(131, 115, 120, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e7e2d9",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "surface-container-high": "#ede7df",
+                        "surface-bright": "#fff9ef",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffd6fd",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e7e2d9",
+                        "surface-container": "#f3ede4",
+                        "on-primary-fixed": "#380822",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dfd9d1",
+                        "on-surface-variant": "#514348",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "on-tertiary-fixed": "#261900",
+                        "on-secondary-container": "#7b4980",
+                        "inverse-surface": "#32302a",
+                        "surface-container-low": "#f9f3ea",
+                        "outline-variant": "#d5c2c7",
+                        "tertiary": "#1f1400",
+                        "secondary": "#7e4c83",
+                        "outline": "#837378",
+                        "inverse-on-surface": "#f6f0e7",
+                        "on-background": "#1d1b16",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "surface": "#fff9ef",
+                        "primary-container": "#4a1731",
+                        "on-surface": "#1d1b16",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdea4",
+                        "primary-fixed": "#ffd8e6",
+                        "surface-tint": "#884b67",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#382700",
+                        "on-primary-container": "#c27c9a",
+                        "on-tertiary-container": "#b58a2c",
+                        "error": "#ba1a1a",
+                        "background": "#fff9ef",
+                        "primary": "#30021c",
+                        "secondary-container": "#fec0ff",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#33053b",
+                        "inverse-primary": "#fdb0d0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-tablet": "24px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "label-md": ["Work Sans"],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "title-lg": ["Work Sans"],
+                        "headline-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 left-0 w-full z-50 h-16 flex justify-between items-center px-margin-mobile md:px-margin-desktop bg-surface-container-low dark:bg-surface-container-high shadow-sm">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-primary-container/10 transition-colors p-2 rounded-full active:scale-95 duration-150">menu</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary dark:text-primary-fixed-dim">Admin Portal</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary transition-colors" href="#">Support</a>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container/20 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a senior Catholic administrator in a clean white clerical collar, set against a soft-focus warm cream background. The lighting is soft and dignified, emphasizing a mood of sacred service. High-quality digital photography with a corporate, modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKKED06SlthZ2gjACzSrv-weSMopGwL-XsJuI_JjrAS80mcg6WzB7xeFdZ9Le_gGU3qosLbZnKLfSyrY1pgxvu3-p0INvmp-vQwLJk2m1Rgd2268zoVnBMUBcOvTMhud_GjNWewjFHfxiN1Kt9neQNyFUzFmIivcsi38uwyKAU1aQjaIPuCnTNCn0nOQBi5bkb2obqFJNh2nTLh2Lhg9Ltm6Fd_hL_Ndkg8makiTrTlXdgvgQepa-x"/>
+</div>
+</div>
+</header>
+<!-- Navigation Drawer (Web) -->
+<aside class="fixed left-0 top-0 h-full z-40 hidden md:flex flex-col bg-surface-container-low dark:bg-surface-container-lowest w-72 rounded-r-xl border-r border-outline-variant dark:border-outline shadow-md pt-20">
+<div class="px-6 py-4 flex flex-col items-start gap-1 border-b border-outline-variant mb-4">
+<span class="font-title-lg text-title-lg text-primary dark:text-primary-fixed-dim">Super Admin</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Diocese of Lagos</span>
+</div>
+<nav class="flex flex-col gap-1">
+<div class="text-on-surface-variant dark:text-outline mx-2 px-4 py-3 flex items-center gap-4 cursor-pointer transition-transform hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</div>
+<div class="bg-secondary-container dark:bg-secondary-fixed-variant text-on-secondary-container dark:text-on-secondary-fixed-variant rounded-full mx-2 px-4 py-3 flex items-center gap-4 cursor-pointer transition-transform">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-body-md text-body-md">Role Management</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline mx-2 px-4 py-3 flex items-center gap-4 cursor-pointer transition-transform hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="font-body-md text-body-md">Content Approval</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline mx-2 px-4 py-3 flex items-center gap-4 cursor-pointer transition-transform hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">System Settings</span>
+</div>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-20 md:pb-8 md:pl-80 px-margin-mobile md:px-margin-desktop min-h-screen">
+<!-- Breadcrumbs & Header Section -->
+<div class="flex flex-col gap-4 mb-8">
+<nav class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<a class="hover:text-primary" href="#">Admin</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">User Management</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-primary">Administrator Roles</h2>
+<p class="text-on-surface-variant font-body-md">Manage permissions and access levels for the diocesan digital ecosystem.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-full flex items-center gap-2 shadow-lg hover:bg-primary-container transition-all active:scale-95 self-start md:self-center">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-label-md">Add New Admin</span>
+</button>
+</div>
+</div>
+<!-- Search & Filter Bar -->
+<div class="mb-8 flex flex-col md:flex-row gap-4">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none font-body-md transition-all" placeholder="Find admins by name or email..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-3 border border-outline-variant rounded-xl bg-white hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-outline">filter_list</span>
+<span class="font-label-md">Filter</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-3 border border-outline-variant rounded-xl bg-white hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-outline">download</span>
+<span class="font-label-md">Export</span>
+</button>
+</div>
+</div>
+<!-- Admin Users List (Bento-style Grid) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Admin Entry 1 -->
+<div class="glass-card p-6 rounded-2xl flex flex-col gap-6 hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/10">
+<img class="w-full h-full object-cover" data-alt="A portrait of a serene priest in his 50s, Fr. Jude Okoh, with a kind expression. He is wearing traditional clerical black with a white collar. The background is a blurred, warm, sunlit stone wall of a Nigerian cathedral. Modern, high-end professional lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHntcFV6YG5K0CArntRh6a-etRckej56lSg6wsxZ0d9tSx_Tt2ogCjFeID7SLpNYCibFxvWtz_fmp4sKsBQFMSqSr5OrY6oH98kP8H61aqXAG6UdXVymg4b9ZW1qZMwSfq_iCWTMuGWaEd5z67uT02vuN_RVy-vzySzmMI0VgVMtDSmKssY0U_midsjHQQop3FU6ZyK9Jn5O9OZz0Xb-nRyglumrlUEDkGHrJjY-3OoqDkYaFChkVp"/>
+</div>
+<div>
+<h3 class="font-title-lg text-on-surface">Fr. Jude Okoh</h3>
+<p class="text-on-surface-variant font-label-md">j.okoh@diocese-lagos.org</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md">Super Admin</span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/30">
+<div>
+<span class="block text-outline font-label-md text-[10px] uppercase tracking-wider">Status</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="font-body-md text-on-surface">Active</span>
+</div>
+</div>
+<div>
+<span class="block text-outline font-label-md text-[10px] uppercase tracking-wider">Last Login</span>
+<span class="font-body-md text-on-surface">Oct 24, 2023 • 09:12 AM</span>
+</div>
+</div>
+<div class="flex justify-end gap-3">
+<button class="flex items-center gap-2 px-4 py-2 text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors font-label-md">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                        Edit Role
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 text-error border border-error/20 rounded-lg hover:bg-error/5 transition-colors font-label-md">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+                        Deactivate
+                    </button>
+</div>
+</div>
+<!-- Admin Entry 2 -->
+<div class="glass-card p-6 rounded-2xl flex flex-col gap-6 hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/10">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of Maria, a Nigerian woman in her 30s with a warm and focused look. She is wearing a modern corporate blazer in a deep navy blue, with a subtle cross pendant. The aesthetic is clean, lit with soft daylight, in a contemporary office setting with warm wood tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrkPrt2CJ3hlxUl7PzKs-8m-f_Cq0A66H51uhFU9zTAhDA6bbpsv2eab3_uz18YRuNexS8I7gmk_bnrDdlp1VSywKsPgngEf0pYcqc7KxIPqw9oVkoSAk--HLEc3VEaAuclSeKZddS5i5F4N7EaEI5FdhL0GDwI7WeQ1A0VeqwlDMSzZoPkiLf2Av87D3BVImWs1h16GRPhdnGxJqBaAMWqiFOLTJ3WGVpI8RrFPCYNtAfFay-TVA9"/>
+</div>
+<div>
+<h3 class="font-title-lg text-on-surface">Admin Maria</h3>
+<p class="text-on-surface-variant font-label-md">m.adeyemi@catholic-portal.ng</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full font-label-md text-label-md">Content Manager</span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/30">
+<div>
+<span class="block text-outline font-label-md text-[10px] uppercase tracking-wider">Status</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="font-body-md text-on-surface">Active</span>
+</div>
+</div>
+<div>
+<span class="block text-outline font-label-md text-[10px] uppercase tracking-wider">Last Login</span>
+<span class="font-body-md text-on-surface">Oct 25, 2023 • 02:45 PM</span>
+</div>
+</div>
+<div class="flex justify-end gap-3">
+<button class="flex items-center gap-2 px-4 py-2 text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors font-label-md">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                        Edit Role
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 text-error border border-error/20 rounded-lg hover:bg-error/5 transition-colors font-label-md">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+                        Deactivate
+                    </button>
+</div>
+</div>
+<!-- Admin Entry 3 -->
+<div class="glass-card p-6 rounded-2xl flex flex-col gap-6 hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/10">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young Nigerian man, Chidi, in a smart casual light blue shirt. He has a professional and tech-savvy look. The background is a clean, minimalist workspace with religious art on the wall. The style is modern Material Design inspired, high clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATAC35Tq0hU5QZR_jEu1VocMtuc4CGFyI_NLbvzrTWC5DBwRC6ety6EB9FQPVASeTg65pCOz-0tZFw_tIX54CYs-XAL1a-OO9gXQDO-znz5mI1cDSTIpxBakWIAYNcv1e1ldBgMBs3tufRm_-v7uOUBSRhj25_9LFRfQ_7hgjBvGUwuKQSnNQKFhWrM_qVTrJhpJg2g1FrQV3oz8IBDveFxo0Eur4ADPGwmDQ6tjmcrdX0gtnsOsNz"/>
+</div>
+<div>
+<h3 class="font-title-lg text-on-surface">Chidi Nwosu</h3>
+<p class="text-on-surface-variant font-label-md">c.nwosu@stmarks.org</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-full font-label-md text-label-md">Moderator</span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/30">
+<div>
+<span class="block text-outline font-label-md text-[10px] uppercase tracking-wider">Status</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+<span class="font-body-md text-on-surface">Pending Invitation</span>
+</div>
+</div>
+<div>
+<span class="block text-outline font-label-md text-[10px] uppercase tracking-wider">Last Login</span>
+<span class="font-body-md text-on-surface italic text-outline">Never logged in</span>
+</div>
+</div>
+<div class="flex justify-end gap-3">
+<button class="flex items-center gap-2 px-4 py-2 text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors font-label-md">
+<span class="material-symbols-outlined text-[18px]">forward_to_inbox</span>
+                        Resend Invite
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 text-error border border-error/20 rounded-lg hover:bg-error/5 transition-colors font-label-md">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                        Remove
+                    </button>
+</div>
+</div>
+<!-- Empty State Concept / Quick Add -->
+<div class="border-2 border-dashed border-outline-variant/50 rounded-2xl flex flex-col items-center justify-center p-8 text-center group cursor-pointer hover:border-primary/50 transition-all">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">add</span>
+</div>
+<h3 class="font-title-lg text-on-surface">Invite New Admin</h3>
+<p class="text-on-surface-variant font-body-md max-w-[240px]">Assign a role to a new user to help manage your parish or diocese.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full h-16 flex justify-around items-center px-4 md:hidden bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-lg z-50 rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-1 hover:bg-surface-variant/50 transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Users</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container/20 text-primary dark:text-primary-fixed-dim rounded-2xl px-4 py-1 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined">shield_person</span>
+<span class="font-label-md text-label-md">Roles</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-1 hover:bg-surface-variant/50 transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">lock_open</span>
+<span class="font-label-md text-label-md">Perms</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-1 hover:bg-surface-variant/50 transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Logs</span>
+</div>
+</nav>
+<!-- Mobile FAB -->
+<button class="md:hidden fixed right-6 bottom-20 w-14 h-14 bg-primary-container text-on-primary-container rounded-2xl shadow-xl flex items-center justify-center active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<script>
+        // Simple Micro-interaction for Search Bar Focus
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.01]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.01]');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled-header');
+            } else {
+                header.classList.remove('scrolled-header');
+            }
+        });
+    </script>
+</body></html>

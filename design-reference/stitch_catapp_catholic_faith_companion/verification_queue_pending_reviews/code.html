@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Verification Queue - Catholic Connect Admin</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fff9ef",
+                        "surface-container": "#f3ede4",
+                        "tertiary-fixed": "#ffdea4",
+                        "surface-container-highest": "#e7e2d9",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#fdb0d0",
+                        "error-container": "#ffdad6",
+                        "surface": "#fff9ef",
+                        "outline": "#837378",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f6f0e7",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "tertiary": "#1f1400",
+                        "primary-fixed": "#ffd8e6",
+                        "tertiary-container": "#382700",
+                        "surface-tint": "#884b67",
+                        "secondary-container": "#fec0ff",
+                        "on-tertiary-fixed": "#261900",
+                        "inverse-surface": "#32302a",
+                        "outline-variant": "#d5c2c7",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "on-surface-variant": "#514348",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#33053b",
+                        "surface-variant": "#e7e2d9",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "error": "#ba1a1a",
+                        "primary": "#30021c",
+                        "on-tertiary-container": "#b58a2c",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f9f3ea",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "secondary": "#7e4c83",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#c27c9a",
+                        "on-secondary-container": "#7b4980",
+                        "surface-container-high": "#ede7df",
+                        "primary-container": "#4a1731",
+                        "on-primary-fixed": "#380822",
+                        "background": "#fff9ef",
+                        "surface-dim": "#dfd9d1",
+                        "on-surface": "#1d1b16",
+                        "on-background": "#1d1b16",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "stack-lg": "24px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "32px",
+                        "margin-tablet": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-md": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "title-lg": ["Work Sans"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff9ef;
+            font-family: 'Work Sans', sans-serif;
+        }
+        .scrolling-touch {
+            -webkit-overflow-scrolling: touch;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .sacred-glow {
+            box-shadow: 0 4px 20px -5px rgba(48, 2, 28, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- Top AppBar (Admin Context) -->
+<header class="bg-surface sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-4 sacred-glow">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-primary/8 rounded-full transition-colors duration-200 text-primary">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Verification Queue</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A dignified close-up portrait of a Catholic administrator in professional attire, featuring soft, warm lighting that highlights a serene expression. The background is a blurred, high-end office with subtle religious icons, maintaining a corporate yet sacred aesthetic. The color palette consists of deep burgundy and warm cream tones, reflecting the 'Sacred Grace' design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBi90P1S64I9EFWAXlqh2nquqHUhwmKCXT2tPzQXl7qEl_TVSIiQw1DgniiDwR8pctSQEVu_oLGc2Z_K_N8zUhmsjbrxVldUCqxRd9MhpjPSNSGXaI6rcxTngvz6DfdS2mPlGcP1sv4A5tB_p-z2dH6EmhrkC8ibs6iNh_ZK0n_YqLIdOYHNuH3RsmFVoyxhQFnxCREil-I395eDWF-ERQIrlEXU5yB6Bke-UbW2PYBDetYTiWtBxg"/>
+</div>
+</header>
+<main class="max-w-[720px] mx-auto px-margin-mobile pt-stack-lg flex flex-col gap-stack-lg">
+<!-- Search and Filter Section -->
+<section class="flex flex-col gap-4">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 font-body-md text-on-surface" placeholder="Search by name or parish..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto scrolling-touch pb-2 no-scrollbar">
+<button class="px-5 py-2 bg-primary text-on-primary rounded-full font-label-md transition-all duration-200">All</button>
+<button class="px-5 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md hover:bg-outline-variant transition-all duration-200">Pending</button>
+<button class="px-5 py-2 bg-surface-container-high text-on-error-container/10 text-error rounded-full font-label-md hover:bg-error-container transition-all duration-200 flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">flag</span> Flagged
+                </button>
+<button class="px-5 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md hover:bg-outline-variant transition-all duration-200">Reviewed</button>
+</div>
+</section>
+<!-- Stats Overview (Asymmetric Mini Bento) -->
+<section class="grid grid-cols-2 gap-3">
+<div class="bg-primary-container/20 p-4 rounded-xl border border-primary-container/30 flex flex-col justify-between h-32">
+<span class="material-symbols-outlined text-primary">hourglass_empty</span>
+<div>
+<p class="font-label-md text-on-primary-container opacity-70">Total Pending</p>
+<h2 class="font-headline-lg-mobile text-primary">24</h2>
+</div>
+</div>
+<div class="bg-secondary-container/20 p-4 rounded-xl border border-secondary-container/30 flex flex-col justify-between h-32">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+<div>
+<p class="font-label-md text-on-secondary-container opacity-70">Verified Today</p>
+<h2 class="font-headline-lg-mobile text-secondary">158</h2>
+</div>
+</div>
+</section>
+<!-- Requests List -->
+<section class="flex flex-col gap-stack-md" id="requests-container">
+<h3 class="font-title-lg text-on-surface-variant px-1">New Submissions</h3>
+<!-- List Item 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl flex items-center gap-4 sacred-glow group hover:bg-surface-container transition-colors duration-200">
+<div class="w-14 h-14 rounded-full overflow-hidden shrink-0 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a Nigerian man in his late 20s, smiling warmly. He is wearing a clean white traditional shirt, positioned against a soft, out-of-focus background of a parish courtyard. The lighting is natural and bright, echoing the light-mode design system with clean highlights and professional depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIL_TxJeq7HNqo1Ihuowu8388KB4oc89QsdoLrP1s2Fz4ykTD9s83pzJM4j8wYc1xzlO6aCREuw9qaEZflQ9abi3mGay4ie_OmqMqc4CGi8UQHtmxQAy36dAm-LTP1KnMuavLTfrtbf9vHLYeJlEn0U3qtC-ettRZCKBS0oYKFfBasmV1XHlomX43WirCzxnRjvD6ARb9OC7CAzw1HzHL__v08Vh5D1RzTTvXR7GEF89xDMBu46Vfy"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-title-lg text-on-surface truncate">Chinedu Okafor</h4>
+<span class="font-label-md text-on-surface-variant/60">2 hours ago</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[16px]">church</span>
+<p class="font-body-md truncate">Holy Cross Cathedral</p>
+</div>
+<div class="flex items-center gap-1 mt-2">
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] uppercase tracking-wider font-bold rounded">Catechist</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-high text-primary group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<!-- List Item 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl flex items-center gap-4 sacred-glow group hover:bg-surface-container transition-colors duration-200">
+<div class="w-14 h-14 rounded-full overflow-hidden shrink-0 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A portrait of a Nigerian woman with a serene, faithful expression, wearing a stylish headtie and professional attire. The setting is a bright, modern interior with soft architectural lines. The image should convey dignity and communal trust, with a color palette emphasizing warm creams and subtle gold accents from the design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0KcGW8Ko18QhbNipAX0JeVhbbJQYybK9WoY-eLUsxbJYUU4zeLz8qEkfuoZErxppE-2fAaLSUtWxhJFqDirV8fMpP3lrt3Bqef306SrzdHtmuPPKalUziUynFvUh-vP2RJ1F7hzC-X8zx2bcvew2Hy2UZUdROZBSAhrWAZUjc940JVnbR6MZmD7j6pmmZxpWnyq-O8gyNowgXuhbKnNu5LSFW7OZwmS-8HcoWX--7DHzwQWyy6Ihp"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-title-lg text-on-surface truncate">Nneka Adeleke</h4>
+<span class="font-label-md text-on-surface-variant/60">5 hours ago</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[16px]">church</span>
+<p class="font-body-md truncate">St. Agnes Parish, Maryland</p>
+</div>
+<div class="flex items-center gap-1 mt-2">
+<span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-[10px] uppercase tracking-wider font-bold rounded">Youth Leader</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-high text-primary group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<!-- List Item 3 (Flagged Example) -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl flex items-center gap-4 border-l-4 border-error sacred-glow group hover:bg-surface-container transition-colors duration-200">
+<div class="w-14 h-14 rounded-full overflow-hidden shrink-0 border border-outline-variant grayscale">
+<img class="w-full h-full object-cover" data-alt="A centered profile photo of a middle-aged man for a digital identification card, featuring neutral studio lighting. The aesthetic is clean and corporate, consistent with a professional administrative interface. The image is presented with a slight desaturation to indicate a flagged status within a modern web application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsoOc5NRi5gEMQfSQ7W49fooIAqK0L3paKFpnRbbDTxU8sRIRtVC_MrFBnscWKBGmUk4kp_INcGByO75twyHfcTqbyegJbE9RbUuXadErgpHX5rlOPPLRoYKpJYAHAx3B80bW_2NnqRKYv5V0xXty8E0CJmo3uOALSOfXQEDVctalXqOtv5kSawaFshMrDQbOv6iqI2BrrPhozcUHa1fWdzSIkK9-wMSgby8J4ocOwMSorJFDulQyO"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-title-lg text-on-surface truncate">Emeka Nwosu</h4>
+<span class="font-label-md text-error">FLAGGED</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[16px]">church</span>
+<p class="font-body-md truncate">Our Lady of Fatima</p>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[10px] uppercase tracking-wider font-bold rounded">Member</span>
+<span class="text-[11px] text-error flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">warning</span> Duplicate Document
+                        </span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-error-container/20 text-error hover:bg-error hover:text-on-error transition-all duration-300">
+<span class="material-symbols-outlined">priority_high</span>
+</button>
+</div>
+</section>
+<!-- Empty State (Hidden by default, shown for "Empty" filter simulation) -->
+<section class="hidden flex-col items-center justify-center py-24 text-center" id="empty-state">
+<div class="w-48 h-48 bg-surface-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary/20 text-[80px]" style="font-variation-settings: 'wght' 200">inventory_2</span>
+</div>
+<h4 class="font-headline-lg-mobile text-primary mb-2">Gracefully Clear</h4>
+<p class="font-body-md text-on-surface-variant max-w-[280px]">No pending verification requests at this time. All faithful servants are accounted for.</p>
+<button class="mt-8 px-8 py-3 bg-primary text-on-primary rounded-full font-label-md hover:scale-105 active:scale-95 transition-all" onclick="window.location.reload()">
+                Refresh Queue
+            </button>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Admin Shell) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile py-2 bg-surface-container-low">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Stats</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container/20 text-on-secondary-container rounded-full px-5 py-1 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+<span class="font-label-md">Queue</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md">Parishes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</div>
+</nav>
+<script>
+        // Simple Interaction Logic
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Haptic feedback simulation or state change
+                console.log('Action triggered');
+            });
+        });
+
+        // Filter chips logic
+        const chips = document.querySelectorAll('.flex.gap-2 button');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('bg-primary', 'text-on-primary');
+                    c.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                chip.classList.add('bg-primary', 'text-on-primary');
+                chip.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                
+                // Simulate empty state for a specific chip
+                const container = document.getElementById('requests-container');
+                const empty = document.getElementById('empty-state');
+                if(chip.innerText.includes('Flagged')) {
+                    // Filter flagged is already shown in the demo list, but we could filter here
+                }
+            });
+        });
+
+        // Search bar interaction
+        const searchInput = document.querySelector('input');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('sacred-glow');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('sacred-glow');
+        });
+    </script>
+</body></html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Portal - Activity Logs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Style Guidance Tokens & Context -->
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sacred-gradient {
+            background: linear-gradient(135deg, #fff9ef 0%, #f3ede4 100%);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(213, 194, 199, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface": "#fff9ef",
+                        "outline": "#837378",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f6f0e7",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#fdb0d0",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#ffdea4",
+                        "surface-container-highest": "#e7e2d9",
+                        "surface-container": "#f3ede4",
+                        "surface-bright": "#fff9ef",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "on-surface-variant": "#514348",
+                        "outline-variant": "#d5c2c7",
+                        "inverse-surface": "#32302a",
+                        "on-tertiary-fixed": "#261900",
+                        "secondary-container": "#fec0ff",
+                        "tertiary-container": "#382700",
+                        "surface-tint": "#884b67",
+                        "primary-fixed": "#ffd8e6",
+                        "tertiary": "#1f1400",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "surface-variant": "#e7e2d9",
+                        "on-secondary-fixed": "#33053b",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#1d1b16",
+                        "on-surface": "#1d1b16",
+                        "surface-dim": "#dfd9d1",
+                        "background": "#fff9ef",
+                        "surface-container-high": "#ede7df",
+                        "primary-container": "#4a1731",
+                        "on-primary-fixed": "#380822",
+                        "on-secondary-container": "#7b4980",
+                        "surface-container-low": "#f9f3ea",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "secondary": "#7e4c83",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#c27c9a",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#b58a2c",
+                        "primary": "#30021c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "24px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "margin-tablet": "24px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Work Sans"],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "title-lg": ["Work Sans"],
+                        "display-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col md:flex-row overflow-hidden">
+<!-- Navigation Drawer (Desktop Anchor) -->
+<aside class="hidden md:flex flex-col h-full w-80 bg-surface-container-low border-r border-outline-variant/30 py-6 z-40">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-primary-container">
+<img class="w-full h-full object-cover" data-alt="A dignified profile portrait of a Catholic diocesan administrator, dressed in professional clerical attire. The background is a soft-focus interior of a Nigerian cathedral with warm sunlight streaming through stained glass. The lighting is ethereal and high-key, maintaining a serene and authoritative atmosphere consistent with the Sacred Grace theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Cmdnsx4QVAGXqG9Ar0mQYLBmXb63Jl2twjDF59Zx9UZ_0r34BehOG7bB79XCnIwFY_YDoslJV_oDwY9jCX08qIdEte4SiLIB-9p-SsABo-yNWaq9LWZ1_6rvFZtoHTcI2gRgmJsDtDbjGs5PZedVC8RyeUQdh3PKDkG2b-n33NGTc8sCEIpzjmg-mEFvcI_VDeJzhk1GPy-lW1wA6_jlbPJ0F3MgWY0AVhJpDMo7eQvazrTghZBl"/>
+</div>
+<div>
+<h2 class="font-title-lg text-primary leading-tight">Admin Portal</h2>
+<p class="text-label-md text-on-surface-variant">Diocesan Management</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-container-high mx-3 px-4 py-3 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">person_cancel</span>
+<span class="font-label-md text-body-md">Users</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-container-high mx-3 px-4 py-3 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">shield_person</span>
+<span class="font-label-md text-body-md">Roles</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-container-high mx-3 px-4 py-3 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">lock_open</span>
+<span class="font-label-md text-body-md">Perms</span>
+</a>
+<!-- Active State: Logs -->
+<a class="flex items-center gap-4 bg-secondary-container/20 text-primary mx-3 px-4 py-3 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<span class="font-label-md text-body-md font-semibold">Logs</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<p class="text-label-md text-outline">v1.0.2</p>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+<!-- TopAppBar (Execution from JSON) -->
+<header class="flex justify-between items-center px-margin-mobile md:px-margin-desktop w-full h-16 bg-surface z-30 shrink-0">
+<div class="flex items-center gap-3">
+<button class="md:hidden p-2 text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary tracking-tight">Activity Logs</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border-2 border-primary-fixed-dim p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="A small circular avatar of a smiling administrator, shot in soft natural light with a minimalist cream background. The image is professional, warm, and fits the corporate-modern aesthetic of a digital parish management tool." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNokbX3vKEhxRIqiYjxvZexOQmm02g3YI4ySmsikEKc-X18R3SOew5yxlR3bSFS2yTa9ucFwVzaORRS2tzEJmq0BluFBF8Z2xIoJfggFb2RQFG97MIuAu04tL7RGdyLKPtJwVhz0iPSwM56Ahg4mfqIPTpxoEXlLuXoZX2ntNvhhiZptI3OePMSXp6CNNQVY9JVu5P_rxrCOaSF1QJzqaqc83lUQm8YtlHjlfBD1oLoHBB2ZejvNG_"/>
+</div>
+</div>
+</header>
+<!-- Filters & Search Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-4 bg-surface/80 backdrop-blur-md z-20 space-y-4">
+<div class="flex flex-col md:flex-row gap-4">
+<!-- Search Bar -->
+<div class="relative flex-1 group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-on-surface" placeholder="Search by Admin Name..." type="text"/>
+</div>
+<!-- Action Type Filter -->
+<div class="flex gap-2 overflow-x-auto scrollbar-hide pb-2 md:pb-0">
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary text-on-primary text-label-md flex items-center gap-2">
+                        All Activities
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                        Approvals
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">security</span>
+                        Security
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+                        Deletions
+                    </button>
+</div>
+</div>
+<!-- Date Filter Toggle -->
+<div class="flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-2 text-label-md">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span>Range: Oct 20 - Oct 27, 2023</span>
+</div>
+<button class="text-primary font-semibold text-label-md flex items-center gap-1">
+                    Change Range
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</section>
+<!-- Logs Scrollable Area -->
+<section class="flex-1 overflow-y-auto px-margin-mobile md:px-margin-desktop pb-24 space-y-4">
+<!-- Day Divider -->
+<div class="sticky top-0 bg-surface/90 backdrop-blur-sm py-2 z-10">
+<span class="text-label-md font-bold text-outline-variant uppercase tracking-widest">Today, Oct 27</span>
+</div>
+<!-- Log Entry Card 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/20 hover:shadow-md transition-shadow group">
+<div class="flex gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male administrative officer, Father Joseph, wearing a clerical collar. The visual style is clean, modern, and respectful, shot in a bright space with warm beige tones that align with the diocesan brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1GvtsZpHcjPlBOeBnSCFPlZTP5ns6ylSSd-2EPeEegPLOAYfPnuKFlWhU5vTN_CGoGshRUOttSp66Gpnj_OfiPhC0DKoTqHnX7fXcSBLK101MsHFxSDbdWvsQtW1gQRflnHNEZT4GHqKtVUyveHQgDPPgj5S-_5krY9Q4TjJEhDfzLXksgouLn__ocih_E9jGzuUzknWgTcfNhpjv9ujSPqhdAMxyNPR0qVvPp4oO1d_tKS3LVOL3"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-tertiary-fixed-dim p-1 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-fixed font-bold">verified</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-body-md font-semibold text-primary">Rev. Fr. Joseph Obi</p>
+<p class="text-on-surface-variant">Approved <span class="font-medium text-on-surface">Baptismal Card #8821</span></p>
+</div>
+<span class="text-label-md text-outline">14:20</span>
+</div>
+<div class="mt-2 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-[10px] uppercase font-bold text-outline tracking-wider">LITURGICAL RECORDS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/20 hover:shadow-md transition-shadow group">
+<div class="flex gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A headshot of a female lay administrator, Sister Maria, in a professional and modest attire. The environment is a clean contemporary office with subtle Catholic iconography. High-quality corporate photography style with warm, sacred lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMo3J6aMYzMi918l2bW7u4aXOE2zeVNCB3M7fEravk2GnpJbcVdP_V4c_C9Z-5txAJ73IU5anachA-OLnJ9HJ63DK3UauR4I2EPszNikydE1C2dt4hIWDIMLx_IPmbFfmpIZxyMV2IDQ1HOce4mgpFEVtj8K0b_VEPNLtnfxRPLpsM-YRhHj9Q7a8T41o9QoSkALJlwxTxcyhZ5tspMMcHqqoOFNseEkab4ZkxblKO-SaibTtCNmZa"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-secondary-container p-1 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-container font-bold">shield_person</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-body-md font-semibold text-primary">Sr. Maria Okafor</p>
+<p class="text-on-surface-variant">Updated Role Permissions for <span class="font-medium text-on-surface">Youth Coordinator</span></p>
+</div>
+<span class="text-label-md text-outline">11:05</span>
+</div>
+<div class="mt-2 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-error-container text-[10px] uppercase font-bold text-on-error-container tracking-wider">SECURITY LEVEL 3</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Day Divider -->
+<div class="sticky top-0 bg-surface/90 backdrop-blur-sm py-2 z-10 pt-6">
+<span class="text-label-md font-bold text-outline-variant uppercase tracking-widest">Yesterday, Oct 26</span>
+</div>
+<!-- Log Entry Card 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/20 hover:shadow-md transition-shadow group">
+<div class="flex gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A portrait of a senior diocesan moderator, Mr. Chidi, in professional attire. He appears calm and focused. The background consists of a library of theological texts, subtly lit with warm golden hues consistent with the diocesan design tokens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjhkgLzNWnhoQ6S8ql9DQBEJCoGEivsi6P90hcSMNJ4ohLwbACuy33yALiKLn2z_MtwViPGe-DLR8IA91O_c8075pE2RjdSmBfntTpN9y1Zy9-gvEyCjNZoz2Q0jjZgFtVScdsH_9Hi8cfKuOV_C1ozihdbDgcivT0YeEhLxqxDCNo-twoyMFl8YgSvtmnPg9H5uM_lWivCYfAZ17unPzgXPRnBvSCapxTnT2hadBMHzGgikC8vJeT"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-error-container p-1 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-[14px] text-on-error-container font-bold">delete_forever</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-body-md font-semibold text-primary">Mr. Chidi Eze</p>
+<p class="text-on-surface-variant">Deleted Forum Post <span class="font-medium text-on-surface italic">"Guidelines for Lent..."</span></p>
+</div>
+<span class="text-label-md text-outline">18:45</span>
+</div>
+<div class="mt-2 flex items-center gap-2 text-error text-[12px] font-medium italic">
+                            Reason: Duplicate entry
+                        </div>
+</div>
+</div>
+</div>
+<!-- Log Entry Card 4 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/20 hover:shadow-md transition-shadow group">
+<div class="flex gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A portrait of a diocesan staff member, Mrs. Adanna, looking professional and welcoming. The image lighting is soft and flattering, emphasizing a mood of sacred service. The background is a minimalist parish office wall in warm cream." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrNuIma4gUT75kNOoL8WmlTyZGLmPNiwtkKY-YDpEFnSOKZYxMFkNFRnsw1S8816WE5sEwhvvK3sMjcTBlLHgPiD-sjvJJzPzwh8Q8xInC9EebCxh7IIF83wocduNA1ockwWIIBBhbuky72JjpMwOysEZgbS5TC0mrVHNyiLioAh3s-g308tHNQQTaDbQQKZuSq5A7LG_LWGJw9cLkVbB-8FKaxYm4OyzaNAQYJlX8-xqH0fm9KEq-"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary-container p-1 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-[14px] text-on-primary-container font-bold">church</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-body-md font-semibold text-primary">Mrs. Adanna Nwachukwu</p>
+<p class="text-on-surface-variant">Modified Parish Details for <span class="font-medium text-on-surface">Holy Ghost Cathedral, Enugu</span></p>
+</div>
+<span class="text-label-md text-outline">09:12</span>
+</div>
+<div class="mt-2 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-[10px] uppercase font-bold text-outline tracking-wider">CORE DATABASE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<button class="w-full py-4 text-primary font-semibold text-label-md border-2 border-dashed border-outline-variant/30 rounded-xl hover:bg-surface-container transition-colors">
+                Load Older Records
+            </button>
+</section>
+<!-- Floating Action Button (Contextual) -->
+<button class="fixed bottom-24 right-6 md:right-12 w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-40 group">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">file_download</span>
+<span class="absolute right-full mr-4 px-3 py-1 bg-inverse-surface text-inverse-on-surface text-label-md rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Export PDF Report</span>
+</button>
+<!-- BottomNavBar (Execution from JSON) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface rounded-t-xl shadow-sm md:hidden h-16">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">Today</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">book_5</span>
+<span class="font-label-md text-label-md">Library</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container/20 text-primary rounded-full px-4 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</div>
+</nav>
+</main>
+<script>
+        // Simple micro-interaction for active states
+        document.querySelectorAll('nav a, nav div').forEach(item => {
+            item.addEventListener('click', function() {
+                // In a real app, this would handle routing
+                console.log('Navigating...');
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.closest('.group').classList.add('ring-offset-2');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.closest('.group').classList.remove('ring-offset-2');
+        });
+    </script>
+</body></html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sacred Grace - Lenten Hymns</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e7e2d9",
+                    "on-secondary-container": "#7b4980",
+                    "on-primary": "#ffffff",
+                    "on-background": "#1d1b16",
+                    "surface-tint": "#884b67",
+                    "secondary-container": "#fec0ff",
+                    "surface-container-low": "#f9f3ea",
+                    "primary-fixed": "#ffd8e6",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#fdb0d0",
+                    "error": "#ba1a1a",
+                    "surface": "#fff9ef",
+                    "surface-bright": "#fff9ef",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "outline-variant": "#d5c2c7",
+                    "on-secondary-fixed": "#33053b",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1d1b16",
+                    "on-primary-fixed": "#380822",
+                    "inverse-surface": "#32302a",
+                    "tertiary-container": "#382700",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "on-surface-variant": "#514348",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#f3ede4",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fff9ef",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "inverse-on-surface": "#f6f0e7",
+                    "tertiary": "#1f1400",
+                    "secondary": "#7e4c83",
+                    "primary-container": "#4a1731",
+                    "tertiary-fixed": "#ffdea4",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-tertiary-fixed": "#261900",
+                    "surface-container-high": "#ede7df",
+                    "on-tertiary-container": "#b58a2c",
+                    "outline": "#837378",
+                    "surface-dim": "#dfd9d1",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "on-primary-container": "#c27c9a",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface-variant": "#e7e2d9",
+                    "primary": "#30021c",
+                    "primary-fixed-dim": "#fdb0d0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "gutter": "16px",
+                    "unit": "4px",
+                    "margin-tablet": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "margin-mobile": "16px",
+                    "stack-lg": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "label-md": ["Work Sans"],
+                    "title-lg": ["Work Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        /* Smooth scrolling for focused reading */
+        html { scroll-behavior: smooth; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f9f3ea; }
+        ::-webkit-scrollbar-thumb { background: #d5c2c7; border-radius: 10px; }
+
+        /* Atmospheric interaction */
+        .hymn-card:active { transform: scale(0.98); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- TopAppBar - Small Center Aligned -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-margin-mobile h-16 bg-surface dark:bg-surface-dim">
+<button class="p-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors active:opacity-80 transition-opacity rounded-full">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim">Sacred Grace</h1>
+<button class="p-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors active:opacity-80 transition-opacity rounded-full">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">search</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-16 max-w-[720px] mx-auto">
+<!-- Seasonal Header Hero -->
+<section class="relative w-full h-[320px] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent z-10"></div>
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A cinematic, contemplative photograph of a weathered wooden cross standing against a dramatic Nigerian sunset with deep purple and orange hues. The lighting is soft and moody, evoking a sense of solemnity and sacred reflection. The composition is artistic and minimalist, shot with a shallow depth of field, adhering to a premium religious aesthetic with warm, dignified tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOSy9TkOf1LJtbhKUpyelK3tbyBUOcdKbs__zzlljiFSEoWaRjIEWWxOUMwjiGvAiA8eDNp-Ea-yPWwJLjnpyZyyOD68HHDkG6PPdglW_8wxqwadtkFb8BFgpjeitqkOT9f4T4opR4E7OQo49cxy6oLo6JgS2Kdsod9gjttL8ZLfdtsFTp3MHEuvJnj9gRWv7dQ-0IpGh9G7Tcbn6tLHHPocbLxNjYfjQAwGYnP_0JAkxaJXvsEEC6"/>
+<div class="absolute bottom-0 left-0 p-margin-mobile z-20">
+<span class="inline-block px-3 py-1 mb-2 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md">
+                    Liturgical Season
+                </span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary">Lent</h2>
+</div>
+</section>
+<!-- Spiritual Description -->
+<article class="p-margin-mobile bg-surface-container-low">
+<div class="flex items-center gap-3 mb-3 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">church</span>
+<p class="font-title-lg text-title-lg text-secondary">A Time of Renewal</p>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                Lent is a solemn religious observance in the Christian liturgical calendar that begins on Ash Wednesday and ends approximately six weeks later, before Easter Sunday. It is a period of prayer, fasting, and almsgiving, preparing the faithful for the celebration of the Resurrection.
+            </p>
+</article>
+<!-- Hymn List Organized by Liturgical Role -->
+<section class="p-margin-mobile space-y-stack-lg">
+<!-- Entrance Section -->
+<div class="space-y-stack-md">
+<h3 class="flex items-center gap-2 font-title-lg text-title-lg text-primary border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined">login</span>
+                    Entrance Hymns
+                </h3>
+<div class="space-y-2">
+<!-- Hymn Item 1 -->
+<div class="hymn-card flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-lg-mobile text-primary/40">042</span>
+<div>
+<p class="font-body-lg text-body-lg font-medium">Lord Who Throughout These Forty Days</p>
+<p class="font-label-md text-label-md text-on-surface-variant">St. Flavian</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<!-- Hymn Item 2 -->
+<div class="hymn-card flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-lg-mobile text-primary/40">051</span>
+<div>
+<p class="font-body-lg text-body-lg font-medium">Attende Domine</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Plainsong, Mode V</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Offertory Section -->
+<div class="space-y-stack-md">
+<h3 class="flex items-center gap-2 font-title-lg text-title-lg text-primary border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined">volunteer_activism</span>
+                    Offertory Hymns
+                </h3>
+<div class="space-y-2">
+<div class="hymn-card flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-lg-mobile text-primary/40">118</span>
+<div>
+<p class="font-body-lg text-body-lg font-medium">Accept These Gifts We Offer</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Sacred Heart Melody</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Communion Section -->
+<div class="space-y-stack-md">
+<h3 class="flex items-center gap-2 font-title-lg text-title-lg text-primary border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined">restaurant</span>
+                    Communion Hymns
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Featured Communion Card -->
+<div class="col-span-full hymn-card relative overflow-hidden p-6 bg-primary-container text-on-primary-container rounded-2xl shadow-md cursor-pointer group">
+<div class="relative z-10">
+<span class="font-label-md text-label-md text-on-primary-container opacity-80 uppercase tracking-widest">Recommended</span>
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile mt-2">Soul of My Savior</h4>
+<p class="font-body-md text-body-md mt-1 mb-4 opacity-90">Anima Christi</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">music_note</span>
+<span class="font-label-md">Hymn #234</span>
+</div>
+</div>
+<span class="absolute top-4 right-4 material-symbols-outlined text-on-primary-container/20 text-6xl rotate-12 group-hover:rotate-0 transition-transform duration-500">lyrics</span>
+</div>
+<div class="hymn-card flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-lg-mobile text-primary/40">241</span>
+<div>
+<p class="font-body-lg text-body-lg font-medium">O Food of Men Wayfaring</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Innsbruck</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="hymn-card flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="font-headline-lg-mobile text-primary/40">255</span>
+<div>
+<p class="font-body-lg text-body-lg font-medium">Godhead Here in Hiding</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Adoro Te Devote</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Aesthetic Spacer -->
+<div class="h-16"></div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container-low dark:bg-surface-container-lowest rounded-t-xl shadow-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary transition-transform active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-md text-label-md">Hymns</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 transition-transform active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">church</span>
+<span class="font-label-md text-label-md">Seasons</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary transition-transform active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">library_music</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary transition-transform active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<!-- Micro-interactions Script -->
+<script>
+        document.querySelectorAll('.hymn-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // Ripple effect or state layer implementation
+                const ripple = document.createElement('div');
+                ripple.className = 'absolute inset-0 bg-primary/5 pointer-events-none opacity-0 transition-opacity duration-300';
+                card.classList.add('relative');
+                card.appendChild(ripple);
+                setTimeout(() => ripple.style.opacity = '1', 10);
+                setTimeout(() => ripple.remove(), 400);
+            });
+        });
+    </script>
+</body></html>

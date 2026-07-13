@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daily Readings - CatApp</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#1f1400",
+                    "secondary": "#7e4c83",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "surface": "#fff9ef",
+                    "inverse-primary": "#fdb0d0",
+                    "primary": "#30021c",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#dfd9d1",
+                    "primary-fixed": "#ffd8e6",
+                    "on-primary-container": "#c27c9a",
+                    "background": "#fff9ef",
+                    "on-tertiary-container": "#b58a2c",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#fec0ff",
+                    "primary-container": "#4a1731",
+                    "on-secondary-fixed": "#33053b",
+                    "surface-container-highest": "#e7e2d9",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#884b67",
+                    "outline": "#837378",
+                    "tertiary-fixed": "#ffdea4",
+                    "tertiary-container": "#382700",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "on-tertiary-fixed": "#261900",
+                    "on-secondary-container": "#7b4980",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#f3ede4",
+                    "inverse-surface": "#32302a",
+                    "surface-container-low": "#f9f3ea",
+                    "surface-container-high": "#ede7df",
+                    "on-surface": "#1d1b16",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "inverse-on-surface": "#f6f0e7",
+                    "on-surface-variant": "#514348",
+                    "surface-bright": "#fff9ef",
+                    "outline-variant": "#d5c2c7",
+                    "on-error-container": "#93000a",
+                    "on-background": "#1d1b16",
+                    "surface-variant": "#e7e2d9",
+                    "on-primary-fixed": "#380822",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "tertiary-fixed-dim": "#f0bf5c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "24px",
+                    "margin-desktop": "32px",
+                    "unit": "4px",
+                    "stack-sm": "8px",
+                    "gutter": "16px",
+                    "stack-md": "16px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "title-lg": ["Work Sans"],
+                    "label-md": ["Work Sans"],
+                    "body-md": ["Work Sans"],
+                    "body-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .reflective-gradient {
+            background: radial-gradient(circle at center, transparent 0%, rgba(255, 249, 239, 0.8) 100%);
+        }
+        .scrolling-content::-webkit-scrollbar {
+            display: none;
+        }
+        .scrolling-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- Top AppBar -->
+<header class="bg-surface sticky top-0 z-50 w-full flex items-center justify-between px-margin-mobile h-16 max-w-[720px] mx-auto">
+<div class="flex items-center gap-4">
+<button class="hover:bg-primary/5 p-2 rounded-full transition-colors active:opacity-80">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">CatApp</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-auto object-cover" data-alt="A dignified close-up portrait of a Nigerian young adult in a peaceful prayerful stance, soft natural lighting coming from a church window, warm skin tones, high quality photography, serene atmosphere, consistent with a premium religious app design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFx8_pjjMdSc5cW5GHIwJgzCR7stjCNfbyGch4-r5L42Ioo71AW4R9VpHuOyhGfOHugmb6dAgZFm1Mv-aMqE6_ZrE2AZW-USv8jiSfJbzWq0okWiiQrjqo4RUECQQJk6InEkKpUmzlFRb3nOePCg-rRUlFeRQ0QtRi8JNpS1NF3Y8jdz8q2ul3bAMYqmk27YVmhkwiI3vsR1fqM_DQ9aW05oDkEXneCpbZxEkQJEY1MEpTwaJPCuI5"/>
+</div>
+</header>
+<main class="max-w-[720px] mx-auto px-margin-mobile pb-32 pt-8 space-y-stack-lg">
+<!-- Liturgical Header Section -->
+<header class="space-y-unit">
+<p class="text-label-md font-label-md text-on-tertiary-fixed-variant uppercase tracking-widest">Tuesday, October 29</p>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-primary leading-tight">Tuesday of the 30th Week in Ordinary Time</h2>
+<div class="flex items-center gap-2 mt-4">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-label-md font-label-md">Liturgical Green</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-label-md font-label-md italic">Year B, Cycle II</span>
+</div>
+</header>
+<!-- Feature Hero Card: The Gospel -->
+<div class="relative overflow-hidden rounded-xl bg-primary-container text-on-primary h-64 flex flex-col justify-end p-6 shadow-sm group cursor-pointer transition-transform duration-300 hover:scale-[1.01]">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center opacity-40 mix-blend-overlay" data-alt="A beautiful, soft-focus cinematic shot of an ancient leather-bound Bible opened to a page with elegant typography, warm golden sunlight streaming across the pages, dust motes dancing in the light, spiritual and contemplative mood, warm cream and deep burgundy color palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2jDRlk-997BQ89PbhcAhFBb53c3PUOff1jGdOpJzKh_6IXJEzhlCSMgZTFunlA9dp6fhSip9H82KL3TOwDQkcWqCrwH-lL9vf6zBo717F1X7a_pGCt_5ujw4AMXewSpunnUjGl4PvBXsIorD9C4OYGRnYZiKBPqmOR3Hsl3t2kIVchbYYapd98lkf3LJJWYRo2IV24CGnleRcPgXjt5QpTG2X5kVcDMHs8X0DcpA9FFIzkxYgW58q')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-primary-container/20 to-transparent"></div>
+</div>
+<div class="relative z-10 space-y-1">
+<div class="flex items-center gap-2 text-secondary-fixed-dim">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-label-md font-label-md uppercase tracking-wider">The Holy Gospel</span>
+</div>
+<h3 class="text-title-lg font-title-lg">Luke 13:18-21</h3>
+<p class="text-body-md italic opacity-90 line-clamp-2">"Jesus said, 'What is the Kingdom of God like? To what can I compare it? It is like a mustard seed...'"</p>
+</div>
+</div>
+<!-- Readings Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- First Reading -->
+<section class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant/20 shadow-sm flex flex-col hover:bg-surface-container transition-colors duration-200">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-primary">menu_book</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">First Reading</span>
+</div>
+<h4 class="text-title-lg font-title-lg text-primary mb-1">Ephesians 5:21-33</h4>
+<p class="text-body-md text-on-surface-variant flex-grow mb-4 leading-relaxed">
+                    Brothers and sisters: Be subordinate to one another out of reverence for Christ. Wives should be subordinate to their husbands as to the Lord...
+                </p>
+<button class="flex items-center text-primary font-label-md text-label-md gap-1 hover:underline">
+                    Read Full Passage <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</section>
+<!-- Responsorial Psalm -->
+<section class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant/20 shadow-sm flex flex-col hover:bg-surface-container transition-colors duration-200">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-on-tertiary-container">music_note</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">Psalm</span>
+</div>
+<h4 class="text-title-lg font-title-lg text-primary mb-1">Psalm 128</h4>
+<p class="text-body-md italic text-on-tertiary-container font-medium mb-2">R. Blessed are those who fear the Lord.</p>
+<p class="text-body-md text-on-surface-variant flex-grow leading-relaxed">
+                    Blessed are you who fear the LORD, who walk in his ways! For you shall eat the fruit of your handiwork...
+                </p>
+</section>
+</div>
+<!-- Reflection Section -->
+<section class="bg-secondary/5 rounded-xl p-stack-md border border-secondary/10">
+<h4 class="text-label-md font-label-md text-secondary uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+                Daily Reflection
+            </h4>
+<p class="text-body-lg font-body-lg text-on-surface italic leading-relaxed">
+                "The mustard seed represents the small, often unnoticed ways God's grace grows within our Nigerian communities. Just as the seed becomes a large tree, our acts of communal love and individual prayer build the Kingdom in our parishes and homes."
+            </p>
+</section>
+<!-- Focused Mode Button -->
+<div class="flex justify-center pt-8">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full flex items-center gap-3 shadow-lg hover:bg-primary-container active:scale-95 transition-all duration-200" onclick="toggleReflectiveMode()">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-title-lg text-body-md">Open Reflective Mode</span>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center py-2 px-margin-mobile border-t border-outline-variant/10 bg-surface-container-low z-50 shadow-sm">
+<a class="flex flex-col items-center justify-center bg-secondary-container/20 text-primary rounded-full px-5 py-1 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-md text-label-md">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<!-- Reflective Mode Overlay (Hidden by Default) -->
+<div class="fixed inset-0 z-[100] bg-surface hidden overflow-y-auto scrolling-content p-margin-mobile flex flex-col items-center animate-fade-in" id="reflectiveMode">
+<button class="absolute top-6 right-6 p-2 rounded-full bg-surface-container-high hover:bg-surface-container-highest transition-colors" onclick="toggleReflectiveMode()">
+<span class="material-symbols-outlined text-primary">close</span>
+</button>
+<div class="max-w-[600px] w-full pt-16 space-y-12 pb-24 text-center">
+<div class="space-y-2">
+<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'wght' 200;">spa</span>
+<p class="text-label-md font-label-md text-on-surface-variant uppercase tracking-widest">Peace be with you</p>
+</div>
+<article class="space-y-8 text-left animate-slide-up">
+<div class="space-y-4">
+<h2 class="font-headline-lg text-headline-lg text-primary text-center">Gospel Reading</h2>
+<p class="text-label-md font-label-md text-center text-on-surface-variant italic">Luke 13:18-21</p>
+<div class="h-px w-24 bg-primary/20 mx-auto"></div>
+</div>
+<div class="space-y-6">
+<p class="font-body-lg text-body-lg leading-relaxed first-letter:text-5xl first-letter:font-headline-lg first-letter:text-primary first-letter:mr-3 first-letter:float-left">
+                        Jesus said, "What is the Kingdom of God like? To what can I compare it? It is like a mustard seed that a man took and planted in the garden. When it was fully grown, it became a large bush and 'the birds of the sky dwelt in its branches.'"
+                    </p>
+<p class="font-body-lg text-body-lg leading-relaxed">
+                        Again he said, "To what shall I compare the Kingdom of God? It is like yeast that a woman took and mixed in with three measures of wheat flour until the whole batch of dough was leavened."
+                    </p>
+</div>
+<div class="pt-12 text-center italic text-on-surface-variant">
+<p class="font-body-md">— The Gospel of the Lord.</p>
+<p class="font-body-md font-medium text-primary mt-2">R. Praise to you, Lord Jesus Christ.</p>
+</div>
+</article>
+<div class="pt-12">
+<button class="border border-primary text-primary px-8 py-3 rounded-full hover:bg-primary/5 font-label-md text-label-md tracking-wide transition-all" onclick="toggleReflectiveMode()">
+                    Finish Reflection
+                </button>
+</div>
+</div>
+</div>
+<script>
+        function toggleReflectiveMode() {
+            const overlay = document.getElementById('reflectiveMode');
+            if (overlay.classList.contains('hidden')) {
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            } else {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Simple animation triggers
+        window.onload = () => {
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideUp {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+                .animate-slide-up { animation: slideUp 0.6s ease-out forwards; }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body></html>

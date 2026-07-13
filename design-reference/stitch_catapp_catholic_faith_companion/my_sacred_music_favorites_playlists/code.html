@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sacred Grace - Hymn Favorites</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;500;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-highest": "#e7e2d9",
+                "on-secondary-container": "#7b4980",
+                "on-primary": "#ffffff",
+                "on-background": "#1d1b16",
+                "surface-tint": "#884b67",
+                "secondary-container": "#fec0ff",
+                "surface-container-low": "#f9f3ea",
+                "primary-fixed": "#ffd8e6",
+                "on-error-container": "#93000a",
+                "inverse-primary": "#fdb0d0",
+                "error": "#ba1a1a",
+                "surface": "#fff9ef",
+                "surface-bright": "#fff9ef",
+                "on-secondary-fixed-variant": "#64346a",
+                "outline-variant": "#d5c2c7",
+                "on-secondary-fixed": "#33053b",
+                "on-tertiary": "#ffffff",
+                "on-surface": "#1d1b16",
+                "on-primary-fixed": "#380822",
+                "inverse-surface": "#32302a",
+                "tertiary-container": "#382700",
+                "secondary-fixed-dim": "#efb2f1",
+                "on-surface-variant": "#514348",
+                "error-container": "#ffdad6",
+                "surface-container": "#f3ede4",
+                "on-secondary": "#ffffff",
+                "on-error": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "background": "#fff9ef",
+                "on-primary-fixed-variant": "#6d344f",
+                "inverse-on-surface": "#f6f0e7",
+                "tertiary": "#1f1400",
+                "secondary": "#7e4c83",
+                "primary-container": "#4a1731",
+                "tertiary-fixed": "#ffdea4",
+                "secondary-fixed": "#ffd6fd",
+                "on-tertiary-fixed": "#261900",
+                "surface-container-high": "#ede7df",
+                "on-tertiary-container": "#b58a2c",
+                "outline": "#837378",
+                "surface-dim": "#dfd9d1",
+                "on-tertiary-fixed-variant": "#5d4200",
+                "on-primary-container": "#c27c9a",
+                "tertiary-fixed-dim": "#f0bf5c",
+                "surface-variant": "#e7e2d9",
+                "primary": "#30021c",
+                "primary-fixed-dim": "#fdb0d0"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "margin-desktop": "32px",
+                "gutter": "16px",
+                "unit": "4px",
+                "margin-tablet": "24px",
+                "stack-sm": "8px",
+                "stack-md": "16px",
+                "margin-mobile": "16px",
+                "stack-lg": "24px"
+            },
+            "fontFamily": {
+                "body-md": ["Work Sans"],
+                "headline-lg": ["\"Source Serif 4\""],
+                "display-lg": ["\"Source Serif 4\""],
+                "headline-lg-mobile": ["\"Source Serif 4\""],
+                "body-lg": ["\"Source Serif 4\""],
+                "label-md": ["Work Sans"],
+                "title-lg": ["Work Sans"]
+            },
+            "fontSize": {
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        .custom-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #e7e2d9;
+            border-radius: 10px;
+        }
+        .tonal-pill {
+            background-color: rgba(126, 76, 131, 0.2);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden selection:bg-secondary-container">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-margin-mobile h-16 bg-surface dark:bg-surface-dim">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-container transition-colors active:opacity-80 rounded-full">menu</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Sacred Grace</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-container transition-colors active:opacity-80 rounded-full">search</button>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-container transition-colors active:opacity-80 rounded-full">more_vert</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-28 px-margin-mobile max-w-[720px] mx-auto min-h-screen">
+<!-- Page Header & Action -->
+<section class="flex flex-col gap-2 mb-8">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-lg text-headline-lg text-primary">Library</h2>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md hover:opacity-90 active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px]">share</span>
+                    Share List
+                </button>
+</div>
+<p class="font-body-md text-on-surface-variant max-w-[90%]">Organize your favorite hymns and prepare for communal worship with curated playlists.</p>
+</section>
+<!-- Recently Played (Horizontal Bento Layout) -->
+<section class="mb-10">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-title-lg text-title-lg text-primary">Recently Played</h3>
+<button class="text-secondary font-label-md hover:underline">View All</button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 -mx-margin-mobile px-margin-mobile hide-scrollbar snap-x">
+<!-- Recent Card 1 -->
+<div class="min-w-[200px] bg-surface-container-low rounded-xl p-4 snap-start border border-outline-variant/30 hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">music_note</span>
+</div>
+<span class="font-label-md text-on-surface-variant block mb-1">#241</span>
+<h4 class="font-body-lg text-body-lg font-semibold leading-tight text-on-surface">Holy Holy Holy</h4>
+</div>
+<!-- Recent Card 2 -->
+<div class="min-w-[200px] bg-surface-container-low rounded-xl p-4 snap-start border border-outline-variant/30 hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">church</span>
+</div>
+<span class="font-label-md text-on-surface-variant block mb-1">#108</span>
+<h4 class="font-body-lg text-body-lg font-semibold leading-tight text-on-surface">Lead Us Heavenly Father</h4>
+</div>
+<!-- Recent Card 3 -->
+<div class="min-w-[200px] bg-surface-container-low rounded-xl p-4 snap-start border border-outline-variant/30 hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-12 h-12 bg-surface-container-highest rounded-lg flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+</div>
+<span class="font-label-md text-on-surface-variant block mb-1">#45</span>
+<h4 class="font-body-lg text-body-lg font-semibold leading-tight text-on-surface">Abide With Me</h4>
+</div>
+</div>
+</section>
+<!-- My Favorites List -->
+<section class="mb-8">
+<div class="flex items-center gap-3 mb-6">
+<h3 class="font-title-lg text-title-lg text-primary">My Favorites</h3>
+<span class="bg-surface-container-highest text-on-surface-variant text-[12px] font-bold px-2 py-0.5 rounded-full">12 items</span>
+</div>
+<div class="flex flex-col gap-1">
+<!-- List Item 1 -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant/50">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-primary font-bold font-label-md">
+                            01
+                        </div>
+<div>
+<p class="font-label-md text-on-surface-variant">#315</p>
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface group-hover:text-primary transition-colors">Immaculate Mary, Our Hearts are on Fire</h4>
+</div>
+</div>
+<button class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 transition-opacity" style="font-variation-settings: 'FILL' 1;">favorite</button>
+</div>
+<!-- List Item 2 -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant/50">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-primary font-bold font-label-md">
+                            02
+                        </div>
+<div>
+<p class="font-label-md text-on-surface-variant">#22</p>
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface group-hover:text-primary transition-colors">Great Is Thy Faithfulness</h4>
+</div>
+</div>
+<button class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 transition-opacity" style="font-variation-settings: 'FILL' 1;">favorite</button>
+</div>
+<!-- List Item 3 -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant/50">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-primary font-bold font-label-md">
+                            03
+                        </div>
+<div>
+<p class="font-label-md text-on-surface-variant">#512</p>
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface group-hover:text-primary transition-colors">Amazing Grace, How Sweet the Sound</h4>
+</div>
+</div>
+<button class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 transition-opacity" style="font-variation-settings: 'FILL' 1;">favorite</button>
+</div>
+<!-- List Item 4 -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant/50">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-primary font-bold font-label-md">
+                            04
+                        </div>
+<div>
+<p class="font-label-md text-on-surface-variant">#89</p>
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface group-hover:text-primary transition-colors">Praise My Soul the King of Heaven</h4>
+</div>
+</div>
+<button class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 transition-opacity" style="font-variation-settings: 'FILL' 1;">favorite</button>
+</div>
+</div>
+</section>
+<!-- Curated Mass Playlist Section -->
+<section class="mt-12 p-6 rounded-2xl bg-secondary-container/20 border border-secondary-container/50 relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-secondary-container mb-2">Mass Preparation</h3>
+<p class="font-body-md text-on-secondary-container opacity-80 mb-6">Create a playlist specifically for the upcoming Sunday Liturgy or Feast day.</p>
+<div class="flex flex-wrap gap-3">
+<button class="bg-primary text-on-primary px-5 py-2 rounded-full font-label-md flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">playlist_add</span>
+                        New Mass List
+                    </button>
+<button class="bg-white/50 text-secondary border border-secondary/30 px-5 py-2 rounded-full font-label-md flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">explore</span>
+                        Explore Seasons
+                    </button>
+</div>
+</div>
+<!-- Atmospheric Graphic Element -->
+<div class="absolute -right-8 -bottom-8 w-32 h-32 opacity-10 rotate-12">
+<span class="material-symbols-outlined text-[120px] text-secondary">church</span>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface-container-low dark:bg-surface-container-lowest rounded-t-xl shadow-sm flex justify-around items-center px-4 py-2 border-t border-outline-variant/10">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors py-1">
+<span class="material-symbols-outlined mb-1">auto_stories</span>
+<span class="font-label-md text-label-md">Hymns</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors py-1">
+<span class="material-symbols-outlined mb-1">church</span>
+<span class="font-label-md text-label-md">Seasons</span>
+</button>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">library_music</span>
+<span class="font-label-md text-label-md">Library</span>
+</div>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors py-1">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</button>
+</nav>
+<!-- Mini Player Micro-interaction -->
+<div class="fixed bottom-24 left-margin-mobile right-margin-mobile bg-primary text-on-primary p-3 rounded-2xl flex items-center justify-between shadow-lg transform translate-y-32 transition-transform duration-500 ease-out z-40 cursor-pointer" id="mini-player">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined animate-pulse">music_note</span>
+</div>
+<div>
+<p class="font-label-md text-[10px] opacity-70 uppercase tracking-widest">Now Playing</p>
+<h5 class="font-body-md font-medium truncate max-w-[150px]">Holy Holy Holy</h5>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="material-symbols-outlined p-2 hover:bg-white/10 rounded-full">skip_previous</button>
+<button class="material-symbols-outlined p-2 bg-white text-primary rounded-full" id="play-pause">play_arrow</button>
+<button class="material-symbols-outlined p-2 hover:bg-white/10 rounded-full">skip_next</button>
+</div>
+</div>
+<script>
+        // Micro-interactions and Animation Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const miniPlayer = document.getElementById('mini-player');
+            const playPauseBtn = document.getElementById('play-pause');
+            let isPlaying = false;
+
+            // Show player after 1 second delay to simulate context
+            setTimeout(() => {
+                miniPlayer.classList.remove('translate-y-32');
+            }, 1000);
+
+            // Simple Play/Pause Toggle
+            playPauseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isPlaying = !isPlaying;
+                playPauseBtn.textContent = isPlaying ? 'pause' : 'play_arrow';
+                
+                if(isPlaying) {
+                    playPauseBtn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+                } else {
+                    playPauseBtn.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+                }
+            });
+
+            // List item active state simulation
+            const listItems = document.querySelectorAll('main section div.group');
+            listItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Reset others
+                    listItems.forEach(li => li.classList.remove('bg-surface-container'));
+                    // Set current
+                    item.classList.add('bg-surface-container');
+                    
+                    // Simulate updating player
+                    const hymnTitle = item.querySelector('h4').textContent;
+                    miniPlayer.querySelector('h5').textContent = hymnTitle;
+                });
+            });
+
+            // Heart animation
+            const heartButtons = document.querySelectorAll('.material-symbols-outlined[style*="FILL"]');
+            heartButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isFilled = btn.style.fontVariationSettings.includes("'FILL' 1");
+                    if (isFilled) {
+                        btn.style.fontVariationSettings = "'FILL' 0";
+                        btn.classList.add('opacity-40');
+                        btn.classList.remove('text-secondary');
+                    } else {
+                        btn.style.fontVariationSettings = "'FILL' 1";
+                        btn.classList.remove('opacity-40');
+                        btn.classList.add('text-secondary');
+                        // Add a little pop effect
+                        btn.classList.add('scale-125');
+                        setTimeout(() => btn.classList.remove('scale-125'), 200);
+                    }
+                });
+            });
+        });
+    </script>
+</body></html>

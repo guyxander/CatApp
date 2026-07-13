@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sacred Grace Admin - Finalize Content</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#64346a",
+                        "on-primary-container": "#c27c9a",
+                        "surface-container-highest": "#e7e2d9",
+                        "surface-variant": "#e7e2d9",
+                        "secondary-fixed": "#ffd6fd",
+                        "outline-variant": "#d5c2c7",
+                        "inverse-on-surface": "#f6f0e7",
+                        "primary": "#30021c",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#33053b",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "on-background": "#1d1b16",
+                        "inverse-surface": "#32302a",
+                        "secondary-container": "#fec0ff",
+                        "surface-container-low": "#f9f3ea",
+                        "surface": "#fff9ef",
+                        "surface-bright": "#fff9ef",
+                        "primary-fixed": "#ffd8e6",
+                        "on-tertiary-fixed": "#261900",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "on-error-container": "#93000a",
+                        "background": "#fff9ef",
+                        "on-surface-variant": "#514348",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdea4",
+                        "on-secondary-container": "#7b4980",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1d1b16",
+                        "tertiary-container": "#382700",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "inverse-primary": "#fdb0d0",
+                        "tertiary": "#1f1400",
+                        "on-primary-fixed": "#380822",
+                        "secondary": "#7e4c83",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "on-tertiary-container": "#b58a2c",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "primary-container": "#4a1731",
+                        "surface-dim": "#dfd9d1",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#ede7df",
+                        "surface-container": "#f3ede4",
+                        "on-primary": "#ffffff",
+                        "outline": "#837378",
+                        "surface-tint": "#884b67"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-lg": "24px",
+                        "margin-tablet": "24px",
+                        "stack-md": "16px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Source Serif 4"],
+                        "display-lg": ["Source Serif 4"],
+                        "headline-lg-mobile": ["Source Serif 4"],
+                        "body-md": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-lg": ["Source Serif 4"],
+                        "title-lg": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            -webkit-font-smoothing: antialiased;
+        }
+        .step-active { color: #30021c; }
+        .step-inactive { color: #837378; }
+        .custom-radio:checked {
+            background-color: #30021c;
+            border-color: #30021c;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface dark:bg-surface-dim flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 hover:bg-surface-variant/50 transition-colors rounded-full text-primary" data-icon="menu">menu</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">Sacred Grace Admin</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden md:inline font-label-md text-on-surface-variant">Admin Profile</span>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold border-2 border-surface">
+                A
+            </div>
+</div>
+</header>
+<main class="pt-24 pb-20 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto min-h-screen">
+<!-- Progress Indicator -->
+<div class="mb-10 max-w-2xl mx-auto">
+<div class="flex items-center justify-between relative">
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-outline-variant -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 w-[100%] h-[2px] bg-primary -translate-y-1/2 z-0 transition-all duration-700 ease-out"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold shadow-sm">1</div>
+<span class="font-label-md text-primary mt-2">Details</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold shadow-sm">2</div>
+<span class="font-label-md text-primary mt-2">Upload</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold shadow-md ring-4 ring-surface ring-offset-0 scale-110">3</div>
+<span class="font-label-md text-primary mt-2 font-bold">Schedule</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Left Side: Preview Card -->
+<div class="w-full lg:w-5/12">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-surface-container-highest sticky top-24">
+<h3 class="font-title-lg text-title-lg text-primary mb-6">Content Preview</h3>
+<div class="relative aspect-video rounded-lg overflow-hidden mb-6 group cursor-pointer">
+<div class="w-full h-full bg-cover bg-center" data-alt="A serene cinematic overhead shot of a Catholic prayer altar with a lit candle, an open Bible on a textured linen cloth, and a traditional Nigerian wooden rosary. The lighting is warm, golden, and contemplative, evoking a sacred atmosphere consistent with a premium liturgical application. The color palette features deep burgundy accents and creamy warm tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCNnaKew0XJSsVY22mFJhnT6l3UxOHXIg-3dzf31aJfR4iO0Wo2eZOQ7GgiVMFQCgomvHNnPTncUdeSliGTR1iUPtqc40FnGyQmelDHA1PHVv1swL8H4jBZJVOgLhM6fRAJZFKQmF5POMYcRJ6VS2NZkNPtNUgDMubdNdxE0oAmH1uM9ZF6IrWRfiY8SyPtFHkToN2-KqfxpZbABIdtcmTSgw9DXffWfsuGrHlmm7WZ-z_l6ftsqtKo')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider">Title</span>
+<p class="font-title-lg text-primary">Evening Vespers: Grace of Humility</p>
+</div>
+<div class="flex justify-between items-center py-3 border-y border-surface-container">
+<div>
+<span class="font-label-md text-on-surface-variant">Type</span>
+<p class="font-body-md text-on-surface font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'opsz' 20;">mic</span>
+                                    Guided Meditation
+                                </p>
+</div>
+<div class="text-right">
+<span class="font-label-md text-on-surface-variant">Duration</span>
+<p class="font-body-md text-on-surface font-medium">12:45</p>
+</div>
+</div>
+<div>
+<span class="font-label-md text-on-surface-variant">Liturgical Season</span>
+<div class="mt-1">
+<span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full font-label-md">Ordinary Time</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Scheduling Logic -->
+<div class="w-full lg:w-7/12 space-y-6">
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-surface-container-highest">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">Publishing Options</h2>
+<div class="space-y-4">
+<!-- Option: Now -->
+<label class="flex items-start p-4 rounded-xl border border-outline-variant hover:border-primary transition-all cursor-pointer group has-[:checked]:bg-primary/5 has-[:checked]:border-primary">
+<input checked="" class="mt-1 w-5 h-5 text-primary focus:ring-primary border-outline-variant custom-radio" name="publish_type" onchange="toggleScheduling(false)" type="radio" value="now"/>
+<div class="ml-4">
+<span class="block font-title-lg text-primary">Publish Now</span>
+<span class="block font-body-md text-on-surface-variant">Your content will be available to all community members immediately.</span>
+</div>
+</label>
+<!-- Option: Later -->
+<label class="flex items-start p-4 rounded-xl border border-outline-variant hover:border-primary transition-all cursor-pointer group has-[:checked]:bg-primary/5 has-[:checked]:border-primary">
+<input class="mt-1 w-5 h-5 text-primary focus:ring-primary border-outline-variant custom-radio" name="publish_type" onchange="toggleScheduling(true)" type="radio" value="later"/>
+<div class="ml-4">
+<span class="block font-title-lg text-primary">Schedule for Later</span>
+<span class="block font-body-md text-on-surface-variant">Select a specific date and time for this content to go live.</span>
+</div>
+</label>
+</div>
+<!-- Scheduling Inputs (Hidden by default) -->
+<div class="mt-6 pt-6 border-t border-surface-container-highest hidden animate-in fade-in slide-in-from-top-4 duration-300" id="scheduling-controls">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-md text-primary ml-1">Date</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">calendar_today</span>
+<input class="w-full pl-11 pr-4 py-3 bg-white border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary font-body-md" type="date"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-primary ml-1">Time (WAT)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">schedule</span>
+<input class="w-full pl-11 pr-4 py-3 bg-white border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary font-body-md" type="time"/>
+</div>
+</div>
+</div>
+<p class="mt-4 text-label-md text-on-surface-variant italic">Note: Content will be published according to West Africa Time (Lagos).</p>
+</div>
+</section>
+<!-- Notifications Toggle -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-surface-container-highest flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-tertiary-fixed rounded-full">
+<span class="material-symbols-outlined text-on-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</div>
+<div>
+<span class="block font-title-lg text-primary">Notify Community</span>
+<span class="block font-label-md text-on-surface-variant">Send a push notification upon publishing</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-focus:ring-4 peer-focus:ring-primary/20 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</section>
+<!-- Action Bar -->
+<div class="flex items-center justify-between pt-6">
+<button class="flex items-center gap-2 px-6 py-3 text-primary font-medium hover:bg-primary/5 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Back
+                    </button>
+<button class="flex items-center gap-3 px-10 py-4 bg-primary text-on-primary rounded-full font-title-lg shadow-lg hover:bg-primary-container transition-all active:scale-95" id="finalize-btn">
+                        Finalize &amp; Publish
+                        <span class="material-symbols-outlined">auto_awesome</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface-container-low dark:bg-surface-container-lowest flex justify-around items-center px-4 py-3">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container/20 text-primary rounded-full px-6 py-1 scale-110 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-label-md">Content</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-md">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-md">Profile</span>
+</a>
+</nav>
+<!-- Side Nav for Desktop -->
+<aside class="fixed left-0 top-0 h-full z-40 hidden md:flex flex-col bg-surface dark:bg-surface-dim shadow-sm w-80 rounded-r-xl pt-20">
+<div class="px-6 mb-6">
+<h2 class="font-headline-lg text-headline-lg text-primary">Portal Menu</h2>
+</div>
+<nav class="flex-1">
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 mx-2 scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="library_books" style="font-variation-settings: 'FILL' 1;">library_books</span>
+<span class="font-body-md font-bold">Content Manager</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-body-md">Community</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md">Liturgical Calendar</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<script>
+        function toggleScheduling(show) {
+            const controls = document.getElementById('scheduling-controls');
+            const finalizeBtn = document.getElementById('finalize-btn');
+            
+            if (show) {
+                controls.classList.remove('hidden');
+                finalizeBtn.innerHTML = 'Schedule Content <span class="material-symbols-outlined">event_available</span>';
+            } else {
+                controls.classList.add('hidden');
+                finalizeBtn.innerHTML = 'Finalize & Publish <span class="material-symbols-outlined">auto_awesome</span>';
+            }
+        }
+
+        // Add a micro-interaction for the finalize button
+        document.getElementById('finalize-btn').addEventListener('click', function() {
+            const btn = this;
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Processing...';
+            btn.classList.add('opacity-80', 'pointer-events-none');
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Content Scheduled';
+                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-green-700');
+                
+                // Show success feedback
+                const notification = document.createElement('div');
+                notification.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-full shadow-2xl z-[100] animate-bounce';
+                notification.innerText = 'Content successfully prepared for the community.';
+                document.body.appendChild(notification);
+            }, 1500);
+        });
+    </script>
+</body></html>

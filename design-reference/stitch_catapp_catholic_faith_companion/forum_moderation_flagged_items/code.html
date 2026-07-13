@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Moderation Queue - Catholic Connect Admin</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Source Serif 4 & Work Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e7e2d9",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "surface-container-high": "#ede7df",
+                    "surface-bright": "#fff9ef",
+                    "secondary-fixed": "#ffd6fd",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e7e2d9",
+                    "surface-container": "#f3ede4",
+                    "on-primary-fixed": "#380822",
+                    "surface-dim": "#dfd9d1",
+                    "on-surface-variant": "#514348",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#261900",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "tertiary": "#1f1400",
+                    "secondary": "#7e4c83",
+                    "outline": "#837378",
+                    "on-secondary-container": "#7b4980",
+                    "inverse-surface": "#32302a",
+                    "surface-container-low": "#f9f3ea",
+                    "outline-variant": "#d5c2c7",
+                    "inverse-on-surface": "#f6f0e7",
+                    "on-background": "#1d1b16",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "primary-container": "#4a1731",
+                    "on-surface": "#1d1b16",
+                    "surface": "#fff9ef",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#884b67",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#ffdea4",
+                    "primary-fixed": "#ffd8e6",
+                    "error": "#ba1a1a",
+                    "background": "#fff9ef",
+                    "tertiary-container": "#382700",
+                    "on-primary-container": "#c27c9a",
+                    "on-tertiary-container": "#b58a2c",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "on-error-container": "#93000a",
+                    "primary": "#30021c",
+                    "secondary-container": "#fec0ff",
+                    "on-secondary-fixed": "#33053b",
+                    "inverse-primary": "#fdb0d0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-tablet": "24px",
+                    "margin-desktop": "32px",
+                    "gutter": "16px",
+                    "stack-sm": "8px",
+                    "stack-lg": "24px",
+                    "unit": "4px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Work Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "title-lg": ["Work Sans"],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fff9ef; /* Warm Cream Level 0 */
+            -webkit-font-smoothing: antialiased;
+        }
+        .bento-card {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            border: 1px solid #ede7df;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-card:active {
+            background-color: rgba(48, 2, 28, 0.08); /* Primary state layer */
+        }
+        .active-tab {
+            border-bottom: 3px solid #30021c;
+            color: #30021c;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-margin-mobile w-full z-50 bg-surface fixed top-0 h-16">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-primary/8 rounded-full transition-colors duration-200">menu</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Moderation Queue</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a kind-looking Nigerian administrator in their 40s wearing a clean white shirt, against a soft warm cream background. The lighting is gentle and high-quality, reflecting a dignified and contemplative atmosphere consistent with a modern Catholic institutional brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRf1KVYAL0721wOpC-UgOhnJd7ulfvB4oPPu7Kqn0MC_Lny-qllsx7u1_HWyejXF93uvBJZ_nYL8AfYy_a_nPbvnzDMn043uY2gDMxNGnnAMM0UkRK8ZBlV-8Ot3L9vQePsh6OPURoJSI9tyhaSTORObUP4xWJbIcAZzsvh96hiNj-TVk1uLvnIuE972cDw5EotFtta8yjgEe34D7TdLQYUHb7qonFBFnvQfkpkISGTlDW_89g5N_c"/>
+</div>
+</header>
+<main class="mt-20 px-margin-mobile max-w-[720px] mx-auto flex flex-col gap-stack-lg">
+<!-- Summary Card -->
+<section class="bento-card rounded-xl p-6 flex items-center justify-between bg-primary-container text-on-primary">
+<div>
+<p class="font-label-md text-label-md opacity-90 uppercase tracking-widest">Awaiting Review</p>
+<h2 class="font-headline-lg text-headline-lg">12 Flagged Items</h2>
+</div>
+<div class="material-symbols-outlined text-4xl opacity-50">pending_actions</div>
+</section>
+<!-- Tabs -->
+<nav class="flex border-b border-outline-variant w-full overflow-x-auto scrollbar-hide">
+<button class="px-6 py-3 font-title-lg text-title-lg active-tab whitespace-nowrap">Flagged Posts</button>
+<button class="px-6 py-3 font-title-lg text-title-lg text-on-surface-variant whitespace-nowrap">Flagged Comments</button>
+<button class="px-6 py-3 font-title-lg text-title-lg text-on-surface-variant whitespace-nowrap">Resolved</button>
+</nav>
+<!-- Flagged List -->
+<div class="flex flex-col gap-stack-md">
+<!-- Flagged Item 1 -->
+<article class="bento-card rounded-xl p-4 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Close up avatar of a young Nigerian man with a friendly smile, outdoor lighting at dusk, wearing a traditional hat. The image has a soft focus background and rich warm skin tones, conveying a sense of community and dignity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2YXS_wsOfDCqPq7T4NggPj-oPKjKuPQLmZcEIWuZf1sGfB_OStGl-68qQ-I6h69E7GrXSIlXzVeic8Dg6UGcSwK-S0TVevTYXc1nS1j57ZhJTkA8BV25H-xaZ1WvfzYj4Ir0-FqBliCFNk5VSyTwozgGG1xN2lKAvlEC3mK5gifnuM5l1MLFAUZTRwlqX3b4D5ob_YWoGJw1dcXz-35k9j5fyDj3bUWiDrrLCvWTvv18ynkhlC-Pq"/>
+<div>
+<h3 class="font-title-lg text-[18px] text-on-surface">Chidi Okoro</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Posted in "Sunday Reflection"</p>
+</div>
+</div>
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-[12px] font-bold">Inappropriate Language</span>
+</div>
+<p class="font-body-md text-on-surface line-clamp-3 leading-relaxed">
+                    "...and I honestly think that some of these arguments are just completely [redacted] and nobody should listen to this kind of nonsense in our parish anymore. It's time we speak the truth regardless of who gets hurt..."
+                </p>
+<div class="bg-surface-container rounded-lg p-3 flex flex-col gap-1">
+<div class="flex items-center gap-2 text-on-surface-variant text-[13px]">
+<span class="material-symbols-outlined text-sm">flag</span>
+<span>Flagged by <strong>Sister Agnes</strong></span>
+<span class="opacity-60">• 2 hours ago</span>
+</div>
+</div>
+<div class="flex gap-2 pt-2 border-t border-surface-variant">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">delete</span> Remove
+                    </button>
+<button class="flex-1 border border-primary text-primary py-2.5 rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-sm">check</span> Keep
+                    </button>
+<button class="w-12 border border-outline-variant text-on-surface-variant rounded-lg flex items-center justify-center hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">open_in_new</span>
+</button>
+</div>
+</article>
+<!-- Flagged Item 2 -->
+<article class="bento-card rounded-xl p-4 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of an elderly woman with kind eyes and silver hair, wearing a vibrant patterned traditional Nigerian headscarf. Studio lighting with warm undertones, emphasizing wisdom and grace. High-end portraiture style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAceETp3HeEaLeTHGJc3m4IJc-bT5J_4NLOkZghm0W-0wPj02z2LE3w_rTWmHaPP0a0UVRN-xJwzel_DxdLUTYBlw63VL4gV_ZgrzeLJipR5YqXuPRcE9WTRTqjzACa3QiE5a0zscoPLHZxzs08rwXXYce0lSUn8S2EO2qMprxxdrSywC_ZOXvkVdCm3AM5jeWkELPE3LDDUwBSeq2ZV0HmHR1fjegrNNUC0NlC9IlgqlAkoNy3ER7K"/>
+<div>
+<h3 class="font-title-lg text-[18px] text-on-surface">Mrs. Florence Adebayo</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Posted in "Community Support"</p>
+</div>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-[12px] font-bold">Spam</span>
+</div>
+<p class="font-body-md text-on-surface line-clamp-3 leading-relaxed">
+                    "Click here to get guaranteed blessings and financial breakthrough! Only 5000 Naira to join our prayer chain for instant wealth. Don't miss this divine opportunity sent directly to me..."
+                </p>
+<div class="bg-surface-container rounded-lg p-3 flex flex-col gap-1">
+<div class="flex items-center gap-2 text-on-surface-variant text-[13px]">
+<span class="material-symbols-outlined text-sm">flag</span>
+<span>Flagged by <strong>System Bot</strong></span>
+<span class="opacity-60">• 15 minutes ago</span>
+</div>
+</div>
+<div class="flex gap-2 pt-2 border-t border-surface-variant">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">delete</span> Remove
+                    </button>
+<button class="flex-1 border border-primary text-primary py-2.5 rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-sm">check</span> Keep
+                    </button>
+<button class="w-12 border border-outline-variant text-on-surface-variant rounded-lg flex items-center justify-center hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">open_in_new</span>
+</button>
+</div>
+</article>
+<!-- Flagged Item 3 -->
+<article class="bento-card rounded-xl p-4 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-lg">JA</div>
+<div>
+<h3 class="font-title-lg text-[18px] text-on-surface">John Amaechi</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Posted in "Daily Readings"</p>
+</div>
+</div>
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-[12px] font-bold">Off-topic</span>
+</div>
+<p class="font-body-md text-on-surface line-clamp-3 leading-relaxed">
+                    "Does anyone know where I can buy cheap football jerseys in Lagos? Need them for my son's birthday next week. Also, has anyone seen the latest match scores?"
+                </p>
+<div class="bg-surface-container rounded-lg p-3 flex flex-col gap-1">
+<div class="flex items-center gap-2 text-on-surface-variant text-[13px]">
+<span class="material-symbols-outlined text-sm">flag</span>
+<span>Flagged by <strong>Lector Jude</strong></span>
+<span class="opacity-60">• 4 hours ago</span>
+</div>
+</div>
+<div class="flex gap-2 pt-2 border-t border-surface-variant">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">delete</span> Remove
+                    </button>
+<button class="flex-1 border border-primary text-primary py-2.5 rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-sm">check</span> Keep
+                    </button>
+<button class="w-12 border border-outline-variant text-on-surface-variant rounded-lg flex items-center justify-center hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">open_in_new</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- NavigationDrawer (Sidebar logic for larger screens or toggle) -->
+<aside class="fixed inset-y-0 left-0 z-[60] flex flex-col p-stack-md bg-surface h-full w-80 rounded-r-xl shadow-md -translate-x-full transition-all duration-300" id="main-drawer">
+<div class="flex flex-col gap-2 p-4 border-b border-outline-variant mb-4">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-primary-container mb-2">
+<img class="w-full h-full object-cover" data-alt="A small detailed icon representing a saintly servant in a modern artistic style, featuring a silhouette with a subtle halo against a deep burgundy background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoOdLc1hY-1u0952CyWfpuHmhK3JBg-QZuaJ9k7iR8UP3O8xkpdLraAoQXUUsvg8wgnojbnBeFDQEq2G3XwjQtw4TrLyZ6WvSo_6LVVq4GHquErtB8s5z4eVhGa5ndDNWd51LbeaG1W8bBPQqspORRie_5hTOzq50onKVcJLs3MsUuZ0ChfUbCDW7QPAaLP0fDaWG7pb_5KtPEEfQeoI3hAngjEXiC74CqvVL1lJz6KzMzCljZ4s37"/>
+</div>
+<h4 class="font-body-md text-body-md font-bold text-primary">Faithful Servant</h4>
+<p class="text-label-md text-on-surface-variant">Admin Console • St. Patrick's</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="bg-secondary-fixed text-on-secondary-fixed font-bold rounded-full mx-2 px-4 py-3 flex items-center gap-4" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="text-on-surface-variant mx-2 px-4 py-3 flex items-center gap-4 hover:bg-surface-variant rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">shield_person</span> Moderation
+            </a>
+<a class="text-on-surface-variant mx-2 px-4 py-3 flex items-center gap-4 hover:bg-surface-variant rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">groups</span> Users
+            </a>
+<a class="text-on-surface-variant mx-2 px-4 py-3 flex items-center gap-4 hover:bg-surface-variant rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+</aside>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile py-2 bg-surface-container-low md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-1 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">Pray</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-1 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md">Formation</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-1 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container/20 text-on-secondary-container rounded-full px-5 py-1 scale-95 duration-150 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface-variant/8 p-1 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+<script>
+        // Simple JS for Drawer Toggle (Demo purposes)
+        const menuBtn = document.querySelector('header button');
+        const drawer = document.getElementById('main-drawer');
+        let isOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            isOpen = !isOpen;
+            if (isOpen) {
+                drawer.classList.remove('-translate-x-full');
+            } else {
+                drawer.classList.add('-translate-x-full');
+            }
+        });
+
+        // Close drawer when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isOpen && !drawer.contains(e.target) && !menuBtn.contains(e.target)) {
+                isOpen = false;
+                drawer.classList.add('-translate-x-full');
+            }
+        });
+
+        // Tab switching logic (Visual only)
+        const tabs = document.querySelectorAll('nav button');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active-tab', 'text-on-surface', 'font-semibold'));
+                tabs.forEach(t => t.classList.add('text-on-surface-variant'));
+                tab.classList.add('active-tab');
+                tab.classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Parish Profile - Holy Cross Cathedral</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#837378",
+                        "on-surface": "#1d1b16",
+                        "inverse-primary": "#fdb0d0",
+                        "inverse-on-surface": "#f6f0e7",
+                        "surface-container": "#f3ede4",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#33053b",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "background": "#fff9ef",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "tertiary-container": "#382700",
+                        "on-surface-variant": "#514348",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "on-primary-container": "#c27c9a",
+                        "secondary-container": "#fec0ff",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-error-container": "#93000a",
+                        "surface": "#fff9ef",
+                        "primary-fixed": "#ffd8e6",
+                        "tertiary": "#1f1400",
+                        "on-secondary-container": "#7b4980",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#d5c2c7",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e7e2d9",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "inverse-surface": "#32302a",
+                        "on-tertiary-container": "#b58a2c",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-dim": "#dfd9d1",
+                        "secondary": "#7e4c83",
+                        "primary-container": "#4a1731",
+                        "surface-container-low": "#f9f3ea",
+                        "on-background": "#1d1b16",
+                        "tertiary-fixed": "#ffdea4",
+                        "surface-bright": "#fff9ef",
+                        "primary": "#30021c",
+                        "on-primary-fixed": "#380822",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "surface-container-highest": "#e7e2d9",
+                        "surface-container-high": "#ede7df",
+                        "surface-tint": "#884b67"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "unit": "4px",
+                        "margin-tablet": "24px",
+                        "margin-desktop": "32px",
+                        "stack-sm": "8px",
+                        "stack-lg": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Work Sans"],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "label-md": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg-mobile": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f7f1e8; /* Explicit Warm Cream Overwrite */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary-fixed-dim">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface h-16 flex justify-between items-center px-margin-mobile shadow-sm transition-all duration-300" id="header">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-title-lg text-title-lg text-primary truncate max-w-[200px] md:max-w-none">Holy Cross Cathedral</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary">share</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<main class="pt-16 pb-24 max-w-[720px] mx-auto min-h-screen">
+<!-- Hero Section -->
+<section class="relative">
+<div class="w-full h-64 md:h-80 overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A majestic, high-angle architectural photograph of Holy Cross Cathedral in Lagos, Nigeria. The stunning neo-gothic facade features pointed arches, intricate stone carvings, and twin spires against a soft, golden hour sky. The lighting is warm and ethereal, highlighting the weathered textures of the historic building. The aesthetic is dignified and serene, reflecting a high-quality Catholic prayer environment with a modern, professional photographic finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASLQwz_YOYSxF8Y7s1KZHkWR1ocIzp5JX-3Nb_tUF8OAk3h6W9tDciEzxLWzNcs9n_lnXXwDMH-QaizmCksIUuHRrFn1dvT-Xog3hhNLZyjBIze8-KAr25Xe18pg6fahwm_n79ZmleXRa5f62qelYcXQ9vmoUXNqp9zcSyS3NJu_QFqh9Q_1eXraT60kPL5fPtrpw1AVCCGdPzhI95xMMPd98V0T0IcJ5_o_dyL1fscRfftyH8DeIp"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+<div class="px-margin-mobile -mt-8 relative z-10">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-md">
+<div class="flex flex-col items-start gap-1">
+<div class="flex items-center gap-2 bg-on-tertiary-container text-surface-container-lowest px-3 py-1 rounded-full mb-2">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-md text-label-md">Verified Parish</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Holy Cross Cathedral</h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">location_city</span>
+                            Lagos Archdiocese
+                        </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex gap-3 mt-6">
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-3 px-4 rounded-full flex items-center justify-center gap-2 active:scale-95 transition-transform hover:opacity-90">
+<span class="material-symbols-outlined">directions</span>
+                            Directions
+                        </button>
+<button class="flex-1 border border-primary text-primary font-label-md text-label-md py-3 px-4 rounded-full flex items-center justify-center gap-2 active:scale-95 transition-transform hover:bg-primary/5">
+<span class="material-symbols-outlined">call</span>
+                            Call
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Information Sections Grid -->
+<div class="px-margin-mobile mt-stack-lg space-y-stack-lg">
+<!-- Mass Times Section -->
+<section class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">event_note</span>
+<h3 class="font-title-lg text-title-lg text-primary">Mass Times</h3>
+</div>
+<div class="space-y-4">
+<div>
+<span class="font-label-md text-label-md text-primary bg-primary-fixed px-2 py-0.5 rounded">Sundays</span>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<div class="p-3 bg-surface-container rounded-lg border border-outline-variant/20">
+<p class="font-label-md text-label-md text-on-surface-variant">Morning</p>
+<p class="font-title-lg text-primary">6:30 AM</p>
+</div>
+<div class="p-3 bg-surface-container rounded-lg border border-outline-variant/20">
+<p class="font-label-md text-label-md text-on-surface-variant">Mid-Morning</p>
+<p class="font-title-lg text-primary">9:00 AM</p>
+</div>
+<div class="p-3 bg-surface-container rounded-lg border border-outline-variant/20">
+<p class="font-label-md text-label-md text-on-surface-variant">Choral High</p>
+<p class="font-title-lg text-primary">11:30 AM</p>
+</div>
+<div class="p-3 bg-surface-container rounded-lg border border-outline-variant/20">
+<p class="font-label-md text-label-md text-on-surface-variant">Evening</p>
+<p class="font-title-lg text-primary">6:00 PM</p>
+</div>
+</div>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-tertiary-container bg-tertiary-fixed px-2 py-0.5 rounded">Weekdays</span>
+<div class="mt-2 p-3 bg-surface-container rounded-lg border border-outline-variant/20 flex justify-between items-center">
+<p class="font-body-md text-on-surface">Mon – Fri</p>
+<p class="font-title-lg text-primary">6:30 AM, 12:15 PM, 6:00 PM</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Confession Section -->
+<section class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">health_and_safety</span>
+<h3 class="font-title-lg text-title-lg text-primary">Reconciliation</h3>
+</div>
+<div class="bg-secondary-container/20 p-4 rounded-lg flex items-start gap-4">
+<div class="bg-secondary-container p-2 rounded-full">
+<span class="material-symbols-outlined text-on-secondary-container">church</span>
+</div>
+<div>
+<p class="font-body-md text-on-surface">Saturdays</p>
+<p class="font-title-lg text-secondary">4:00 PM – 5:30 PM</p>
+<p class="text-[12px] text-on-surface-variant mt-1 italic">Or by appointment through the parish office.</p>
+</div>
+</div>
+</section><section class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+<h3 class="font-title-lg text-title-lg text-primary">Clergy</h3>
+</div>
+<div class="space-y-4">
+<!-- Fr. Jude Okonkwo -->
+<div class="flex items-center gap-4 p-3 bg-surface-container rounded-lg border border-outline-variant/20">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary text-3xl">person</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<h4 class="font-title-lg text-[18px] text-primary">Fr. Jude Okonkwo</h4>
+<div class="flex items-center gap-1 bg-on-tertiary-container text-surface-container-lowest px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[10px] font-label-md">Verified</span>
+</div>
+</div>
+<p class="font-body-md text-on-surface-variant text-[14px]">Parish Priest</p>
+</div>
+</div>
+<!-- Fr. Emmanuel Utomi -->
+<div class="flex items-center gap-4 p-3 bg-surface-container rounded-lg border border-outline-variant/20">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary text-3xl">person</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<h4 class="font-title-lg text-[18px] text-primary">Fr. Emmanuel Utomi</h4>
+<div class="flex items-center gap-1 bg-on-tertiary-container text-surface-container-lowest px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[10px] font-label-md">Verified</span>
+</div>
+</div>
+<p class="font-body-md text-on-surface-variant text-[14px]">Associate Priest</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+<section class="overflow-hidden rounded-xl shadow-sm border border-outline-variant/30">
+<div class="relative h-48 w-full">
+<div class="absolute inset-0 z-0" data-alt="A detailed digital map interface showing the location of Holy Cross Cathedral in Lagos Island, Nigeria. The map uses a minimalist, modern aesthetic with warm earthy tones, showing nearby landmarks such as City Hall and Freedom Park. A prominent Deep Burgundy pin marks the cathedral location. The style is clean, functional, and aligns with Material 3 design systems." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDyNzVyftXozdhNTI4cdCBk4sW-BUT5KFbOZ4Uynb_bcmrU17L7CoO6WQUgIahkNNtlNeyQ75oN3HrCwTLxDC5wsEgRyTd0hc7bz8f0p2gyB3GnOs1B2pDJqHHFMEbVu0NKCd7PIdoR5JMBVCkl4cXNVtteO2qlFbppGC7Fx-C-UjJcYFjOi-_no6Hy4iYERHfjnaQdeKrkwp0ex-gIvH24cm8mivl8MnM3bRLMkRibUkneRTxnUq2')"></div>
+<div class="hidden" data-location="Lagos Island, Nigeria" style=""></div>
+<div class="absolute bottom-4 left-4 bg-surface-container-lowest px-4 py-2 rounded-full shadow-lg z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">map</span>
+<span class="font-label-md text-label-md text-primary">Open in Google Maps</span>
+</div>
+</div>
+</section>
+<!-- About & Contact Section -->
+<section class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/30">
+<h3 class="font-title-lg text-title-lg text-primary mb-4">Contact Information</h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-on-surface-variant mt-1">location_on</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface-variant">Address</p>
+<p class="font-body-md">2, Catholic Mission Street, Lagos Island, Lagos, Nigeria.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-on-surface-variant mt-1">mail</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface-variant">Email</p>
+<p class="font-body-md text-primary">info@holycrosscathedrallagos.org</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-on-surface-variant mt-1">public</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface-variant">Website</p>
+<p class="font-body-md text-primary">www.holycrosscathedrallagos.org</p>
+</div>
+</li>
+</ul>
+</section>
+<!-- Parish Notices -->
+<section class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/30">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-title-lg text-title-lg text-primary">Parish Notices</h3>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-background border-l-4 border-primary rounded-r-lg">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-label-md text-label-md text-primary font-semibold">2024 Lenten Mission</h4>
+<span class="text-[10px] text-on-surface-variant">2 days ago</span>
+</div>
+<p class="text-[14px] line-clamp-2">Join us for a three-day spiritual journey themed 'Renewal of Faith' starting this Wednesday...</p>
+</div>
+<div class="p-4 bg-background border-l-4 border-tertiary-fixed-dim rounded-r-lg opacity-80">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-label-md text-label-md text-primary font-semibold">Cathedral Choir Auditions</h4>
+<span class="text-[10px] text-on-surface-variant">1 week ago</span>
+</div>
+<p class="text-[14px] line-clamp-2">The cathedral choir is seeking new voices for the soprano and tenor sections. Please visit the office...</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Shared Component) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center py-2 px-margin-mobile bg-surface-container-low rounded-t-xl border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple scroll effect for header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-lg', 'bg-surface/95', 'backdrop-blur-md');
+                header.classList.remove('shadow-sm');
+            } else {
+                header.classList.remove('shadow-lg', 'bg-surface/95', 'backdrop-blur-md');
+                header.classList.add('shadow-sm');
+            }
+        });
+
+        // Add micro-interactions for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+            btn.addEventListener('mouseleave', () => btn.classList.remove('scale-95'));
+        });
+    </script>
+</body></html>

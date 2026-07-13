@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Diocese Admin - Geographic Management</title>
+<!-- Google Fonts: Source Serif 4 & Work Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&amp;family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dfd9d1",
+                        "on-tertiary-fixed": "#261900",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#4a1731",
+                        "secondary-container": "#fec0ff",
+                        "on-secondary-container": "#7b4980",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f6f0e7",
+                        "tertiary": "#1f1400",
+                        "surface-tint": "#884b67",
+                        "surface-bright": "#fff9ef",
+                        "primary": "#30021c",
+                        "on-surface-variant": "#514348",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1d1b16",
+                        "inverse-primary": "#fdb0d0",
+                        "background": "#fff9ef",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "tertiary-fixed": "#ffdea4",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "outline-variant": "#d5c2c7",
+                        "on-surface": "#1d1b16",
+                        "surface-variant": "#e7e2d9",
+                        "outline": "#837378",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "surface-container-low": "#f9f3ea",
+                        "secondary": "#7e4c83",
+                        "on-secondary-fixed": "#33053b",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ede7df",
+                        "inverse-surface": "#32302a",
+                        "surface": "#fff9ef",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface-container-highest": "#e7e2d9",
+                        "on-tertiary-container": "#b58a2c",
+                        "tertiary-container": "#382700",
+                        "primary-fixed": "#ffd8e6",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#c27c9a",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "surface-container": "#f3ede4",
+                        "on-primary-fixed": "#380822"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "stack-sm": "8px",
+                        "margin-tablet": "24px",
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Work Sans"],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "title-lg": ["Work Sans"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            font-family: 'Work Sans', sans-serif;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+        .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Custom Tooltip Animation */
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-tooltip { animation: fadeInScale 0.2s ease-out forwards; }
+    </style>
+</head>
+<body class="flex h-screen w-screen bg-surface">
+<!-- Sidebar (NavigationDrawer Component) -->
+<aside class="hidden md:flex flex-col py-stack-lg gap-unit fixed left-0 top-0 h-full w-72 bg-surface-container-low dark:bg-surface-container-lowest shadow-sm z-30">
+<div class="px-6 mb-8">
+<h1 class="font-headline-lg text-primary leading-tight">Diocese Management</h1>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant dark:hover:bg-inverse-surface transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant dark:hover:bg-inverse-surface transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">edit_calendar</span>
+<span class="font-label-md text-label-md">Parish Editor</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant dark:hover:bg-inverse-surface transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Clergy Directory</span>
+</a>
+<!-- Active State -->
+<a class="bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-full mx-2 px-4 py-3 flex items-center gap-3 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-label-md text-label-md">Discovery Map</span>
+</a>
+</nav>
+<div class="mt-auto px-6 pt-6 border-t border-outline-variant/20">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold">Admin Profile</p>
+<p class="text-[10px] text-on-surface-variant">Lagos Archdiocese</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-72 flex flex-col relative h-full">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 bg-surface dark:bg-inverse-surface z-20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">account_balance</span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary dark:text-primary-fixed-dim">Diocese Admin Portal</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="hidden sm:flex flex-col items-end">
+<span class="text-xs font-bold text-primary">Discovery Map</span>
+<span class="text-[10px] text-on-surface-variant">Active Session: 42m</span>
+</div>
+</div>
+</header>
+<!-- Map Canvas (Asymmetric Layout) -->
+<div class="flex-1 relative overflow-hidden bg-surface-dim">
+<!-- Simulated Map Background -->
+<div class="absolute inset-0 w-full h-full grayscale-[0.2] brightness-[0.95]" data-alt="A detailed digital map view of the Lagos metropolitan area in Nigeria, featuring intricate street grids, coastline details along the Bight of Benin, and highlighted administrative boundaries. The map is rendered in a professional, slightly muted color palette of soft creams, greys, and deep burgundy accents for markers, maintaining the elegant light-mode aesthetic of a modern religious administration portal. Subways, bridges, and major landmarks like the Third Mainland Bridge are faintly visible to provide geographic context." data-location="Lagos, Nigeria" id="map-container" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDlmZk7DpAfAHSpg8NyjfMHqa2iad6uTfhdF8fnXTUxOtpQg4EkpffZGHlWFQc4lu7CW2NXz9U16eZqJhVP9B04Xd17KmCWjkrHN0Db2oiOtJvyQAVhR-kD_i9SsYVlPocwePbp0Mzfq1TGNOv6APeZ7bXR7a95x0ZAwiNqWmY7u0vwPawfWn5sKjQ_ciADD7guXrlmx2jJqJLaYwYUxG34t81iHwVAk5Sh0A9E1yyfI9WRyGpihrgg')">
+</div>
+<!-- UI Overlay: Control Panel (Bento Style) -->
+<div class="absolute top-4 left-4 z-10 flex flex-col gap-4 w-full max-w-xs md:max-w-sm pointer-events-none">
+<!-- Search & Filters Bento Box -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-4 rounded-xl shadow-lg pointer-events-auto border border-outline-variant/20">
+<div class="relative mb-4">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-body-md transition-all" placeholder="Search Parish or Deanery..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1 bg-primary text-on-primary rounded-full text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">church</span> All Parishes
+                        </button>
+<button class="px-3 py-1 bg-surface-variant text-on-surface-variant rounded-full text-xs font-medium flex items-center gap-1 border border-outline-variant/30 hover:bg-outline-variant/20">
+<span class="material-symbols-outlined text-sm">polyline</span> Deaneries
+                        </button>
+<button class="px-3 py-1 bg-surface-variant text-on-surface-variant rounded-full text-xs font-medium flex items-center gap-1 border border-outline-variant/30 hover:bg-outline-variant/20">
+<span class="material-symbols-outlined text-sm">group</span> Clusters
+                        </button>
+</div>
+</div>
+<!-- Stats Bento Box -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-4 rounded-xl shadow-lg pointer-events-auto border border-outline-variant/20 grid grid-cols-2 gap-3">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider font-bold text-outline">Active Parishes</span>
+<span class="text-2xl font-bold text-primary">124</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider font-bold text-outline">Pending GPS</span>
+<span class="text-2xl font-bold text-error">08</span>
+</div>
+</div>
+</div>
+<!-- UI Overlay: Inspector / Editor (Asymmetric Right Panel) -->
+<div class="absolute right-4 top-4 bottom-20 md:bottom-4 w-full max-w-[340px] z-10 pointer-events-none transition-transform duration-500 translate-x-[calc(100%+20px)]" id="inspector-panel">
+<div class="h-full bg-surface-container-lowest/95 backdrop-blur-lg rounded-2xl shadow-xl border border-outline-variant/30 pointer-events-auto flex flex-col overflow-hidden">
+<div class="p-6 bg-primary text-on-primary">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile leading-tight mb-1">St. Dominic's Parish</h3>
+<p class="font-label-md text-label-md opacity-80 uppercase tracking-widest">Yaba Deanery</p>
+</div>
+<button class="p-1 hover:bg-white/20 rounded-full transition-all" onclick="closeInspector()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6 scroll-hide">
+<!-- Location Metadata -->
+<div class="space-y-4">
+<h4 class="font-label-md text-label-md font-bold text-primary border-b border-outline-variant/20 pb-2">Geographic Coordinates</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 bg-surface rounded-lg border border-outline-variant/20">
+<p class="text-[10px] text-outline font-bold">LATITUDE</p>
+<input class="w-full bg-transparent border-none p-0 text-sm font-medium focus:ring-0" type="text" value="6.5165° N"/>
+</div>
+<div class="p-3 bg-surface rounded-lg border border-outline-variant/20">
+<p class="text-[10px] text-outline font-bold">LONGITUDE</p>
+<input class="w-full bg-transparent border-none p-0 text-sm font-medium focus:ring-0" type="text" value="3.3764° E"/>
+</div>
+</div>
+<button class="w-full py-2 bg-secondary/10 text-secondary border border-secondary/20 rounded-lg flex items-center justify-center gap-2 hover:bg-secondary/20 transition-all font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm">my_location</span> Recalibrate from GPS
+                            </button>
+</div>
+<!-- Geofencing Management -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<h4 class="font-label-md text-label-md font-bold text-primary">Parish Boundaries</h4>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold">AUTO-LOCKED</span>
+</div>
+<div class="h-32 rounded-lg relative overflow-hidden bg-surface-dim group cursor-crosshair">
+<div class="absolute inset-0 border-2 border-primary/40 rounded-lg m-4 bg-primary/5"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/20 backdrop-blur-[1px] transition-all">
+<button class="bg-white text-primary px-4 py-2 rounded-full font-bold text-xs shadow-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">edit_square</span> Draw Boundary
+                                    </button>
+</div>
+<!-- Visual Placeholder for mini-map boundary -->
+<div class="w-full h-full bg-cover" data-alt="A macro-level top-down satellite view of a urban neighborhood in Yaba, Lagos, with a glowing burgundy polygon boundary overlaying several city blocks to represent a digital geofence. The imagery is crisp, showing rooftops and narrow streets, contrasting with the vibrant tech-inspired boundary line." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDPKEbQilCXfbloPEt0ht_3pIhVwEzvxTM4NNYQf2azn2z1wPwE57Yp7WWGT_AYgcF9g8Xi2DJKmNRrwDtWtzemRucC87_ftTmEX1i24dT-w1ZOz84idjlWrrAyCnKderM4Ka1TrnYHIvHYAtL7ALnuPEH_pGUeBHOJKLCY9vQtei1JUkVuPAsuqmFCHQeg179-dEruxH4hYKzxn8ArW4ape8CRCO_OXhAKRwJ59E2zudnuL8WJFiu1')"></div>
+</div>
+<p class="text-xs text-on-surface-variant italic">Drawing boundaries helps users find their nearest parish automatically based on their precise location.</p>
+</div>
+<!-- Clergy & Assignments -->
+<div class="space-y-3">
+<h4 class="font-label-md text-label-md font-bold text-primary">Assigned Personnel</h4>
+<div class="flex items-center gap-3 p-2 hover:bg-surface rounded-lg transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container text-xs font-bold">FR</div>
+<div>
+<p class="text-sm font-bold">Rev. Fr. John Okechukwu</p>
+<p class="text-[10px] text-outline">Parish Priest • Since 2018</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant/20 flex gap-3">
+<button class="flex-1 py-3 bg-primary text-on-primary rounded-xl font-bold shadow-md active:scale-95 transition-all">Save Changes</button>
+<button class="p-3 border border-outline text-outline rounded-xl hover:bg-error/10 hover:text-error hover:border-error transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Action Buttons -->
+<div class="absolute bottom-6 right-6 flex flex-col gap-3 z-10">
+<button class="w-14 h-14 bg-surface-container-lowest text-primary rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all border border-outline-variant/20">
+<span class="material-symbols-outlined">layers</span>
+</button>
+<button class="w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all" onclick="openInspector()">
+<span class="material-symbols-outlined">add_location_alt</span>
+</button>
+</div>
+<!-- Map Markers (Simulated Interactive Points) -->
+<div class="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 group">
+<div class="relative">
+<div class="w-4 h-4 bg-primary rounded-full animate-ping absolute inset-0 opacity-40"></div>
+<button class="w-4 h-4 bg-primary border-2 border-white rounded-full relative z-10 shadow-lg cursor-pointer hover:scale-150 transition-transform" onclick="openInspector()"></button>
+</div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 bg-white px-3 py-1 rounded-full shadow-lg border border-outline-variant/30 opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap pointer-events-none">
+<span class="text-xs font-bold text-primary">St. Dominic's</span>
+</div>
+</div>
+<div class="absolute top-[60%] left-[35%] group">
+<div class="relative">
+<button class="w-4 h-4 bg-secondary border-2 border-white rounded-full relative z-10 shadow-lg cursor-pointer hover:scale-150 transition-transform"></button>
+</div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 bg-white px-3 py-1 rounded-full shadow-lg border border-outline-variant/30 opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap pointer-events-none">
+<span class="text-xs font-bold text-secondary">Holy Cross Cathedral</span>
+</div>
+</div>
+<!-- Legend Overlay -->
+<div class="absolute bottom-6 left-6 hidden md:block">
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-outline-variant/20 space-y-2">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-2">Map Legend</p>
+<div class="flex items-center gap-3">
+<span class="w-3 h-3 bg-primary rounded-full"></span>
+<span class="text-xs text-on-surface-variant">Parish Church</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-3 h-3 bg-secondary rounded-full"></span>
+<span class="text-xs text-on-surface-variant">Cathedral / Pro-Cathedral</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-3 h-3 bg-tertiary-fixed-dim rounded-full"></span>
+<span class="text-xs text-on-surface-variant">Outstations</span>
+</div>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe h-20 bg-surface dark:bg-inverse-surface border-t border-outline-variant/30 shadow-lg rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-6 py-1 hover:bg-surface-variant/50 transition-all">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-md text-label-md">Overview</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-6 py-1 hover:bg-surface-variant/50 transition-all">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary/20 text-primary dark:text-primary-fixed-dim rounded-2xl px-6 py-1 scale-110 duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="font-label-md text-label-md">Map</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-6 py-1 hover:bg-surface-variant/50 transition-all">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-md text-label-md">Clergy</span>
+</button>
+</nav>
+</main>
+<script>
+        function openInspector() {
+            const panel = document.getElementById('inspector-panel');
+            panel.classList.remove('translate-x-[calc(100%+20px)]');
+            panel.classList.add('translate-x-0');
+        }
+
+        function closeInspector() {
+            const panel = document.getElementById('inspector-panel');
+            panel.classList.remove('translate-x-0');
+            panel.classList.add('translate-x-[calc(100%+20px)]');
+        }
+
+        // Simple parallax or movement effect for map
+        const container = document.getElementById('map-container');
+        window.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 100;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 100;
+                container.style.transform = `scale(1.05) translate(${xAxis}px, ${yAxis}px)`;
+            }
+        });
+
+        // Initialize transition after a small delay to avoid snap on load
+        setTimeout(() => {
+            document.getElementById('inspector-panel').classList.add('transition-all');
+        }, 100);
+    </script>
+</body></html>

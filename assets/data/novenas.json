@@ -1,0 +1,2459 @@
+[
+  {
+    "id": "novenas/surrender-novena",
+    "title": "Surrender Novena",
+    "month": "January",
+    "starts": "January 2",
+    "feast": "January 11",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/surrender-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/infant-of-prague-novena",
+    "title": "Infant of Prague Novena",
+    "month": "January",
+    "starts": "January 5",
+    "feast": "January 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/infant-of-prague-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-hope-novena",
+    "title": "Our Lady of Hope Novena",
+    "month": "January",
+    "starts": "January 8",
+    "feast": "January 17",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-hope-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-sebastian-novena",
+    "title": "St. Sebastian Novena",
+    "month": "January",
+    "starts": "January 11",
+    "feast": "January 20",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-sebastian-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-agnes-novena",
+    "title": "St. Agnes Novena",
+    "month": "January",
+    "starts": "January 12",
+    "feast": "January 21",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-agnes-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-marianne-cope-novena",
+    "title": "St Marianne Cope Novena",
+    "month": "January",
+    "starts": "January 14",
+    "feast": "January 23",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-marianne-cope-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-francis-de-sales-novena",
+    "title": "St. Francis de Sales Novena",
+    "month": "January",
+    "starts": "January 15",
+    "feast": "January 24",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-francis-de-sales-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-angela-merici-novena",
+    "title": "St Angela Merici Novena",
+    "month": "January",
+    "starts": "January 18",
+    "feast": "January 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-angela-merici-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/angelic-warfare-confraternity-novena",
+    "title": "Angelic Warfare Confraternity Novena",
+    "month": "January",
+    "starts": "January 19",
+    "feast": "January 28",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/angelic-warfare-confraternity-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-thomas-aquinas-novena",
+    "title": "St. Thomas Aquinas Novena",
+    "month": "January",
+    "starts": "January 19",
+    "feast": "January 28",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-thomas-aquinas-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/respect-life-novena",
+    "title": "Respect Life Novena",
+    "month": "January",
+    "starts": "January 20",
+    "feast": "January 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/respect-life-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-john-bosco-novena",
+    "title": "St. John Bosco Novena",
+    "month": "January",
+    "starts": "January 22",
+    "feast": "January 31",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-john-bosco-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-brigid-of-ireland-novena",
+    "title": "St. Brigid of Ireland Novena",
+    "month": "January",
+    "starts": "January 23",
+    "feast": "February 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-brigid-of-ireland-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-good-success-novena",
+    "title": "Our Lady of Good Success Novena",
+    "month": "January",
+    "starts": "January 24",
+    "feast": "February 2",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-good-success-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-blaise-novena",
+    "title": "St. Blaise Novena",
+    "month": "January",
+    "starts": "January 25",
+    "feast": "February 3",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-blaise-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-agatha-novena",
+    "title": "St. Agatha Novena",
+    "month": "January",
+    "starts": "January 27",
+    "feast": "February 5",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-agatha-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-graces-novena",
+    "title": "Our Lady of Graces Novena",
+    "month": "January",
+    "starts": "January 29",
+    "feast": "February 7",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-graces-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-josephine-bakhita-novena",
+    "title": "St. Josephine Bakhita Novena",
+    "month": "January",
+    "starts": "January 30",
+    "feast": "February 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-josephine-bakhita-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-priscilla-novena",
+    "title": "St Priscilla Novena",
+    "month": "January",
+    "starts": "January 9",
+    "feast": "January 18",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-priscilla-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-timothy-novena",
+    "title": "St Timothy Novena",
+    "month": "January",
+    "starts": "January 17",
+    "feast": "January 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-timothy-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-apollonia-novena",
+    "title": "St Apollonia Novena",
+    "month": "January",
+    "starts": "January 31",
+    "feast": "February 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-apollonia-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-jose-luis-sanchez-del-rio-novena",
+    "title": "St Jose Luis Sanchez del Rio Novena",
+    "month": "February",
+    "starts": "February 1",
+    "feast": "February 10",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-jose-luis-sanchez-del-rio-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-scholastica-novena",
+    "title": "St Scholastica Novena",
+    "month": "February",
+    "starts": "February 1",
+    "feast": "February 10",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-scholastica-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-lourdes-novena",
+    "title": "Our Lady of Lourdes Novena",
+    "month": "February",
+    "starts": "February 2",
+    "feast": "February 11",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-lourdes-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-abigail-novena",
+    "title": "St Abigail Novena",
+    "month": "February",
+    "starts": "February 2",
+    "feast": "February 11",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-abigail-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-valentine-novena",
+    "title": "St. Valentine Novena",
+    "month": "February",
+    "starts": "February 5",
+    "feast": "February 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-valentine-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/holy-face-novena",
+    "title": "Holy Face of Jesus Novena",
+    "month": "February",
+    "starts": "The Sunday 10 days before Shrove Tuesday",
+    "feast": "Shrove Tuesday",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/holy-face-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/mary-undoer-of-knots-novena",
+    "title": "Mary, Undoer of Knots Novena",
+    "month": "February",
+    "starts": "February 8",
+    "feast": "February 17",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/mary-undoer-of-knots-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/sts-jacinta-francisco-marto-fatima-seers-novena",
+    "title": "Sts Jacinta and Francisco Marto Novena",
+    "month": "February",
+    "starts": "February 11",
+    "feast": "February 20",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/sts-jacinta-francisco-marto-fatima-seers-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-peter-damian-novena",
+    "title": "St Peter Damian Novena",
+    "month": "February",
+    "starts": "February 12",
+    "feast": "February 21",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-peter-damian-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-margaret-of-cortona-novena",
+    "title": "St Margaret of Cortona Novena",
+    "month": "February",
+    "starts": "February 13",
+    "feast": "February 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-margaret-of-cortona-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/30-day-novena-to-st-joseph",
+    "title": "30 Day Novena to St Joseph",
+    "month": "February",
+    "starts": "February 17",
+    "feast": "March 19",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/30-day-novena-to-st-joseph/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-gabriel-of-our-lady-of-sorrows-novena",
+    "title": "St Gabriel of Our Lady of Sorrows Novena",
+    "month": "February",
+    "starts": "February 18",
+    "feast": "February 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-gabriel-of-our-lady-of-sorrows-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-katharine-drexel-novena",
+    "title": "St. Katharine Drexel Novena",
+    "month": "February",
+    "starts": "February 22",
+    "feast": "March 3",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-katharine-drexel-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-colette-novena",
+    "title": "St Colette Novena",
+    "month": "February",
+    "starts": "February 25",
+    "feast": "March 6",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-colette-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/sts-perpetua-and-felicity-novena",
+    "title": "Sts Perpetua and Felicity Novena",
+    "month": "February",
+    "starts": "February 26",
+    "feast": "March 7",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/sts-perpetua-and-felicity-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-john-of-god-novena",
+    "title": "St John of God Novena",
+    "month": "February",
+    "starts": "February 27",
+    "feast": "March 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-john-of-god-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-frances-of-rome-novena",
+    "title": "St Frances of Rome Novena",
+    "month": "February",
+    "starts": "February 28",
+    "feast": "March 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-frances-of-rome-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-catherine-of-bologna-novena",
+    "title": "St Catherine of Bologna Novena",
+    "month": "February",
+    "starts": "February 28",
+    "feast": "March 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-catherine-of-bologna-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-dominic-savio-novena",
+    "title": "St. Dominic Savio Novena",
+    "month": "March",
+    "starts": "March 1",
+    "feast": "March 10",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-dominic-savio-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-francis-xavier-novena",
+    "title": "St. Francis Xavier Novena",
+    "month": "March",
+    "starts": "March 3",
+    "feast": "March 12",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-francis-xavier-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/release-ancestral-curses-novena",
+    "title": "Release from Ancestral Curses Novena",
+    "month": "March",
+    "starts": "March 4",
+    "feast": "July 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/release-ancestral-curses-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/novena-for-fertility-to-conceive-a-baby",
+    "title": "Novena for Fertility to Conceive",
+    "month": "March",
+    "starts": "March 6",
+    "feast": "March 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/novena-for-fertility-to-conceive-a-baby/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-patrick-novena",
+    "title": "St. Patrick Novena",
+    "month": "March",
+    "starts": "March 8",
+    "feast": "March 17",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-patrick-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-cyril-of-jerusalem-novena",
+    "title": "St Cyril of Jerusalem Novena",
+    "month": "March",
+    "starts": "March 10",
+    "feast": "March 19",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-cyril-of-jerusalem-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-joseph-novena",
+    "title": "St. Joseph Novena",
+    "month": "March",
+    "starts": "March 10",
+    "feast": "March 19",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-joseph-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/cardinal-burke-our-lady-of-guadalupe-novena",
+    "title": "Cardinal Burke Our Lady of Guadalupe Novena",
+    "month": "March",
+    "starts": "March 12",
+    "feast": "December 12",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/cardinal-burke-our-lady-of-guadalupe-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/seven-sorrows-joys-st-joseph-novena",
+    "title": "Seven Sorrows and Joys of St Joseph Novena",
+    "month": "March",
+    "starts": "March 13",
+    "feast": "March 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/seven-sorrows-joys-st-joseph-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/annunciation-novena",
+    "title": "Annunciation Novena",
+    "month": "March",
+    "starts": "March 16",
+    "feast": "March 25",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/annunciation-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/divine-infant-king-novena",
+    "title": "Novena to the Divine Infant King",
+    "month": "March",
+    "starts": "March 17",
+    "feast": "March 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/divine-infant-king-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/54-day-rosary-novena",
+    "title": "54 Day Rosary Novena",
+    "month": "March",
+    "starts": "March 20",
+    "feast": "May 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/54-day-rosary-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/three-hail-marys-novena",
+    "title": "The Three Hail Marys Novena",
+    "month": "March",
+    "starts": "March 20",
+    "feast": "March 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/three-hail-marys-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-pedro-calungsod-novena",
+    "title": "St Pedro Calungsod Novena",
+    "month": "March",
+    "starts": "March 24",
+    "feast": "April 2",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-pedro-calungsod-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/annunciation-9-month-novena-impossible-requests",
+    "title": "Impossible Requests Annunciation Novena",
+    "month": "March",
+    "starts": "March 25",
+    "feast": "December 25",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/annunciation-9-month-novena-impossible-requests/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-isidore-of-seville-novena",
+    "title": "St Isidore of Seville Novena",
+    "month": "March",
+    "starts": "March 26",
+    "feast": "April 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-isidore-of-seville-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-vincent-ferrer-novena",
+    "title": "St. Vincent Ferrer Novena",
+    "month": "March",
+    "starts": "March 27",
+    "feast": "April 5",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-vincent-ferrer-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-gertrude-of-nivelles-novena",
+    "title": "St Gertrude of Nivelles Novena",
+    "month": "March",
+    "starts": "March 8",
+    "feast": "March 17",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-gertrude-of-nivelles-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-rafqa-novena",
+    "title": "St Rafqa Novena",
+    "month": "March",
+    "starts": "March 14",
+    "feast": "March 23",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-rafqa-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/novena-of-gratitude",
+    "title": "Novena of Gratitude",
+    "month": "March",
+    "starts": "March 16",
+    "feast": "March 25",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/novena-of-gratitude/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-mary-of-egypt-novena",
+    "title": "St Mary of Egypt Novena",
+    "month": "March",
+    "starts": "March 23",
+    "feast": "April 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-mary-of-egypt-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/holy-cloak-of-st-joseph-novena-30-days",
+    "title": "Holy Cloak of St Joseph Novena",
+    "month": "April",
+    "starts": "April 1",
+    "feast": "May 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/holy-cloak-of-st-joseph-novena-30-days/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-gemma-novena",
+    "title": "St. Gemma Galgani Novena",
+    "month": "April",
+    "starts": "April 2",
+    "feast": "April 11",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-gemma-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/divine-mercy-novena",
+    "title": "Divine Mercy Novena",
+    "month": "April",
+    "starts": "Good Friday",
+    "feast": "Divine Mercy Sunday",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/divine-mercy-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/mary-the-virgin-of-revelation-novena",
+    "title": "Virgin of Revelation Novena",
+    "month": "April",
+    "starts": "April 3",
+    "feast": "April 12",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/mary-the-virgin-of-revelation-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-margaret-of-castello-novena",
+    "title": "St Margaret of Castello Novena",
+    "month": "April",
+    "starts": "April 4",
+    "feast": "April 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-margaret-of-castello-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-lydwine-novena",
+    "title": "St Lydwine Novena",
+    "month": "April",
+    "starts": "April 5",
+    "feast": "April 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-lydwine-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-benedict-joseph-labre-novena",
+    "title": "St Benedict Joseph Labre Novena",
+    "month": "April",
+    "starts": "April 7",
+    "feast": "April 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-benedict-joseph-labre-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-bernadette-novena",
+    "title": "St. Bernadette Novena",
+    "month": "April",
+    "starts": "April 7",
+    "feast": "April 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-bernadette-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-expeditus-novena",
+    "title": "St. Expeditus Novena",
+    "month": "April",
+    "starts": "April 10",
+    "feast": "April 19",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-expeditus-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-george-novena",
+    "title": "St George Novena",
+    "month": "April",
+    "starts": "April 14",
+    "feast": "April 23",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-george-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-good-counsel-novena",
+    "title": "Our Lady of Good Counsel Novena",
+    "month": "April",
+    "starts": "April 17",
+    "feast": "April 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-good-counsel-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-gianna-beretta-molla-novena",
+    "title": "St. Gianna Molla Novena",
+    "month": "April",
+    "starts": "April 19",
+    "feast": "April 28",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-gianna-beretta-molla-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-louis-de-montfort-novena",
+    "title": "St. Louis de Montfort Novena",
+    "month": "April",
+    "starts": "April 19",
+    "feast": "April 28",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-louis-de-montfort-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-peter-chanel-novena",
+    "title": "St Peter Chanel Novena",
+    "month": "April",
+    "starts": "April 19",
+    "feast": "April 28",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-peter-chanel-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-catherine-of-siena-novena",
+    "title": "St. Catherine of Siena Novena",
+    "month": "April",
+    "starts": "April 20",
+    "feast": "April 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-catherine-of-siena-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-joseph-the-worker-novena",
+    "title": "St Joseph the Worker Novena",
+    "month": "April",
+    "starts": "April 22",
+    "feast": "May 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-joseph-the-worker-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-peregrine-novena",
+    "title": "St. Peregrine Novena",
+    "month": "April",
+    "starts": "April 22",
+    "feast": "May 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-peregrine-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/novena-for-repose-of-the-pope-and-new-pope",
+    "title": "Novena for Pope's Repose and New Pope",
+    "month": "April",
+    "starts": "April 23",
+    "feast": "May 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/novena-for-repose-of-the-pope-and-new-pope/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/sts-philip-james-novena",
+    "title": "Sts Philip and James Novena",
+    "month": "April",
+    "starts": "April 24",
+    "feast": "May 3",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/sts-philip-james-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/english-martyrs-novena",
+    "title": "English Martyrs Novena",
+    "month": "April",
+    "starts": "April 25",
+    "feast": "May 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/english-martyrs-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-zita-novena",
+    "title": "St Zita Novena",
+    "month": "April",
+    "starts": "April 18",
+    "feast": "April 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-zita-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-the-forsaken-novena",
+    "title": "Our Lady of the Forsaken Novena",
+    "month": "May",
+    "starts": "May 1",
+    "feast": "May 10",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-the-forsaken-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-damien-of-molokai-novena",
+    "title": "St Damien of Molokai Novena",
+    "month": "May",
+    "starts": "May 1",
+    "feast": "May 10",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-damien-of-molokai-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-fatima-novena",
+    "title": "Our Lady of Fatima Novena",
+    "month": "May",
+    "starts": "May 4",
+    "feast": "May 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-fatima-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-corona-novena",
+    "title": "St. Corona Novena",
+    "month": "May",
+    "starts": "May 5",
+    "feast": "May 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-corona-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-matthias-apostle-novena",
+    "title": "St Matthias Apostle Novena",
+    "month": "May",
+    "starts": "May 5",
+    "feast": "May 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-matthias-apostle-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-dymphna-novena",
+    "title": "St. Dymphna Novena",
+    "month": "May",
+    "starts": "May 6",
+    "feast": "May 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-dymphna-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-isidore-the-farmer-novena",
+    "title": "St. Isidore the Farmer Novena",
+    "month": "May",
+    "starts": "May 6",
+    "feast": "May 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-isidore-the-farmer-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-brendan-novena",
+    "title": "St Brendan Novena",
+    "month": "May",
+    "starts": "May 7",
+    "feast": "May 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-brendan-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-bernadine-of-siena-novena",
+    "title": "St Bernadine of Siena Novena",
+    "month": "May",
+    "starts": "May 11",
+    "feast": "May 20",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-bernadine-of-siena-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-rita-novena",
+    "title": "St. Rita Novena",
+    "month": "May",
+    "starts": "May 13",
+    "feast": "May 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-rita-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/mary-queen-of-the-apostles-novena",
+    "title": "Mary, Queen of the Apostles Novena",
+    "month": "May",
+    "starts": "Thursday of the Fifth Week of Easter",
+    "feast": "Saturday after Ascension Thursday",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/mary-queen-of-the-apostles-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/holy-spirit-novena",
+    "title": "Novena to the Holy Spirit",
+    "month": "May",
+    "starts": "10 days before Pentecost",
+    "feast": "on Pentecost",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/holy-spirit-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/mary-help-of-christians-novena",
+    "title": "Mary, Help of Christians Novena",
+    "month": "May",
+    "starts": "May 15",
+    "feast": "May 24",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/mary-help-of-christians-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-mary-magdalene-de-pazzi-novena",
+    "title": "St Mary Magdalene de Pazzi Novena",
+    "month": "May",
+    "starts": "May 16",
+    "feast": "May 25",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-mary-magdalene-de-pazzi-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-philip-neri-novena",
+    "title": "St. Philip Neri Novena",
+    "month": "May",
+    "starts": "May 17",
+    "feast": "May 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-philip-neri-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-joan-of-arc-novena",
+    "title": "St. Joan of Arc Novena",
+    "month": "May",
+    "starts": "May 21",
+    "feast": "May 30",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-joan-of-arc-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/visitation-novena",
+    "title": "Visitation Novena",
+    "month": "May",
+    "starts": "May 22",
+    "feast": "May 31",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/visitation-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-justin-martyr-novena",
+    "title": "St Justin Martyr Novena",
+    "month": "May",
+    "starts": "May 23",
+    "feast": "June 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-justin-martyr-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-kevin-novena",
+    "title": "St Kevin Novena",
+    "month": "May",
+    "starts": "May 25",
+    "feast": "June 3",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-kevin-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/corpus-christi-novena",
+    "title": "Corpus Christi Novena",
+    "month": "May",
+    "starts": "May 26",
+    "feast": "June 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/corpus-christi-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-norbert-novena",
+    "title": "St Norbert Novena",
+    "month": "May",
+    "starts": "May 28",
+    "feast": "June 6",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-norbert-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-sophia-of-rome-novena",
+    "title": "St Sophia of Rome Novena",
+    "month": "May",
+    "starts": "May 6",
+    "feast": "May 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-sophia-of-rome-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-andrew-bobola-novena",
+    "title": "St Andrew Bobola Novena",
+    "month": "May",
+    "starts": "May 7",
+    "feast": "May 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-andrew-bobola-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/sacred-heart-novena",
+    "title": "Sacred Heart Novena",
+    "month": "June",
+    "starts": "10 days after Pentecost",
+    "feast": "19 days after Pentecost, on a Friday",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/sacred-heart-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/immaculate-heart-of-mary-novena",
+    "title": "Immaculate Heart of Mary Novena",
+    "month": "June",
+    "starts": "Second Friday after Pentecost",
+    "feast": "Third Saturday after Pentecost",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/immaculate-heart-of-mary-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-anthony-novena",
+    "title": "St. Anthony Novena",
+    "month": "June",
+    "starts": "June 4",
+    "feast": "June 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-anthony-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-germaine-cousin-novena",
+    "title": "St Germaine Cousin Novena",
+    "month": "June",
+    "starts": "June 6",
+    "feast": "June 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-germaine-cousin-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-juliana-falconieri-novena",
+    "title": "St Juliana Falconieri Novena",
+    "month": "June",
+    "starts": "June 10",
+    "feast": "June 19",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-juliana-falconieri-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-aloysius-gonzaga-novena",
+    "title": "St. Aloysius Gonzaga Novena",
+    "month": "June",
+    "starts": "June 12",
+    "feast": "June 21",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-aloysius-gonzaga-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-thomas-more-novena",
+    "title": "St. Thomas More Novena",
+    "month": "June",
+    "starts": "June 13",
+    "feast": "June 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-thomas-more-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-john-the-baptist-novena",
+    "title": "St. John the Baptist Novena",
+    "month": "June",
+    "starts": "June 15",
+    "feast": "June 24",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-john-the-baptist-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-josemaria-escriva-novena",
+    "title": "St. Josemaria Escriva Novena",
+    "month": "June",
+    "starts": "June 17",
+    "feast": "June 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-josemaria-escriva-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-perpetual-help-novena",
+    "title": "Our Lady of Perpetual Help",
+    "month": "June",
+    "starts": "June 18",
+    "feast": "June 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-perpetual-help-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-peter-and-paul-novena",
+    "title": "St. Peter and Paul Novena",
+    "month": "June",
+    "starts": "June 20",
+    "feast": "June 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-peter-and-paul-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-peter-novena",
+    "title": "St Peter Novena",
+    "month": "June",
+    "starts": "June 20",
+    "feast": "June 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-peter-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/precious-blood-novena",
+    "title": "Precious Blood Novena",
+    "month": "June",
+    "starts": "June 22",
+    "feast": "July 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/precious-blood-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-oliver-plunkett-novena",
+    "title": "St Oliver Plunkett Novena",
+    "month": "June",
+    "starts": "June 22",
+    "feast": "July 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-oliver-plunkett-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/blessed-pier-giorgio-frassati-novena",
+    "title": "St Pier Giorgio Frassati Novena",
+    "month": "June",
+    "starts": "June 25",
+    "feast": "July 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/blessed-pier-giorgio-frassati-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-elizabeth-of-portugal-novena",
+    "title": "St Elizabeth of Portugal Novena",
+    "month": "June",
+    "starts": "June 25",
+    "feast": "July 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-elizabeth-of-portugal-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-maria-goretti-novena",
+    "title": "St. Maria Goretti Novena",
+    "month": "June",
+    "starts": "June 27",
+    "feast": "July 6",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-maria-goretti-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-mark-xi-tianxiang-novena",
+    "title": "St Mark Ji Tianxiang Novena",
+    "month": "June",
+    "starts": "June 28",
+    "feast": "July 7",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-mark-xi-tianxiang-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-peace-novena",
+    "title": "Our Lady of Peace Novena",
+    "month": "June",
+    "starts": "June 30",
+    "feast": "July 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-peace-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-the-atonement-novena",
+    "title": "Novena to Our Lady of the Atonement",
+    "month": "June",
+    "starts": "June 30",
+    "feast": "July 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-the-atonement-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-veronica-giuliani-novena",
+    "title": "St Veronica Giuliani Novena",
+    "month": "June",
+    "starts": "June 30",
+    "feast": "July 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-veronica-giuliani-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-benedict-novena",
+    "title": "St. Benedict Novena",
+    "month": "July",
+    "starts": "July 2",
+    "feast": "July 11",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-benedict-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/sts-louis-and-zelie-martin-novena",
+    "title": "Sts Louis and Zelie Martin Novena",
+    "month": "July",
+    "starts": "July 3",
+    "feast": "July 12",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/sts-louis-and-zelie-martin-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-teresa-of-the-andes-novena",
+    "title": "St Teresa of the Andes Novena",
+    "month": "July",
+    "starts": "July 4",
+    "feast": "July 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-teresa-of-the-andes-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-camillus-de-lellis-novena",
+    "title": "St Camillus de Lellis Novena",
+    "month": "July",
+    "starts": "July 5",
+    "feast": "July 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-camillus-de-lellis-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-kateri-tekakwitha-novena",
+    "title": "St Kateri Novena",
+    "month": "July",
+    "starts": "July 5",
+    "feast": "July 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-kateri-tekakwitha-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-bonaventure-novena",
+    "title": "St Bonaventure Novena",
+    "month": "July",
+    "starts": "July 6",
+    "feast": "July 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-bonaventure-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-mt-carmel-novena",
+    "title": "Our Lady of Mt. Carmel Novena",
+    "month": "July",
+    "starts": "July 7",
+    "feast": "July 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-mt-carmel-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-odilia-novena",
+    "title": "St Odilia Novena",
+    "month": "July",
+    "starts": "July 9",
+    "feast": "July 18",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-odilia-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-mary-magdalene-novena",
+    "title": "St. Mary Magdalene Novena",
+    "month": "July",
+    "starts": "July 13",
+    "feast": "July 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-mary-magdalene-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-bridget-of-sweden-novena",
+    "title": "St. Bridget of Sweden Novena",
+    "month": "July",
+    "starts": "July 14",
+    "feast": "July 23",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-bridget-of-sweden-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-charbel-novena",
+    "title": "St Charbel Novena",
+    "month": "July",
+    "starts": "July 15",
+    "feast": "July 24",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-charbel-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-christina-the-astonishing-novena",
+    "title": "St. Christina the Astonishing Novena",
+    "month": "July",
+    "starts": "July 15",
+    "feast": "July 24",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-christina-the-astonishing-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-christopher-novena",
+    "title": "St Christopher Novena",
+    "month": "July",
+    "starts": "July 16",
+    "feast": "July 25",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-christopher-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-james-the-greater-novena",
+    "title": "St. James the Greater Novena",
+    "month": "July",
+    "starts": "July 16",
+    "feast": "July 25",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-james-the-greater-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-anne-novena",
+    "title": "St. Anne Novena",
+    "month": "July",
+    "starts": "July 17",
+    "feast": "July 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-anne-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/sts-joachim-and-anne-novena",
+    "title": "Sts. Joachim and Anne Novena",
+    "month": "July",
+    "starts": "July 17",
+    "feast": "July 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/sts-joachim-and-anne-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/blessed-stanley-rother-novena",
+    "title": "Blessed Stanley Rother Novena",
+    "month": "July",
+    "starts": "July 19",
+    "feast": "July 28",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/blessed-stanley-rother-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-martha-of-bethany-novena",
+    "title": "St Martha of Bethany Novena",
+    "month": "July",
+    "starts": "July 20",
+    "feast": "July 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-martha-of-bethany-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/solanus-casey-novena",
+    "title": "Blessed Solanus Casey Novena",
+    "month": "July",
+    "starts": "July 21",
+    "feast": "July 30",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/solanus-casey-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-ignatius-loyola-novena",
+    "title": "St. Ignatius Loyola Novena",
+    "month": "July",
+    "starts": "July 22",
+    "feast": "July 31",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-ignatius-loyola-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-alphonsus-liguori-novena",
+    "title": "St Alphonsus Liguori Novena",
+    "month": "July",
+    "starts": "July 23",
+    "feast": "August 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-alphonsus-liguori-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-bridget-of-sweden-novena-one-year",
+    "title": "One Year St. Bridget of Sweden Novena",
+    "month": "July",
+    "starts": "July 23",
+    "feast": "July 23",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-bridget-of-sweden-novena-one-year/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-peter-julian-eymard-novena",
+    "title": "St Peter Julian Eymard Novena",
+    "month": "July",
+    "starts": "July 24",
+    "feast": "August 2",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-peter-julian-eymard-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-john-vianney-novena",
+    "title": "St. John Vianney Novena",
+    "month": "July",
+    "starts": "July 26",
+    "feast": "August 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-john-vianney-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-the-snows-novena",
+    "title": "Our Lady of the Snows Novena",
+    "month": "July",
+    "starts": "July 27",
+    "feast": "August 5",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-the-snows-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-cajetan-novena",
+    "title": "St. Cajetan Novena",
+    "month": "July",
+    "starts": "July 29",
+    "feast": "August 7",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-cajetan-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/fourteen-holy-helpers-novena",
+    "title": "14 Holy Helpers Novena",
+    "month": "July",
+    "starts": "July 30",
+    "feast": "August 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/fourteen-holy-helpers-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-dominic-novena",
+    "title": "St. Dominic Novena",
+    "month": "July",
+    "starts": "July 30",
+    "feast": "August 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-dominic-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-mary-mackillop-novena",
+    "title": "St Mary MacKillop Novena",
+    "month": "July",
+    "starts": "July 30",
+    "feast": "August 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-mary-mackillop-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-edith-stein-novena",
+    "title": "St Edith Stein Novena",
+    "month": "July",
+    "starts": "July 31",
+    "feast": "August 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-edith-stein-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-lawrence-novena",
+    "title": "St Lawrence Novena",
+    "month": "August",
+    "starts": "August 1",
+    "feast": "August 10",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-lawrence-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-clare-of-assisi-novena",
+    "title": "St. Clare Novena",
+    "month": "August",
+    "starts": "August 2",
+    "feast": "August 11",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-clare-of-assisi-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-philomena-novena",
+    "title": "St. Philomena Novena",
+    "month": "August",
+    "starts": "August 2",
+    "feast": "August 11",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-philomena-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-jane-frances-de-chantal-novena",
+    "title": "St Jane Frances de Chantal Novena",
+    "month": "August",
+    "starts": "August 3",
+    "feast": "August 12",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-jane-frances-de-chantal-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/fr-michael-mcgivney-novena",
+    "title": "Bl Fr Michael McGivney Novena",
+    "month": "August",
+    "starts": "August 4",
+    "feast": "August 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/fr-michael-mcgivney-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-maximilian-kolbe-novena",
+    "title": "St. Maximilian Kolbe Novena",
+    "month": "August",
+    "starts": "August 5",
+    "feast": "August 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-maximilian-kolbe-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/assumption-novena",
+    "title": "Assumption Novena",
+    "month": "August",
+    "starts": "August 6",
+    "feast": "August 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/assumption-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-rocco-novena",
+    "title": "St. Rocco Novena Against Plague",
+    "month": "August",
+    "starts": "August 7",
+    "feast": "August 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-rocco-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-knock-novena",
+    "title": "Our Lady of Knock Novena",
+    "month": "August",
+    "starts": "August 8",
+    "feast": "August 17",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-knock-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-helena-novena",
+    "title": "St Helena Novena",
+    "month": "August",
+    "starts": "August 9",
+    "feast": "August 18",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-helena-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-bernard-of-clairvaux-novena",
+    "title": "St Bernard of Clairvaux Novena",
+    "month": "August",
+    "starts": "August 11",
+    "feast": "August 20",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-bernard-of-clairvaux-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/pope-st-pius-x-novena",
+    "title": "Pope St Pius X Novena",
+    "month": "August",
+    "starts": "August 12",
+    "feast": "August 21",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/pope-st-pius-x-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-monte-berico-novena",
+    "title": "Our Lady of Monte Berico Novena",
+    "month": "August",
+    "starts": "August 13",
+    "feast": "August 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-monte-berico-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/queenship-of-mary-novena",
+    "title": "Queenship of Mary Novena",
+    "month": "August",
+    "starts": "August 13",
+    "feast": "August 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/queenship-of-mary-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-rose-of-lima-novena",
+    "title": "St. Rose of Lima Novena",
+    "month": "August",
+    "starts": "August 14",
+    "feast": "August 23",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-rose-of-lima-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-michaels-lent-novena",
+    "title": "St Michael's Lent Novena",
+    "month": "August",
+    "starts": "August 15",
+    "feast": "September 30",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-michaels-lent-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-louis-king-of-france-novena",
+    "title": "St Louis King of France Novena",
+    "month": "August",
+    "starts": "August 16",
+    "feast": "August 25",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-louis-king-of-france-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-czestochowa-novena",
+    "title": "Our Lady of Czestochowa Novena",
+    "month": "August",
+    "starts": "August 17",
+    "feast": "August 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-czestochowa-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/lapsed-catholics-novena",
+    "title": "Novena for Lapsed Fallen Away Catholics",
+    "month": "August",
+    "starts": "August 18",
+    "feast": "August 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/lapsed-catholics-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-monica-novena",
+    "title": "St. Monica Novena",
+    "month": "August",
+    "starts": "August 18",
+    "feast": "August 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-monica-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-augustine-novena",
+    "title": "St. Augustine Novena",
+    "month": "August",
+    "starts": "August 19",
+    "feast": "August 28",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-augustine-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-raymond-nonnatus-novena",
+    "title": "St Raymond Nonnatus Novena",
+    "month": "August",
+    "starts": "August 22",
+    "feast": "August 31",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-raymond-nonnatus-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-gregory-the-great-novena",
+    "title": "St Gregory the Great Novena",
+    "month": "August",
+    "starts": "August 25",
+    "feast": "September 3",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-gregory-the-great-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/fr-vincent-capodanno-novena",
+    "title": "Fr. Vincent Capodanno Novena",
+    "month": "August",
+    "starts": "August 26",
+    "feast": "September 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/fr-vincent-capodanno-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-teresa-of-calcutta-novena",
+    "title": "St Mother Teresa Novena",
+    "month": "August",
+    "starts": "August 26",
+    "feast": "September 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-teresa-of-calcutta-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/nativity-of-mary-novena",
+    "title": "Nativity of Mary Novena",
+    "month": "August",
+    "starts": "August 30",
+    "feast": "September 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/nativity-of-mary-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-charity-novena",
+    "title": "Our Lady of Charity Novena",
+    "month": "August",
+    "starts": "August 30",
+    "feast": "September 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-charity-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-good-health-novena",
+    "title": "Our Lady of Good Health Novena",
+    "month": "August",
+    "starts": "August 30",
+    "feast": "September 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-good-health-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/holy-cross-novena",
+    "title": "Holy Cross Novena",
+    "month": "September",
+    "starts": "September 5",
+    "feast": "September 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/holy-cross-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-sorrows-novena",
+    "title": "Our Lady of Sorrows Novena",
+    "month": "September",
+    "starts": "September 6",
+    "feast": "September 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-sorrows-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-hildegard-of-bingen-novena",
+    "title": "St Hildegard of Bingen Novena",
+    "month": "September",
+    "starts": "September 8",
+    "feast": "September 17",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-hildegard-of-bingen-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-robert-bellarmine-novena",
+    "title": "St Robert Bellarmine Novena",
+    "month": "September",
+    "starts": "September 8",
+    "feast": "September 17",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-robert-bellarmine-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-joseph-cupertino-novena",
+    "title": "St. Joseph Cupertino Novena",
+    "month": "September",
+    "starts": "September 9",
+    "feast": "September 18",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-joseph-cupertino-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-lasalette-novena",
+    "title": "Our Lady of La Salette Novena",
+    "month": "September",
+    "starts": "September 10",
+    "feast": "September 19",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-lasalette-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-januarius-novena",
+    "title": "St. Januarius (Gennaro) Novena",
+    "month": "September",
+    "starts": "September 10",
+    "feast": "September 19",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-januarius-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/consecration-of-the-election-to-the-blessed-virgin-mary-novena",
+    "title": "Election Consecration 54 Day Novena",
+    "month": "September",
+    "starts": "September 12",
+    "feast": "November 5",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/consecration-of-the-election-to-the-blessed-virgin-mary-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-matthew-novena",
+    "title": "St Matthew Novena",
+    "month": "September",
+    "starts": "September 12",
+    "feast": "September 21",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-matthew-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/padre-pio-novena",
+    "title": "St Padre Pio Novena",
+    "month": "September",
+    "starts": "September 14",
+    "feast": "September 23",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/padre-pio-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-walsingham-novena",
+    "title": "Our Lady of Walsingham Novena",
+    "month": "September",
+    "starts": "September 15",
+    "feast": "September 24",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-walsingham-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/sts-cosmas-and-damian-novena",
+    "title": "Sts Cosmas and Damian Novena",
+    "month": "September",
+    "starts": "September 17",
+    "feast": "September 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/sts-cosmas-and-damian-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-star-of-the-sea-novena",
+    "title": "Our Lady Star of the Sea Novena",
+    "month": "September",
+    "starts": "September 18",
+    "feast": "September 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-star-of-the-sea-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-vincent-de-paul-novena",
+    "title": "St Vincent de Paul Novena",
+    "month": "September",
+    "starts": "September 18",
+    "feast": "September 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-vincent-de-paul-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-gabriel-archangel-novena",
+    "title": "St. Gabriel Novena",
+    "month": "September",
+    "starts": "September 20",
+    "feast": "September 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-gabriel-archangel-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-michael-the-archangel-novena",
+    "title": "St. Michael Novena",
+    "month": "September",
+    "starts": "September 20",
+    "feast": "September 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-michael-the-archangel-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-raphael-novena",
+    "title": "St. Raphael Novena",
+    "month": "September",
+    "starts": "September 20",
+    "feast": "September 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-raphael-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-jerome-novena",
+    "title": "St. Jerome Novena",
+    "month": "September",
+    "starts": "September 21",
+    "feast": "September 30",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-jerome-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-therese-of-lisieux-novena",
+    "title": "St. Therese of Lisieux Rose Novena",
+    "month": "September",
+    "starts": "September 22",
+    "feast": "October 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-therese-of-lisieux-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/guardian-angel-novena",
+    "title": "Guardian Angel Novena",
+    "month": "September",
+    "starts": "September 23",
+    "feast": "October 2",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/guardian-angel-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-francis-of-assisi-novena",
+    "title": "St. Francis of Assisi Novena",
+    "month": "September",
+    "starts": "September 25",
+    "feast": "October 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-francis-of-assisi-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/blessed-francis-xavier-seelos-novena",
+    "title": "Blessed Francis Xavier Seelos Novena",
+    "month": "September",
+    "starts": "September 26",
+    "feast": "October 5",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/blessed-francis-xavier-seelos-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-faustina-novena",
+    "title": "St. Faustina Novena",
+    "month": "September",
+    "starts": "September 26",
+    "feast": "October 5",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-faustina-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-the-rosary-novena",
+    "title": "Our Lady of the Rosary Novena",
+    "month": "September",
+    "starts": "September 28",
+    "feast": "October 7",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-the-rosary-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-good-remedy-novena",
+    "title": "Our Lady of Good Remedy Novena",
+    "month": "September",
+    "starts": "September 29",
+    "feast": "October 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-good-remedy-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-champion-novena",
+    "title": "Our Lady of Champion Novena",
+    "month": "September",
+    "starts": "September 30",
+    "feast": "October 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-champion-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-john-henry-newman-novena",
+    "title": "St John Henry Newman Novena",
+    "month": "September",
+    "starts": "September 30",
+    "feast": "October 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-john-henry-newman-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-la-leche-novena",
+    "title": "Our Lady of La Leche Novena",
+    "month": "October",
+    "starts": "October 2",
+    "feast": "October 11",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-la-leche-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/blessed-carlo-acutis-novena",
+    "title": "St Carlo Acutis Novena",
+    "month": "October",
+    "starts": "October 3",
+    "feast": "October 12",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/blessed-carlo-acutis-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-teresa-of-avila-novena",
+    "title": "St. Teresa of Avila Novena",
+    "month": "October",
+    "starts": "October 6",
+    "feast": "October 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-teresa-of-avila-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-gerard-majella-novena",
+    "title": "St. Gerard Majella Novena",
+    "month": "October",
+    "starts": "October 7",
+    "feast": "October 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-gerard-majella-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-margaret-mary-novena",
+    "title": "St. Margaret Mary Novena",
+    "month": "October",
+    "starts": "October 7",
+    "feast": "October 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-margaret-mary-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-luke-novena",
+    "title": "St Luke Novena",
+    "month": "October",
+    "starts": "October 9",
+    "feast": "October 18",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-luke-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/north-american-martyrs-novena",
+    "title": "North American Martyrs Novena",
+    "month": "October",
+    "starts": "October 10",
+    "feast": "October 19",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/north-american-martyrs-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-jude-novena",
+    "title": "St. Jude Novena",
+    "month": "October",
+    "starts": "October 11",
+    "feast": "October 20",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-jude-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-paul-of-the-cross-novena",
+    "title": "St Paul of the Cross Novena",
+    "month": "October",
+    "starts": "October 11",
+    "feast": "October 20",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-paul-of-the-cross-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/pope-st-john-paul-ii-novena",
+    "title": "Pope St. John Paul II Novena",
+    "month": "October",
+    "starts": "October 13",
+    "feast": "October 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/pope-st-john-paul-ii-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-anthony-mary-claret-novena",
+    "title": "St Anthony Mary Claret Novena",
+    "month": "October",
+    "starts": "October 15",
+    "feast": "October 24",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-anthony-mary-claret-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/all-saints-novena",
+    "title": "All Saints Novena",
+    "month": "October",
+    "starts": "October 23",
+    "feast": "November 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/all-saints-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/novena-holy-souls-purgatory",
+    "title": "Holy Souls in Purgatory Novena",
+    "month": "October",
+    "starts": "October 24",
+    "feast": "November 2",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/novena-holy-souls-purgatory/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-hubert-novena",
+    "title": "St Hubert Novena",
+    "month": "October",
+    "starts": "October 25",
+    "feast": "November 3",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-hubert-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-martin-de-porres-novena",
+    "title": "St. Martin de Porres Novena",
+    "month": "October",
+    "starts": "October 25",
+    "feast": "November 3",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-martin-de-porres-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-charles-borromeo-novena",
+    "title": "St Charles Borromeo Novena",
+    "month": "October",
+    "starts": "October 26",
+    "feast": "November 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-charles-borromeo-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/election-novena",
+    "title": "Election Novena",
+    "month": "October",
+    "starts": "October 27",
+    "feast": "November 5",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/election-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-elizabeth-novena",
+    "title": "St Elizabeth Novena",
+    "month": "October",
+    "starts": "October 27",
+    "feast": "November 5",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-elizabeth-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-elizabeth-of-the-trinity-novena",
+    "title": "St. Elizabeth of the Trinity Novena",
+    "month": "October",
+    "starts": "October 30",
+    "feast": "November 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-elizabeth-of-the-trinity-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/pope-st-leo-the-great-novena",
+    "title": "Pope St Leo the Great Novena",
+    "month": "November",
+    "starts": "November 1",
+    "feast": "November 10",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/pope-st-leo-the-great-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-andrew-avellino-novena",
+    "title": "St Andrew Avellino Novena",
+    "month": "November",
+    "starts": "November 1",
+    "feast": "November 10",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-andrew-avellino-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-martin-of-tours-novena",
+    "title": "St. Martin of Tours Novena",
+    "month": "November",
+    "starts": "November 2",
+    "feast": "November 11",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-martin-of-tours-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-frances-xavier-cabrini-novena",
+    "title": "St Frances Xavier Cabrini Novena",
+    "month": "November",
+    "starts": "November 4",
+    "feast": "November 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-frances-xavier-cabrini-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-homobonus-novena",
+    "title": "St Homobonus Novena",
+    "month": "November",
+    "starts": "November 4",
+    "feast": "November 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-homobonus-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-albert-the-great-novena",
+    "title": "St Albert the Great Novena",
+    "month": "November",
+    "starts": "November 6",
+    "feast": "November 15",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-albert-the-great-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-gertrude-the-great-novena",
+    "title": "St. Gertrude Prayer Novena",
+    "month": "November",
+    "starts": "November 7",
+    "feast": "November 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-gertrude-the-great-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-giuseppe-moscati-novena",
+    "title": "St Giuseppe Moscati Novena",
+    "month": "November",
+    "starts": "November 7",
+    "feast": "November 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-giuseppe-moscati-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-margaret-of-scotland-novena",
+    "title": "St Margaret of Scotland Novena",
+    "month": "November",
+    "starts": "November 7",
+    "feast": "November 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-margaret-of-scotland-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-elizabeth-of-hungary-novena",
+    "title": "St. Elizabeth of Hungary Novena",
+    "month": "November",
+    "starts": "November 8",
+    "feast": "November 17",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-elizabeth-of-hungary-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-rose-philippine-duchesne-novena",
+    "title": "St Rose Philippine Duchesne Novena",
+    "month": "November",
+    "starts": "November 9",
+    "feast": "November 18",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-rose-philippine-duchesne-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/presentation-of-the-blessed-virgin-mary-novena",
+    "title": "Presentation of the Blessed Virgin Mary Novena",
+    "month": "November",
+    "starts": "November 12",
+    "feast": "November 21",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/presentation-of-the-blessed-virgin-mary-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/christ-the-king-novena",
+    "title": "Christ the King Novena",
+    "month": "November",
+    "starts": "November 13",
+    "feast": "November 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/christ-the-king-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-cecilia-novena",
+    "title": "St. Cecilia Novena",
+    "month": "November",
+    "starts": "November 13",
+    "feast": "November 22",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-cecilia-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/miguel-agustin-pro-novena",
+    "title": "Bl Miguel Agustin Pro Novena",
+    "month": "November",
+    "starts": "November 14",
+    "feast": "November 23",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/miguel-agustin-pro-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-catherine-of-alexandria-novena",
+    "title": "St Catherine of Alexandria Novena",
+    "month": "November",
+    "starts": "November 16",
+    "feast": "November 25",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-catherine-of-alexandria-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/miraculous-medal-novena",
+    "title": "Miraculous Medal Novena",
+    "month": "November",
+    "starts": "November 18",
+    "feast": "November 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/miraculous-medal-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-andrew-the-apostle-novena",
+    "title": "St Andrew the Apostle Novena",
+    "month": "November",
+    "starts": "November 21",
+    "feast": "November 30",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-andrew-the-apostle-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-edmund-campion-novena",
+    "title": "St Edmund Campion Novena",
+    "month": "November",
+    "starts": "November 22",
+    "feast": "December 1",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-edmund-campion-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-barbara-novena",
+    "title": "St. Barbara Novena",
+    "month": "November",
+    "starts": "November 25",
+    "feast": "December 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-barbara-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-john-of-damascus-novena",
+    "title": "St John Damascene Novena",
+    "month": "November",
+    "starts": "November 25",
+    "feast": "December 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-john-of-damascus-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-nicholas-novena",
+    "title": "St. Nicholas Novena",
+    "month": "November",
+    "starts": "November 27",
+    "feast": "December 6",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-nicholas-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-ambrose-novena",
+    "title": "St Ambrose Novena",
+    "month": "November",
+    "starts": "November 28",
+    "feast": "December 7",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-ambrose-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/immaculate-conception-novena",
+    "title": "Immaculate Conception Novena",
+    "month": "November",
+    "starts": "November 29",
+    "feast": "December 8",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/immaculate-conception-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/fulton-sheen-novena",
+    "title": "Fulton Sheen Novena",
+    "month": "November",
+    "starts": "November 30",
+    "feast": "December 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/fulton-sheen-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-andrew-christmas-novena",
+    "title": "St. Andrew Christmas Novena",
+    "month": "November",
+    "starts": "November 30",
+    "feast": "December 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-andrew-christmas-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-juan-diego-novena",
+    "title": "St Juan Diego Novena",
+    "month": "November",
+    "starts": "November 30",
+    "feast": "December 9",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-juan-diego-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/holy-name-of-jesus-novena",
+    "title": "Holy Name of Jesus Novena",
+    "month": "December",
+    "starts": "December 25",
+    "feast": "January 3",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/holy-name-of-jesus-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-genevieve-novena",
+    "title": "St Genevieve Novena",
+    "month": "December",
+    "starts": "December 25",
+    "feast": "January 3",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-genevieve-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-elizabeth-ann-seton-novena",
+    "title": "St. Elizabeth Ann Seton Novena",
+    "month": "December",
+    "starts": "December 26",
+    "feast": "January 4",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-elizabeth-ann-seton-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-john-neumann-novena",
+    "title": "St John Neumann Novena",
+    "month": "December",
+    "starts": "December 27",
+    "feast": "January 5",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-john-neumann-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/epiphany-holy-magi-novena",
+    "title": "Epiphany Magi Novena",
+    "month": "December",
+    "starts": "December 28",
+    "feast": "January 6",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/epiphany-holy-magi-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-andre-bessette-novena",
+    "title": "St. Andre Bessette Novena",
+    "month": "December",
+    "starts": "December 28",
+    "feast": "January 6",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-andre-bessette-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-loreto-novena",
+    "title": "Our Lady of Loreto Novena",
+    "month": "December",
+    "starts": "December 1",
+    "feast": "December 10",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-loreto-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/our-lady-of-guadalupe-novena",
+    "title": "Our Lady of Guadalupe Novena",
+    "month": "December",
+    "starts": "December 3",
+    "feast": "December 12",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/our-lady-of-guadalupe-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-lucy-novena",
+    "title": "St. Lucy Novena",
+    "month": "December",
+    "starts": "December 4",
+    "feast": "December 13",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-lucy-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-john-of-the-cross-novena",
+    "title": "St. John of the Cross Novena",
+    "month": "December",
+    "starts": "December 5",
+    "feast": "December 14",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-john-of-the-cross-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-adelaide-novena",
+    "title": "St Adelaide Novena",
+    "month": "December",
+    "starts": "December 7",
+    "feast": "December 16",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-adelaide-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-anastasia-novena",
+    "title": "St. Anastasia Novena",
+    "month": "December",
+    "starts": "December 16",
+    "feast": "December 25",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-anastasia-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-stephen-novena",
+    "title": "St. Stephen Novena",
+    "month": "December",
+    "starts": "December 17",
+    "feast": "December 26",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-stephen-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/holy-family-novena",
+    "title": "Holy Family Novena",
+    "month": "December",
+    "starts": "Nine days before the Feastday",
+    "feast": "The feast is celebrated on the Sunday within the Octave of Christmas, that is, the Sunday between Christmas Day and New Year's Day (both exclusive), or if both Christmas Day and the Solemnity of Mary, Mother of God are Sundays, on 30 December (always a Friday in such years).",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/holy-family-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-john-the-apostle-novena",
+    "title": "St. John the Apostle Novena",
+    "month": "December",
+    "starts": "December 18",
+    "feast": "December 27",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-john-the-apostle-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/holy-innocents-novena",
+    "title": "Holy Innocents Novena",
+    "month": "December",
+    "starts": "December 19",
+    "feast": "December 28",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/holy-innocents-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  },
+  {
+    "id": "novenas/st-thomas-becket-novena",
+    "title": "St Thomas Becket Novena",
+    "month": "December",
+    "starts": "December 20",
+    "feast": "December 29",
+    "sourceUrl": "https://catholicnovenaapp.com/novenas/st-thomas-becket-novena/",
+    "sourceName": "Intercede - Catholic Novena App"
+  }
+]

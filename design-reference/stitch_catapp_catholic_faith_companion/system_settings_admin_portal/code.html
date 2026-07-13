@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>System Settings | Sacred Grace Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(48, 2, 28, 0.05);
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none !important;
+            border-color: #30021c !important;
+            box-shadow: 0 0 0 2px rgba(48, 2, 28, 0.1) !important;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5c2c7;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#c27c9a",
+                      "outline-variant": "#d5c2c7",
+                      "inverse-on-surface": "#f6f0e7",
+                      "on-surface-variant": "#514348",
+                      "error": "#ba1a1a",
+                      "on-tertiary-container": "#b58a2c",
+                      "tertiary-fixed-dim": "#f0bf5c",
+                      "primary-fixed-dim": "#fdb0d0",
+                      "primary": "#30021c",
+                      "on-secondary-fixed-variant": "#64346a",
+                      "surface-bright": "#fff9ef",
+                      "on-primary-fixed": "#380822",
+                      "tertiary-fixed": "#ffdea4",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "surface-container": "#f3ede4",
+                      "on-error": "#ffffff",
+                      "on-secondary-container": "#7b4980",
+                      "on-secondary-fixed": "#33053b",
+                      "secondary-fixed": "#ffd6fd",
+                      "on-background": "#1d1b16",
+                      "primary-fixed": "#ffd8e6",
+                      "surface-container-high": "#ede7df",
+                      "background": "#fff9ef",
+                      "inverse-primary": "#fdb0d0",
+                      "tertiary": "#1f1400",
+                      "inverse-surface": "#32302a",
+                      "on-primary-fixed-variant": "#6d344f",
+                      "on-error-container": "#93000a",
+                      "surface": "#fff9ef",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#fec0ff",
+                      "surface-tint": "#884b67",
+                      "outline": "#837378",
+                      "secondary-fixed-dim": "#efb2f1",
+                      "secondary": "#7e4c83",
+                      "tertiary-container": "#382700",
+                      "surface-dim": "#dfd9d1",
+                      "surface-container-highest": "#e7e2d9",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#4a1731",
+                      "on-surface": "#1d1b16",
+                      "surface-variant": "#e7e2d9",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed": "#261900",
+                      "surface-container-low": "#f9f3ea"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-lg": "24px",
+                      "margin-desktop": "32px",
+                      "stack-md": "16px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "stack-sm": "8px",
+                      "margin-tablet": "24px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "title-lg": ["Work Sans"],
+                      "headline-lg": ["\"Source Serif 4\""],
+                      "display-lg": ["\"Source Serif 4\""],
+                      "body-md": ["Work Sans"],
+                      "body-lg": ["\"Source Serif 4\""],
+                      "headline-lg-mobile": ["\"Source Serif 4\""],
+                      "label-md": ["Work Sans"]
+              },
+              "fontSize": {
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden custom-scrollbar">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface dark:bg-surface-dim flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 shadow-none">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer md:hidden" data-icon="menu">menu</span>
+<h1 class="font-headline-lg text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">Sacred Grace Admin</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full transition-colors" data-icon="search">search</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full transition-colors" data-icon="notifications">notifications</button>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a mature Nigerian administrator in a formal office setting, soft natural lighting, high resolution, minimalist and dignified aesthetic consistent with the Sacred Grace Admin brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvaU9vKDeIKy_5dWi4-SVmSzuAuh6VecRK9JKDXA7OyvCAM77q26RYxeP14_POQW27nOzOxbizPe2byviYOZjZbXGnpOCeseYwdfhtWh3W41-FllLuqAEdcsJZAXQijKE-V9cEkb2t8encjajFmB8CtrODEBLEOizUu4-yVwVh-tzozrSiwb0a02vdURy8tHJ4P41H-Co_U5LrZEqXQRfh2PLHiCHRxexRYZRvKMNm4T9yOpSwuwmB"/>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Desktop) -->
+<aside class="fixed left-0 top-0 h-full z-40 hidden md:flex flex-col bg-surface dark:bg-surface-dim w-80 rounded-r-xl shadow-sm pt-20">
+<div class="px-6 mb-6">
+<h2 class="font-title-lg text-title-lg text-primary">Portal Menu</h2>
+</div>
+<nav class="flex-1 overflow-y-auto space-y-1">
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+<span class="font-label-md text-label-md">Content Manager</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-md text-label-md">Liturgical Calendar</span>
+</a>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 mx-2 scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md font-bold">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-surface-variant">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-bold shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                Audit Log
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pt-20 pb-24 md:pb-8 md:pl-80 min-h-screen px-margin-mobile md:px-margin-desktop">
+<div class="max-w-6xl mx-auto">
+<header class="mb-8">
+<div class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span class="text-xs font-label-md uppercase tracking-widest">Global Configuration</span>
+</div>
+<h1 class="font-headline-lg text-primary mb-2">System Settings</h1>
+<p class="text-on-surface-variant max-w-2xl">Manage critical app infrastructure, versioning, and moderation parameters for the Sacred Grace ecosystem.</p>
+</header>
+<!-- Settings Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column -->
+<div class="lg:col-span-8 space-y-gutter">
+<!-- App Version & Updates -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant/50 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="system_update">system_update</span>
+</div>
+<h3 class="font-title-lg text-on-surface">App Version Management</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase text-on-surface-variant px-1">Minimum iOS Version</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:ring-primary" type="text" value="2.4.1"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase text-on-surface-variant px-1">Minimum Android Version</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:ring-primary" type="text" value="2.3.8"/>
+</div>
+</div>
+<div class="mt-6 flex items-center justify-between p-4 bg-error-container/10 border border-error/10 rounded-lg">
+<div>
+<h4 class="font-bold text-on-surface">Force Update Required</h4>
+<p class="text-sm text-on-surface-variant">Prevent users on older versions from accessing the app.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</section>
+<!-- Global Moderation -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant/50 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="policy">policy</span>
+</div>
+<h3 class="font-title-lg text-on-surface">Global Moderation Thresholds</h3>
+</div>
+<div class="space-y-8">
+<div class="space-y-3">
+<div class="flex justify-between">
+<span class="text-sm font-bold text-on-surface">Profanity Filter Sensitivity</span>
+<span class="text-sm text-primary font-bold">85%</span>
+</div>
+<input class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase tracking-widest">
+<span>Lenient</span>
+<span>Strict</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between">
+<span class="text-sm font-bold text-on-surface">Image AI Moderation</span>
+<span class="text-sm text-primary font-bold">72%</span>
+</div>
+<input class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase tracking-widest">
+<span>Casual</span>
+<span>Conservative</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Flags -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant/50 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="flag">flag</span>
+</div>
+<h3 class="font-title-lg text-on-surface">Feature Flags</h3>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between py-3 border-b border-surface-variant/30">
+<div>
+<span class="text-sm font-bold block text-on-surface">Diocesan Delegation</span>
+<span class="text-xs text-on-surface-variant">Allow regional bishops to manage local community content.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-surface-variant/30">
+<div>
+<span class="text-sm font-bold block text-on-surface">Live Novena Streaming</span>
+<span class="text-xs text-on-surface-variant">Beta testing for real-time communal prayer sessions.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between py-3">
+<div>
+<span class="text-sm font-bold block text-on-surface">AI Homily Assistant</span>
+<span class="text-xs text-on-surface-variant">Internal tool for assisting priests in sermon structuring.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Integration Status -->
+<section class="bg-surface-container-low p-6 rounded-xl border border-surface-variant/50">
+<h3 class="font-title-lg text-primary mb-4">Integration Status</h3>
+<div class="space-y-4">
+<div class="bg-white p-4 rounded-lg flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-600" data-icon="database">database</span>
+<div>
+<p class="text-sm font-bold">Supabase DB</p>
+<p class="text-[10px] text-on-surface-variant">Lat: 12ms | Cluster: NG-South</p>
+</div>
+</div>
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+</div>
+<div class="bg-white p-4 rounded-lg flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-600" data-icon="api">api</span>
+<div>
+<p class="text-sm font-bold">Liturgical API</p>
+<p class="text-[10px] text-on-surface-variant">V3.2 Stable</p>
+</div>
+</div>
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+</div>
+<div class="bg-white p-4 rounded-lg flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="cloud_sync">cloud_sync</span>
+<div>
+<p class="text-sm font-bold">Push Notifications</p>
+<p class="text-[10px] text-on-surface-variant">Firebase Connected</p>
+</div>
+</div>
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+</div>
+</div>
+<button class="w-full mt-4 py-2 text-primary font-bold text-sm hover:underline flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+                            Run Health Check
+                        </button>
+</section>
+<!-- Maintenance Mode -->
+<section class="bg-primary text-on-primary p-6 rounded-xl shadow-lg relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="construction">construction</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-title-lg">Maintenance Mode</h3>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-white/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<p class="text-sm opacity-80 mb-4">When active, users see a custom message and cannot access the app content.</p>
+<textarea class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-sm text-white placeholder-white/40 h-24" placeholder="Enter maintenance message... (e.g. We are currently updating our prayer database. Please return in 30 minutes.)"></textarea>
+<button class="w-full mt-4 bg-secondary text-on-secondary py-2 rounded-lg font-bold hover:opacity-90 transition-opacity">
+                                Update Message
+                            </button>
+</div>
+</section>
+<!-- Audit Quick Link -->
+<div class="bg-surface-variant p-6 rounded-xl border border-outline-variant flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-2" data-icon="security">security</span>
+<h4 class="font-bold text-on-surface">Security &amp; Compliance</h4>
+<p class="text-xs text-on-surface-variant mb-4">All configuration changes are logged and attributed to your admin ID.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold hover:underline" href="#">
+                            View Full Audit Log
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Global Actions -->
+<div class="mt-12 flex flex-col md:flex-row items-center justify-between gap-4 p-6 bg-surface-container-high rounded-2xl">
+<div>
+<h3 class="font-bold text-on-surface">Discard or Apply Changes</h3>
+<p class="text-sm text-on-surface-variant">Changes will propagate to global edge nodes within 60 seconds.</p>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<button class="flex-1 md:px-8 py-3 rounded-full border border-primary text-primary font-bold hover:bg-primary/5 transition-colors">Discard</button>
+<button class="flex-1 md:px-8 py-3 rounded-full bg-primary text-on-primary font-bold shadow-md hover:scale-[1.02] active:scale-95 transition-all">Save Configurations</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden bg-surface-container-low dark:bg-surface-container-lowest">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-label-md text-label-md">Content</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-md text-label-md">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container/20 text-primary rounded-full px-6 py-1 scale-110 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for range sliders
+        const sliders = document.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                const val = e.target.value;
+                const display = e.target.previousElementSibling.querySelector('.text-primary');
+                if (display) display.textContent = val + '%';
+            });
+        });
+
+        // Quick Save Interaction
+        document.querySelector('.bg-primary.text-on-primary.shadow-md').addEventListener('click', function() {
+            const btn = this;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="sync">sync</span> Saving...';
+            btn.classList.add('opacity-80');
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span> Saved';
+                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-green-600', 'opacity-80');
+                    btn.classList.add('bg-primary');
+                }, 2000);
+            }, 1500);
+        });
+    </script>
+</body></html>

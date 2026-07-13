@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Find a Resource - CatApp Library</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdea4",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e7e2d9",
+                        "inverse-surface": "#32302a",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-background": "#1d1b16",
+                        "inverse-primary": "#fdb0d0",
+                        "surface-container-low": "#f9f3ea",
+                        "on-surface-variant": "#514348",
+                        "on-tertiary-fixed": "#261900",
+                        "on-secondary-fixed": "#33053b",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "on-error": "#ffffff",
+                        "tertiary": "#1f1400",
+                        "inverse-on-surface": "#f6f0e7",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#ede7df",
+                        "surface-bright": "#fff9ef",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "outline-variant": "#d5c2c7",
+                        "secondary": "#7e4c83",
+                        "error": "#ba1a1a",
+                        "primary-container": "#4a1731",
+                        "surface": "#fff9ef",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#b58a2c",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "on-secondary-container": "#7b4980",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "surface-tint": "#884b67",
+                        "primary-fixed": "#ffd8e6",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "secondary-container": "#fec0ff",
+                        "surface-container": "#f3ede4",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e7e2d9",
+                        "on-surface": "#1d1b16",
+                        "surface-dim": "#dfd9d1",
+                        "outline": "#837378",
+                        "on-primary-fixed": "#380822",
+                        "background": "#fff9ef",
+                        "on-primary-container": "#c27c9a",
+                        "primary": "#30021c",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#382700"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-tablet": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "stack-lg": "24px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Work Sans"],
+                        "title-lg": ["Work Sans"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "label-md": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        .filter-chip-active {
+            background-color: #30021c;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Top AppBar (Source: Shared Components JSON) -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim flex justify-between items-center px-margin-mobile py-stack-md transition-all duration-150">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-150 hover:bg-surface-container-high dark:hover:bg-surface-variant p-2 rounded-full">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-primary dark:text-primary-fixed">Library</h1>
+</div>
+<div class="flex items-center">
+<button class="active:scale-95 transition-transform duration-150 hover:bg-surface-container-high dark:hover:bg-surface-variant p-2 rounded-full">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed">search</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 min-h-screen max-w-screen-md mx-auto px-margin-mobile">
+<!-- Search Bar Section -->
+<div class="relative mb-stack-lg">
+<div class="flex items-center bg-surface-container-low rounded-xl border border-outline-variant px-4 py-3 shadow-sm focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-body-md text-on-surface placeholder:text-outline italic" placeholder="Search resources, prayers, books..." type="text"/>
+<button class="ml-2 p-1 hover:bg-surface-container-high rounded-full transition-colors text-primary">
+<span class="material-symbols-outlined">mic</span>
+</button>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 overflow-x-auto pb-4 custom-scrollbar mb-stack-lg">
+<button class="px-5 py-2 rounded-full border border-outline-variant font-label-md text-label-md bg-primary text-on-primary whitespace-nowrap active:scale-95 transition-all">All</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant whitespace-nowrap hover:bg-surface-container-high active:scale-95 transition-all">Bible</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant whitespace-nowrap hover:bg-surface-container-high active:scale-95 transition-all">Catechism</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant whitespace-nowrap hover:bg-surface-container-high active:scale-95 transition-all">Saints</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant whitespace-nowrap hover:bg-surface-container-high active:scale-95 transition-all">Theology</button>
+</div>
+<!-- Recent Resources Header -->
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="font-title-lg text-title-lg text-primary">Recent Resources</h2>
+<button class="text-primary font-label-md text-label-md hover:underline decoration-2 underline-offset-4">Clear all</button>
+</div>
+<!-- Resources List (High-End Card Layout) -->
+<div class="space-y-stack-md">
+<!-- Resource Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-4 border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow active:scale-[0.98] cursor-pointer">
+<div class="w-16 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A beautiful leather-bound Catholic Bible with gold-edged pages resting on a dark wood liturgical table. The lighting is warm and cinematic, suggesting a sacred study environment. Deep burgundy highlights reflect off the cover, maintaining a professional and contemplative Nigerian Catholic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIRfOqcUc7iUq71KkRl4dM0lGhNIHBrbNSoQX0ZebBGkVJ_GvYtUFey3BtKm5ax7ep6C5fqG9FwPr-MiPLo1Ie3uJmfiLmHXz3EZ9L-XNxNJ7JlEbDrCLB2pT06NNeHthvnytdTGESFJWtD9hUiuHl5jahzbz0XhsYVpy1c6Q0SM2g5PaDr4m1bsdGrx-OGpV-1dFNkZA7yGs9oof4TdjRhhgIZadjfGa--En3Ec4MFbtxJvBjyGgz"/>
+</div>
+<div class="flex flex-col justify-center">
+<h3 class="font-title-lg text-body-md font-semibold text-on-surface">Revised Standard Version Bible</h3>
+<p class="font-body-md text-sm text-on-surface-variant mt-1 line-clamp-2 italic">The Catholic Edition of the RSV, essential for daily meditation and study.</p>
+</div>
+</div>
+<!-- Resource Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-4 border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow active:scale-[0.98] cursor-pointer">
+<div class="w-16 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="The Catechism of the Catholic Church book with a white cover and gold papal crest illustration. It is positioned elegantly against a cream-colored background with soft shadows. The visual style is modern, high-quality, and dignified, capturing the essence of theological depth in a clear light-mode presentation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCspqMDtywWsovAklCnSkh8Uw9akgbC485v1dWWfUvHmB7wEuYhoI-3v5fAkdP9Yn2U4n-IAEn1KNi6Qv9HvKcoRC5hiWGD4xPMeD0bOyY5-JjW76HWMNhFGhBunKICExQQTT2AMpPkTCfuDjn0hYrrwL3oM2nqttueeR2JqddwqwL-25fGF6MSPVdxlZmkz7ftmGSi3Visq2yWOpYHfyDXzOLm9suFi5xoJT8-WTX1nymIADGK-aty"/>
+</div>
+<div class="flex flex-col justify-center">
+<h3 class="font-title-lg text-body-md font-semibold text-on-surface">Catechism of the Catholic Church</h3>
+<p class="font-body-md text-sm text-on-surface-variant mt-1 line-clamp-2 italic">Comprehensive guide to the fundamental beliefs of the Nigerian Catholic community.</p>
+</div>
+</div>
+<!-- Resource Item 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-4 border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow active:scale-[0.98] cursor-pointer">
+<div class="w-16 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="An ornate, glowing icon of Saint Cyprian of Carthage in a modern digital art style. The icon uses vibrant gold and deep burgundy colors, set against a minimalist and clean white gallery-style background. The lighting is soft and holy, emphasizing a contemplative and communal brand personality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALQTmIE55n3JED2V-y2AHbteh8Nk9FsmN1uuGGvrdh6S7E_zvqcYsARhP-NLNa2bZ1V0PswpBbt7vrcgPtcx-hL8Pie1Tvz6nG09Pvei60nlsTICPdew8SoijFM9KxlH07LKrlmd2ujlTsAmAsQF_IHPDPiTQkiqGCmIPAEdJxI4UpkgzU7b9HMZ2uZajm5ZXmNq_ftNfTjMnDuagmQzBECFIvLHQzbrwkhz2dv4ZR-McppZVgHOXZ"/>
+</div>
+<div class="flex flex-col justify-center">
+<h3 class="font-title-lg text-body-md font-semibold text-on-surface">Lives of the African Saints</h3>
+<p class="font-body-md text-sm text-on-surface-variant mt-1 line-clamp-2 italic">Biographies and prayers of holy men and women from our vibrant continent.</p>
+</div>
+</div>
+<!-- Resource Item 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-4 border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow active:scale-[0.98] cursor-pointer">
+<div class="w-16 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A modern liturgical calendar illustration featuring Nigerian cultural patterns blended with Catholic symbols. The art is clean, utilizing the sacred grace palette of warm gold and cream. The composition is asymmetrical and professional, reflecting a high-quality digital experience for spiritual growth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxcS6Qcv38k6b7EnCh-95XuGCPJDytZucoCco-RrDyvqIjirWQKV4vJdaqqld1-oO_ohP-fMQ8mkvkbVXO_2SYKgw-5j1nhW2zVhJ86b0i6A_5YdbKIbkZ3mhhg9TyOvwjUpEodfqbS6ygl7ck3TuUtdhlSuXxljNRUjAUO2ToqQFwU_NDMsyqI3jsdxL9bmtXfK2SEWt_sFJ9LduWO-qZ6EVBLWfo5ISAfMZwEkkNboEuMity8IKt"/>
+</div>
+<div class="flex flex-col justify-center">
+<h3 class="font-title-lg text-body-md font-semibold text-on-surface">Nigerian Liturgical Calendar 2024</h3>
+<p class="font-body-md text-sm text-on-surface-variant mt-1 line-clamp-2 italic">Follow the daily readings and feast days specific to the Nigerian Church.</p>
+</div>
+</div>
+</div>
+<!-- Featured Section (Bento Style) -->
+<div class="mt-stack-lg">
+<h2 class="font-title-lg text-title-lg text-primary mb-stack-md">Explore Categories</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-primary-container text-on-primary-container p-6 rounded-2xl flex flex-col justify-end aspect-square relative overflow-hidden active:scale-95 transition-transform">
+<span class="material-symbols-outlined absolute top-4 right-4 opacity-20 text-5xl">auto_stories</span>
+<span class="font-headline-lg-mobile text-lg font-semibold relative z-10">Daily<br/>Readings</span>
+</div>
+<div class="grid grid-rows-2 gap-4">
+<div class="bg-secondary-container text-on-secondary-container p-4 rounded-2xl flex items-center gap-3 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-md text-sm font-semibold">Devotionals</span>
+</div>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed p-4 rounded-2xl flex items-center gap-3 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-tertiary">church</span>
+<span class="font-label-md text-sm font-semibold">Parish Docs</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Source: Shared Components JSON) -->
+<!-- active: Library (index 1) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile py-2 bg-surface-container dark:bg-surface-container-low rounded-t-xl shadow-md">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 p-2 rounded-lg transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="today">today</span>
+<span class="font-label-md text-label-md mt-1">Today</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container/20 text-primary rounded-full px-5 py-1 transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="local_library">local_library</span>
+<span class="font-label-md text-label-md mt-1">Library</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 p-2 rounded-lg transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md mt-1">Community</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-secondary-container/10 p-2 rounded-lg transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="church">church</span>
+<span class="font-label-md text-label-md mt-1">Parishes</span>
+</button>
+</nav>
+<script>
+        // Simple micro-interaction for clear all
+        document.querySelector('button:contains("Clear all")')?.addEventListener('click', function() {
+            const list = document.querySelector('.space-y-stack-md');
+            list.style.opacity = '0';
+            setTimeout(() => {
+                list.innerHTML = '<div class="text-center py-10 text-on-surface-variant italic">No recent resources found.</div>';
+                list.style.opacity = '1';
+            }, 300);
+        });
+
+        // Add contain text helper for the selector above
+        window.addEventListener('load', () => {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                if(btn.innerText === "Clear all") {
+                    btn.addEventListener('click', () => {
+                        const items = document.querySelectorAll('.space-y-stack-md > div');
+                        items.forEach(item => item.classList.add('scale-95', 'opacity-0'));
+                        setTimeout(() => {
+                             document.querySelector('.space-y-stack-md').innerHTML = '<div class="text-center py-10 text-on-surface-variant italic font-body-md">Your history is clear. Start exploring!</div>';
+                        }, 300);
+                    });
+                }
+            });
+        });
+    </script>
+</body></html>

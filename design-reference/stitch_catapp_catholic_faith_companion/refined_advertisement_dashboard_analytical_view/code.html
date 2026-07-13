@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Advertisement Management - Sacred Grace Admin</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..700&amp;family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e7e2d9",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#33053b",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#dfd9d1",
+                    "on-surface": "#1d1b16",
+                    "on-background": "#1d1b16",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#ede7df",
+                    "primary-container": "#4a1731",
+                    "on-primary-fixed": "#380822",
+                    "background": "#fff9ef",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f9f3ea",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "secondary": "#7e4c83",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#c27c9a",
+                    "on-secondary-container": "#7b4980",
+                    "primary": "#30021c",
+                    "on-tertiary-container": "#b58a2c",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "error-container": "#ffdad6",
+                    "surface": "#fff9ef",
+                    "outline": "#837378",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f6f0e7",
+                    "tertiary-fixed": "#ffdea4",
+                    "surface-container-highest": "#e7e2d9",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#fdb0d0",
+                    "surface-bright": "#fff9ef",
+                    "surface-container": "#f3ede4",
+                    "outline-variant": "#d5c2c7",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "on-surface-variant": "#514348",
+                    "on-tertiary-fixed": "#261900",
+                    "inverse-surface": "#32302a",
+                    "primary-fixed": "#ffd8e6",
+                    "tertiary-container": "#382700",
+                    "surface-tint": "#884b67",
+                    "secondary-container": "#fec0ff",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "tertiary": "#1f1400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "margin-desktop": "32px",
+                    "margin-tablet": "24px",
+                    "margin-mobile": "16px",
+                    "unit": "4px",
+                    "gutter": "16px",
+                    "stack-md": "16px",
+                    "stack-lg": "24px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Work Sans"],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "body-md": ["Work Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-lg-mobile": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            font-family: 'Work Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .sacred-gradient {
+            background: linear-gradient(135deg, #4a1731 0%, #30021c 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(74, 23, 49, 0.1);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff9ef;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d5c2c7;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #837378;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-20 md:pb-0 md:pl-80">
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 bg-surface dark:bg-surface-dim docked full-width top-0 sticky z-30">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 text-primary hover:bg-surface-variant/50 transition-colors rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">Sacred Grace Admin</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden md:block font-label-md text-on-surface-variant">Welcome, Administrator</span>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary font-bold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a mature Nigerian male administrator with a kind expression, wearing a formal charcoal suit and a clean white shirt. The background is a soft-focus warm cream office setting, reflecting the Sacred Grace brand's contemplative and dignified aesthetic with high-quality, professional lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA79DXYaLnl0qPVvqJh_raBg17rVjnhMTGBDz3TxGidBvSpvhzrKPlT-3wIRssTz2k82qe01_YV3_3pV5qwLVx4clcKrXBGjyfM_7DZRDJAYGI-o7djyBeJz-jDdsuocReir2zsu5GH4etboXTn1D_Y9lfzO0bC-JEaMyv2q0L_wOihjetou2uSdGg4B_1r7y1r_YSxaf0OlW6YVWsfVFpQe4tGloKncoa0A0eYkaWenuVkolvcWMeV"/>
+</div>
+</div>
+</header>
+<!-- Navigation Drawer (Desktop) -->
+<aside class="fixed left-0 top-0 h-full z-40 hidden md:flex flex-col bg-surface dark:bg-surface-dim shadow-sm h-full w-80 rounded-r-xl py-6">
+<div class="px-6 mb-8">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">Portal Menu</span>
+</div>
+<nav class="flex-1 space-y-2 overflow-y-auto">
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 mx-2 scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md text-label-md">Content Manager</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Liturgical Calendar</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-6 pt-6 border-t border-outline-variant/30">
+<p class="text-xs text-on-surface-variant opacity-60">System Version 2.4.1</p>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+<!-- Summary Dashboard Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-stack-md mb-stack-lg">
+<div class="sacred-gradient p-stack-lg rounded-xl shadow-lg text-white relative overflow-hidden"><div class="relative z-10 flex flex-col h-full justify-between"><div class="flex justify-between items-start"><div><h2 class="font-title-lg text-title-lg opacity-80 mb-1">Active Campaigns</h2><p class="text-4xl font-bold">14 <span class="text-lg font-normal opacity-60">Live Today</span></p></div><div class="flex items-end gap-1 h-12"><div class="w-1 bg-white/20 h-4 rounded-full"></div><div class="w-1 bg-white/40 h-6 rounded-full"></div><div class="w-1 bg-white/60 h-8 rounded-full"></div><div class="w-1 bg-white h-10 rounded-full"></div><div class="w-1 bg-white/80 h-7 rounded-full"></div></div></div><div class="mt-4 flex items-center gap-2 text-sm bg-white/10 w-fit px-3 py-1 rounded-full"><span class="material-symbols-outlined text-green-400 text-sm">trending_up</span><span>+12% increase from last week</span></div></div><span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-10">campaign</span></div>
+<div class="bg-white border border-outline-variant p-stack-lg rounded-xl shadow-sm flex flex-col justify-between"><div><h2 class="font-title-lg text-title-lg text-on-surface-variant mb-1">Total Impressions</h2><p class="text-4xl font-bold text-primary">842.5K</p></div><div class="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-outline-variant/20"><div class="flex flex-col"><span class="text-[10px] uppercase font-semibold text-on-surface-variant">Total Clicks</span><span class="font-bold text-primary">40.6K</span></div><div class="flex flex-col"><span class="text-[10px] uppercase font-semibold text-on-surface-variant">Avg. CTR</span><span class="font-bold text-primary">4.82%</span></div></div><div class="mt-4 w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-tertiary-fixed-dim h-full w-3/4 rounded-full"></div></div><div class="flex justify-between mt-2 text-xs text-on-surface-variant font-medium"><span>Reach Goal: 1M</span><span>75% Complete</span></div></div>
+</section>
+<!-- Filters and Controls -->
+<div class="flex flex-col md:flex-row gap-4 mb-stack-lg items-center justify-between">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-full focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md" placeholder="Search advertisers or keywords..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+<button class="px-6 py-2 bg-primary text-on-primary rounded-full font-label-md whitespace-nowrap shadow-sm hover:opacity-90 transition-opacity">All Ads</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">Active</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">Scheduled</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">Completed</button>
+</div>
+</div>
+<!-- Ad Management Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
+<!-- Ad Card 1 -->
+<div class="bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden hover:shadow-md transition-shadow group">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-black/20 z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautiful, vibrant advertisement banner for a Catholic Bookshop featuring a curated collection of leather-bound liturgical books, rosaries, and candles on a warm oak wooden table. The lighting is soft and golden, creating a peaceful, spiritual atmosphere. The colors are rich burgundies, golds, and creams, consistent with the Sacred Grace design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAab-et3t59Bi0Vuz0mCb0pmZJ6dWl2ydjJKvZBHvWkb2uE6aeHOjhepEI6k-gxMMM3JRQZWrFYhoqiXJR_Ocq_8Ea7_pc1Oxxb9nY2jLzyB0qes9-gg74pZh55JR29YAOhOHRndJ8bj45SriMiObmEfPzOzzO93tYqyVc4kUEdKjqz4zAk-gUtaKXedW0cq-t3dIGag7fxHD0TWdVdXQr7d3rNXOB_vuE0RnwxmgpGOFdwGp8I_upS"/>
+<span class="absolute top-4 left-4 z-20 bg-green-100 text-green-800 text-[10px] uppercase font-bold px-3 py-1 rounded-full border border-green-200">Active</span>
+</div>
+<div class="p-stack-md"><div class="flex justify-between items-start mb-2"><div><div class="flex items-center gap-2 mb-1"><span class="bg-surface-container-high text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-medium">Home Banner</span><h3 class="font-title-lg text-lg text-primary truncate w-32">Catholic Bookshop</h3></div><p class="text-xs text-on-surface-variant">Lent Specials 2024</p></div><button class="p-2 bg-primary-container/10 text-primary hover:bg-primary-container/20 rounded-full transition-colors" title="Edit"><span class="material-symbols-outlined text-xl">edit</span></button></div><div class="grid grid-cols-3 gap-2 py-3 border-y border-outline-variant/30 mb-3"><div class="text-center"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">Impr.</p><p class="font-bold text-sm text-primary">124K</p></div><div class="text-center border-x border-outline-variant/20"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">Clicks</p><p class="font-bold text-sm text-primary">5.9K</p></div><div class="text-center"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">CTR</p><p class="font-bold text-sm text-primary">4.82%</p></div></div><div class="flex justify-between items-center mb-4"><div class="flex flex-col"><span class="text-[10px] text-on-surface-variant uppercase font-semibold">Budget Spent</span><span class="text-sm font-bold text-on-surface">$450.00 / $600</span></div><div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden"><div class="bg-primary h-full w-3/4"></div></div></div><div class="flex gap-2"><button class="flex-1 py-2 text-xs font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors border border-outline-variant/30">Pause</button><button class="p-2 text-error hover:bg-error/5 rounded-lg transition-colors" title="Delete"><span class="material-symbols-outlined text-lg">delete</span></button></div></div>
+</div>
+<!-- Ad Card 2 -->
+<div class="bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden hover:shadow-md transition-shadow group">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-black/20 z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A cinematic advertisement banner for Pilgrimage Tours showing a distant silhouette of a historic cathedral at sunset in Israel. The sky is a gradient of deep orange and purple. The foreground shows a group of diverse people walking together. High-quality travel photography with a contemplative, communal mood and warm color grading." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAaY9y5kQrQgEYN_hKs8TMhJ-RYsOtONzCLQ6an3iakg8eBlMQalPhtOmvUhwjIN7v0piTyZx3j6qVipzrummVmsMAhq3IUCt5zS4ynaJdD1gkYKYlhM47AXlXQ7d6E5XHKcIkBRzAKoLlxLDLx2Swswx0xnzWvN-OLM5N7ljVfn_JC3rY23XCFNnM-7vgosJn8ULN1KhH48oj9KD7YPM0rM7TEOHT3LUSi26hC6y87H9L3GeatZhN"/>
+<span class="absolute top-4 left-4 z-20 bg-blue-100 text-blue-800 text-[10px] uppercase font-bold px-3 py-1 rounded-full border border-blue-200">Scheduled</span>
+</div>
+<div class="p-stack-md"><div class="flex justify-between items-start mb-2"><div><div class="flex items-center gap-2 mb-1"><span class="bg-surface-container-high text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-medium">Sidebar</span><h3 class="font-title-lg text-lg text-primary truncate w-32">Pilgrimage Tours</h3></div><p class="text-xs text-on-surface-variant">Holy Land 2024</p></div><button class="p-2 bg-primary-container/10 text-primary hover:bg-primary-container/20 rounded-full transition-colors" title="Edit"><span class="material-symbols-outlined text-xl">edit</span></button></div><div class="grid grid-cols-3 gap-2 py-3 border-y border-outline-variant/30 mb-3"><div class="text-center"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">Impr.</p><p class="font-bold text-sm text-on-surface-variant">-</p></div><div class="text-center border-x border-outline-variant/20"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">Clicks</p><p class="font-bold text-sm text-on-surface-variant">-</p></div><div class="text-center"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">CTR</p><p class="font-bold text-sm text-on-surface-variant">N/A</p></div></div><div class="flex justify-between items-center mb-4"><div class="flex flex-col"><span class="text-[10px] text-on-surface-variant uppercase font-semibold">Budget</span><span class="text-sm font-bold text-on-surface">$1,200.00</span></div><span class="text-[10px] text-blue-800 font-bold uppercase">Starts May 01</span></div><div class="flex gap-2"><button class="flex-1 py-2 text-xs font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors border border-outline-variant/30">Resume</button><button class="p-2 text-error hover:bg-error/5 rounded-lg transition-colors" title="Delete"><span class="material-symbols-outlined text-lg">delete</span></button></div></div>
+</div>
+<!-- Ad Card 3 -->
+<div class="bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden hover:shadow-md transition-shadow group">
+<div class="h-48 relative overflow-hidden grayscale">
+<div class="absolute inset-0 bg-black/40 z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A promotional graphic for a Choir Festival with elegant typography and an illustration of a pipe organ in the background. The design is modern but respectful of tradition, using muted gold and cream colors. The image is presented with a grayscale filter to indicate a completed or inactive status." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr4ndZ0QeAc1ofD6yfuB8nfkZOiAgwcJMuPuDSCBFjorYMomSzlNJUImmsW6Q3yTFjLowX7hbCAT5oJfMu4J2dDCAtKUiV5f6wkLQRiKK1sANfenkDLora93is38NmoeCDYSi4318aGjgxjArWRGMhNiI0ZKh6SfAn1JlUkuGGWkG2C8sEwtGvD-G2kElttKuqnfDIm1qq2sqFZklnMBktflI25WEw5bmC66PqW8E0x922iSNvamQa"/>
+<span class="absolute top-4 left-4 z-20 bg-gray-100 text-gray-800 text-[10px] uppercase font-bold px-3 py-1 rounded-full border border-gray-200">Completed</span>
+</div>
+<div class="p-stack-md opacity-75"><div class="flex justify-between items-start mb-2"><div><div class="flex items-center gap-2 mb-1"><span class="bg-surface-container-high text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-medium">Footer</span><h3 class="font-title-lg text-lg text-primary truncate w-32">Sacred Music Fest</h3></div><p class="text-xs text-on-surface-variant">Advent Concert Series</p></div><button class="p-2 bg-primary-container/10 text-primary hover:bg-primary-container/20 rounded-full transition-colors" title="Edit"><span class="material-symbols-outlined text-xl">edit</span></button></div><div class="grid grid-cols-3 gap-2 py-3 border-y border-outline-variant/30 mb-3"><div class="text-center"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">Impr.</p><p class="font-bold text-sm text-primary">85K</p></div><div class="text-center border-x border-outline-variant/20"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">Clicks</p><p class="font-bold text-sm text-primary">5.2K</p></div><div class="text-center"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">CTR</p><p class="font-bold text-sm text-primary">6.15%</p></div></div><div class="flex justify-between items-center mb-4"><div class="flex flex-col"><span class="text-[10px] text-on-surface-variant uppercase font-semibold">Final Cost</span><span class="text-sm font-bold text-on-surface">$320.00</span></div><span class="text-[10px] text-on-surface-variant font-bold uppercase">Ended Dec 24</span></div><div class="flex gap-2"><button class="flex-1 py-2 text-xs font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors border border-outline-variant/30">Archive</button><button class="p-2 text-error hover:bg-error/5 rounded-lg transition-colors" title="Delete"><span class="material-symbols-outlined text-lg">delete</span></button></div></div>
+</div>
+<!-- Ad Card 4 (New) -->
+<div class="bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden hover:shadow-md transition-shadow group">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-black/20 z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An advertisement banner for a Catholic University featuring a diverse group of students studying in a modern, light-filled library with high windows. The aesthetic is clean, academic, and premium. The lighting is soft morning light, casting long shadows. Primary colors include navy blue and gold accents, designed to look professional and inspiring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTgjsQolZBnJ79-0cYdjQMphCpwnMJcC2M3ttvwOPhRkkYs4wKiYEUUjQQgTE66LaPjncA6ZEAcBW4IQ0Z2wE0YX7JXFWlHLO1LA2lznLITzXe81Nqd7_gtIpxYoP_nQpH-OLIjCMcsQhyPb8roR8rN_k68Gx1UHiBPBq9z0LXs6AVGZ3jSNi4Q1hdDd5LXWtWxT6ypQmz9FGRBzM62VYgFG0opeo829hu-4isgt1m5AWM7_oTlOaD"/>
+<span class="absolute top-4 left-4 z-20 bg-green-100 text-green-800 text-[10px] uppercase font-bold px-3 py-1 rounded-full border border-green-200">Active</span>
+</div>
+<div class="p-stack-md"><div class="flex justify-between items-start mb-2"><div><div class="flex items-center gap-2 mb-1"><span class="bg-surface-container-high text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-medium">Library Sidebar</span><h3 class="font-title-lg text-lg text-primary truncate w-32">St. Mary's Univ</h3></div><p class="text-xs text-on-surface-variant">Postgrad Enrollments</p></div><button class="p-2 bg-primary-container/10 text-primary hover:bg-primary-container/20 rounded-full transition-colors" title="Edit"><span class="material-symbols-outlined text-xl">edit</span></button></div><div class="grid grid-cols-3 gap-2 py-3 border-y border-outline-variant/30 mb-3"><div class="text-center"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">Impr.</p><p class="font-bold text-sm text-primary">210K</p></div><div class="text-center border-x border-outline-variant/20"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">Clicks</p><p class="font-bold text-sm text-primary">6.8K</p></div><div class="text-center"><p class="text-[10px] text-on-surface-variant uppercase font-semibold">CTR</p><p class="font-bold text-sm text-primary">3.24%</p></div></div><div class="flex justify-between items-center mb-4"><div class="flex flex-col"><span class="text-[10px] text-on-surface-variant uppercase font-semibold">Budget Spent</span><span class="text-sm font-bold text-on-surface">$890.00 / $1.5K</span></div><div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden"><div class="bg-primary h-full w-[59%]"></div></div></div><div class="flex gap-2"><button class="flex-1 py-2 text-xs font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors border border-outline-variant/30">Pause</button><button class="p-2 text-error hover:bg-error/5 rounded-lg transition-colors" title="Delete"><span class="material-symbols-outlined text-lg">delete</span></button></div></div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed right-6 bottom-24 md:bottom-10 z-50 sacred-gradient w-16 h-16 rounded-2xl shadow-xl flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-all group overflow-hidden">
+<span class="material-symbols-outlined text-3xl">add</span>
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+<!-- Bottom Navigation Bar (Mobile only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden bg-surface-container-low dark:bg-surface-container-lowest shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container/20 text-primary rounded-full px-6 py-1 scale-110 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-md text-label-md">Content</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-md text-label-md">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for active states
+        document.querySelectorAll('nav a, .md\\:flex a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // If it was a real app, we'd navigate. For now, just a visual pop.
+                this.classList.add('opacity-80');
+                setTimeout(() => this.classList.remove('opacity-80'), 150);
+            });
+        });
+
+        // Hover effect for the cards
+        document.querySelectorAll('.bg-white.rounded-xl').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.querySelector('img').style.transform = 'scale(1.05)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.querySelector('img').style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

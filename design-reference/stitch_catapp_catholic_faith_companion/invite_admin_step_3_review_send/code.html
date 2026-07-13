@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Invite Admin - Review | Diocese of Lagos</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#261900",
+                    "on-surface-variant": "#514348",
+                    "on-background": "#1d1b16",
+                    "inverse-primary": "#fdb0d0",
+                    "secondary-fixed": "#ffd6fd",
+                    "surface-container-low": "#f9f3ea",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e7e2d9",
+                    "inverse-surface": "#32302a",
+                    "tertiary-fixed": "#ffdea4",
+                    "outline-variant": "#d5c2c7",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "secondary": "#7e4c83",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#f6f0e7",
+                    "surface-bright": "#fff9ef",
+                    "surface-container-high": "#ede7df",
+                    "tertiary": "#1f1400",
+                    "on-secondary-fixed": "#33053b",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "on-secondary-container": "#7b4980",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "on-tertiary-container": "#b58a2c",
+                    "surface-tint": "#884b67",
+                    "surface": "#fff9ef",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "primary-container": "#4a1731",
+                    "on-primary-container": "#c27c9a",
+                    "tertiary-container": "#382700",
+                    "primary": "#30021c",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dfd9d1",
+                    "outline": "#837378",
+                    "on-primary-fixed": "#380822",
+                    "background": "#fff9ef",
+                    "on-surface": "#1d1b16",
+                    "surface-variant": "#e7e2d9",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#ffd8e6",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "surface-container": "#f3ede4",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#fec0ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "24px",
+                    "gutter": "16px",
+                    "unit": "4px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "32px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "margin-tablet": "24px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Work Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "label-md": ["Work Sans"],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "headline-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            background-color: #fff9ef; /* surface */
+        }
+        .bento-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        /* Custom Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #837378; /* outline */
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #30021c; /* primary */ }
+        input:checked + .slider:before { transform: translateX(20px); }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline fixed top-0 w-full z-50">
+<div class="flex items-center justify-between px-margin-mobile h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="A portrait of a dignified Nigerian Catholic priest in clerical attire, smiling warmly against a soft-focus background of a traditional church interior. The lighting is warm and golden, reflecting a contemplative and communal atmosphere. The image uses a premium, high-quality digital aesthetic with rich textures and deep burgundy tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcJfP9x8I-XiW9IDlw9_f_uQAbTDkVFJM6q3uAnTLnfLEH9T-RT3pFGRUO6fO-Zk-j8ghSsh3H1mRzEIyOrlyXDVuydkOY10Ic0KvAfRvtFgfdNF7O0LknXFdBb2RzWU63tGCe09Rkrfz56cLQqXHhklqK4AaKtyuQ9KPpc1wMSjOfTKbwYnDACI9KAWmiK1hBJieNxDH3BmJT711lVNPabmxfwEWIxWTd4M5aR1JSqBBeOtGiJufx"/>
+</div>
+<span class="font-title-lg text-title-lg font-bold text-primary dark:text-primary-fixed-dim">Diocese of Lagos</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-variant/50 transition-colors text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="pt-24 pb-32 px-margin-mobile max-w-4xl mx-auto min-h-screen">
+<!-- Stepper / Breadcrumb -->
+<nav class="mb-stack-lg flex items-center gap-2 text-on-surface-variant">
+<span class="font-label-md text-label-md">Add New Admin</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-label-md text-label-md text-primary font-bold">Step 3 of 3: Review</span>
+</nav>
+<!-- Header Section -->
+<section class="mb-stack-lg">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Review Invitation</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Please confirm the details before sending the invitation to the new administrator.</p>
+</section>
+<!-- Review Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- Profile Summary Card -->
+<div class="md:col-span-2 bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl bento-card flex items-center gap-stack-md">
+<div class="w-20 h-20 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[48px]">person</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Candidate Name</span>
+<h2 class="font-title-lg text-title-lg text-primary">Chidi Okafor</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">chidi.okafor@lagosdiocese.org</p>
+</div>
+</div>
+<!-- Role Card -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl bento-card">
+<div class="flex items-center gap-2 mb-2 text-secondary">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-md text-label-md uppercase font-bold">Assigned Role</span>
+</div>
+<div class="p-3 bg-secondary-container rounded-lg">
+<h3 class="font-title-lg text-title-lg text-on-secondary-container">Parish Coordinator</h3>
+<p class="font-label-md text-label-md text-on-secondary-container/80 mt-1">Full access to parish member lists, calendar events, and liturgical scheduling.</p>
+</div>
+</div>
+<!-- Parish Card -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl bento-card">
+<div class="flex items-center gap-2 mb-2 text-tertiary-container">
+<span class="material-symbols-outlined text-on-tertiary-container">church</span>
+<span class="font-label-md text-label-md uppercase font-bold text-on-tertiary-container">Assigned Parish</span>
+</div>
+<div class="p-3 bg-tertiary-fixed rounded-lg">
+<h3 class="font-title-lg text-title-lg text-on-tertiary-fixed">Holy Cross Cathedral</h3>
+<p class="font-label-md text-label-md text-on-tertiary-fixed-variant mt-1">Lagos Island Deanery</p>
+</div>
+</div>
+<!-- Settings Card -->
+<div class="md:col-span-2 bg-surface-container-high p-stack-md rounded-xl border border-outline-variant/30">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="font-title-lg text-title-lg text-primary leading-tight">Send Welcome Email immediately</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Includes login instructions and a temporary password.</p>
+</div>
+</div>
+<label class="switch">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="mt-stack-lg flex flex-col sm:flex-row items-center gap-stack-md">
+<button class="w-full sm:w-auto px-10 py-4 bg-primary text-on-primary font-title-lg rounded-full flex items-center justify-center gap-2 active:scale-95 transition-transform" id="sendBtn">
+<span>Send Invitation</span>
+<span class="material-symbols-outlined">send</span>
+</button>
+<button class="w-full sm:w-auto px-8 py-4 border border-primary text-primary font-title-lg rounded-full hover:bg-primary/5 transition-colors">
+                Back to Edit
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container dark:bg-surface-container-low shadow-[0_-1px_3px_0_rgba(0,0,0,0.05)] rounded-t-xl z-50">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface/5 p-2 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-5 py-1 transition-transform active:scale-95">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-md text-label-md">Content</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface/5 p-2 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Calendar</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-on-surface/5 p-2 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Stats</span>
+</div>
+</nav>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center px-gutter bg-on-background/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300" id="successModal">
+<div class="bg-surface p-stack-lg rounded-3xl max-w-md w-full shadow-2xl transform scale-95 transition-transform duration-300" id="modalContent">
+<div class="flex flex-col items-center text-center">
+<div class="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mb-stack-md">
+<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Invitation Sent!</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg">Chidi Okafor has been invited as a Parish Coordinator for Holy Cross Cathedral. They will receive an email shortly.</p>
+<div class="w-full space-y-3">
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-title-lg" onclick="closeModal()">Return to Dashboard</button>
+<button class="w-full py-4 text-primary font-title-lg" onclick="closeModal()">Invite Another Admin</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        const sendBtn = document.getElementById('sendBtn');
+        const successModal = document.getElementById('successModal');
+        const modalContent = document.getElementById('modalContent');
+
+        sendBtn.addEventListener('click', () => {
+            // Show Modal
+            successModal.classList.remove('hidden');
+            setTimeout(() => {
+                successModal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        });
+
+        function closeModal() {
+            successModal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                successModal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body></html>

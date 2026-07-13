@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Find a Parish - CatApp</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .map-gradient-overlay {
+            background: linear-gradient(to bottom, rgba(255,249,239,1) 0%, rgba(255,249,239,0) 15%, rgba(255,249,239,0) 70%, rgba(255,249,239,1) 100%);
+        }
+        .glass-search {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.85);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#837378",
+                        "on-tertiary-container": "#b58a2c",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface-variant": "#e7e2d9",
+                        "primary": "#30021c",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "surface-dim": "#dfd9d1",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "on-primary-container": "#c27c9a",
+                        "inverse-on-surface": "#f6f0e7",
+                        "tertiary": "#1f1400",
+                        "surface-container": "#f3ede4",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fff9ef",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "primary-container": "#4a1731",
+                        "tertiary-fixed": "#ffdea4",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-container-high": "#ede7df",
+                        "secondary": "#7e4c83",
+                        "on-secondary-fixed": "#33053b",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#d5c2c7",
+                        "tertiary-container": "#382700",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "on-surface-variant": "#514348",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1d1b16",
+                        "on-primary-fixed": "#380822",
+                        "inverse-surface": "#32302a",
+                        "on-background": "#1d1b16",
+                        "surface-tint": "#884b67",
+                        "secondary-container": "#fec0ff",
+                        "surface-container-low": "#f9f3ea",
+                        "primary-fixed": "#ffd8e6",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e7e2d9",
+                        "on-secondary-container": "#7b4980",
+                        "on-primary": "#ffffff",
+                        "surface": "#fff9ef",
+                        "surface-bright": "#fff9ef",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "inverse-primary": "#fdb0d0",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "24px",
+                        "margin-desktop": "32px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "margin-tablet": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "label-md": ["Work Sans"],
+                        "title-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "display-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background dark:bg-surface-dim flex justify-between items-center px-margin-mobile h-16 z-[60]">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-variant/10 transition-colors duration-200">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim">CatApp</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a friendly Nigerian man in his late 30s wearing a clean white shirt, with a soft-focus background of a peaceful study. The lighting is warm and natural, reflecting the dignified and communal brand identity of the CatApp platform. The overall aesthetic is clean, high-end, and corporate, maintaining the cream and burgundy color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx0jynR4BqunYs7Xzf9kYnDX84JdX5TJbFdKSYdd4LPM7rVNS_JAWBgUK43X533hxBNYVOprJaSIxmn7il5Ub60KZJe_T0svG8cW7H8w8YkxozkGccXnn7SKCP23gTVtnMrHnIhbctrKBKbFRYbp33lPyveI2FfDmrclPkRrUu4LBKJiJFhex4zeqGt_dTEOz-VrEooQmNxHLs7QIKKW0VUwfnvYHezfxHznhWqKCDG1_zGGoqyA2X"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col relative overflow-hidden">
+<!-- Search & Filters Container (Floating) -->
+<div class="absolute top-0 left-0 w-full z-50 px-margin-mobile pt-4 space-y-4">
+<!-- Search Bar -->
+<div class="glass-search rounded-xl shadow-sm border border-outline-variant flex items-center px-4 h-14">
+<span class="material-symbols-outlined text-on-surface-variant mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface w-full font-label-md text-label-md placeholder-on-surface-variant/60" placeholder="Search by parish name, city, or diocese" type="text"/>
+<span class="material-symbols-outlined text-on-surface-variant ml-2">tune</span>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-2">
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-on-primary whitespace-nowrap shadow-sm transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">near_me</span>
+<span class="font-label-md text-label-md">Nearby</span>
+</button>
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant whitespace-nowrap transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-label-md text-label-md">Mass Times</span>
+</button>
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant whitespace-nowrap transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="font-label-md text-label-md">Adoration</span>
+</button>
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant whitespace-nowrap transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[18px]">lock_open</span>
+<span class="font-label-md text-label-md">Confession</span>
+</button>
+</div>
+</div>
+<!-- Stylized Map Area -->
+<div class="flex-grow relative bg-surface-variant/20">
+<div class="absolute inset-0 z-10 pointer-events-none map-gradient-overlay"></div>
+<!-- Map Placeholder -->
+<div class="w-full h-full bg-cover bg-center" data-alt="A stylized, high-end digital map of the Lagos Island and Yaba districts in Nigeria, using a refined palette of warm creams, soft golds, and deep burgundy accents for markers. The map features minimalist street layouts with subtle 3D elevation for landmark buildings. Several church icons are placed artistically across the terrain, glowing softly with a burgundy aura. The mood is contemplative and modern." data-location="Lagos, Nigeria" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_6uKoxbCgjkKJapC2e8ZuLQ7QKSSimn87W4pVCN2Jq8b_wQeuc2hO4Y8rEf1mEwlcdh9x5eeEoC-ZwiTARl3WJ2Sbe5ovkIxXzBgrBzbe29VYIljcAhfgYsAOVxiWJvlOPik1UcT8GjUMxhMij36GotAwUXFXE8-5iyhipxyVzNA-sFCNTdUPlD5jS3C9MGuYPyzq9Q5qDceM_wpJl_bWxY7MgQg5GGNCQIyRhd3wM6x9Y0f8ch0h')"></div>
+<!-- Custom Church Markers (Absolute Positioned) -->
+<div class="absolute top-[45%] left-[55%] z-20 group cursor-pointer">
+<div class="bg-primary text-on-primary p-2 rounded-full shadow-lg border-2 border-white transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">church</span>
+</div>
+<div class="absolute top-full mt-1 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded shadow text-[10px] font-bold text-primary whitespace-nowrap">HOLY CROSS</div>
+</div>
+<div class="absolute top-[35%] left-[30%] z-20 group cursor-pointer">
+<div class="bg-secondary text-on-secondary p-2 rounded-full shadow-lg border-2 border-white transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">church</span>
+</div>
+<div class="absolute top-full mt-1 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded shadow text-[10px] font-bold text-secondary whitespace-nowrap">ST. DOMINIC'S</div>
+</div>
+</div>
+<!-- Parishes Near You Swipeable List -->
+<section class="absolute bottom-24 left-0 w-full z-40">
+<div class="px-margin-mobile mb-3 flex justify-between items-end">
+<h2 class="font-title-lg text-title-lg text-primary">Parishes Near You</h2>
+<button class="text-on-secondary-container font-label-md text-label-md underline">See all</button>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar px-margin-mobile snap-x snap-mandatory">
+<!-- Card 1: Holy Cross -->
+<div class="min-w-[85vw] md:min-w-[400px] bg-white rounded-2xl p-4 shadow-xl flex gap-4 snap-center border border-outline-variant/30">
+<div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A beautiful, detailed architectural photo of the Holy Cross Cathedral in Lagos, Nigeria. The image captures the majestic neo-gothic facade in the warm afternoon light, emphasizing the cream and white stone textures. The atmosphere is serene and sacred, perfectly aligned with the Catholic brand identity. High-quality photography with soft depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ0U6h_hJ8FSX2dUjyhF1qlHO6hh9xqcIu3JaJwC7BhTN07LXVu_XXZcjkJJSTciAXvDpDoa9X6Bk_JzOf3rp8IshsPbtVeaKYwo9bYQb7aOhXyF19d2T6G3AlrFtrfyFF-7BfZHtPQb00oUkMpryzjMFnrYqht5Cvyo4OpDgDKafzanoqytGT2XB6qL6aMprhzyou08bBbnYR6UhRpViYkdQid1z7TkPUp0-hB72cMGV7DgL7iVm_"/>
+</div>
+<div class="flex flex-col justify-between">
+<div>
+<h3 class="font-title-lg text-[18px] text-on-surface leading-tight mb-1">Holy Cross Cathedral</h3>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-label-md mb-2">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>1.2 km away • Lagos Island</span>
+</div>
+</div>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1.5 rounded-lg flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase tracking-wider">Next Mass</span>
+<span class="font-bold text-label-md">06:30 PM</span>
+</div>
+</div>
+</div>
+<!-- Card 2: St. Dominic's -->
+<div class="min-w-[85vw] md:min-w-[400px] bg-white rounded-2xl p-4 shadow-xl flex gap-4 snap-center border border-outline-variant/30">
+<div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A vibrant and communal photograph of St. Dominic's Catholic Church in Yaba, Lagos. The image shows the church exterior surrounded by lush greenery and a few parishioners in contemplative prayer. The lighting is golden and inviting, evoking a strong sense of community and sacred Nigerian tradition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwxwJaPDJJ6AF26FxQxPEGxZSH9xL3YTtXSLthJ-NwQfHNqapME-plZi5rJJeo5koAvnTHnYLuGhF7FaEMeZ0jobQ4aNAWjYgsC-3UHbpllue0POWV-fN_aVsiF-VybXl0I1nRpeFRb9YxgWZ-sx9yZW2MU_-zZZwKdUIm_ygvCLpVJYf6i6ijGHEJW0Q2VTMw-tHGsPaVAXW2w9uLWqjjHKn9XKHg8jyO0cwQVZWkBGk4nWhaUG4e"/>
+</div>
+<div class="flex flex-col justify-between">
+<div>
+<h3 class="font-title-lg text-[18px] text-on-surface leading-tight mb-1">St. Dominic's Parish</h3>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-label-md mb-2">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>3.8 km away • Yaba</span>
+</div>
+</div>
+<div class="bg-surface-container-high text-on-surface-variant px-3 py-1.5 rounded-lg flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase tracking-wider">Next Mass</span>
+<span class="font-bold text-label-md">07:00 PM</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface-container-low dark:bg-surface-container-lowest flex justify-around items-center h-20 px-2 pb-safe">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-on-surface/5 dark:hover:bg-on-surface-variant/10 active:scale-95 transition-all">
+<span class="material-symbols-outlined mb-1">calendar_today</span>
+<span class="font-label-md text-label-md">Today</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-on-surface/5 dark:hover:bg-on-surface-variant/10 active:scale-95 transition-all">
+<span class="material-symbols-outlined mb-1">book_2</span>
+<span class="font-label-md text-label-md">Library</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-on-surface/5 dark:hover:bg-on-surface-variant/10 active:scale-95 transition-all">
+<span class="material-symbols-outlined mb-1">group</span>
+<span class="font-label-md text-label-md">Community</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-5 py-1 active:scale-95 transition-all">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 hover:bg-on-surface/5 dark:hover:bg-on-surface-variant/10 active:scale-95 transition-all">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple Micro-interaction for filter chips
+        const filterChips = document.querySelectorAll('button[class*="rounded-full"]');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                // Reset others (very basic logic for demo)
+                filterChips.forEach(c => {
+                    if (c !== chip && c.classList.contains('bg-primary')) {
+                        c.classList.remove('bg-primary', 'text-on-primary');
+                        c.classList.add('bg-surface-container-highest', 'text-on-surface-variant', 'border', 'border-outline-variant');
+                        const icon = c.querySelector('.material-symbols-outlined');
+                        if (icon) icon.style.fontVariationSettings = "'FILL' 0";
+                    }
+                });
+                
+                // Toggle active state
+                if (!chip.classList.contains('bg-primary')) {
+                    chip.classList.add('bg-primary', 'text-on-primary');
+                    chip.classList.remove('bg-surface-container-highest', 'text-on-surface-variant', 'border', 'border-outline-variant');
+                    const icon = chip.querySelector('.material-symbols-outlined');
+                    if (icon) icon.style.fontVariationSettings = "'FILL' 1";
+                }
+            });
+        });
+    </script>
+</body></html>

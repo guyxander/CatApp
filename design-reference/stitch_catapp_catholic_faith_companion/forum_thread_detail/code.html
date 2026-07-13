@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Community | Healing for Sister Maria</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-error": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "inverse-surface": "#32302a",
+                "surface-container-high": "#ede7df",
+                "secondary-fixed-dim": "#efb2f1",
+                "error": "#ba1a1a",
+                "surface-container-low": "#f9f3ea",
+                "secondary": "#7e4c83",
+                "on-secondary-fixed": "#33053b",
+                "on-primary-container": "#c27c9a",
+                "error-container": "#ffdad6",
+                "on-secondary-fixed-variant": "#64346a",
+                "on-primary-fixed": "#380822",
+                "surface-container": "#f3ede4",
+                "surface-container-lowest": "#ffffff",
+                "surface": "#fff9ef",
+                "on-tertiary-fixed-variant": "#5d4200",
+                "surface-container-highest": "#e7e2d9",
+                "on-tertiary-container": "#b58a2c",
+                "tertiary-fixed-dim": "#f0bf5c",
+                "primary-fixed": "#ffd8e6",
+                "tertiary-container": "#382700",
+                "on-primary": "#ffffff",
+                "secondary-container": "#fec0ff",
+                "on-secondary-container": "#7b4980",
+                "inverse-on-surface": "#f6f0e7",
+                "surface-tint": "#884b67",
+                "tertiary": "#1f1400",
+                "surface-dim": "#dfd9d1",
+                "on-error-container": "#93000a",
+                "on-tertiary-fixed": "#261900",
+                "primary-container": "#4a1731",
+                "secondary-fixed": "#ffd6fd",
+                "on-primary-fixed-variant": "#6d344f",
+                "outline-variant": "#d5c2c7",
+                "on-surface": "#1d1b16",
+                "surface-variant": "#e7e2d9",
+                "outline": "#837378",
+                "primary": "#30021c",
+                "on-surface-variant": "#514348",
+                "surface-bright": "#fff9ef",
+                "background": "#fff9ef",
+                "on-secondary": "#ffffff",
+                "on-background": "#1d1b16",
+                "inverse-primary": "#fdb0d0",
+                "tertiary-fixed": "#ffdea4",
+                "primary-fixed-dim": "#fdb0d0"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "stack-sm": "8px",
+                "margin-tablet": "24px",
+                "gutter": "16px",
+                "stack-md": "16px",
+                "stack-lg": "24px",
+                "unit": "4px",
+                "margin-mobile": "16px",
+                "margin-desktop": "32px"
+            },
+            "fontFamily": {
+                "label-md": ["Work Sans"],
+                "headline-lg-mobile": ["\"Source Serif 4\""],
+                "title-lg": ["Work Sans"],
+                "display-lg": ["\"Source Serif 4\""],
+                "headline-lg": ["\"Source Serif 4\""],
+                "body-md": ["Work Sans"],
+                "body-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fff9ef; /* background from config */
+            color: #1d1b16; /* on-background */
+            -webkit-font-smoothing: antialiased;
+        }
+        .sacred-shadow {
+            box-shadow: 0 4px 20px -4px rgba(48, 2, 28, 0.05);
+        }
+        .comment-thread::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #d5c2c7; /* outline-variant */
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopAppBar from JSON Logic -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex items-center justify-between px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Community</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-primary">search</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A serene close-up portrait of a Nigerian woman in her late 30s, wearing a modest head wrap, looking calmly into the distance. The lighting is warm and golden, reflecting a contemplative and spiritual mood. The style is professional digital photography with a soft focus background in warm cream and deep burgundy tones consistent with the sacred grace aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbUmogtbXqVdNfy0nQaDeGTGWlwgaRlbQPITFZHBhfi8BkvpvNlIDkxi2QtSxRptvwugOJzh7rT46PyJtgXN3jA4_pZR9SMG11V10VnIPp0Pd-aCA6bvqYASzF3jiL7s8zVpaYfW55DZ-6x9b_n4C3wPyTRWZQUQ7prdVV3q1EES0HJRQKJnJDKP10RBoC3cxD5RI2A4nwzf7YT2o2VfdQtV86AyZB3KyBECQHywfqpgG8uxwvX5zT"/>
+</div>
+</div>
+</header>
+<main class="mt-16 pb-32 flex-1 max-w-3xl mx-auto w-full px-margin-mobile">
+<!-- Original Post Section -->
+<article class="pt-stack-lg animate-in fade-in duration-700">
+<div class="flex items-center gap-stack-md mb-stack-md">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a kind elderly Nigerian priest with a gentle smile, wearing a traditional clerical collar. The background is a soft, blurred church interior with warm wood and cream marble. The image has a dignified, sacred quality with soft, natural lighting coming from a high window, emphasizing a peaceful and communal atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoYaItxw8rgT4udBYiWiWE2eGeNThsAxRZQ4Mxh25t_H-a6EOGPWfZPcf_Y_YXmNiZ4ycxVvnweSuApt67Whw1AwvgLwuWvmJxW9ogO7hqomM6eWWlkiwNJhlgO2Ja_sob_4yYoHtMBzMzkVwOLbYsEGRn4_nlRynGWl9vHab8CjO3t3pdCYDEywd9Sjcug--4kKbIMIt3PNU7nTQ42i7_Jj9cdNLMasRc1BWP05WJ7LgD3votiWvG"/>
+</div>
+<div>
+<h2 class="font-title-lg text-title-lg text-primary leading-tight">Father Jude Okafor</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">2 hours ago • St. Anthony's Parish</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-stack-md sacred-shadow border border-surface-container">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-stack-sm">Healing for Sister Maria</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg leading-relaxed">
+                    Dear Brothers and Sisters, let us unite our hearts in prayer for Sister Maria, who has served our community with tireless devotion for forty years. She is currently facing a serious health challenge. May the Divine Physician touch her with His healing grace and restore her strength.
+                </p>
+<div class="relative w-full aspect-video rounded-lg overflow-hidden mb-stack-md group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A high-quality, atmospheric photograph of a single lit beeswax candle in a dark, quiet prayer room. The warm orange flame casts a soft, flickering glow on a textured stone wall behind it. The composition is minimalist and contemplative, focusing on the light in the darkness, symbolizing hope and prayer. The aesthetic is modern yet deeply traditional, fitting the sacred grace theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxV05duZ4FYEJoZUy-yNh_9hcoMgZYbFXIM68oK2kwF-GV4rxBM4ELgocvf1mTR9naRvI1jdw7u3iUSKCnPftrkl9Z5rwTk_5ctroebPTOezpQzob2bl3aY88kXxkmz2oyWDmlg6EhIfTOxQxlPbPWmQS074OSyPLs6zhIxKrtAW7b9sye6BXabIcCo6XPT9a3vrldueGQvaE1pizHMzl6q_ZUpjSsUtpLAu-fHJDnwJtNL5zMDCge"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-stack-md">
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-md text-label-md">124 Prayers</span>
+</button>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-label-md text-label-md">18 Replies</span>
+</button>
+</div>
+<button class="text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Replies Section -->
+<section class="mt-stack-lg">
+<div class="flex items-center gap-2 mb-stack-md">
+<span class="w-1 h-6 bg-secondary rounded-full"></span>
+<h4 class="font-title-lg text-title-lg text-on-surface">Supportive Replies</h4>
+</div>
+<div class="relative space-y-gutter comment-thread ml-2">
+<!-- Reply 1 -->
+<div class="relative pl-8 animate-in slide-in-from-left duration-500">
+<div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-white z-10 border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A warm, smiling middle-aged Nigerian woman wearing a vibrant but modest patterned dress. She has a look of deep empathy and kindness. The portrait is set against a soft-focus background of a sunlit garden, conveying a sense of community support and maternal care. The lighting is high-key and bright, maintaining the modern corporate yet sacred aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbBFylqJjB3MG3P0VUja8zkcpoV0Aqbf8TWIuiXqD2Gsl7cPZzem2H7gzpqmhKfYhcxK_5nTnqLrHsjRcDwS5HIS-N1tObSxeHbyx5P6ROfia_ZPp535lef7FUajL6P4W0ucyVPiHpG3e9lloiPKd-LMhU4LI371SHINsaKmVUnMyuoqrD4qGrmhMV9re_SdUs1bnSv7SSXqFfPBZkk2uzvFwErRtFtN7wj9QUtPKh9VQTg4ewTBpx"/>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-lg text-[16px] text-primary">Mrs. Ngozi Eke</span>
+<span class="font-label-md text-label-md text-on-surface-variant">45m ago</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                            Amen. Sister Maria taught all my children in Sunday School. We are praying a family Rosary for her intention tonight. Stay strong, Sister.
+                        </p>
+<div class="mt-2 flex items-center gap-3">
+<button class="text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="text-[12px] font-medium">12</span>
+</button>
+<button class="text-on-surface-variant text-[12px] font-medium hover:underline">Reply</button>
+</div>
+</div>
+</div>
+<!-- Reply 2 -->
+<div class="relative pl-8 animate-in slide-in-from-left duration-700">
+<div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-white z-10 border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A young Nigerian man in his early 20s with a clean-cut appearance, wearing a simple white polo shirt. He has an expression of sincere devotion. The setting is a minimalist modern office with large windows showing soft daylight. The image evokes a sense of youthful faith and digital community connection, styled with a high-end, clean aesthetic and warm tonal layers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3Z_iIFTXBu5lyZ09429Fx2z2mcOjcTp8kYoyP2vK8KDbDIX2TEfV6NLXcMGgp_YTIhMaJr65kK0mll2twANcO5wXJkrNJh9Dm3RRFju2ZWNZuT3Ko0xdtio1ROtm0PYp0mEgY6_MUZYwWryPXiAkr33gQXNMed1VAWFMaUkIM-MTo3ckkqqFQ4h-VPgrC7eP29x8e9ohN8Ewj_SY9V0myC2d5VIsdtvsHRfp7Yy1d6b_GaGSM1x-z"/>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-lg text-[16px] text-primary">Chidi Benson</span>
+<span class="font-label-md text-label-md text-on-surface-variant">1h ago</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                            Joining in prayer from Lagos. Sister Maria is a pillar of our faith. May God's healing light surround her.
+                        </p>
+<div class="mt-2 flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-secondary flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="text-[12px] font-medium">8</span>
+</button>
+<button class="text-on-surface-variant text-[12px] font-medium hover:underline">Reply</button>
+</div>
+</div>
+</div>
+<!-- Reply 3 (Community Group) -->
+<div class="relative pl-8 animate-in slide-in-from-left duration-1000">
+<div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center z-10 border border-outline-variant">
+<span class="material-symbols-outlined text-on-secondary-container">groups</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-lg text-[16px] text-primary">St. Jude Prayer Circle</span>
+<span class="font-label-md text-label-md text-on-surface-variant">2h ago</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed italic">
+                            "The prayer of faith will save the sick, and the Lord will raise them up." — James 5:15. Our entire group is offering our weekly Novena for Sister Maria.
+                        </p>
+<div class="mt-2 flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-secondary flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="text-[12px] font-medium">24</span>
+</button>
+<button class="text-on-surface-variant text-[12px] font-medium hover:underline">Reply</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar: Offer a Prayer -->
+<div class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest border-t border-outline-variant p-4 md:px-0">
+<div class="max-w-3xl mx-auto flex items-end gap-3">
+<div class="flex-1 bg-surface-container rounded-2xl p-3 flex items-center gap-3 border border-outline-variant/50 focus-within:border-secondary transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">favorite</span>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-on-surface-variant font-body-md resize-none py-1" placeholder="Offer a Prayer..." rows="1"></textarea>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<!-- Safe Area for Mobile Bottom Nav -->
+<div class="h-4"></div>
+</div>
+<!-- Background Decoration -->
+<div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary-fixed/20 blur-[100px] rounded-full"></div>
+<div class="absolute -bottom-24 -left-24 w-96 h-96 bg-tertiary-fixed/20 blur-[100px] rounded-full"></div>
+</div>
+<script>
+        // Simple Interaction Script
+        const textarea = document.querySelector('textarea');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+            if (this.scrollHeight > 120) {
+                this.style.overflowY = 'scroll';
+                this.style.height = '120px';
+            } else {
+                this.style.overflowY = 'hidden';
+            }
+        });
+
+        // Prayer like toggle effect
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText.includes('favorite')) {
+                btn.addEventListener('click', function() {
+                    const icon = this.querySelector('.material-symbols-outlined');
+                    const isFilled = icon.style.fontVariationSettings.includes("'FILL' 1");
+                    
+                    if (isFilled) {
+                        icon.style.fontVariationSettings = "'FILL' 0";
+                        this.classList.replace('text-secondary', 'text-on-surface-variant');
+                    } else {
+                        icon.style.fontVariationSettings = "'FILL' 1";
+                        this.classList.replace('text-on-surface-variant', 'text-secondary');
+                        
+                        // Heart particle effect
+                        createHeartParticle(this);
+                    }
+                });
+            }
+        });
+
+        function createHeartParticle(btn) {
+            const heart = document.createElement('span');
+            heart.innerText = 'favorite';
+            heart.className = 'material-symbols-outlined absolute text-secondary pointer-events-none opacity-0';
+            heart.style.fontVariationSettings = "'FILL' 1";
+            heart.style.fontSize = '24px';
+            btn.appendChild(heart);
+            
+            const animation = heart.animate([
+                { transform: 'translate(0, 0) scale(0.5)', opacity: 0 },
+                { transform: 'translate(0, -40px) scale(1.2)', opacity: 1, offset: 0.3 },
+                { transform: 'translate(0, -80px) scale(0.8)', opacity: 0 }
+            ], {
+                duration: 1000,
+                easing: 'ease-out'
+            });
+
+            animation.onfinish = () => heart.remove();
+        }
+    </script>
+</body></html>

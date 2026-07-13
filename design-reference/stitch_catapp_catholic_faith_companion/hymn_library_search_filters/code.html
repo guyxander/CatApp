@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sacred Grace - Hymn Search</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e7e2d9",
+                        "on-secondary-container": "#7b4980",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1d1b16",
+                        "surface-tint": "#884b67",
+                        "secondary-container": "#fec0ff",
+                        "surface-container-low": "#f9f3ea",
+                        "primary-fixed": "#ffd8e6",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#fdb0d0",
+                        "error": "#ba1a1a",
+                        "surface": "#fff9ef",
+                        "surface-bright": "#fff9ef",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "outline-variant": "#d5c2c7",
+                        "on-secondary-fixed": "#33053b",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1d1b16",
+                        "on-primary-fixed": "#380822",
+                        "inverse-surface": "#32302a",
+                        "tertiary-container": "#382700",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "on-surface-variant": "#514348",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#f3ede4",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fff9ef",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "inverse-on-surface": "#f6f0e7",
+                        "tertiary": "#1f1400",
+                        "secondary": "#7e4c83",
+                        "primary-container": "#4a1731",
+                        "tertiary-fixed": "#ffdea4",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-container-high": "#ede7df",
+                        "on-tertiary-container": "#b58a2c",
+                        "outline": "#837378",
+                        "surface-dim": "#dfd9d1",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "on-primary-container": "#c27c9a",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface-variant": "#e7e2d9",
+                        "primary": "#30021c",
+                        "primary-fixed-dim": "#fdb0d0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "margin-tablet": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "label-md": ["Work Sans"],
+                        "title-lg": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5c2c7;
+            border-radius: 10px;
+        }
+        .focus-ring:focus-within {
+            border-color: #30021c;
+            box-shadow: 0 0 0 2px rgba(48, 2, 28, 0.1);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-margin-mobile h-16 bg-surface dark:bg-surface-dim">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors p-2 rounded-full active:opacity-80 transition-opacity">
+            menu
+        </button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim">
+            Sacred Grace
+        </h1>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors p-2 rounded-full active:opacity-80 transition-opacity">
+            search
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 px-margin-mobile max-w-[720px] mx-auto min-h-screen">
+<!-- Search Header Section -->
+<section class="mt-4 mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-6">Find a Hymn</h2>
+<!-- Search Bar -->
+<div class="relative group focus-ring rounded-xl bg-white border border-outline-variant flex items-center px-4 h-14 shadow-sm transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-body-md placeholder:text-outline italic" placeholder="Search by name, number, or lyrics..." type="text"/>
+<button class="material-symbols-outlined text-outline-variant hover:text-primary transition-colors">mic</button>
+</div>
+<!-- Filter Chips -->
+<div class="flex overflow-x-auto gap-3 py-4 no-scrollbar custom-scrollbar mt-2">
+<button class="flex-none px-4 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-md active:scale-95 transition-transform">
+                    All
+                </button>
+<button class="flex-none px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors active:scale-95">
+                    By Number
+                </button>
+<button class="flex-none px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors active:scale-95">
+                    By Title
+                </button>
+<button class="flex-none px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors active:scale-95">
+                    By Author
+                </button>
+<button class="flex-none px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors active:scale-95">
+                    By Season
+                </button>
+</div>
+</section>
+<!-- Search Results / Recent Searches -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-title-lg text-title-lg text-primary">Recent Searches</h3>
+<button class="text-label-md font-label-md text-secondary hover:underline">Clear all</button>
+</div>
+<div class="space-y-stack-md">
+<!-- Result Item 1 -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-outline-variant transition-all flex items-center group cursor-pointer active:scale-[0.98]">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-lg mr-4">
+                        241
+                    </div>
+<div class="flex-1">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold leading-tight">Great is Thy Faithfulness</h4>
+<p class="text-label-md font-label-md text-on-surface-variant mt-1">Thomas O. Chisholm • Morning Hymn</p>
+</div>
+<button class="material-symbols-outlined text-primary hover:bg-secondary-container rounded-full p-2 transition-colors">
+                        play_circle
+                    </button>
+</div>
+<!-- Result Item 2 -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-outline-variant transition-all flex items-center group cursor-pointer active:scale-[0.98]">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-lg mr-4">
+                        082
+                    </div>
+<div class="flex-1">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold leading-tight">As the Deer Panteth</h4>
+<p class="text-label-md font-label-md text-on-surface-variant mt-1">Martin Nystrom • Psalm 42</p>
+</div>
+<button class="material-symbols-outlined text-primary hover:bg-secondary-container rounded-full p-2 transition-colors">
+                        play_circle
+                    </button>
+</div>
+<!-- Result Item 3 -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-outline-variant transition-all flex items-center group cursor-pointer active:scale-[0.98]">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-lg mr-4">
+                        115
+                    </div>
+<div class="flex-1">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold leading-tight">O Sacrament Most Holy</h4>
+<p class="text-label-md font-label-md text-on-surface-variant mt-1">Traditional • Eucharistic Adoration</p>
+</div>
+<button class="material-symbols-outlined text-primary hover:bg-secondary-container rounded-full p-2 transition-colors">
+                        play_circle
+                    </button>
+</div>
+<!-- Result Item 4 (Asymmetric Card Style) -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-outline-variant transition-all flex items-center group cursor-pointer active:scale-[0.98]">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-lg mr-4">
+                        003
+                    </div>
+<div class="flex-1">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold leading-tight">Holy Holy Holy</h4>
+<p class="text-label-md font-label-md text-on-surface-variant mt-1">Reginald Heber • Trinity Sunday</p>
+</div>
+<button class="material-symbols-outlined text-primary hover:bg-secondary-container rounded-full p-2 transition-colors">
+                        play_circle
+                    </button>
+</div>
+</div>
+<!-- Featured Seasonal Section (Bento style hint) -->
+<div class="mt-10 grid grid-cols-2 gap-4">
+<div class="col-span-2 relative overflow-hidden h-32 rounded-xl bg-primary-container p-4 flex flex-col justify-end group cursor-pointer">
+<div class="absolute inset-0 opacity-20 pointer-events-none" data-alt="A detailed digital artistic background featuring subtle liturgical patterns and cross motifs in gold and deep burgundy, rendered in a high-quality light-mode aesthetic that feels premium and contemplative. The lighting is soft and ambient, creating a sacred atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDJZjyUsRkE3V83LcZ6RWgWxnXy1Gj67UTmoHpYqpnOQVBYAQ3OE-vRhJ3jZAn_80twZfB-z0XwP9NhRjiukkvYshBfNJGBLsNpKdSjMsQuRacm3cCo2cLAkCoL_GwcLhmyxmAe8Ausmd0k-umbmlOjJkG5IEo-q2jZovDXr5ON7zpjqmGLKioO1aQW9zrWEKfSgORH9xG98pPfSG6OSImzFlfJuL8H5ImHso7AgK1chnyeRtV60VJn')"></div>
+<p class="text-on-primary-container font-label-md text-label-md uppercase tracking-widest relative z-10">Current Season</p>
+<h3 class="text-white font-headline-lg-mobile text-headline-lg-mobile relative z-10">Lent Hymns</h3>
+<span class="material-symbols-outlined absolute right-4 bottom-4 text-white opacity-50 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+<div class="bg-surface-container-high p-4 rounded-xl flex flex-col justify-between h-32 cursor-pointer hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-primary">auto_stories</span>
+<p class="font-title-lg text-primary leading-tight">Catholic Hymnbook</p>
+</div>
+<div class="bg-surface-container-high p-4 rounded-xl flex flex-col justify-between h-32 cursor-pointer hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-primary">queue_music</span>
+<p class="font-title-lg text-primary leading-tight">My Favorites</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container-low dark:bg-surface-container-lowest rounded-t-xl shadow-sm">
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-95 transition-transform duration-200 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+<span class="font-label-md text-label-md">Hymns</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors active:scale-95 duration-200 cursor-pointer">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md">Seasons</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors active:scale-95 duration-200 cursor-pointer">
+<span class="material-symbols-outlined">library_music</span>
+<span class="font-label-md text-label-md">Library</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors active:scale-95 duration-200 cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</div>
+</nav>
+<script>
+        // Micro-interactions for chips
+        document.querySelectorAll('button.rounded-full').forEach(chip => {
+            chip.addEventListener('click', function() {
+                if (!this.classList.contains('bg-primary')) {
+                    // Reset others
+                    document.querySelectorAll('button.rounded-full').forEach(c => {
+                        c.classList.remove('bg-primary', 'text-on-primary', 'shadow-md');
+                        c.classList.add('border', 'border-outline-variant', 'text-on-surface-variant');
+                    });
+                    // Set active
+                    this.classList.remove('border', 'border-outline-variant', 'text-on-surface-variant');
+                    this.classList.add('bg-primary', 'text-on-primary', 'shadow-md');
+                }
+            });
+        });
+
+        // Search bar interaction
+        const searchInput = document.querySelector('input');
+        const searchBar = searchInput.parentElement;
+        
+        searchInput.addEventListener('focus', () => {
+            searchBar.classList.add('border-primary');
+        });
+        
+        searchInput.addEventListener('blur', () => {
+            searchBar.classList.remove('border-primary');
+        });
+    </script>
+</body></html>

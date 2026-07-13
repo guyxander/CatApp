@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Community Updates - Catholic Fellowship</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#380822",
+                    "primary-container": "#4a1731",
+                    "background": "#fff9ef",
+                    "tertiary-container": "#382700",
+                    "surface-container": "#f3ede4",
+                    "on-surface-variant": "#514348",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#32302a",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface-dim": "#dfd9d1",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "secondary": "#7e4c83",
+                    "surface-tint": "#884b67",
+                    "on-tertiary-fixed": "#261900",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "tertiary": "#1f1400",
+                    "surface-container-high": "#ede7df",
+                    "on-surface": "#1d1b16",
+                    "inverse-on-surface": "#f6f0e7",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#d5c2c7",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fec0ff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#c27c9a",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "surface-container-low": "#f9f3ea",
+                    "outline": "#837378",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#33053b",
+                    "surface-bright": "#fff9ef",
+                    "primary-fixed": "#ffd8e6",
+                    "primary": "#30021c",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#fdb0d0",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "surface-variant": "#e7e2d9",
+                    "surface-container-highest": "#e7e2d9",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-tertiary-container": "#b58a2c",
+                    "on-background": "#1d1b16",
+                    "surface": "#fff9ef",
+                    "on-secondary-container": "#7b4980",
+                    "tertiary-fixed": "#ffdea4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "24px",
+                    "margin-desktop": "32px",
+                    "unit": "4px",
+                    "stack-md": "16px",
+                    "margin-tablet": "24px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px",
+                    "stack-sm": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Work Sans"],
+                    "label-md": ["Work Sans"],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "title-lg": ["Work Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff9ef; /* Warm Cream Level 0 */
+        }
+        .unread-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #30021c; /* Deep Burgundy */
+        }
+        .glass-header {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 249, 239, 0.9);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Top Navigation Shell (Contextual Back/Action) -->
+<header class="sticky top-0 z-50 glass-header border-b border-outline-variant/30 px-margin-mobile md:px-margin-desktop py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button aria-label="Go back" class="hover:opacity-80 transition-opacity active:scale-95 flex items-center justify-center p-2 rounded-full hover:bg-surface-variant/20">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">Community Updates</h1>
+</div>
+<button aria-label="Mark all as read" class="flex items-center gap-2 hover:opacity-80 transition-opacity active:scale-95 px-4 py-2 rounded-full hover:bg-primary/5">
+<span class="material-symbols-outlined text-primary" data-icon="checklist">checklist</span>
+<span class="hidden md:inline font-label-md text-primary uppercase tracking-wider">Mark all as read</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="max-w-[720px] mx-auto px-margin-mobile md:px-margin-tablet py-stack-lg min-h-screen pb-24">
+<!-- Section: Today -->
+<section class="mb-stack-lg">
+<h2 class="font-title-lg text-on-surface-variant mb-stack-md px-2">Today</h2>
+<div class="space-y-stack-sm">
+<!-- Unread Notification: Said Amen -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm flex gap-4 transition-all hover:bg-surface-container-low active:scale-[0.99] cursor-pointer border-l-4 border-primary">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A portrait of a serene Nigerian woman in her 30s wearing a subtle purple headscarf, captured in soft, natural morning light. The background is a warm-toned, minimalist interior that reflects a modern Nigerian household. High-quality photography style with a shallow depth of field, highlighting her kind expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4qMi1Y1DfSscJWQrMD7_DD6jDXtoPhiSFIu3Vd4r_c5nqTGJqGceCmzlPo0sXJPERfiA0sbS6Z7ocSKH0Mu2TP04KwyxmRBy1jhwK_4a1I8nD4036UgW0_v2jUy0PAlGehxYOwTn6-VoR70dJyNzjDloO43DPVZx3FEuVv6NVLQ6QIxh3qFm8QeRBjKGsEi1FIoG8lyYszr_XNtSUKkvAOp0vBLGTL86ZezCj_AdJ91IsXOyJdj6l"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary-container p-1 rounded-full border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-white text-xs" data-icon="volunteer_activism" style="font-size: 14px;">volunteer_activism</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body-md text-on-surface">
+<span class="font-semibold text-primary">Chidinma Okafor</span> and 12 others <span class="text-on-surface-variant">said Amen to your prayer for Nigeria's peace.</span>
+</p>
+<span class="unread-indicator mt-1"></span>
+</div>
+<p class="text-on-surface-variant/80 italic mt-1 font-body-md text-sm border-l-2 border-outline-variant pl-3">"Lord, grant our leaders wisdom and our people patience..."</p>
+<p class="font-label-md text-outline mt-2">12 mins ago</p>
+</div>
+</div>
+<!-- Unread Notification: Reply -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-sm flex gap-4 transition-all hover:bg-surface-container-low active:scale-[0.99] cursor-pointer border-l-4 border-primary">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="Close-up profile photo of a young Nigerian man with a friendly smile, styled in a clean corporate look. The lighting is bright and professional, suggesting a bright office or studio environment. The aesthetic is clean, corporate, and trustworthy, using warm tones consistent with a dignified Catholic community app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVl-V8q0siI68XCZdeMfwiKdvpg2GMQYWK1JnYyhKm15YAdL6SBgRvmLxTYWt_CClyPPEOFo8fcm3uMfrypdonPNnNWn_3cawuBM1arxU7a3LRldo7LsmVDYjOUOHHCNLPvxKcibh0odPonlTSctroiZqcDtxKZMjZybbhct9ASddaEsT43IYEZRjOt7Hb8GUB3i5qtWnfA3w5B-vhd0M_K1Lcaxli2K2E2zw3EnpuxmlPBp-oIjkv"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-secondary-container p-1 rounded-full border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-on-secondary-container text-xs" data-icon="chat_bubble" style="font-size: 14px;">chat_bubble</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body-md text-on-surface">
+<span class="font-semibold text-primary">Emeka Uzor</span> <span class="text-on-surface-variant">replied to your comment in the "Monthly Novena" thread.</span>
+</p>
+<span class="unread-indicator mt-1"></span>
+</div>
+<p class="text-on-surface-variant mt-1 line-clamp-2">"That's a beautiful reflection, sister. We are also praying the same intentions in our parish group..."</p>
+<p class="font-label-md text-outline mt-2">2 hours ago</p>
+</div>
+</div>
+<!-- Read Notification: New Activity in Thread -->
+<div class="bg-surface-container-low/50 p-stack-md rounded-xl flex gap-4 transition-all hover:bg-surface-container-low active:scale-[0.99] cursor-pointer">
+<div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-surface-variant/40">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="forum">forum</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface-variant">
+<span class="font-medium text-on-surface">New Activity:</span> 15 new responses in the thread <span class="text-primary font-medium italic">"Preparing for the Feast of the Assumption."</span>
+</p>
+<p class="font-label-md text-outline mt-2">5 hours ago</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Yesterday -->
+<section>
+<h2 class="font-title-lg text-on-surface-variant mb-stack-md px-2">Yesterday</h2>
+<div class="space-y-stack-sm opacity-90">
+<!-- Read Notification: Amen -->
+<div class="bg-surface-container-low/50 p-stack-md rounded-xl flex gap-4 transition-all hover:bg-surface-container-low cursor-pointer">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A dignified older Nigerian man with graying hair, wearing a traditional white embroidered kaftan. He is seated in a sun-drenched courtyard with lush greenery in the background. The lighting is golden and warm, evoking a sense of wisdom and peace. High-end, dignified photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDugIIwyOztMDvhRq5ZAiWFmiZK09bqRpsGsKr6O5mvqU5L2nac34fGPrpNsnfuaMGdmscXSyhmfEQXHhpvKhpScjMkMMNzuHruQuGO_QyyaR2PaSZt9lVfryzvJ9iG5ASzKTrkUZ9OUCcicRKKGryrFw4B-pUdsczSu0YLEmQ27J550qMZ9R_1odiKV3jAY_Lr-VZPygUcnOBbLmSi9aIHwVh04vg5PVhd-1YE9YD3NmPEFiDUoTh8"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-surface-variant p-1 rounded-full border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-on-surface-variant text-xs" data-icon="volunteer_activism" style="font-size: 14px;">volunteer_activism</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface-variant">
+<span class="font-semibold text-on-surface">Brother Tunde</span> <span class="text-on-surface-variant">said Amen to your prayer request for healing.</span>
+</p>
+<p class="font-label-md text-outline mt-2">Yesterday, 4:30 PM</p>
+</div>
+</div>
+<!-- Read Notification: Thread Update -->
+<div class="bg-surface-container-low/50 p-stack-md rounded-xl flex gap-4 transition-all hover:bg-surface-container-low cursor-pointer">
+<div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-surface-variant/40">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="rss_feed">rss_feed</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface-variant">
+                            The topic <span class="font-medium text-on-surface">"How to deepen your Rosary meditation"</span> was pinned by a moderator.
+                        </p>
+<p class="font-label-md text-outline mt-2">Yesterday, 11:15 AM</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Empty State (Hidden by default, shown for demo logic) -->
+<div class="hidden flex-col items-center justify-center py-20 text-center" id="empty-state">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-outline text-5xl" data-icon="notifications_off">notifications_off</span>
+</div>
+<h3 class="font-headline-lg-mobile text-on-surface mb-2">All Caught Up!</h3>
+<p class="text-on-surface-variant max-w-xs">No new community updates for you. Check back later or start a new conversation.</p>
+</div>
+</main>
+<!-- Shared Navigation Component (BottomNavBar) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center py-2 pb-safe px-2 bg-surface-container-low dark:bg-surface-container-lowest z-50 rounded-t-xl shadow-sm border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-md text-label-md">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-5 py-1 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1 hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<!-- Contextual FAB (Only on Community Main, suppressed here as per logic) -->
+<script>
+        // Micro-interactions for list items
+        document.querySelectorAll('.cursor-pointer').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove unread indicators on click (simulating "read" state)
+                const unread = this.querySelector('.unread-indicator');
+                if (unread) {
+                    unread.style.opacity = '0';
+                    this.classList.remove('border-l-4', 'border-primary');
+                    this.classList.add('bg-surface-container-low/50');
+                    this.classList.remove('bg-surface-container-lowest');
+                }
+            });
+        });
+
+        // "Mark all as read" logic
+        const markAllRead = () => {
+            document.querySelectorAll('.unread-indicator').forEach(el => el.style.opacity = '0');
+            document.querySelectorAll('.border-primary').forEach(el => {
+                el.classList.remove('border-l-4', 'border-primary');
+                el.classList.add('bg-surface-container-low/50');
+                el.classList.remove('bg-surface-container-lowest');
+            });
+        };
+
+        document.querySelector('[aria-label="Mark all as read"]').addEventListener('click', markAllRead);
+    </script>
+</body></html>

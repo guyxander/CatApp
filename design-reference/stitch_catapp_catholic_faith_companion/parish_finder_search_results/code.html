@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Find Your Parish - CatApp</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#837378",
+                    "on-tertiary-container": "#b58a2c",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface-variant": "#e7e2d9",
+                    "primary": "#30021c",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "surface-dim": "#dfd9d1",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "on-primary-container": "#c27c9a",
+                    "inverse-on-surface": "#f6f0e7",
+                    "tertiary": "#1f1400",
+                    "surface-container": "#f3ede4",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fff9ef",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "primary-container": "#4a1731",
+                    "tertiary-fixed": "#ffdea4",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-tertiary-fixed": "#261900",
+                    "surface-container-high": "#ede7df",
+                    "secondary": "#7e4c83",
+                    "on-secondary-fixed": "#33053b",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#d5c2c7",
+                    "tertiary-container": "#382700",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "on-surface-variant": "#514348",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#1d1b16",
+                    "on-primary-fixed": "#380822",
+                    "inverse-surface": "#32302a",
+                    "on-background": "#1d1b16",
+                    "surface-tint": "#884b67",
+                    "secondary-container": "#fec0ff",
+                    "surface-container-low": "#f9f3ea",
+                    "primary-fixed": "#ffd8e6",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e7e2d9",
+                    "on-secondary-container": "#7b4980",
+                    "on-primary": "#ffffff",
+                    "surface": "#fff9ef",
+                    "surface-bright": "#fff9ef",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "inverse-primary": "#fdb0d0",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "margin-mobile": "16px",
+                    "stack-lg": "24px",
+                    "margin-desktop": "32px",
+                    "gutter": "16px",
+                    "unit": "4px",
+                    "margin-tablet": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "label-md": ["Work Sans"],
+                    "title-lg": ["Work Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "display-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            background-color: #fff9ef;
+            -webkit-font-smoothing: antialiased;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5c2c7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background z-50 transition-colors duration-200 ease-in-out flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-variant/10 transition-colors rounded-full">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">CatApp</h1>
+</div>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full border-2 border-outline-variant bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional and serene profile portrait of a Nigerian man in his late 30s, dressed in a clean linen shirt. The image is captured with soft, natural morning light in a contemporary home office with warm wooden textures. The aesthetic is clean, high-quality, and dignified, consistent with a premium Catholic digital experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq8Rbcy4LYWAm8fx-sIGpXK5OxBW56TjfPPXzzQ6jOfvnH8ZMXxD_s-AU-rVygkxoF5YF9ae92Szh43YlpwQkbbkwQt0RjDgjJ9DucSYmr8bWuPAN14s7gr1AqR_dMKSyvMB7iXSHEmhp5TZ2P4XRt4GaXk0kesx9F2JxNDOH-GWqic24mc7kCwj6dPdvPIaWVKDCLN5hC2FUi2J5S46UqQL713kvaRWvujkymHeiqwFcr4rXh2jVs"/>
+</div>
+</div>
+</header>
+<!-- Search & Filter Section -->
+<section class="px-margin-mobile pt-stack-md pb-stack-sm bg-background border-b border-surface-variant/30 sticky top-16 z-40">
+<div class="max-w-[720px] mx-auto space-y-4">
+<!-- Search Bar -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-body-md text-on-surface" placeholder="Search parishes, cities, or neighborhoods..." type="text" value="Lagos"/>
+</div>
+<!-- Active Filters Scroll -->
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<div class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-full shrink-0">
+<span class="text-label-md font-label-md">Near Me</span>
+<span class="material-symbols-outlined text-[16px]">close</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full shrink-0">
+<span class="text-label-md font-label-md">Daily Mass</span>
+<span class="material-symbols-outlined text-[16px]">close</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 border border-outline-variant text-on-surface-variant rounded-full shrink-0">
+<span class="text-label-md font-label-md">Confession Times</span>
+<span class="material-symbols-outlined text-[16px]">add</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 border border-outline-variant text-on-surface-variant rounded-full shrink-0">
+<span class="text-label-md font-label-md">Archdiocese</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Results Count -->
+<div class="px-margin-mobile py-4 max-w-[720px] mx-auto w-full">
+<p class="text-label-md font-label-md text-on-surface-variant">Showing 24 parishes in Lagos</p>
+</div>
+<!-- Main Content: Parish List -->
+<main class="flex-grow px-margin-mobile pb-24 max-w-[720px] mx-auto w-full">
+<div class="space-y-stack-md">
+<!-- Parish Item 1 -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-surface-container-high flex gap-4 hover:shadow-md transition-all duration-300">
+<div class="w-20 h-24 sm:w-24 sm:h-24 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A majestic architectural photograph of Holy Cross Cathedral in Lagos at sunset. The gothic revival style architecture is illuminated by golden hour light, casting long shadows and highlighting the intricate stone details. The atmosphere is peaceful, contemplative, and dignified, set against a clear evening sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZx4PAAr5loxsexn72m1oKnXB_LBuhGfdmdQDhJFX9mHTYHhsqS-sXMQEd5go2-GPtHlR4gZB-LMZ4xU5YvJqlbjIHGGYYCyIHlqVZ9PrTpx1O31yc_r609WxClI6hrQRN6WgeSLrBcc7AbgMi83LKaL8Anz5eGZRUCUTxXkQD7jWDFJwZyiC2K7JHkHlHPRcnCt7GblQJEWqHDkGqa9OoeKZF4fGkGrCwwsMKUsgi_H6Y8OcPZhwa"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<h2 class="font-title-lg text-title-lg text-primary leading-tight">Holy Cross Cathedral</h2>
+<p class="text-body-md text-on-surface-variant mt-1 flex items-start gap-1">
+<span class="material-symbols-outlined text-[18px] shrink-0 mt-0.5">location_on</span>
+                            Catholic Mission St, Lagos Island
+                        </p>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-label-md font-label-md text-on-tertiary-container bg-tertiary-fixed/30 px-2 py-0.5 rounded">0.8 km away</span>
+<button class="text-primary font-label-md px-4 py-2 rounded-lg border border-primary hover:bg-primary/5 transition-colors">View Profile</button>
+</div>
+</div>
+</div>
+<!-- Parish Item 2 -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-surface-container-high flex gap-4 hover:shadow-md transition-all duration-300">
+<div class="w-20 h-24 sm:w-24 sm:h-24 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="The modern facade of St. Anthony's Catholic Church in Surulere. A bright, high-key photograph showcasing the clean lines of the contemporary ecclesiastical architecture under a bright blue Nigerian sky. The scene is airy and welcoming, featuring lush green landscaping at the entrance to evoke a communal, sacred space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYo-PMAWYVVkgkkhsZKhAOa9rPWTjojKzdfzMOP6rQOAgLHShYk3g623ZJN73jzqbb9tH5GBA2hQ9c0ZuLIn5vJaJ3dPZaz2NcC4TU9jXhDPm9bLViIjU6E81RZCkN9lXlrgQ9LFc0ckR3glXk5lyzetk4PV8947mI9pgDc-1gfTv_AHdRGXIWyMYJradOocMB_ut4aNeN442AwfolxV-8ZT0ZDjjYKwMxCnVOffnvjQNhC7Mk62-0"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<h2 class="font-title-lg text-title-lg text-primary leading-tight">St. Anthony's Catholic Church</h2>
+<p class="text-body-md text-on-surface-variant mt-1 flex items-start gap-1">
+<span class="material-symbols-outlined text-[18px] shrink-0 mt-0.5">location_on</span>
+                            Gbaja St, Surulere, Lagos
+                        </p>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-label-md font-label-md text-on-tertiary-container bg-tertiary-fixed/30 px-2 py-0.5 rounded">3.2 km away</span>
+<button class="text-primary font-label-md px-4 py-2 rounded-lg border border-primary hover:bg-primary/5 transition-colors">View Profile</button>
+</div>
+</div>
+</div>
+<!-- Parish Item 3 -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-surface-container-high flex gap-4 hover:shadow-md transition-all duration-300">
+<div class="w-20 h-24 sm:w-24 sm:h-24 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Interior view of the Church of the Assumption in Falomo, showing the sanctuary during a quiet moment of prayer. Soft light filters through stained glass, illuminating the wooden pews and the altar. The mood is deeply contemplative and serene, captured with a professional wide-angle lens to emphasize the sacred scale of the space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFEeaJuN0i8_2kRK6s0eQeqrUnUuxFhQ6nAJhAAP73IE9Al5aEPhVE3jYPGO9CqQuJxlLepSVpn4ugaukjw1Xr22_FESuCsPlE1f6iQpdP3Xc-7D1RkgcT7vWeIs5pcVf7UMGricNPe4MgbH_Q8v1RyPIkVQCGg8ASUtbTSAyb-TgCI570og-pj5QTHCl8q0_xEWXY4NUEzIP3T5SBBo8lW6xmL7w8HvagboKAB_9MmO0JwojF5_eW"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<h2 class="font-title-lg text-title-lg text-primary leading-tight">Church of the Assumption</h2>
+<p class="text-body-md text-on-surface-variant mt-1 flex items-start gap-1">
+<span class="material-symbols-outlined text-[18px] shrink-0 mt-0.5">location_on</span>
+                            Falomo, Ikoyi, Lagos
+                        </p>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-label-md font-label-md text-on-tertiary-container bg-tertiary-fixed/30 px-2 py-0.5 rounded">5.1 km away</span>
+<button class="text-primary font-label-md px-4 py-2 rounded-lg border border-primary hover:bg-primary/5 transition-colors">View Profile</button>
+</div>
+</div>
+</div>
+<!-- Parish Item 4 (State Suggestion) -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-surface-container-high flex gap-4 hover:shadow-md transition-all duration-300">
+<div class="w-20 h-24 sm:w-24 sm:h-24 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A cinematic evening shot of St. Dominic’s Catholic Church in Yaba. The lighting is warm and inviting, showing the community gathering in the courtyard. The photography style is modern yet respectful of tradition, using rich tones of burgundy and warm gold in the ambient lighting to create a sense of belonging and spiritual home." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfwZXZFh5uJY_K-FT00TeUyGfd9xrUfx9TsgkSfZ64csOwv9SJz0WermQ0R-N5Y-5Fgpsw0bvEtCz4UtyiGvxcC4MAyJjUQTQxbrRXbW1NKqwQAfpIk7RE0yZsGiD_Ox4Tb1AqD0_mhcJlScLy7M0EP6JNlM12e2FT66WExuER9XGHM7VIB4zFYmj0UZLtwv4qsh1sa-Jt1qia99kBhQaHe9Rwh-DIBjyX255nb5StvLa7EryjiTkU"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<h2 class="font-title-lg text-title-lg text-primary leading-tight">St. Dominic's Catholic Church</h2>
+<p class="text-body-md text-on-surface-variant mt-1 flex items-start gap-1">
+<span class="material-symbols-outlined text-[18px] shrink-0 mt-0.5">location_on</span>
+                            Herbert Macaulay Way, Yaba, Lagos
+                        </p>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-label-md font-label-md text-on-tertiary-container bg-tertiary-fixed/30 px-2 py-0.5 rounded">4.5 km away</span>
+<button class="text-primary font-label-md px-4 py-2 rounded-lg border border-primary hover:bg-primary/5 transition-colors">View Profile</button>
+</div>
+</div>
+</div>
+<!-- Map Button (Floating Contextual Action) -->
+<div class="flex justify-center pt-4">
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-full shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md">Switch to Map View</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface-container-low flex justify-around items-center h-20 px-2 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('ring-2', 'ring-primary/20');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('ring-2', 'ring-primary/20');
+            });
+        });
+
+        // Simple scroll animation for list items
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('main > div > div').forEach(card => {
+            card.classList.add('transition-all', 'duration-500', 'opacity-0', 'translate-y-4');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

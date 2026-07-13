@@ -1,0 +1,29 @@
+{
+  "source": "C:\\Users\\DELL\\Documents\\CatApp 2\\assets\\source\\Daily mass readings, hymns and prayers.docx",
+  "readings": 768,
+  "hymns": 496,
+  "sampleReadings": [
+    "Advent 17 December",
+    "Advent 18 December",
+    "Advent 19 December",
+    "Advent 20 December",
+    "Advent 22 December",
+    "Advent 23 December",
+    "Advent 24 December",
+    "Advent Week 1 Friday",
+    "Advent Week 1 Monday",
+    "Advent Week 1 Saturday"
+  ],
+  "sampleHymns": [
+    "1 Abba Father",
+    "2 Abide With Me",
+    "2A Abinci Alheri (Hausa)",
+    "2B Abum Achicha Di Ndu",
+    "3 Accept Almighty Father",
+    "4 Adeste Fideles",
+    "5 Adoremus Et Laudate",
+    "6 Adoro Te Devote",
+    "6A Agam Eje N'alter",
+    "6B Agam Eji Gini Kele Olisa"
+  ]
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Invite Admin - Diocese of Lagos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            background-color: #fff9ef; /* Warm Cream Level 0 */
+            -webkit-font-smoothing: antialiased;
+        }
+        .form-input-focus:focus {
+            border-color: #30021c !important;
+            box-shadow: 0 0 0 1px #30021c;
+            outline: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#261900",
+                        "on-surface-variant": "#514348",
+                        "on-background": "#1d1b16",
+                        "inverse-primary": "#fdb0d0",
+                        "secondary-fixed": "#ffd6fd",
+                        "surface-container-low": "#f9f3ea",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e7e2d9",
+                        "inverse-surface": "#32302a",
+                        "tertiary-fixed": "#ffdea4",
+                        "outline-variant": "#d5c2c7",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "secondary": "#7e4c83",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f6f0e7",
+                        "surface-bright": "#fff9ef",
+                        "surface-container-high": "#ede7df",
+                        "tertiary": "#1f1400",
+                        "on-secondary-fixed": "#33053b",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "on-secondary-container": "#7b4980",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "on-tertiary-container": "#b58a2c",
+                        "surface-tint": "#884b67",
+                        "surface": "#fff9ef",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-container": "#4a1731",
+                        "on-primary-container": "#c27c9a",
+                        "tertiary-container": "#382700",
+                        "primary": "#30021c",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dfd9d1",
+                        "outline": "#837378",
+                        "on-primary-fixed": "#380822",
+                        "background": "#fff9ef",
+                        "on-surface": "#1d1b16",
+                        "surface-variant": "#e7e2d9",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffd8e6",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "surface-container": "#f3ede4",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#fec0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "24px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "margin-tablet": "24px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "label-md": ["Work Sans"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant">
+<div class="flex items-center justify-between px-margin-mobile h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a Catholic church administrator, middle-aged, wearing a dignified clerical shirt, with a warm and welcoming expression. The photo is high-resolution with soft, natural side-lighting against a blurred interior of a stone cathedral. The aesthetic is clean, modern, and high-quality, fitting a premium digital platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBgDP6ctj8SVPre7u7Cfo8vYUWLus6yykVvEtoNzmY9qNRgdNP6mJj4FFs96VZlCZsRwFpuchQJ_CEj2eP-A9uQQWRql66yyaDW32-4FTBU9BOSRTwdd0AIdDPvNNtBq8qMfVe3zE-geQfD49rWC_t5hGyiIRQ1TmXNaU1WKLVN8x7eB87BCoIVVXyyylD-lgeVgQp3jB8hc8hj7y-ASdrsrWu8L0QW_qblWBMisvcH-UD4aJGcW6Q"/>
+</div>
+<h1 class="font-title-lg text-title-lg font-bold text-primary">Diocese of Lagos</h1>
+</div>
+<button class="material-symbols-outlined text-primary hover:bg-surface-variant/50 p-2 rounded-full transition-colors active:opacity-80">
+                notifications
+            </button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow pt-20 pb-24 px-margin-mobile">
+<div class="max-w-[720px] mx-auto w-full">
+<!-- Back Link -->
+<nav class="mb-stack-lg">
+<a class="flex items-center gap-2 text-primary font-label-md text-label-md hover:underline active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                    Back to Admins
+                </a>
+</nav>
+<!-- Page Title -->
+<header class="mb-stack-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">Invite Admin</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 italic">Fill in the basic information to begin the invitation process.</p>
+</header>
+<!-- 3-Step Progress Indicator -->
+<div class="mb-stack-lg py-4">
+<div class="flex items-start justify-between w-full relative">
+<!-- Progress Line -->
+<div class="absolute top-5 left-0 w-full h-[2px] bg-outline-variant z-0"></div>
+<div class="absolute top-5 left-0 w-1/3 h-[2px] bg-tertiary-fixed-dim z-0"></div>
+<!-- Step 1: Active -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm border-4 border-background">
+<span class="font-label-md">1</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold">Personal Info</span>
+</div>
+<!-- Step 2: Inactive -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-outline-variant flex items-center justify-center text-on-surface-variant shadow-sm bg-background">
+<span class="font-label-md">2</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Role &amp; Access</span>
+</div>
+<!-- Step 3: Inactive -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-outline-variant flex items-center justify-center text-on-surface-variant shadow-sm bg-background">
+<span class="font-label-md">3</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Review</span>
+</div>
+</div>
+</div>
+<!-- Form Card -->
+<div class="bg-surface-container-lowest rounded-xl p-stack-lg shadow-[0_1px_3px_0_rgba(0,0,0,0.04)] border border-surface-variant/30">
+<form class="space-y-stack-lg">
+<!-- Full Name -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="full_name">Full Name</label>
+<input class="w-full h-14 px-4 bg-transparent border border-outline rounded-lg font-body-md text-body-md text-on-surface focus:border-primary transition-all form-input-focus" id="full_name" placeholder="e.g. Chinelo Okoro" type="text"/>
+</div>
+<!-- Email Address -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="email">Email Address</label>
+<input class="w-full h-14 px-4 bg-transparent border border-outline rounded-lg font-body-md text-body-md text-on-surface focus:border-primary transition-all form-input-focus" id="email" placeholder="chinelo.okoro@example.com" type="email"/>
+</div>
+<!-- Phone Number (Optional) -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="phone">Phone Number (Optional)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">+234</span>
+<input class="w-full h-14 pl-16 pr-4 bg-transparent border border-outline rounded-lg font-body-md text-body-md text-on-surface focus:border-primary transition-all form-input-focus" id="phone" placeholder="800 000 0000" type="tel"/>
+</div>
+</div>
+<!-- Illustration/Atmosphere -->
+<div class="pt-4 flex justify-center">
+<div class="w-full h-32 rounded-lg bg-surface-container-low flex items-center justify-center border border-dashed border-outline-variant overflow-hidden">
+<img class="h-full opacity-60 mix-blend-multiply" data-alt="A minimalist, contemplative digital illustration of a Dove symbolizing the Holy Spirit, rendered in thin, elegant deep burgundy lines. The background is a soft gradient of warm cream and white, evoking a sense of divine grace and official ecclesiastical purpose. The style is modern, corporate, yet spiritually grounded, fitting a Catholic administrative interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPq_JBLuLHiz75UaYyINm76LigJ7h_1tBJeiZ_TsplzpCu9UK8YrFDQs_G6xjA1xzHWeO_0gjZ7VtSUyHm-m64gk66PS1OsDCqIZnAtmc3O0mMt-rlglPMAmlC_gueu9n9r_K79111Re5hgoR6yGxkAJtwG8gFo55hQq2QFlCya8kNC3QUp0Taah0e-uDpIRhLFl7yY_ok5wUQXaqEOXSGkZ6JB3XkEHOt830AEI-mQL32JVQlsmBS"/>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="pt-stack-lg flex flex-col gap-stack-sm md:flex-row md:justify-end">
+<button class="order-2 md:order-1 px-stack-lg h-12 rounded-full border border-primary text-primary font-label-md text-label-md hover:bg-primary/5 active:scale-95 transition-all" type="button">
+                            Cancel
+                        </button>
+<button class="order-1 md:order-2 px-stack-lg h-12 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm hover:opacity-90 active:scale-95 transition-all" type="submit">
+                            Continue to Role &amp; Access
+                        </button>
+</div>
+</form>
+</div>
+<p class="mt-stack-lg text-center font-label-md text-label-md text-on-surface-variant/60">
+                All invitations sent are valid for 7 days.
+            </p>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on desktop if TopAppBar handled it, but as per instructions, we render it for top-level context) -->
+<!-- Suppression Logic: Usually hidden for transactional pages, but instructions explicitly requested TopAppBar and BottomNavBar components for this specific screen request -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container flex justify-around items-center px-gutter py-2 pb-safe z-50 rounded-t-xl shadow-[0_-1px_3px_0_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface/5 px-4 py-1 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1" href="#">
+<span class="material-symbols-outlined" data-weight="fill">auto_stories</span>
+<span class="font-label-md text-label-md">Content</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface/5 px-4 py-1 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-on-surface/5 px-4 py-1 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Stats</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for the continue button
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="flex items-center gap-2"><span class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span> Processing...</span>';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Success! Moving to Step 2...');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1000);
+        });
+
+        // Focus interaction for accessibility and flair
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').classList.add('text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').classList.remove('text-primary');
+            });
+        });
+    </script>
+</body></html>

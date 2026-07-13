@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catholic Connect - Admin Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#c27c9a",
+            "on-primary-fixed": "#380822",
+            "on-tertiary-fixed-variant": "#5d4200",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "surface-variant": "#e7e2d9",
+            "outline": "#837378",
+            "surface-container-low": "#f9f3ea",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "primary": "#30021c",
+            "surface-container": "#f3ede4",
+            "primary-fixed": "#ffd8e6",
+            "error": "#ba1a1a",
+            "primary-fixed-dim": "#fdb0d0",
+            "inverse-surface": "#32302a",
+            "inverse-primary": "#fdb0d0",
+            "on-secondary-container": "#7b4980",
+            "secondary": "#7e4c83",
+            "inverse-on-surface": "#f6f0e7",
+            "surface": "#fff9ef",
+            "on-surface": "#1d1b16",
+            "on-background": "#1d1b16",
+            "secondary-fixed-dim": "#efb2f1",
+            "on-surface-variant": "#514348",
+            "tertiary": "#1f1400",
+            "background": "#fff9ef",
+            "tertiary-fixed-dim": "#f0bf5c",
+            "on-error-container": "#93000a",
+            "surface-dim": "#dfd9d1",
+            "surface-bright": "#fff9ef",
+            "on-secondary-fixed": "#33053b",
+            "on-primary-fixed-variant": "#6d344f",
+            "secondary-fixed": "#ffd6fd",
+            "outline-variant": "#d5c2c7",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#64346a",
+            "surface-tint": "#884b67",
+            "tertiary-fixed": "#ffdea4",
+            "secondary-container": "#fec0ff",
+            "error-container": "#ffdad6",
+            "surface-container-high": "#ede7df",
+            "surface-container-highest": "#e7e2d9",
+            "tertiary-container": "#382700",
+            "primary-container": "#4a1731",
+            "on-tertiary-fixed": "#261900",
+            "on-tertiary-container": "#b58a2c"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "stack-md": "16px",
+            "stack-lg": "24px",
+            "margin-tablet": "24px",
+            "stack-sm": "8px",
+            "unit": "4px",
+            "gutter": "16px",
+            "margin-mobile": "16px",
+            "margin-desktop": "32px"
+          },
+          "fontFamily": {
+            "headline-lg": ["\"Source Serif 4\""],
+            "display-lg": ["\"Source Serif 4\""],
+            "body-md": ["Work Sans"],
+            "title-lg": ["Work Sans"],
+            "label-md": ["Work Sans"],
+            "headline-lg-mobile": ["\"Source Serif 4\""],
+            "body-lg": ["\"Source Serif 4\""]
+          },
+          "fontSize": {
+            "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+            "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #fff9ef;
+      font-family: 'Work Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .serif-font {
+      font-family: 'Source Serif 4', serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f3ede4;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #d5c2c7;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="text-on-surface">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface flex justify-between items-center px-margin-mobile h-16 transition-colors duration-200">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-primary/8 rounded-full transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Review Submission</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden md:block text-right">
+<p class="font-label-md text-label-md text-primary font-bold">Admin</p>
+<p class="text-[10px] text-on-surface-variant">System Moderator</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden bg-surface-container-highest flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a dignified Nigerian administrator in corporate attire, soft indoor office lighting, high-quality photography, warm skin tones, and a neutral background. The style is modern and clean, consistent with a high-end corporate digital interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDWWhcmOvNc3uJzjUFVJzZkjwpaNsa2OLJX72RVZ94C6kdj-LMaQfEilh_ojlZSvMgXVCIMHxDpGIwNVmt-jFIUdL46ziBHglS-VpCwy0yRAlabSSqwDTkQOgHHt-oVeASjygM565gZe9UjcKk-A2FAVOMOUikzgfKUTCZyHOqKNHuDplXCleNu52lREnmWMPjFTwrHAvIo-Gue11YN6fku2NTeSY7Izctf75T4QB0iZWlx2405TFu"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-32 px-margin-mobile max-w-7xl mx-auto min-h-screen">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: User Summary & Details -->
+<div class="lg:col-span-4 flex flex-col gap-stack-md">
+<!-- User Summary Card -->
+<section class="bg-surface-container-lowest p-stack-md rounded-xl border border-surface-container-high">
+<h2 class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant mb-4">Applicant Profile</h2>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border border-outline-variant bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young Nigerian man, Chinedu Okafor, with a friendly and respectful expression. The lighting is soft and natural, resembling a professional identity photograph. The image uses warm, earth-toned colors and high clarity to align with the dignified Catholic community aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyBCnJ95Wlm7ArNOHTJByxe4CAYyQ27IXHlDT33oveNL05eJ6QNVuuddC_USAFwYFoMDRy5IejUHZZs-wU6WKTSMTh4GIpNUMm98Hx4m6_iVm9irdp3-4Buxr6KqPFE-j5GLNvlU0gBZKXUEDhKkT1OjN4YR9wYfHxI-exf9UcLlFMLBvCzsoX79EHlnctrDE-Z2qpMgb6kXaBwa0iwTaMOX3x4mCmks57N9VEymZb156WpD_zEGKF"/>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary">Chinedu Okafor</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">chinedu.okafor@example.ng</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-surface-container-high flex gap-2">
+<span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container text-[11px] font-bold rounded-full uppercase tracking-tighter">New Registration</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[11px] font-bold rounded-full uppercase tracking-tighter">ID Pending</span>
+</div>
+</section>
+<!-- Submitted Details -->
+<section class="bg-surface-container-lowest p-stack-md rounded-xl border border-surface-container-high">
+<h2 class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant mb-6">Submitted Details</h2>
+<div class="space-y-5">
+<div class="group">
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">Full Name</label>
+<div class="flex justify-between items-center">
+<p class="font-body-lg text-body-lg text-primary serif-font">Chinedu Okafor</p>
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="group">
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">Date of Baptism</label>
+<div class="flex justify-between items-center">
+<p class="font-body-lg text-body-lg text-primary serif-font">June 15, 1992</p>
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="group">
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">Parish</label>
+<div class="flex justify-between items-center">
+<p class="font-body-lg text-body-lg text-primary serif-font">Holy Cross Cathedral, Lagos</p>
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="group">
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">Diocese</label>
+<div class="flex justify-between items-center">
+<p class="font-body-lg text-body-lg text-primary serif-font">Lagos Archdiocese</p>
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Document Viewer -->
+<div class="lg:col-span-8">
+<section class="bg-surface-container-lowest rounded-xl border border-surface-container-high h-full flex flex-col overflow-hidden">
+<div class="p-4 border-b border-surface-container-high flex justify-between items-center bg-surface-container-low">
+<h2 class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">description</span>
+              Baptismal Card Image
+            </h2>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-on-surface-variant/8 rounded-full transition-all" title="Rotate">
+<span class="material-symbols-outlined text-on-surface-variant">rotate_right</span>
+</button>
+<button class="p-2 hover:bg-on-surface-variant/8 rounded-full transition-all" title="Zoom In">
+<span class="material-symbols-outlined text-on-surface-variant">zoom_in</span>
+</button>
+<button class="p-2 hover:bg-on-surface-variant/8 rounded-full transition-all" title="Zoom Out">
+<span class="material-symbols-outlined text-on-surface-variant">zoom_out</span>
+</button>
+<button class="p-2 hover:bg-on-surface-variant/8 rounded-full transition-all" title="Full Screen">
+<span class="material-symbols-outlined text-on-surface-variant">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- Image Canvas -->
+<div class="relative flex-grow bg-surface-variant/30 flex items-center justify-center p-8 overflow-auto custom-scrollbar">
+<div class="shadow-2xl max-w-full transform transition-transform duration-300 hover:scale-[1.02]">
+<img class="rounded-sm border border-outline-variant max-w-full" data-alt="A high-fidelity baptismal certificate or card, featuring ornate Catholic liturgical borders and elegant serif typography. The document shows handwritten ink details, a golden embossed seal of an archdiocese, and dated stamps. The presentation is clean, photographed on a flat surface with soft, even studio lighting that highlights the texture of the aged paper. The style is dignified and historical." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcE8zbQmmcP6nrpFLFf-BoS0TcLk9OZXedLFPIwsZUc7KRO-dU8ZwJMqoGJtpEmHwgJY6qOKPHJveG4c-LykkwfCAFQwqkuWiMI1wgdhr8l_qNZ54ILVzhGDT9EmZGjdTXCaqUjMTXNjo1saVHbUKYLl23eNxvVr5ivfqZzXrCJ5-3waLdiUAZCkELKsKW4XufHVIOh9qLKUZYJ-QGZjrl7AcBvmA0NGWScohrG44hpOXem7kAhxp6"/>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low text-center">
+<p class="font-label-md text-label-md text-on-surface-variant italic">File: baptismal_card_v1_chinedu.jpg (4.2 MB)</p>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Sticky Action Footer -->
+<footer class="fixed bottom-0 w-full bg-surface-container-low border-t border-surface-container-high px-margin-mobile py-4 z-50">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<!-- Flag Select -->
+<div class="flex items-center gap-3 w-full md:w-auto">
+<div class="relative flex-grow md:flex-grow-0">
+<select class="appearance-none bg-surface border border-outline px-4 py-2.5 rounded-lg text-on-surface font-label-md text-label-md pr-10 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all w-full md:w-64">
+<option disabled="" selected="" value="">Select Flag Reason...</option>
+<option value="blurry">Image is Blurry/Unreadable</option>
+<option value="seal">Missing Official Seal</option>
+<option value="mismatch">Information Mismatch</option>
+<option value="incomplete">Incomplete Document</option>
+<option value="fraud">Suspected Fraud/Forgery</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+<button class="px-6 py-2.5 border border-error text-error font-label-md text-label-md rounded-lg hover:bg-error/5 transition-colors whitespace-nowrap">
+          Flag for Review
+        </button>
+</div>
+<!-- Main Actions -->
+<div class="flex items-center gap-4 w-full md:w-auto">
+<button class="flex-grow md:flex-grow-0 px-8 py-2.5 text-on-surface-variant font-label-md text-label-md hover:bg-on-surface-variant/5 rounded-lg transition-colors">
+          Reject Submission
+        </button>
+<button class="flex-grow md:flex-grow-0 px-10 py-3 bg-primary text-on-primary font-label-md text-label-md font-bold rounded-full shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-150">
+          Verify &amp; Approve
+        </button>
+</div>
+</div>
+</footer>
+<script>
+    // Micro-interactions for button ripples and state layers
+    document.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Mock ripple effect or haptic feedback logic
+        console.log('Action performed:', this.innerText.trim() || 'Icon action');
+      });
+    });
+
+    // Zoom simulation state
+    let currentScale = 1;
+    const img = document.querySelector('.relative.flex-grow img');
+    
+    document.querySelector('[title="Zoom In"]')?.addEventListener('click', () => {
+      currentScale += 0.2;
+      img.style.transform = `scale(${currentScale})`;
+    });
+
+    document.querySelector('[title="Zoom Out"]')?.addEventListener('click', () => {
+      if(currentScale > 0.4) {
+        currentScale -= 0.2;
+        img.style.transform = `scale(${currentScale})`;
+      }
+    });
+
+    document.querySelector('[title="Rotate"]')?.addEventListener('click', () => {
+      // Rotation logic would go here
+    });
+  </script>
+</body></html>

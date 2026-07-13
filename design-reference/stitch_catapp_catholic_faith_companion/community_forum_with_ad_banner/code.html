@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CatApp Community</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#64346a",
+                      "secondary-fixed-dim": "#efb2f1",
+                      "surface-container-high": "#ede7df",
+                      "tertiary": "#1f1400",
+                      "on-primary-fixed-variant": "#6d344f",
+                      "secondary": "#7e4c83",
+                      "surface-tint": "#884b67",
+                      "on-tertiary-fixed": "#261900",
+                      "outline-variant": "#d5c2c7",
+                      "on-surface": "#1d1b16",
+                      "inverse-on-surface": "#f6f0e7",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#382700",
+                      "surface-container": "#f3ede4",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#380822",
+                      "background": "#fff9ef",
+                      "primary-container": "#4a1731",
+                      "inverse-surface": "#32302a",
+                      "tertiary-fixed-dim": "#f0bf5c",
+                      "surface-dim": "#dfd9d1",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#514348",
+                      "surface-container-highest": "#e7e2d9",
+                      "on-tertiary-container": "#b58a2c",
+                      "secondary-fixed": "#ffd6fd",
+                      "surface-variant": "#e7e2d9",
+                      "on-background": "#1d1b16",
+                      "primary": "#30021c",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#fdb0d0",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "tertiary-fixed": "#ffdea4",
+                      "on-secondary-container": "#7b4980",
+                      "surface": "#fff9ef",
+                      "primary-fixed-dim": "#fdb0d0",
+                      "outline": "#837378",
+                      "surface-container-low": "#f9f3ea",
+                      "secondary-container": "#fec0ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#c27c9a",
+                      "on-secondary-fixed": "#33053b",
+                      "surface-bright": "#fff9ef",
+                      "primary-fixed": "#ffd8e6",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "unit": "4px",
+                      "stack-lg": "24px",
+                      "margin-desktop": "32px",
+                      "stack-sm": "8px",
+                      "margin-tablet": "24px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["\"Source Serif 4\""],
+                      "headline-lg": ["\"Source Serif 4\""],
+                      "title-lg": ["Work Sans"],
+                      "label-md": ["Work Sans"],
+                      "body-md": ["Work Sans"],
+                      "display-lg": ["\"Source Serif 4\""],
+                      "body-lg": ["\"Source Serif 4\""]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .bento-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-card:active {
+            transform: scale(0.98);
+        }
+        .filter-chip.active {
+            background-color: #30021c;
+            color: #ffffff;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim sticky top-0 z-40 flex justify-between items-center px-margin-mobile w-full h-16 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean professional studio portrait of a young Nigerian man with a warm and peaceful expression. He is wearing a simple linen shirt against a soft, creamy warm background that matches the app's aesthetic. The lighting is soft and flattering, emphasizing a sense of community and faith." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxw8buMLF2DW9qfVYCvpbWLnFlz00KlbS4spHStgLmoNNU2vr9fiepZ7wpSIZutEqoEo2eJfQf7lasPfDOE-2B6PmdPZpVDLs9XrHCmv4H7N_OnKims4yD_7lCZ4VFmYJD7eW66GYijEDcECrtDez2Ls0Zm66Q6EeTe6Vrmu63fxKH-GDmYm4RuzD3O9p4wYMCzUPfSDwND6N7CCIqk47jjKiC-s3LKmO23Rpu0CFOIVjeNhB9twRV"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-primary dark:text-inverse-primary">CatApp</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors text-primary dark:text-inverse-primary active:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-1 max-w-[720px] mx-auto w-full px-margin-mobile pb-32"><div class="pt-4 pb-2">
+<div class="w-full rounded-xl overflow-hidden shadow-sm border border-outline-variant/30">
+<img alt="CatApp Community Banner" class="w-full h-auto object-cover aspect-[16/9]" src="https://lh3.googleusercontent.com/aida/AP1WRLtAspunqidGJY_vl_gOT7ww8849UBhW-4BkH9oG645cx3jYQYzp5iNluIJrBnYYb97A9IviuTLhLcLtFowfNyDkUhCxD51WES_3KalRxOT6xIjCmzmFlgI66D4O87x7HhAI_zVWht5p_oH0yCFglfvEM0wLiQIuQ_M2f5I2_yhUnSeteKsZzVXDCkjfnxFdqCGPqnatGxiF61TRrpJ7mEEpqW3fPBNDbx7E08hLq47Va670CUdEHH2ROw"/>
+</div>
+</div>
+<!-- Filter Bar -->
+<section class="py-stack-lg flex items-center gap-stack-sm sticky top-16 bg-background z-30">
+<button class="filter-chip active flex items-center px-4 py-2 rounded-full border border-primary font-label-md text-label-md transition-all" onclick="toggleFilter(this)">
+                Latest
+            </button>
+<button class="filter-chip flex items-center px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md transition-all" onclick="toggleFilter(this)">
+                Popular
+            </button>
+</section>
+<!-- Community Feed -->
+<div class="flex flex-col gap-stack-md">
+<!-- Post Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0_2px_4px_rgba(0,0,0,0.04)] border border-outline-variant/30 bento-card">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-secondary font-semibold">Fr. Jude Okonkwo</span>
+<span class="material-symbols-outlined text-[16px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[12px] text-on-surface-variant opacity-70">• 2h ago</span>
+</div>
+<span class="bg-secondary-container/30 text-secondary px-2 py-0.5 rounded-full font-label-md text-[10px]">Verified Priest</span>
+</div>
+<h2 class="font-title-lg text-title-lg text-primary mb-2">Reflections on the Sunday Gospel: The Bread of Life</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+                    Dear community, as we reflect on today's readings, let us remember that the spiritual nourishment we receive in the Eucharist is the foundation of our daily strength. How are you making space for silence this week?
+                </p>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant/20">
+<div class="flex gap-4">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+<span class="font-label-md text-label-md">24 Comments</span>
+</button>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors flex items-center gap-1 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+<span class="font-label-md text-label-md">Report</span>
+</button>
+</div>
+</article>
+<!-- Post Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0_2px_4px_rgba(0,0,0,0.04)] border border-outline-variant/30 bento-card">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Chioma Adeyemi</span>
+<span class="text-[12px] text-on-surface-variant opacity-70">• 5h ago</span>
+</div>
+</div>
+<h2 class="font-title-lg text-title-lg text-primary mb-2">Asking for prayers for my grandmother</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+                    Please siblings in Christ, join me in praying for my grandmother who is undergoing a minor surgery tomorrow morning. Her faith has always been our family's anchor. God bless you all.
+                </p>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant/20">
+<div class="flex gap-4">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+<span class="font-label-md text-label-md">112 Comments</span>
+</button>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors flex items-center gap-1 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+<span class="font-label-md text-label-md">Report</span>
+</button>
+</div>
+</article>
+<!-- Post Card 3 (Asymmetric/Highlighted) -->
+<article class="bg-primary/5 border-l-4 border-primary rounded-r-xl p-stack-md shadow-[0_2px_4px_rgba(0,0,0,0.04)] bento-card">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-secondary font-semibold">Sr. Mary Immaculate</span>
+<span class="material-symbols-outlined text-[16px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[12px] text-on-surface-variant opacity-70">• 1d ago</span>
+</div>
+</div>
+<h2 class="font-title-lg text-title-lg text-primary mb-2">Upcoming Parish Youth Retreat</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+                    We are excited to announce the registration for our annual retreat is now open! This year's theme is "Radiant Hearts." Looking forward to seeing our vibrant youth community gather in prayer and fellowship.
+                </p>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant/20">
+<div class="flex gap-4">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+<span class="font-label-md text-label-md">45 Comments</span>
+</button>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors flex items-center gap-1 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+<span class="font-label-md text-label-md">Report</span>
+</button>
+</div>
+</article>
+<!-- Post Card 4 -->
+<article class="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0_2px_4px_rgba(0,0,0,0.04)] border border-outline-variant/30 bento-card">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Ifeanyi Okafor</span>
+<span class="text-[12px] text-on-surface-variant opacity-70">• 2d ago</span>
+</div>
+</div>
+<h2 class="font-title-lg text-title-lg text-primary mb-2">Does anyone have recommendations for daily devotional books?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+                    I'm looking to deepen my morning prayer routine. Specifically something that connects the Liturgy of the Hours with personal reflection. Any suggestions from the community would be appreciated!
+                </p>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant/20">
+<div class="flex gap-4">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+<span class="font-label-md text-label-md">8 Comments</span>
+</button>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors flex items-center gap-1 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+<span class="font-label-md text-label-md">Report</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- Create Post FAB -->
+<button class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-primary text-on-primary rounded-xl shadow-lg flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center py-2 px-margin-mobile bg-surface-container-low rounded-t-xl border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md mt-1">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md mt-1">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-container text-on-secondary-container dark:text-secondary-container rounded-full px-5 py-1 scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-md text-label-md mt-0.5">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md mt-1">Parishes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-5 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        function toggleFilter(btn) {
+            document.querySelectorAll('.filter-chip').forEach(b => {
+                b.classList.remove('active', 'bg-primary', 'text-on-primary');
+                b.classList.add('text-on-surface-variant', 'border-outline-variant');
+            });
+            btn.classList.add('active', 'bg-primary', 'text-on-primary');
+            btn.classList.remove('text-on-surface-variant', 'border-outline-variant');
+            
+            // Simple haptic-like effect
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(5);
+            }
+        }
+
+        // Add subtle scroll reveal for posts
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('article').forEach(post => {
+            post.classList.add('transition-all', 'duration-500', 'opacity-0', 'translate-y-4');
+            observer.observe(post);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #fff9ef; /* background from config */
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(131, 115, 120, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#64346a",
+                      "secondary-fixed-dim": "#efb2f1",
+                      "surface-container-high": "#ede7df",
+                      "tertiary": "#1f1400",
+                      "on-primary-fixed-variant": "#6d344f",
+                      "secondary": "#7e4c83",
+                      "surface-tint": "#884b67",
+                      "on-tertiary-fixed": "#261900",
+                      "outline-variant": "#d5c2c7",
+                      "on-surface": "#1d1b16",
+                      "inverse-on-surface": "#f6f0e7",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#382700",
+                      "surface-container": "#f3ede4",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#380822",
+                      "background": "#fff9ef",
+                      "primary-container": "#4a1731",
+                      "inverse-surface": "#32302a",
+                      "tertiary-fixed-dim": "#f0bf5c",
+                      "surface-dim": "#dfd9d1",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#514348",
+                      "surface-container-highest": "#e7e2d9",
+                      "on-tertiary-container": "#b58a2c",
+                      "secondary-fixed": "#ffd6fd",
+                      "surface-variant": "#e7e2d9",
+                      "on-background": "#1d1b16",
+                      "primary": "#30021c",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#fdb0d0",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "tertiary-fixed": "#ffdea4",
+                      "on-secondary-container": "#7b4980",
+                      "surface": "#fff9ef",
+                      "primary-fixed-dim": "#fdb0d0",
+                      "outline": "#837378",
+                      "surface-container-low": "#f9f3ea",
+                      "secondary-container": "#fec0ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#c27c9a",
+                      "on-secondary-fixed": "#33053b",
+                      "surface-bright": "#fff9ef",
+                      "primary-fixed": "#ffd8e6",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "unit": "4px",
+                      "stack-lg": "24px",
+                      "margin-desktop": "32px",
+                      "stack-sm": "8px",
+                      "margin-tablet": "24px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Source Serif 4"],
+                      "headline-lg": ["Source Serif 4"],
+                      "title-lg": ["Work Sans"],
+                      "label-md": ["Work Sans"],
+                      "body-md": ["Work Sans"],
+                      "display-lg": ["Source Serif 4"],
+                      "body-lg": ["Source Serif 4"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+<!-- Top AppBar (from JSON) -->
+<header class="flex justify-between items-center px-margin-mobile w-full h-16 bg-surface fixed top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional and warm close-up portrait of a Nigerian Catholic parishioner, smiling gently. The lighting is soft and natural, reflecting a serene and communal atmosphere within a modern light-mode interface. The color palette emphasizes warm cream and deep burgundy tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnr-byN4JVxlC8qJ5eh3_NSddVKSf6eTudOX_Tf10rF9ZAM8Y4MDhw_Ns0MIIeo5n8L8hAsojI4jRk3fTT5b9oa-MPpE9gV7jkYBDw0d2CColj-pIpx4qkHg2Utf4RowMJMJEByOfzKGx-xFJjDU5Og1me49M5SkJo0-LNTWiptbcb8MlCZClA0_Ccszlr1jIzqxzHDQGSN7Zo69mbR6Px7-rLqTJ3zZo8A758ibchcZnKZyv5hQpI"/>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-primary">CatApp</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="pt-20 pb-28 px-margin-mobile max-w-lg mx-auto"><div class="mb-stack-md rounded-xl overflow-hidden shadow-sm"><img alt="CatApp Banner" class="w-full h-auto object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtAspunqidGJY_vl_gOT7ww8849UBhW-4BkH9oG645cx3jYQYzp5iNluIJrBnYYb97A9IviuTLhLcLtFowfNyDkUhCxD51WES_3KalRxOT6xIjCmzmFlgI66D4O87x7HhAI_zVWht5p_oH0yCFglfvEM0wLiQIuQ_M2f5I2_yhUnSeteKsZzVXDCkjfnxFdqCGPqnatGxiF61TRrpJ7mEEpqW3fPBNDbx7E08hLq47Va670CUdEHH2ROw"/></div>
+<!-- Global Search Bar -->
+<div class="mb-stack-lg">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-full py-3 pl-12 pr-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<!-- Featured Section: Hymns -->
+<section class="mb-stack-lg">
+<div class="relative w-full h-48 rounded-xl overflow-hidden shadow-sm group cursor-pointer active:scale-[0.98] transition-transform">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A majestic interior view of a Nigerian Catholic cathedral during a festive liturgy. Sunlight streams through stained-glass windows, illuminating the choir and pews in a warm, golden glow. The atmosphere is dignified, prayerful, and communal, perfectly complementing a premium digital library experience with deep burgundy and cream accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBB5OUc8_Z_Za2sYSGrV7H3ZFBEvwqWHnNOicg4-c7y3gBq8agkrd_cMDYMn3LarCG9cqjc1471QNr98ve9f1ENf-wrSionLLQ2jVzuLOwl4g0kpm34Q1CV-5Ml6N-KPoT0w__C4U72lqkk7t9d_VBw0Ov5zMUjVdFEpeYqKlg2XkM5n_9q5H8FR9luyZ9bSB1XPSkcsQplyriEnPuVkcdnrmFQKNHzvBG1JSJDkUnhwO5a-gAl6OWr')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-margin-mobile">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary mb-1">Hymns</h2>
+<p class="font-label-md text-label-md text-on-primary/80 uppercase tracking-widest">Sing to the Lord</p>
+</div>
+<div class="absolute top-4 right-4 bg-primary-container p-2 rounded-full text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="music_note">music_note</span>
+</div>
+</div>
+</section>
+<!-- Library Bento Grid -->
+<div class="bento-grid">
+<!-- Bible -->
+<div class="glass-card p-margin-mobile rounded-xl flex flex-col items-start gap-4 hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Bible</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">The Holy Scriptures</p>
+</div>
+</div>
+<!-- Catechism -->
+<div class="glass-card p-margin-mobile rounded-xl flex flex-col items-start gap-4 hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Catechism</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Faith &amp; Doctrine</p>
+</div>
+</div>
+<!-- Rosary -->
+<div class="glass-card p-margin-mobile rounded-xl col-span-2 flex items-center justify-between hover:shadow-md transition-shadow cursor-pointer bg-white">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="prayer_times">prayer_times</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">The Holy Rosary</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Meditate on the Mysteries</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Novenas -->
+<div class="glass-card p-margin-mobile rounded-xl flex flex-col items-start gap-4 hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Novenas</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">9-Day Devotions</p>
+</div>
+</div>
+<!-- Breviary -->
+<div class="glass-card p-margin-mobile rounded-xl flex flex-col items-start gap-4 hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Breviary</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Divine Office</p>
+</div>
+</div>
+</div>
+<!-- Nigerian Context: Parishes Prompt -->
+<div class="mt-stack-lg p-margin-mobile rounded-xl bg-primary text-on-primary flex items-center justify-between shadow-lg">
+<div class="flex-1">
+<h4 class="font-title-lg text-title-lg">Parish Resources</h4>
+<p class="font-body-md text-white/70">Find bulletins and specific prayers from your Nigerian parish.</p>
+</div>
+<div class="ml-4 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="church">church</span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (from JSON) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center py-2 px-margin-mobile bg-surface-container-low rounded-t-xl border-t border-outline-variant">
+<!-- Today -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-md text-label-md">Today</span>
+</a>
+<!-- Library (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<!-- Community -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<!-- Parishes -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="church">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

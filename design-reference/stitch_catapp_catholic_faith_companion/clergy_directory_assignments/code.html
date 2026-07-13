@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Diocese Admin Portal - Clergy Directory</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&amp;family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dfd9d1",
+                    "on-tertiary-fixed": "#261900",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#4a1731",
+                    "secondary-container": "#fec0ff",
+                    "on-secondary-container": "#7b4980",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#f6f0e7",
+                    "tertiary": "#1f1400",
+                    "surface-tint": "#884b67",
+                    "surface-bright": "#fff9ef",
+                    "primary": "#30021c",
+                    "on-surface-variant": "#514348",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1d1b16",
+                    "inverse-primary": "#fdb0d0",
+                    "background": "#fff9ef",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "tertiary-fixed": "#ffdea4",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "outline-variant": "#d5c2c7",
+                    "on-surface": "#1d1b16",
+                    "surface-variant": "#e7e2d9",
+                    "outline": "#837378",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "surface-container-low": "#f9f3ea",
+                    "secondary": "#7e4c83",
+                    "on-secondary-fixed": "#33053b",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#ede7df",
+                    "inverse-surface": "#32302a",
+                    "surface": "#fff9ef",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface-container-highest": "#e7e2d9",
+                    "on-tertiary-container": "#b58a2c",
+                    "tertiary-container": "#382700",
+                    "primary-fixed": "#ffd8e6",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#c27c9a",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "surface-container": "#f3ede4",
+                    "on-primary-fixed": "#380822"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "32px",
+                    "stack-sm": "8px",
+                    "margin-tablet": "24px",
+                    "gutter": "16px",
+                    "stack-md": "16px",
+                    "stack-lg": "24px"
+            },
+            "fontFamily": {
+                    "label-md": ["Work Sans"],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "title-lg": ["Work Sans"],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "body-md": ["Work Sans"],
+                    "body-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-pill {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            scroll-behavior: smooth;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f3ede4;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5c2c7;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex min-h-screen">
+<!-- NavigationDrawer (Web) -->
+<aside class="hidden md:flex flex-col py-stack-lg gap-unit fixed left-0 top-0 h-full w-72 bg-surface-container-low dark:bg-surface-container-lowest shadow-sm z-40">
+<div class="px-6 mb-8">
+<h1 class="font-headline-lg text-primary">Diocese Management</h1>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant active:scale-95 transition-transform transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant active:scale-95 transition-transform transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="edit_calendar">edit_calendar</span>
+<span class="font-label-md text-label-md">Parish Editor</span>
+</a>
+<!-- Active Tab: Clergy Directory -->
+<a class="bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-full mx-2 px-4 py-3 flex items-center gap-3 active:scale-95 transition-transform transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-md text-label-md">Clergy Directory</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant active:scale-95 transition-transform transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Discovery Map</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-72 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-inverse-surface flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 sticky top-0 z-30">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="account_balance">account_balance</span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary dark:text-primary-fixed-dim">Diocese Admin Portal</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-variant/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="search">search</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden border-2 border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a senior Catholic administrator in a dignified black clerical shirt, featuring soft warm lighting and a minimalist cream-colored background consistent with the M3 design system. The lighting is high-key and the mood is calm and authoritative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtwyqH_wV8axgmdYHTgG5HkPvgvKagXXDGb1yGhKcAvGjor2drYZcIgXbdQkKXihoDntirovtnHJUsSVaL6NYR-Za63jtIl0uT9YFhYOo70J7EnP1BaIifVWoVK8LbsZEj98Pcb4KiDH2OhZDdk2je3PrcPr2VJPBZOzhVUizmA0_lE67hU4kcpfYhVXAky1JwBjbqdb_19yZgPz4mVGyukK-Qfy1O4Elaw3CDmJDcnbxOmaJ3TZfh"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 p-margin-mobile md:p-margin-desktop bg-surface-container-lowest">
+<!-- Page Header & Action Bar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-stack-md mb-stack-lg">
+<div class="space-y-1">
+<h3 class="font-display-lg text-headline-lg text-primary">Clergy Directory</h3>
+<p class="font-body-md text-on-surface-variant">Oversee assignments, update contact details, and manage spiritual leadership roles.</p>
+</div>
+<div class="flex gap-stack-sm">
+<button class="flex items-center gap-2 px-6 py-3 rounded-full border border-primary text-primary font-label-md text-label-md hover:bg-primary/5 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="file_download">file_download</span>
+                        Export List
+                    </button>
+<button class="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm hover:shadow-md transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="person_add">person_add</span>
+                        Register Clergy
+                    </button>
+</div>
+</div>
+<!-- Filters & Stats (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="bg-surface p-stack-md rounded-xl border border-outline-variant/30 shadow-sm flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-primary" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface-variant">Total Clergy</p>
+<p class="font-headline-lg text-primary">142</p>
+</div>
+</div>
+<div class="bg-surface p-stack-md rounded-xl border border-outline-variant/30 shadow-sm flex items-center gap-4">
+<div class="bg-secondary/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-secondary" data-icon="church" style="font-variation-settings: 'FILL' 1;">church</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface-variant">Parish Vacancies</p>
+<p class="font-headline-lg text-secondary">08</p>
+</div>
+</div>
+<div class="md:col-span-2 bg-surface-container p-stack-md rounded-xl border border-outline-variant/30 shadow-sm flex flex-wrap gap-2 items-center">
+<span class="font-label-md text-on-surface-variant mr-2">Quick Filters:</span>
+<span class="px-3 py-1 bg-primary-container text-on-primary-container rounded-full font-label-md text-[11px] cursor-pointer">Active</span>
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant rounded-full font-label-md text-[11px] cursor-pointer hover:bg-outline-variant/30">Pastors</span>
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant rounded-full font-label-md text-[11px] cursor-pointer hover:bg-outline-variant/30">Deacons</span>
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant rounded-full font-label-md text-[11px] cursor-pointer hover:bg-outline-variant/30">On Leave</span>
+</div>
+</div>
+<!-- Highly Functional Data Table -->
+<div class="bg-surface rounded-2xl shadow-sm border border-outline-variant/30 overflow-hidden">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant/50">
+<th class="px-6 py-4 font-label-md text-on-surface-variant text-label-md uppercase tracking-wider">Cleric Name</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant text-label-md uppercase tracking-wider">Role</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant text-label-md uppercase tracking-wider">Current Parish</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant text-label-md uppercase tracking-wider">Assigned Since</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant text-label-md uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant text-label-md uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<!-- Entry 1 -->
+<tr class="hover:bg-surface-variant/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a serene Middle-aged African priest in formal Roman collar, looking kindly towards the camera. The image has a soft-focus background of a cathedral interior, with warm lighting and a high-quality, dignified digital photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpSZX-R2jVYmvIJIUProA9ognlHB49iXJXFLReuIbQWnKNn1RgXrr5XUBUUEJo95kOcIZy243FiBB90ITDNS9E6N4Ar8hIxUgQMb1yzAeq0_y5VufnAZj-Eb_YoC7OzkYqkvTUXEcd1WEQd8ECxnD7JCgD4C3Ga6Iwhl7mmEKgVmO36uf8wAUJJygYXOcC8jkPUjZbtlMv1THO-BbUalVI6r3e-9vsrEcmJqoIYJFAYJaIsF0HMbhy"/>
+</div>
+<div>
+<p class="font-title-lg text-body-md text-primary font-semibold">Rev. Fr. Emmanuel Okeke</p>
+<p class="font-label-md text-[11px] text-on-surface-variant">fr.okeke@diocese.ng</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-body-md text-on-surface">Pastor</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface">Holy Trinity Cathedral</span>
+<span class="font-label-md text-[11px] text-on-surface-variant">Lagos Central</span>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">Jan 12, 2018</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:bg-primary/10 rounded-lg" title="Reassign">
+<span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:bg-primary/10 rounded-lg" title="Edit Contact">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Entry 2 -->
+<tr class="hover:bg-surface-variant/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a young Catholic deacon with a gentle smile, wearing a clerical collar. Bright and clear daylight lighting, set against a blurred background of a modern community hall. High resolution digital portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjyUYahmMrVpkESe57ezt6Ck9lRQXOyenzpv-gJd6lt0nF25BPBOeBztIH3L4wDVlgURIyJeRuu2YxiQyv3o78YcBJDIte6GjWG6r7OsTmNPZioaCoBliN8ggSSfjtPQtQoQxYs9d5UrZeKEbm2giPJdoCWNp1aKxbJ77o6YC6pekTsANDKEEECd1MoBt1OgFv3QX-edIK8xzTqRHEfwH9DkoMnkDj50EFRlhjXQAXV4iHteTRxtcJ"/>
+</div>
+<div>
+<p class="font-title-lg text-body-md text-primary font-semibold">Rev. Mr. Jude Nwachukwu</p>
+<p class="font-label-md text-[11px] text-on-surface-variant">j.nwachukwu@diocese.ng</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-body-md text-on-surface">Deacon</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface">St. Jude’s Catholic Church</span>
+<span class="font-label-md text-[11px] text-on-surface-variant">Surulere</span>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">Aug 05, 2021</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:bg-primary/10 rounded-lg" title="Reassign">
+<span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:bg-primary/10 rounded-lg" title="Edit Contact">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Entry 3 -->
+<tr class="hover:bg-surface-variant/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Dignified portrait of an elderly priest with grey hair, wearing a vestment in a softly lit chapel. The aesthetic is contemplative and reverent, with a focus on fine facial details and warm, ambient candlelight illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD34fogPS4sqWGMZtlSGy7c-2hSUNIiBg1IJA_0_FcBeyj6EELo6Pm6k9Mkdo6jt6wWichIHeCRouyRwQqWr9c-ovNH4vsLSxfxhtCV8UNsWU81q5mIQ1RiiubCslKXPRsGSjS66MNfxYs3O98aompj66Qmj9a3cKnnEcgPHus_EDt-Dtdu638cSF-5cXwWFbmF_HdSePplPpM4HOsDb7372vXs3pGrAPsGGYO71RVrSNhoMEAefEL4"/>
+</div>
+<div>
+<p class="font-title-lg text-body-md text-primary font-semibold">Very Rev. Msgr. Silas Ade</p>
+<p class="font-label-md text-[11px] text-on-surface-variant">s.ade@diocese.ng</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-body-md text-on-surface">Pastor Emeritus</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface">St. Peter's Parish</span>
+<span class="font-label-md text-[11px] text-on-surface-variant">Ikeja</span>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">Mar 20, 2005</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">Sabbatical</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:bg-primary/10 rounded-lg" title="Reassign">
+<span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:bg-primary/10 rounded-lg" title="Edit Contact">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Entry 4 -->
+<tr class="hover:bg-surface-variant/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional profile photo of a young African priest, dressed in a black clerical suit, smiling subtly. The background is a crisp white office setting with soft shadows, creating a high-end corporate yet accessible vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2fcTZgd1W0hcsW42F_s4X1Uqre6f38jMONKmFBDednpq2oP-xQj-g50JVLsf1LQMXWtxwWNgb0n-o46hvM4PxQZ2LiLJuRa1D-lgI2svocyiTonOIgfx312PISCpYa6xc-lf920GXDXAvPjUZ1CJwFxulQzqA085l7W53TXXgCaoMs5g7FWk_tzWYMrEBDHprdygewak2pW7dE-WfBl5r7SC1ZE1Y-M8BgS9kmMkmniF5T9gGnMdz"/>
+</div>
+<div>
+<p class="font-title-lg text-body-md text-primary font-semibold">Rev. Fr. Peter Chima</p>
+<p class="font-label-md text-[11px] text-on-surface-variant">p.chima@diocese.ng</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-body-md text-on-surface">Parochial Vicar</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface">Corpus Christi Parish</span>
+<span class="font-label-md text-[11px] text-on-surface-variant">Lekki Phase 1</span>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">Nov 30, 2022</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:bg-primary/10 rounded-lg" title="Reassign">
+<span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors hover:bg-primary/10 rounded-lg" title="Edit Contact">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="bg-surface-container-low px-6 py-4 flex items-center justify-between border-t border-outline-variant/30">
+<span class="font-label-md text-on-surface-variant">Showing 1-10 of 142 clergy members</span>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg hover:bg-surface-variant text-on-surface-variant disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<span class="px-3 py-1 bg-primary text-on-primary rounded font-label-md">1</span>
+<span class="px-3 py-1 hover:bg-surface-variant rounded font-label-md cursor-pointer">2</span>
+<span class="px-3 py-1 hover:bg-surface-variant rounded font-label-md cursor-pointer">3</span>
+<button class="p-2 rounded-lg hover:bg-surface-variant text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer for BottomNavBar on Mobile -->
+<div class="h-16 md:hidden"></div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe md:hidden bg-surface dark:bg-inverse-surface border-t border-outline-variant/30 h-16 shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="font-label-md text-label-md">Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="church">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+<!-- Active Tab: Clergy -->
+<a class="flex flex-col items-center justify-center bg-secondary/20 text-primary dark:text-primary-fixed-dim rounded-2xl px-6 py-1 scale-110 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="person_search" style="font-variation-settings: 'FILL' 1;">person_search</span>
+<span class="font-label-md text-label-md">Clergy</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-label-md text-label-md">Map</span>
+</a>
+</nav>
+<!-- Reassignment Modal (Overlay Template) -->
+<div class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4" id="modal-overlay">
+<div class="bg-surface max-w-md w-full rounded-2xl shadow-xl border border-outline-variant/30 animate-in fade-in zoom-in duration-300">
+<div class="p-6 border-b border-outline-variant/20 flex justify-between items-center">
+<h4 class="font-title-lg text-primary">Assign to Parish</h4>
+<button class="text-on-surface-variant hover:text-primary" onclick="toggleModal()"><span class="material-symbols-outlined" data-icon="close">close</span></button>
+</div>
+<div class="p-6 space-y-stack-md">
+<div>
+<label class="block font-label-md text-on-surface-variant mb-1">Clergy Member</label>
+<div class="flex items-center gap-3 p-3 bg-surface-container rounded-lg">
+<div class="w-8 h-8 rounded-full bg-primary-container text-[10px] flex items-center justify-center text-on-primary-container font-bold">EO</div>
+<span class="font-body-md font-semibold">Rev. Fr. Emmanuel Okeke</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-1">Target Parish</label>
+<select class="w-full bg-surface-container border-outline-variant rounded-lg p-3 font-body-md">
+<option>St. Mary's Catholic Church, Ajah</option>
+<option>St. Anthony of Padua, Mushin</option>
+<option>Immaculate Conception, Maryland</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-1">Role in New Parish</label>
+<select class="w-full bg-surface-container border-outline-variant rounded-lg p-3 font-body-md">
+<option>Pastor</option>
+<option>Parochial Vicar</option>
+<option>Resident Priest</option>
+</select>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant/20 flex gap-stack-sm">
+<button class="flex-1 px-4 py-2 border border-outline text-on-surface-variant rounded-full font-label-md hover:bg-surface-variant/20 transition-all" onclick="toggleModal()">Cancel</button>
+<button class="flex-1 px-4 py-2 bg-primary text-on-primary rounded-full font-label-md hover:bg-primary/90 transition-all" onclick="toggleModal()">Confirm Transfer</button>
+</div>
+</div>
+</div>
+<script>
+        function toggleModal() {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.toggle('hidden');
+        }
+
+        // Attach modal trigger to buttons for demo
+        document.querySelectorAll('button[title="Reassign"]').forEach(btn => {
+            btn.addEventListener('click', toggleModal);
+        });
+
+        // Simple row highlight effect
+        const tableRows = document.querySelectorAll('tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('click', (e) => {
+                if (!e.target.closest('button')) {
+                    // Logic for selecting a row or viewing details
+                }
+            });
+        });
+    </script>
+</body></html>

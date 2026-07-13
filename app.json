@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "CatApp",
+    "owner": "guyxander",
+    "slug": "catapp",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/catapp-logo.png",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "assets/*"
+    ],
+    "android": {
+      "package": "ng.catholic.catapp",
+      "permissions": [
+        "POST_NOTIFICATIONS",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/catapp-logo.png",
+        "backgroundColor": "#000000"
+      }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "CatApp uses your location to show nearby parishes and calculate distance."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/catapp-logo.png",
+          "color": "#ffb743"
+        }
+      ]
+    ],
+    "extra": {
+      "market": "Nigeria",
+      "backend": "Supabase",
+      "eas": {
+        "projectId": "55a96b62-f6c4-49b7-b5c6-f6d7578cdabe"
+      }
+    }
+  }
+}

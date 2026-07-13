@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reflective Reading Mode - CatApp</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#1f1400",
+                        "secondary": "#7e4c83",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "surface": "#fff9ef",
+                        "inverse-primary": "#fdb0d0",
+                        "primary": "#30021c",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dfd9d1",
+                        "primary-fixed": "#ffd8e6",
+                        "on-primary-container": "#c27c9a",
+                        "background": "#fff9ef",
+                        "on-tertiary-container": "#b58a2c",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#fec0ff",
+                        "primary-container": "#4a1731",
+                        "on-secondary-fixed": "#33053b",
+                        "surface-container-highest": "#e7e2d9",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#884b67",
+                        "outline": "#837378",
+                        "tertiary-fixed": "#ffdea4",
+                        "tertiary-container": "#382700",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "on-tertiary-fixed": "#261900",
+                        "on-secondary-container": "#7b4980",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#f3ede4",
+                        "inverse-surface": "#32302a",
+                        "surface-container-low": "#f9f3ea",
+                        "surface-container-high": "#ede7df",
+                        "on-surface": "#1d1b16",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "inverse-on-surface": "#f6f0e7",
+                        "on-surface-variant": "#514348",
+                        "surface-bright": "#fff9ef",
+                        "outline-variant": "#d5c2c7",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1d1b16",
+                        "surface-variant": "#e7e2d9",
+                        "on-primary-fixed": "#380822",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "tertiary-fixed-dim": "#f0bf5c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "24px",
+                        "margin-desktop": "32px",
+                        "unit": "4px",
+                        "stack-sm": "8px",
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "margin-tablet": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "title-lg": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .sepia {
+            background-color: #f4ecd8 !important;
+            color: #5b4636 !important;
+        }
+        .sepia .text-on-surface-variant { color: #7a6652 !important; }
+        .sepia .bg-surface-container-low { background-color: #efe4cb !important; }
+        .sepia .border-outline-variant\/10 { border-color: rgba(91, 70, 54, 0.1) !important; }
+
+        #reading-container {
+            transition: font-size 0.2s ease-in-out, background-color 0.3s ease;
+        }
+
+        .scroll-progress {
+            height: 4px;
+            background: #884b67; /* surface-tint */
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Distraction-free fade */
+        .ui-element {
+            transition: opacity 0.5s ease;
+        }
+        .distraction-free .ui-element {
+            opacity: 0.1;
+        }
+        .distraction-free .ui-element:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Top Progress Bar (Fixed) -->
+<div class="fixed top-0 left-0 w-full z-[60]">
+<div class="scroll-progress" id="progress-bar"></div>
+</div>
+<!-- Header / Controls -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-md ui-element">
+<div class="max-w-[720px] mx-auto h-16 flex items-center justify-between px-margin-mobile">
+<button class="p-2 rounded-full hover:bg-on-surface/5 transition-colors" onclick="window.history.back()">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-on-surface/5 transition-colors" id="theme-toggle" onclick="toggleAppearanceMenu()">
+<span class="material-symbols-outlined text-on-surface-variant">format_size</span>
+</button>
+<div class="hidden absolute top-14 right-margin-mobile w-64 bg-surface-container-high shadow-xl rounded-xl p-4 border border-outline-variant/20 z-[70]" id="appearance-menu">
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md">Text Size</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary/5" onclick="adjustFontSize(-2)">A-</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary/5" onclick="adjustFontSize(2)">A+</button>
+</div>
+</div>
+<div class="h-px bg-outline-variant/20"></div>
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md">Theme</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-white border border-outline flex items-center justify-center shadow-sm" onclick="setTheme('light')" title="Light"></button>
+<button class="w-8 h-8 rounded-full bg-[#f4ecd8] border border-[#d5c2c7] flex items-center justify-center shadow-sm" onclick="setTheme('sepia')" title="Sepia"></button>
+<button class="w-8 h-8 rounded-full bg-[#1d1b16] border border-black flex items-center justify-center shadow-sm" onclick="setTheme('dark')" title="Dark"></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Reading Content -->
+<main class="pt-32 pb-40 px-margin-mobile max-w-[720px] mx-auto min-h-screen" id="reading-container">
+<!-- Liturgical Header -->
+<div class="text-center mb-16 animate-fade-in">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">Gospel Reading</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-2">John 15:9-17</h1>
+<p class="font-body-md text-on-surface-variant italic">"Abide in my love"</p>
+</div>
+<!-- Scripture Body -->
+<article class="font-body-lg text-body-lg leading-relaxed md:leading-loose space-y-8 text-on-surface" id="scripture-text">
+<p>
+                Jesus said to his disciples: <br/>
+                “As the Father loves me, so I also love you. <br/>
+                Remain in my love. <br/>
+                If you keep my commandments, you will remain in my love, <br/>
+                just as I have kept my Father’s commandments <br/>
+                and remain in his love.
+            </p>
+<p>
+                “I have told you this so that my joy may be in you <br/>
+                and your joy might be complete. <br/>
+                This is my commandment: love one another as I love you. <br/>
+                No one has greater love than this, <br/>
+                to lay down one’s life for one’s friends.
+            </p>
+<p>
+                You are my friends if you do what I command you. <br/>
+                I no longer call you slaves, <br/>
+                because a slave does not know what his master is doing. <br/>
+                I have called you friends, <br/>
+                because I have told you everything I have heard from my Father.
+            </p>
+<p>
+                It was not you who chose me, but I who chose you <br/>
+                and appointed you to go and bear fruit that will remain, <br/>
+                so that whatever you ask the Father in my name he may give you. <br/>
+                This I command you: love one another.”
+            </p>
+</article>
+<!-- Divider Decor -->
+<div class="flex items-center justify-center gap-4 my-20 opacity-30">
+<div class="h-px w-12 bg-primary"></div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">chess</span>
+<div class="h-px w-12 bg-primary"></div>
+</div>
+<!-- Reflection Section -->
+<section class="bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10">
+<h2 class="font-title-lg text-title-lg text-primary mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined">self_improvement</span>
+                Guided Reflection
+            </h2>
+<div class="space-y-6">
+<p class="font-body-md text-on-surface-variant">
+                    Take a moment to sit with the word "Friends." Jesus explicitly moves us from the status of servants to friends. 
+                </p>
+<div class="pl-4 border-l-4 border-secondary/30 italic font-body-lg text-on-surface">
+                    "How does it feel to be chosen by Christ, not as a task-worker, but as a personal friend with whom He shares His Father's secrets?"
+                </div>
+<div class="mt-8">
+<button class="w-full bg-primary text-on-primary py-4 px-6 rounded-full font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-[0.98]">
+                        Finish Reading &amp; Log Reflection
+                        <span class="material-symbols-outlined">edit_note</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Contextual Visual (Atmospheric) -->
+<div class="mt-16 overflow-hidden rounded-2xl relative h-64 shadow-inner group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" data-alt="A serene, soft-focus landscape of a sun-drenched vineyard at dawn. The lighting is warm and golden, casting long shadows between rows of grapevines. The atmosphere is quiet, spiritual, and contemplative, reflecting the biblical themes of abiding and growth. High-quality digital photography style with a shallow depth of field." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDge3tb4KuqshUE9OT2K0RbQv-Dn2raiMfyAFP8H_qZVxSwPSLLOuiKNneKoyPo-_OaADwPajX-8qxWtJQ1zx86Is5kaXH7sYrWgvrsRpaGVCT6QUQnvZhQRNPOLvs30a30wjk_TChWn1Zz9nGrz5lhH5FL-28SH7uZxaPf4LsiJapzHakfL80rJY-GzTPI0nyXOXZcjzU-AwFIcrTFrp-10YcvhnFq4x0oZB09DrlYnKfs0uY3V6ZD')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+</div>
+</main>
+<!-- Navigation Shell Logic Suppression: Reading mode is a "Task-Focused" sub-page, so TopAppBar/BottomNavBar are excluded. Contextual FAB is suppressed. -->
+<script>
+        // Progress bar logic
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+
+            // Toggle distraction free mode after some scrolling
+            if (winScroll > 100) {
+                document.body.classList.add('distraction-free');
+            } else {
+                document.body.classList.remove('distraction-free');
+            }
+        };
+
+        // UI Interactions
+        function toggleAppearanceMenu() {
+            const menu = document.getElementById('appearance-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        let currentFontSize = 18;
+        function adjustFontSize(delta) {
+            currentFontSize += delta;
+            // Bound font size
+            if (currentFontSize < 14) currentFontSize = 14;
+            if (currentFontSize > 32) currentFontSize = 32;
+            document.getElementById('scripture-text').style.fontSize = currentFontSize + 'px';
+            document.getElementById('scripture-text').style.lineHeight = (currentFontSize * 1.6) + 'px';
+        }
+
+        function setTheme(mode) {
+            const body = document.body;
+            const html = document.documentElement;
+            
+            // Remove classes
+            body.classList.remove('sepia');
+            html.classList.remove('dark');
+
+            if (mode === 'sepia') {
+                body.classList.add('sepia');
+            } else if (mode === 'dark') {
+                html.classList.add('dark');
+            }
+            
+            document.getElementById('appearance-menu').classList.add('hidden');
+        }
+
+        // Close menu on click outside
+        window.addEventListener('click', function(e){   
+            if (!document.getElementById('appearance-menu').contains(e.target) && !document.getElementById('theme-toggle').contains(e.target)){
+                document.getElementById('appearance-menu').classList.add('hidden');
+            }
+        });
+    </script>
+</body></html>

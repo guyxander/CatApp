@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mass Times - Holy Cross Cathedral</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#837378",
+                        "on-tertiary-container": "#b58a2c",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface-variant": "#e7e2d9",
+                        "primary": "#30021c",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "surface-dim": "#dfd9d1",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "on-primary-container": "#c27c9a",
+                        "inverse-on-surface": "#f6f0e7",
+                        "tertiary": "#1f1400",
+                        "surface-container": "#f3ede4",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fff9ef",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "primary-container": "#4a1731",
+                        "tertiary-fixed": "#ffdea4",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-container-high": "#ede7df",
+                        "secondary": "#7e4c83",
+                        "on-secondary-fixed": "#33053b",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#d5c2c7",
+                        "tertiary-container": "#382700",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "on-surface-variant": "#514348",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1d1b16",
+                        "on-primary-fixed": "#380822",
+                        "inverse-surface": "#32302a",
+                        "on-background": "#1d1b16",
+                        "surface-tint": "#884b67",
+                        "secondary-container": "#fec0ff",
+                        "surface-container-low": "#f9f3ea",
+                        "primary-fixed": "#ffd8e6",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e7e2d9",
+                        "on-secondary-container": "#7b4980",
+                        "on-primary": "#ffffff",
+                        "surface": "#fff9ef",
+                        "surface-bright": "#fff9ef",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "inverse-primary": "#fdb0d0",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "24px",
+                        "margin-desktop": "32px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "margin-tablet": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "label-md": ["Work Sans"],
+                        "title-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "display-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .schedule-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .schedule-card:active {
+            transform: scale(0.98);
+        }
+        .glass-header {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 249, 239, 0.85);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f9f3ea;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5c2c7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md custom-scrollbar">
+<!-- Top AppBar (Sticky) -->
+<header class="w-full top-0 sticky z-40 bg-background flex justify-between items-center px-margin-mobile h-16 transition-colors duration-200 ease-in-out glass-header">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:bg-surface-variant/10 p-2 rounded-full transition-colors">arrow_back</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Parish Schedule</h1>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a smiling young Nigerian woman with braided hair, wearing a modest, stylish dress in a brightly lit modern office environment with warm sunlight filtering through. The photographic style is clean and corporate, featuring high-quality bokeh and a warm, inviting color palette of creams and deep reds to match the brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP3JqKGM2Qswb58I-sutTB_1TBxPeyMa1iIhdF5xIpstOvtwLrDLquQ18H0DK6eOHwUr9SOSxDJlxNuBs46MFy7ZYKX_J8lMCgEU5q5tFIZ7qbKd3AKSMHrxh83FUHK_T5WFP8wcZxqWcfZcszUAnD965MdBsLUbVCMfP9kroIc6uH9YqM_30_tW2l3ORVxIojYt1FpSlH0cH1HrutcVjhKEDNepJWEAvrExRQJE-CqgCOq7xdGjtu"/>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-margin-mobile pb-32 pt-stack-md space-y-stack-lg">
+<!-- Parish Hero -->
+<section class="relative rounded-xl overflow-hidden h-48 flex items-end p-stack-md group">
+<div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A wide-angle interior photograph of a majestic Nigerian Catholic Cathedral during the golden hour. The architecture features soaring white arches, intricate stained glass depicting local saints, and rows of polished wooden pews. Sunlight streams in beams through the dust particles, creating a serene, sacred atmosphere with a color palette of warm golds, deep burgundies, and soft creams." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAoQ-Kp6Kvxch-RH9qpiwwC-R8gu0cK_s0ba7NuDCcsOw3_z_votmkRTHChfLqwO_kAXU_TZTxgH8Zo50tFC_dH_v_pYwiJWVEL5EXq8cYwH17MBk3Dur5S_RA0jBkkrcsgqED4tcJEwaIw-JeRamvVYOKVDlDwwwbVpzSpDmZCXCZbtVCbdrCXLgceQ2_hxhPn2gKXobOOiVmU6CwDtc9tsG3L8B_LwRFk5BFNTmbL9iOYmQWLdi5_')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent z-10"></div>
+<div class="relative z-20">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-white">Holy Cross Cathedral</h2>
+<div class="flex items-center text-white/90 font-label-md text-label-md mt-1">
+<span class="material-symbols-outlined text-[18px] mr-1">location_on</span>
+                    Lagos Island, Lagos State
+                </div>
+</div>
+</section>
+<!-- Quick Tabs / Filters -->
+<div class="flex gap-stack-sm overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex-none px-stack-md py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md">Mass Times</button>
+<button class="flex-none px-stack-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-surface-variant/20">Confession</button>
+<button class="flex-none px-stack-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-surface-variant/20">Adoration</button>
+<button class="flex-none px-stack-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-surface-variant/20">Office Hours</button>
+</div>
+<!-- Sunday Mass Schedule (Bento Style) -->
+<section class="space-y-stack-md">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event</span>
+<h3 class="font-title-lg text-title-lg">Sunday Schedule</h3>
+</div>
+<div class="grid grid-cols-2 gap-stack-md">
+<!-- Early Morning -->
+<div class="col-span-2 md:col-span-1 bg-white p-stack-md rounded-xl border border-outline-variant/30 schedule-card flex flex-col justify-between h-32">
+<div>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider">Early Morning</span>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-primary mt-1">6:30 AM</p>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Main Cathedral</p>
+</div>
+<!-- Mid-Morning (High Mass) -->
+<div class="col-span-2 md:col-span-1 bg-secondary-container p-stack-md rounded-xl border border-outline-variant/30 schedule-card flex flex-col justify-between h-32">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-md text-label-md text-on-secondary-container uppercase tracking-wider">Mid-Morning</span>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-primary mt-1">9:00 AM</p>
+</div>
+<span class="bg-primary text-white text-[10px] px-2 py-0.5 rounded-full font-bold">HIGH MASS</span>
+</div>
+<p class="font-body-md text-body-md text-on-secondary-container">Sung Mass with Choir</p>
+</div>
+<!-- Late Morning -->
+<div class="col-span-1 bg-white p-stack-md rounded-xl border border-outline-variant/30 schedule-card flex flex-col justify-between h-32">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">English</span>
+<p class="font-title-lg text-title-lg text-primary mt-1">11:30 AM</p>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant italic">Youth Mass</p>
+</div>
+<!-- Evening -->
+<div class="col-span-1 bg-surface-container-high p-stack-md rounded-xl border border-outline-variant/30 schedule-card flex flex-col justify-between h-32">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Evening</span>
+<p class="font-title-lg text-title-lg text-primary mt-1">6:00 PM</p>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Evening Reflection</p>
+</div>
+</div>
+</section>
+<!-- Weekday & Saturday -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<!-- Weekdays -->
+<div class="space-y-stack-md">
+<div class="flex items-center gap-2 text-primary border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined">calendar_view_week</span>
+<h3 class="font-title-lg text-title-lg">Weekdays</h3>
+</div>
+<ul class="space-y-3">
+<li class="flex justify-between items-center bg-white/50 p-3 rounded-lg">
+<span class="font-body-md text-body-md">Morning Mass</span>
+<span class="font-label-md text-label-md font-bold text-primary">6:00 AM</span>
+</li>
+<li class="flex justify-between items-center bg-white/50 p-3 rounded-lg">
+<span class="font-body-md text-body-md">Noon Mass</span>
+<span class="font-label-md text-label-md font-bold text-primary">12:30 PM</span>
+</li>
+<li class="flex justify-between items-center bg-white/50 p-3 rounded-lg">
+<span class="font-body-md text-body-md">Evening Mass</span>
+<span class="font-label-md text-label-md font-bold text-primary">6:30 PM</span>
+</li>
+</ul>
+</div>
+<!-- Saturday -->
+<div class="space-y-stack-md">
+<div class="flex items-center gap-2 text-primary border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined">weekend</span>
+<h3 class="font-title-lg text-title-lg">Saturday</h3>
+</div>
+<ul class="space-y-3">
+<li class="flex justify-between items-center bg-white/50 p-3 rounded-lg">
+<span class="font-body-md text-body-md">Morning Mass</span>
+<span class="font-label-md text-label-md font-bold text-primary">7:00 AM</span>
+</li>
+<li class="flex justify-between items-center bg-tertiary-fixed p-3 rounded-lg">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-tertiary-fixed">Vigil Mass</span>
+<span class="text-[10px] text-on-tertiary-fixed/70 uppercase">Fulfills Sunday</span>
+</div>
+<span class="font-label-md text-label-md font-bold text-on-tertiary-fixed">5:30 PM</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- Sacraments & Adoration (Special Interest) -->
+<section class="bg-primary text-on-primary p-stack-lg rounded-2xl relative overflow-hidden">
+<!-- Decorative Gold Glow -->
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-tertiary-fixed-dim/20 rounded-full blur-3xl"></div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile mb-stack-md">Sacramental Presence</h3>
+<div class="space-y-stack-md">
+<!-- Adoration -->
+<div class="flex items-start gap-4 p-stack-md bg-white/5 rounded-xl">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<div>
+<p class="font-title-lg text-title-lg text-white">Perpetual Adoration</p>
+<p class="font-body-md text-body-md text-white/70">24/7 in the Blessed Sacrament Chapel</p>
+</div>
+</div>
+<!-- Confession -->
+<div class="flex items-start gap-4 p-stack-md bg-white/5 rounded-xl">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">rebase_edit</span>
+<div>
+<p class="font-title-lg text-title-lg text-white">Sacrament of Reconciliation</p>
+<div class="mt-2 space-y-1">
+<p class="font-body-md text-body-md text-white/70 flex justify-between">
+<span>Mon - Fri</span>
+<span>12:00 PM - 12:30 PM</span>
+</p>
+<p class="font-body-md text-body-md text-white/70 flex justify-between">
+<span>Saturdays</span>
+<span>4:00 PM - 5:00 PM</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Location Mini-view -->
+<section class="space-y-stack-md pb-stack-lg">
+<h3 class="font-title-lg text-title-lg text-primary">Visit Us</h3>
+<div class="h-40 rounded-xl overflow-hidden border border-outline-variant relative">
+<img class="w-full h-full object-cover grayscale opacity-80" data-alt="A stylized minimalist map showing the area around Holy Cross Cathedral in Lagos Island. The map uses a sophisticated dark and cream aesthetic with key landmarks indicated by elegant burgundy pins. The visual style is clean, modern, and high-contrast." data-location="Lagos" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7sUhRDOGEY5eD6QQxXGARXqH9feqbn3F3-p_VSgYS8nH-CU7QTZgRUIfzpvQDczxM7iSHo3XTob2pgG8nbCOSxALsiPIVyKEJSJR9KrCF-VeOTLrICqAocGney-y5VjGWBUUGHVo62qf6PSBxNQqlZPPO_pza8__5C26RrRSkn7GgjflFP6No4iWEdB2ZNjn4HZ__3RLng3cpa6w7R8MXWCFfdB2tmn7krbmXjPsah8b1BrhxEhOo"/>
+<div class="absolute inset-0 bg-primary/5"></div>
+<div class="absolute bottom-3 left-3 bg-white px-3 py-1.5 rounded-lg shadow-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">directions</span>
+<span class="font-label-md text-label-md text-primary">Get Directions</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-surface-container-low transition-transform duration-150">
+<!-- Today -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-on-surface/5" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Today</span>
+</a>
+<!-- Library -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-on-surface/5" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<!-- Community -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-on-surface/5" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<!-- Parishes (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-on-surface/5" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) - Subscribed to Parish -->
+<button class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</button>
+<script>
+        // Micro-interaction for tab switching
+        const tabs = document.querySelectorAll('button[class*="flex-none"]');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('bg-primary', 'text-on-primary');
+                    t.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                tab.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                tab.classList.add('bg-primary', 'text-on-primary');
+            });
+        });
+
+        // Simple scroll reveal effect for cards
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.schedule-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-500');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

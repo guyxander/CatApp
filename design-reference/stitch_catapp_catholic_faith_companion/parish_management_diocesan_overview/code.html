@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Diocese Admin Portal | Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff9ef;
+            color: #1d1b16;
+            font-family: 'Work Sans', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(131, 115, 120, 0.1);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dfd9d1",
+                        "on-tertiary-fixed": "#261900",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#4a1731",
+                        "secondary-container": "#fec0ff",
+                        "on-secondary-container": "#7b4980",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f6f0e7",
+                        "tertiary": "#1f1400",
+                        "surface-tint": "#884b67",
+                        "surface-bright": "#fff9ef",
+                        "primary": "#30021c",
+                        "on-surface-variant": "#514348",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1d1b16",
+                        "inverse-primary": "#fdb0d0",
+                        "background": "#fff9ef",
+                        "primary-fixed-dim": "#fdb0d0",
+                        "tertiary-fixed": "#ffdea4",
+                        "secondary-fixed": "#ffd6fd",
+                        "on-primary-fixed-variant": "#6d344f",
+                        "outline-variant": "#d5c2c7",
+                        "on-surface": "#1d1b16",
+                        "surface-variant": "#e7e2d9",
+                        "outline": "#837378",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#efb2f1",
+                        "surface-container-low": "#f9f3ea",
+                        "secondary": "#7e4c83",
+                        "on-secondary-fixed": "#33053b",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ede7df",
+                        "inverse-surface": "#32302a",
+                        "surface": "#fff9ef",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface-container-highest": "#e7e2d9",
+                        "on-tertiary-container": "#b58a2c",
+                        "tertiary-container": "#382700",
+                        "primary-fixed": "#ffd8e6",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#c27c9a",
+                        "on-secondary-fixed-variant": "#64346a",
+                        "surface-container": "#f3ede4",
+                        "on-primary-fixed": "#380822"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "stack-sm": "8px",
+                        "margin-tablet": "24px",
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Work Sans"],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "title-lg": ["Work Sans"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="account_balance">account_balance</span>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Diocese Admin Portal</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm">
+                AD
+            </div>
+</div>
+</header>
+<div class="flex pt-16 min-h-screen">
+<!-- NavigationDrawer (Desktop) -->
+<aside class="hidden md:flex flex-col py-stack-lg gap-unit fixed left-0 top-0 h-full w-72 bg-surface-container-low border-r border-outline-variant/20 pt-20">
+<div class="px-6 pb-6">
+<h2 class="font-title-lg text-title-lg text-primary">Diocese Management</h2>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="bg-secondary-container text-on-secondary-container rounded-full mx-2 px-4 py-3 flex items-center gap-3 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="edit_calendar">edit_calendar</span>
+<span class="font-label-md text-label-md">Parish Editor</span>
+</a>
+<a class="text-on-surface-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-md text-label-md">Clergy Directory</span>
+</a>
+<a class="text-on-surface-variant mx-2 px-4 py-3 flex items-center gap-3 hover:bg-surface-variant active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Discovery Map</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-72 p-margin-mobile md:p-margin-desktop bg-surface overflow-x-hidden">
+<!-- Hero Stats Bento -->
+<section class="mb-stack-lg">
+<div class="bento-grid">
+<!-- Main Metric -->
+<div class="col-span-12 md:col-span-8 glass-card rounded-xl p-stack-lg relative overflow-hidden flex flex-col justify-between min-h-[240px]">
+
+<div class="relative z-10">
+<span class="text-primary font-label-md uppercase tracking-widest">Active Diocese Overview</span>
+<h2 class="font-display-lg text-display-lg text-primary mt-2">Lagos Archdiocese</h2>
+<p class="font-body-lg text-on-surface-variant mt-2 max-w-md">Maintaining the sanctity and administrative excellence of our parishes through centralized oversight and communal support.</p>
+</div>
+<div class="relative z-10 flex gap-stack-lg mt-8">
+<div class="flex flex-col">
+<span class="text-headline-lg font-bold text-primary">142</span>
+<span class="font-label-md text-on-surface-variant">Total Parishes</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-lg font-bold text-primary">318</span>
+<span class="font-label-md text-on-surface-variant">Active Clergy</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-lg font-bold text-primary">12k+</span>
+<span class="font-label-md text-on-surface-variant">Daily Mass Attendees</span>
+</div>
+</div>
+</div>
+<!-- Liturgical Context -->
+<div class="col-span-12 md:col-span-4 bg-primary rounded-xl p-stack-lg flex flex-col justify-between text-on-primary">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-label-md uppercase opacity-80">Liturgical Season</span>
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h3 class="font-headline-lg text-3xl mt-4">Ordinary Time</h3>
+<p class="text-sm opacity-90 mt-2 font-body-md">Reflecting on the life and teachings of Jesus Christ in our daily mission.</p>
+</div>
+<div class="mt-6 p-4 bg-primary-container rounded-lg border border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed" data-icon="event">event</span>
+<span class="font-label-md">Next Feast Day</span>
+</div>
+<p class="font-title-lg text-on-primary mt-1">St. Augustine of Hippo</p>
+<p class="text-xs opacity-70">August 28th, 2024</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions & Search -->
+<section class="mb-stack-lg flex flex-col md:flex-row gap-4 items-center justify-between">
+<div class="relative w-full md:w-96 group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-highest border-none rounded-full focus:ring-2 focus:ring-primary text-body-md transition-all" placeholder="Search parishes, clergy, or events..." type="text"/>
+</div>
+<div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-full font-label-md whitespace-nowrap active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                        New Parish
+                    </button>
+<button class="flex items-center gap-2 bg-surface-container-high text-on-surface px-6 py-3 rounded-full font-label-md border border-outline-variant/30 whitespace-nowrap hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                        Filters
+                    </button>
+</div>
+</section>
+<!-- Parish Directory Table / List -->
+<section class="glass-card rounded-2xl overflow-hidden mb-24 md:mb-0">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="font-title-lg text-primary">Parish Directory</h3>
+<div class="flex gap-2">
+<span class="inline-flex items-center gap-1 text-xs font-label-md text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-green-500"></span> 100% Complete
+                        </span>
+<span class="inline-flex items-center gap-1 text-xs font-label-md text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-yellow-500"></span> Needs Update
+                        </span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low text-on-surface-variant">
+<tr>
+<th class="px-6 py-4 font-label-md">Parish Name</th>
+<th class="px-6 py-4 font-label-md">Deanery</th>
+<th class="px-6 py-4 font-label-md">Parish Priest</th>
+<th class="px-6 py-4 font-label-md">Data Status</th>
+<th class="px-6 py-4 font-label-md text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-cover bg-center" data-alt="A dignified close-up photograph of a modern Catholic church altar in Nigeria, featuring rich mahogany wood, warm golden lighting, and a serene, meditative atmosphere with soft shadows." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBG2AJ-D2Il9NA5s4oeLiLaPgyrr7UJhObwzI9CbKrBSzXNQ3lLebs7EhiCZA4Yo4OX2OD-O2dm6OHDlJv39BEkE83X1E31iJ_UhcQyhES1DUOdmXVDFJ7rO27EK_8WvZG6VqjikrbUXUPlJFnrqrLR4Gv2EwS-zMWJU8tPWhwTR1ZriyxVu_iOebQOuFc7-89QSeyN9v6CtQuqbfLhdANEs93j-ECnpsET5Rj3TOT2OyKtfWN6U6gS')"></div>
+<div>
+<p class="font-body-md font-semibold text-primary">Holy Cross Cathedral</p>
+<p class="text-xs text-on-surface-variant">Lagos Island</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full text-xs font-label-md">Central Deanery</span>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-body-md">Very Rev. Msgr. Gabriel Bosah</p>
+</td>
+<td class="px-6 py-5">
+<div class="w-full bg-surface-variant rounded-full h-1.5 max-w-[100px]">
+<div class="bg-green-600 h-1.5 rounded-full" style="width: 100%"></div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-cover bg-center" data-alt="A wide architectural shot of a contemporary Catholic church in Nigeria during the golden hour, showing its elegant stained glass windows and cream-colored exterior against a soft twilight sky." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzhuqn58jjhP9xkF7axr_SmnYYw6Fywrbl55L2PqJaq9DKyoQQUhGCywYTU4VvaYoq87TThAZoq1XCBBmPJkyz227G6SgufSkWOV4IqFSqyRKBOxBr0eMot-VZsFhQeVK8N2KsPW0_Hy0kErXLg9R-nlirOHVdz3RCPj0TWaxB_UkiqqqKgfDH9Irbc5AAl5qmti1tlOJ6DP223s2ATqJESGQcUW09mlm36tWd4dPaiGYFj6xqvcav')"></div>
+<div>
+<p class="font-body-md font-semibold text-primary">St. Anthony of Padua</p>
+<p class="text-xs text-on-surface-variant">Surulere</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full text-xs font-label-md">Surulere Deanery</span>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-body-md">Rev. Fr. Jude Okafor</p>
+</td>
+<td class="px-6 py-5">
+<div class="w-full bg-surface-variant rounded-full h-1.5 max-w-[100px]">
+<div class="bg-yellow-500 h-1.5 rounded-full" style="width: 65%"></div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-cover bg-center" data-alt="An interior shot of a vibrant Nigerian parish community center with modern wooden benches, elegant marble floors, and soft, natural light streaming through high windows, creating a peaceful and welcoming environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAmRCyF8ceBV3SzR2NBk1USGtZBPJ_jfG5RvnkAbU5sNve6q1HlsqHaMx4MmgkJOb_pe_b7fnpxG5krzwoVrNrI4sUSLESH-C4hzZqSQq_BCtZ6VxZYiDM0s0jWtWWVsBvomgu3tDSC80Bv441-S1-JZEBb-awHKTjkjOBWO9lEiGOIoRq1vLjpgPLcvLHQQlozKFNHVGxytYOmx7Ui9SlUzTCquW2yI8PnCfr8E8dOBpIinT05VH4F')"></div>
+<div>
+<p class="font-body-md font-semibold text-primary">Our Lady of Perpetual Help</p>
+<p class="text-xs text-on-surface-variant">Victoria Island</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full text-xs font-label-md">Lekki Deanery</span>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-body-md">Rev. Fr. Emmanuel Adebayor</p>
+</td>
+<td class="px-6 py-5">
+<div class="w-full bg-surface-variant rounded-full h-1.5 max-w-[100px]">
+<div class="bg-green-600 h-1.5 rounded-full" style="width: 92%"></div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 bg-surface-container-low flex justify-between items-center">
+<p class="text-xs text-on-surface-variant font-label-md">Showing 3 of 142 Parishes</p>
+<div class="flex gap-2">
+<button class="p-2 rounded-full border border-outline-variant/30 hover:bg-surface-variant transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-2 rounded-full border border-outline-variant/30 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe md:hidden bg-surface h-16 border-t border-outline-variant/30 shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-secondary/20 text-primary rounded-2xl px-6 py-1 scale-110 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="font-label-md text-label-md">Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:bg-surface-variant/50" href="#">
+<span class="material-symbols-outlined" data-icon="church">church</span>
+<span class="font-label-md text-label-md">Parishes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:bg-surface-variant/50" href="#">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+<span class="font-label-md text-label-md">Clergy</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 hover:bg-surface-variant/50" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-label-md text-label-md">Map</span>
+</a>
+</nav>
+<script>
+        // Simple search interactivity
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            console.log('Searching for:', e.target.value);
+            // In a real app, this would filter the table rows
+        });
+
+        // Add ripple effect style micro-interaction
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', function(e) {
+                this.classList.add('opacity-80');
+                setTimeout(() => this.classList.remove('opacity-80'), 150);
+            });
+        });
+    </script>
+</body></html>

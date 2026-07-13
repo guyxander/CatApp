@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Prayer Request Thread - Catholic Fellowship</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#380822",
+                    "primary-container": "#4a1731",
+                    "background": "#fff9ef",
+                    "tertiary-container": "#382700",
+                    "surface-container": "#f3ede4",
+                    "on-surface-variant": "#514348",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#32302a",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface-dim": "#dfd9d1",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "secondary": "#7e4c83",
+                    "surface-tint": "#884b67",
+                    "on-tertiary-fixed": "#261900",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "tertiary": "#1f1400",
+                    "surface-container-high": "#ede7df",
+                    "on-surface": "#1d1b16",
+                    "inverse-on-surface": "#f6f0e7",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#d5c2c7",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fec0ff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#c27c9a",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "surface-container-low": "#f9f3ea",
+                    "outline": "#837378",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#33053b",
+                    "surface-bright": "#fff9ef",
+                    "primary-fixed": "#ffd8e6",
+                    "primary": "#30021c",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#fdb0d0",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "surface-variant": "#e7e2d9",
+                    "surface-container-highest": "#e7e2d9",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-tertiary-container": "#b58a2c",
+                    "on-background": "#1d1b16",
+                    "surface": "#fff9ef",
+                    "on-secondary-container": "#7b4980",
+                    "tertiary-fixed": "#ffdea4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "24px",
+                    "margin-desktop": "32px",
+                    "unit": "4px",
+                    "stack-md": "16px",
+                    "margin-tablet": "24px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px",
+                    "stack-sm": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Work Sans"],
+                    "label-md": ["Work Sans"],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "title-lg": ["Work Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .prayer-input-focus:focus-within {
+            border-color: #30021c;
+            box-shadow: 0 0 0 1px #30021c;
+        }
+        .amen-active {
+            font-variation-settings: 'FILL' 1;
+            color: #7e4c83;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5c2c7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container">
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 z-40 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95" onclick="history.back()">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">Community</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer">share</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer">more_vert</span>
+</div>
+</header>
+<main class="max-w-[720px] mx-auto pb-32">
+<!-- Original Post Container (Summarized/Header) -->
+<section class="mx-margin-mobile mt-4 mb-stack-lg">
+<div class="bg-surface-container-lowest rounded-xl p-stack-md shadow-sm border border-outline-variant/30">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A portrait of a serene elderly Nigerian woman with a kind expression, wearing a traditional headscarf in deep burgundy. The lighting is soft and natural, emphasizing a peaceful and spiritual atmosphere within a warm cream-toned interior space. High-end photography style with shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNsMtuVi0FEbJY0XtEKkjsIFQW6vuYAmUiqrFmLWHxCZwLHrRyulUdBdF9o95pNWFQu7KSZOLO5n3ljSf00D-imqTcefQvHf8GLCS7IHQDs2n9WC_5ojihKkwz0bpK3ITFfdxqMC1rOZvZZsLaymVDMr5ugeWNDSZRLALXuZeUxuNNfB4rS1odSzXi7zokTHjqmptqUKfQArSRE59VmnhTfEx_6e0JZipHK8nA93X1br4RzjDrEjxp"/>
+<div>
+<h2 class="font-title-lg text-title-lg text-primary">Chidinma Okoro</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">St. Jude's Parish, Lagos • 2 hours ago</p>
+</div>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">Urgent Prayer</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-primary mb-2 italic">"Prayers for my daughter's recovery"</h3>
+<p class="text-on-surface leading-relaxed line-clamp-2 md:line-clamp-none">
+                    Brothers and sisters, I humbly ask for your intercession for my daughter, Ngozi, who is currently in surgery. May the Divine Physician guide the hands of the surgeons and grant her a speedy recovery. We trust in His mercy...
+                </p>
+<button class="mt-2 text-secondary font-label-md hover:underline flex items-center gap-1">
+                    Read full request <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+</section>
+<!-- Comments List -->
+<section class="px-margin-mobile space-y-stack-md">
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/30">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Intercessions (14)</p>
+<button class="text-label-md text-primary font-medium flex items-center gap-1">
+                    Newest <span class="material-symbols-outlined text-[18px]">sort</span>
+</button>
+</div>
+<!-- Comment 1 -->
+<div class="flex gap-4 items-start group">
+<img class="w-10 h-10 rounded-full object-cover mt-1" data-alt="A profile photo of a young man with a friendly smile, dressed in a clean white polo shirt. The background is a blurred Nigerian church courtyard with warm, golden hour sunlight. Minimalist corporate portrait style, bright and inviting with a soft cream color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAevPRbHn8bc9urpKm19t-6l_SH9VM4S996PBjhMp_udR0TXq6TwB7DcHYHU8sB6Ec4_h0SmzsZqMZutTngfwmi_uzwsq26S8-qHxjyGyn3flJ7b-tFX2R1QaXKkjazeQz9YZbTPb7SFC8O7VTWriryzRE6iTmGYgSBxkiMRulCeswpkfAIxKgdtcs2e6wa9WFz1cE2fUHBmMQlgm3ZWumA2B61qhxZVA3TF_MClogVaJ8T4e5ok9JV"/>
+<div class="flex-1 space-y-2">
+<div class="bg-surface-container rounded-2xl rounded-tl-none p-4 shadow-sm">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-lg text-[16px] text-primary">Emeka Uzor</span>
+<span class="font-label-md text-label-md text-on-surface-variant">45m ago</span>
+</div>
+<p class="text-on-surface font-body-md">Amen. We are standing in the gap for Ngozi. May the Holy Spirit comfort your family during this time. "By His stripes, she is healed."</p>
+</div>
+<div class="flex items-center gap-6 px-2">
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors group/btn active:scale-95">
+<span class="material-symbols-outlined text-[20px] transition-all group-active/btn:fill-1">favorite</span>
+<span class="font-label-md">8 Amen</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+<span class="font-label-md">Reply</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Comment 2 -->
+<div class="flex gap-4 items-start group">
+<img class="w-10 h-10 rounded-full object-cover mt-1" data-alt="A portrait of a woman in her 40s wearing an elegant lace blouse in cream and purple. She has a serene, prayerful expression. The lighting is soft and contemplative, suggesting a sacred Nigerian liturgical setting. High-quality digital photography with soft focus on the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4Crn8kk5e_U6p-gafQlAYbcvyZ10D1T3a_JU5tCAnKKlvXqL7RCo_JNuEbSnP9EU5N1xl-OGsR8KGyju1iHm9I0m2GIifVnDxCF1AkT-DzrYbYLZVP7vFuofg358IHv70z065ysHWBdwj3pVMnO8kHrKAx53RtR2F7TAnx9OuQH4puJC3lkyKZjd7-4BL6YszDSAYSaOfz1P6OnxOQJI2Q_0MJqzHJ6RVLOJNDz9FawiQVbY8MHtq"/>
+<div class="flex-1 space-y-2">
+<div class="bg-surface-container rounded-2xl rounded-tl-none p-4 shadow-sm">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-lg text-[16px] text-primary">Sister Mary Agatha</span>
+<span class="font-label-md text-label-md text-on-surface-variant">1h ago</span>
+</div>
+<p class="text-on-surface font-body-md">The Legion of Mary in our parish will include her in our evening Rosary tonight. Be strong, Sister Chidinma. God is in control.</p>
+</div>
+<div class="flex items-center gap-6 px-2">
+<button class="flex items-center gap-1.5 text-secondary transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-md">12 Amen</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+<span class="font-label-md">Reply</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Comment 3 (Nested Reply Example) -->
+<div class="ml-14 flex gap-3 items-start group">
+<img class="w-8 h-8 rounded-full object-cover mt-1" data-alt="A simple, elegant avatar of a young woman with braided hair, wearing a modest dress. Set against a clean, light-filled background with a modern Nigerian Catholic aesthetic. The shot is a close-up with soft, even lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO67VBmKIN7rsTc3ciDpkaYmXEWv0VSSrEDQ292lQ6E9rTTYPaAojVS7_WD02nOWIZ2oU_gQCuZ8SOiFJz9aZa7ftNT5LkodjVLrUV4F-3aGyN9HIV19uVZPilpI5LbMiaaRtD8rgZdJOZTS8C3g7gsDUqoQNrLxUtQF7zWP_vTPBMQziiVqvDjoUxdD_skclEc8jyL2nWjKSQz2duZr3XEEwwaCTi94wYvoRdqJmHEJm9DxVRV27X"/>
+<div class="flex-1 space-y-2">
+<div class="bg-surface-container-high rounded-2xl rounded-tl-none p-3 border border-outline-variant/20">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-lg text-[14px] text-primary">Tolu Balogun</span>
+<span class="font-label-md text-[10px] text-on-surface-variant">30m ago</span>
+</div>
+<p class="text-on-surface font-body-md text-[15px]">Thank you, Sister Mary. We also joined in from Ibadan.</p>
+</div>
+<div class="flex items-center gap-4 px-1">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-secondary active:scale-95">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+<span class="font-label-md text-[11px]">3</span>
+</button>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary active:scale-95">
+<span class="material-symbols-outlined text-[16px]">reply</span>
+<span class="font-label-md text-[11px]">Reply</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Comment 4 -->
+<div class="flex gap-4 items-start group">
+<img class="w-10 h-10 rounded-full object-cover mt-1" data-alt="A middle-aged man with a thoughtful expression, wearing a traditional embroidered tunic in dark burgundy. He is standing near a stained-glass window that casts colorful, soft light onto his face. The atmosphere is dignified and spiritually profound. Cinematic lighting, rich colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsJjwVyKH1hgwiM3lOwDot1XEGiobgPrBChGvgTNQJvQPuI_yTwtLlAel1x6euTcJAO6zZbGfKPofp_fSQrUH-lmiu-he5WXe7Avacwp2wltHVVOeQtYYNEvMPRSXkqsSSahariGS3oUnlUHQYkw9Kaal1_b7nG7MBrtm2toZVvySD5ej_RaYyk_TOm3CcUc9_6nDDsia7tK6-Mhm0RS7YP7kZGJrcS_2xC50VcZKs6uP8xN-0RV7y"/>
+<div class="flex-1 space-y-2">
+<div class="bg-surface-container rounded-2xl rounded-tl-none p-4 shadow-sm">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-lg text-[16px] text-primary">Father Jude</span>
+<span class="font-label-md text-label-md text-on-surface-variant">2h ago</span>
+</div>
+<p class="text-on-surface font-body-md">Peace be with you. I will offer my private intentions for Ngozi during tomorrow's morning Mass. Trust in the Lord with all your heart.</p>
+</div>
+<div class="flex items-center gap-6 px-2">
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+<span class="font-label-md">24 Amen</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+<span class="font-label-md">Reply</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Persistent Bottom Input Field -->
+<div class="fixed bottom-0 left-0 w-full bg-surface/95 backdrop-blur-md border-t border-outline-variant/30 px-margin-mobile py-4 pb-safe z-50">
+<div class="max-w-[720px] mx-auto flex items-end gap-3">
+<div class="flex-1 bg-surface-container-lowest rounded-2xl border border-outline-variant p-2 flex items-end gap-2 prayer-input-focus transition-all">
+<button class="p-2 text-on-surface-variant hover:text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface py-2 resize-none max-h-32 custom-scrollbar overflow-y-auto" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'" placeholder="Offer a Prayer..." rows="1"></textarea>
+<button class="p-2 text-on-surface-variant hover:text-tertiary-container active:scale-90 transition-transform">
+<span class="material-symbols-outlined">menu_book</span>
+</button>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg hover:opacity-90 active:scale-90 transition-all">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        // Simple Amen button toggle logic
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText.includes('Amen')) {
+                btn.addEventListener('click', function() {
+                    const icon = this.querySelector('.material-symbols-outlined');
+                    const text = this.querySelector('.font-label-md');
+                    const currentCount = parseInt(text.innerText);
+                    
+                    if (icon.style.fontVariationSettings.includes("'FILL' 1")) {
+                        icon.style.fontVariationSettings = "'FILL' 0";
+                        this.classList.replace('text-secondary', 'text-on-surface-variant');
+                        text.innerText = (currentCount - 1) + " Amen";
+                    } else {
+                        icon.style.fontVariationSettings = "'FILL' 1";
+                        this.classList.replace('text-on-surface-variant', 'text-secondary');
+                        text.innerText = (currentCount + 1) + " Amen";
+                    }
+                });
+            }
+        });
+
+        // Floating appearance for comments on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.flex.gap-4.items-start').forEach(el => {
+            el.classList.add('transition-all', 'duration-500', 'opacity-0', 'translate-y-4');
+            observer.observe(el);
+        });
+    </script>
+</body></html>

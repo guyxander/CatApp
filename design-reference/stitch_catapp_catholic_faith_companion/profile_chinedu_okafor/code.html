@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile - CatApp</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fec0ff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#c27c9a",
+                    "primary-fixed-dim": "#fdb0d0",
+                    "surface-container-low": "#f9f3ea",
+                    "outline": "#837378",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#33053b",
+                    "surface-bright": "#fff9ef",
+                    "primary-fixed": "#ffd8e6",
+                    "primary": "#30021c",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#fdb0d0",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "surface-variant": "#e7e2d9",
+                    "surface-container-highest": "#e7e2d9",
+                    "secondary-fixed": "#ffd6fd",
+                    "on-tertiary-container": "#b58a2c",
+                    "on-background": "#1d1b16",
+                    "surface": "#fff9ef",
+                    "on-secondary-container": "#7b4980",
+                    "tertiary-fixed": "#ffdea4",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#380822",
+                    "primary-container": "#4a1731",
+                    "background": "#fff9ef",
+                    "tertiary-container": "#382700",
+                    "surface-container": "#f3ede4",
+                    "on-surface-variant": "#514348",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#32302a",
+                    "tertiary-fixed-dim": "#f0bf5c",
+                    "surface-dim": "#dfd9d1",
+                    "on-primary-fixed-variant": "#6d344f",
+                    "secondary": "#7e4c83",
+                    "surface-tint": "#884b67",
+                    "on-tertiary-fixed": "#261900",
+                    "secondary-fixed-dim": "#efb2f1",
+                    "on-secondary-fixed-variant": "#64346a",
+                    "tertiary": "#1f1400",
+                    "surface-container-high": "#ede7df",
+                    "on-surface": "#1d1b16",
+                    "inverse-on-surface": "#f6f0e7",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#d5c2c7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "unit": "4px",
+                    "stack-lg": "24px",
+                    "margin-desktop": "32px",
+                    "stack-sm": "8px",
+                    "margin-tablet": "24px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Work Sans"],
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "body-md": ["Work Sans"],
+                    "label-md": ["Work Sans"]
+            },
+            "fontSize": {
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { -webkit-tap-highlight-color: transparent; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-effect { backdrop-filter: blur(8px); background: rgba(255, 255, 255, 0.7); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 h-16 flex justify-between items-center px-margin-mobile bg-surface dark:bg-surface-dim transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A dignified and warm professional portrait of a Nigerian man named Chinedu Okafor, appearing contemplative and friendly. The photography is soft-focus, captured in natural, warm golden hour lighting that complements the sacred and modern aesthetic of the Catholic prayer app. He is dressed in a clean, professional linen shirt against a minimalist cream-toned background, maintaining a high-end corporate yet spiritual feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuwXwuPreJOi89E12My_-a-N2sXSpQaw-MOdjVxRnvZuht9_zplQQB3Dnc-jjYr_qjZjalbys-TUByd0HeAsjJ3Tubczdiz3ZwRt86UnwqeLiBh35MVRvwYbpiNpTnMqbCQWETm_FgTZQm4EAEorps3kZnd-QYeYXWJDuBBJxHzLN8DbhKtJ0iO9t4ABx0nS_lisSV7cs5PGmHptyGn_Ck9g9gXsaStRaxUVCCicFbS0wnFkOT_34N"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-primary">Profile</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<main class="pt-20 pb-32 px-margin-mobile max-w-md mx-auto space-y-stack-lg">
+<!-- User Identity Header -->
+<section class="flex flex-col items-center text-center space-y-unit">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Chinedu Okafor</h2>
+<p class="font-body-md text-on-surface-variant">chinedu.okafor@catholic.ng</p>
+</section>
+<!-- Verification Status Section (Bento Style Card) -->
+<section class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed p-2 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary">Catholic Identity</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Verified Lay Catholic</p>
+</div>
+</div>
+<div class="h-2 w-16 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full w-3/4 bg-on-tertiary-container"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-dashed border-outline">
+<p class="font-body-md text-on-surface-variant mb-3">Complete your profile to unlock parish voting and community leadership features.</p>
+<button class="w-full bg-primary text-on-primary py-3 rounded-full font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+                    Verify with Baptismal Card
+                </button>
+</div>
+</section>
+<!-- Catholic Status Details (Asymmetric Layout) -->
+<section class="grid grid-cols-2 gap-3">
+<div class="col-span-2 bg-surface-container-high p-4 rounded-xl flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">church</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Home Parish</p>
+<p class="font-body-lg text-body-lg text-on-surface font-semibold">Holy Cross Cathedral, Lagos</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Status</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Lay Faithful</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Diocese</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Lagos Archdiocese</p>
+</div>
+</section>
+<!-- App Settings -->
+<section class="space-y-stack-sm">
+<h4 class="px-2 font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Preferences</h4>
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant">
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary">notifications_active</span>
+<span class="font-body-md text-on-surface">Prayer Reminders</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<div class="h-[1px] bg-outline-variant mx-4"></div>
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary">download_for_offline</span>
+<span class="font-body-md text-on-surface">Offline Downloads</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<div class="h-[1px] bg-outline-variant mx-4"></div>
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-high transition-colors cursor-pointer group" onclick="document.documentElement.classList.toggle('dark')">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary">dark_mode</span>
+<span class="font-body-md text-on-surface">Theme (Light/Dark)</span>
+</div>
+<div class="w-10 h-6 bg-primary-container rounded-full relative">
+<div class="absolute right-1 top-1 w-4 h-4 bg-on-primary rounded-full transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Admin Section -->
+<section class="mt-8 border-t border-outline-variant pt-6">
+<div class="bg-on-secondary-container text-secondary-container rounded-xl p-5 flex items-center justify-between hover:opacity-90 transition-opacity cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+<div>
+<h5 class="font-title-lg text-title-lg">Admin Portal</h5>
+<p class="font-label-md opacity-80">Parish Management &amp; Analytics</p>
+</div>
+</div>
+<span class="material-symbols-outlined">launch</span>
+</div>
+</section>
+<!-- Logout / Footer -->
+<button class="w-full py-4 text-error font-body-md flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">logout</span>
+            Sign Out
+        </button>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center py-2 px-margin-mobile bg-surface-container-low border-t border-outline-variant rounded-t-xl h-20">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors rounded-full">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md mt-1">Today</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors rounded-full">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md mt-1">Library</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors rounded-full">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md mt-1">Community</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-highest transition-colors rounded-full">
+<span class="material-symbols-outlined">church</span>
+<span class="font-label-md text-label-md mt-1">Parishes</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-110 transition-transform duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button, .cursor-pointer').forEach(el => {
+            el.addEventListener('touchstart', () => {
+                el.classList.add('opacity-80', 'scale-95');
+            });
+            el.addEventListener('touchend', () => {
+                el.classList.remove('opacity-80', 'scale-95');
+            });
+        });
+
+        // Theme Persistence Simulation
+        const toggleTheme = () => {
+            document.documentElement.classList.toggle('dark');
+        };
+    </script>
+</body></html>
