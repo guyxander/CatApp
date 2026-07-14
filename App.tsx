@@ -363,19 +363,47 @@ const adminModules: AdminModuleName[] = [
 ];
 
 function adminRecordTitle(moduleName: AdminModuleName, record: Record<string, any>) {
-  return record.title || record.parish_name || record.name || record.hymn_title || record.celebration_title || record.full_name || record.display_name || record.actor_name || moduleName;
+  return safeAdminText(record.title || record.parish_name || record.name || record.hymn_title || record.celebration_title || record.full_name || record.display_name || record.actor_name || moduleName);
 }
 
 function adminRecordSubtitle(record: Record<string, any>) {
-  return [
+  return safeAdminText([
     record.__adminKind,
     record.status || record.moderation_status || record.verification_status,
     record.email || record.submitted_by_name || record.author_name || record.sponsor,
-  ].filter(Boolean).join(" - ");
+  ].filter(Boolean).map(safeAdminText).join(" - "));
 }
 
 function adminRecordBody(record: Record<string, any>) {
-  return record.body || record.reason || record.note || record.document_note || record.proposed_text || record.proposed_address || record.action || record.category || record.placement || "No extra details.";
+  return safeAdminText(record.body || record.reason || record.note || record.document_note || record.proposed_text || record.proposed_address || record.action || record.category || record.placement || "No extra details.");
+}
+
+function safeAdminText(value: any) {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "string") return value;
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return "Unsupported record data";
+  }
+}
+
+function safeAdminDate(value: any) {
+  if (!value) return "";
+  const date = new Date(String(value));
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString();
+}
+
+function safeAdminJson(value: any) {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return "";
+  }
 }
 
 function adminActionsForRecord(moduleName: AdminModuleName, record: Record<string, any>): Array<{ action: string; label: string; icon: keyof typeof Ionicons.glyphMap; danger?: boolean }> {
@@ -2046,6 +2074,7 @@ function ProfileScreen({
 
   useEffect(() => {
     if (!showAdmin || !selectedAdminModule || !isAdmin) return;
+    setAdminModuleRows([]);
     setAdminLoading(true);
     fetchAdminModuleData(selectedAdminModule as AdminModuleName)
       .then((result) => {
@@ -2876,13 +2905,13 @@ function AdminRecordCard({
     <View style={styles.postCard}>
       <View style={styles.postMeta}>
         <Text style={styles.verifiedBadge}>{adminRecordSubtitle(record) || moduleName}</Text>
-        <Text style={styles.mutedText}>{record.created_at ? new Date(record.created_at).toLocaleDateString() : record.updated_at ? new Date(record.updated_at).toLocaleDateString() : ""}</Text>
+        <Text style={styles.mutedText}>{safeAdminDate(record.created_at || record.updated_at)}</Text>
       </View>
       <Text style={styles.postTitle}>{adminRecordTitle(moduleName, record)}</Text>
-      <Text style={styles.postBody}>{String(adminRecordBody(record)).slice(0, 450)}</Text>
-      {record.proposed_phone ? <InfoRow icon="call-outline" label="Proposed phone" value={record.proposed_phone} /> : null}
-      {record.proposed_mass_times?.length ? <InfoRow icon="time-outline" label="Proposed Mass" value={JSON.stringify(record.proposed_mass_times)} /> : null}
-      {record.proposed_confession_times?.length ? <InfoRow icon="chatbubble-outline" label="Proposed confession" value={JSON.stringify(record.proposed_confession_times)} /> : null}
+      <Text style={styles.postBody}>{adminRecordBody(record).slice(0, 450)}</Text>
+      {record.proposed_phone ? <InfoRow icon="call-outline" label="Proposed phone" value={safeAdminText(record.proposed_phone)} /> : null}
+      {safeAdminJson(record.proposed_mass_times) ? <InfoRow icon="time-outline" label="Proposed Mass" value={safeAdminJson(record.proposed_mass_times)} /> : null}
+      {safeAdminJson(record.proposed_confession_times) ? <InfoRow icon="chatbubble-outline" label="Proposed confession" value={safeAdminJson(record.proposed_confession_times)} /> : null}
       {actions.length ? (
         <View style={styles.adminActionRow}>
           {actions.map((item) => (
