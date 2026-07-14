@@ -84,6 +84,17 @@ export const isSupabaseConfigured = Boolean(
 
 const oauthRedirectTo = "catapp://auth/callback";
 
+function readAuthCallbackParams(url: string) {
+  const [, fragment = ""] = url.split("#");
+  const [, query = ""] = url.split("?");
+  const params = new URLSearchParams(query.split("#")[0]);
+  const fragmentParams = new URLSearchParams(fragment);
+  fragmentParams.forEach((value, key) => {
+    if (!params.has(key)) params.set(key, value);
+  });
+  return params;
+}
+
 const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl!, supabaseAnonKey!, {
       auth: {
@@ -91,6 +102,7 @@ const supabase = isSupabaseConfigured
         autoRefreshToken: true,
         persistSession: true,
         detectSessionInUrl: false,
+        flowType: "pkce",
       },
     })
   : null;
@@ -241,17 +253,35 @@ export async function signInWithGoogle(): Promise<ActionResult> {
   });
   if (error) return { ok: false, message: error.message };
   if (!data.url) return { ok: false, message: "Google sign-in URL was not returned." };
+  const canOpen = await Linking.canOpenURL(data.url);
+  if (!canOpen) return { ok: false, message: "This device could not open the Google sign-in page." };
   await Linking.openURL(data.url);
   return { ok: true, message: "Opening Google sign-in..." };
 }
 
 export async function handleSupabaseAuthCallback(url: string): Promise<ActionResult> {
-  if (!supabase || !url.startsWith(oauthRedirectTo)) return { ok: false, message: "No Supabase auth callback to handle." };
-  const parsed = new URL(url);
-  const code = parsed.searchParams.get("code");
-  if (!code) return { ok: false, message: "Google sign-in did not return an auth code." };
-  const { error } = await supabase.auth.exchangeCodeForSession(code);
-  return error ? { ok: false, message: error.message } : { ok: true, message: "Signed in with Google." };
+  if (!supabase) return { ok: false, message: "Supabase Auth is not configured." };
+  if (!url.startsWith(oauthRedirectTo) && !url.includes("auth/callback")) {
+    return { ok: false, message: "No Supabase auth callback to handle." };
+  }
+  const params = readAuthCallbackParams(url);
+  const authError = params.get("error_description") || params.get("error");
+  if (authError) return { ok: false, message: authError };
+  const code = params.get("code");
+  if (code) {
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    return error ? { ok: false, message: error.message } : { ok: true, message: "Signed in with Google." };
+  }
+  const accessToken = params.get("access_token");
+  const refreshToken = params.get("refresh_token");
+  if (accessToken && refreshToken) {
+    const { error } = await supabase.auth.setSession({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    });
+    return error ? { ok: false, message: error.message } : { ok: true, message: "Signed in with Google." };
+  }
+  return { ok: false, message: "Google sign-in returned without a usable auth code. Check the Supabase redirect URL allow-list for catapp://auth/callback." };
 }
 
 export async function signUpWithEmail(email: string, password: string, fullName: string): Promise<ActionResult> {
