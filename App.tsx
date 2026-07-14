@@ -406,6 +406,17 @@ function safeAdminJson(value: any) {
   }
 }
 
+function safeDisplayText(value: any) {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "string") return value;
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return "Unsupported value";
+  }
+}
+
 function adminActionsForRecord(moduleName: AdminModuleName, record: Record<string, any>): Array<{ action: string; label: string; icon: keyof typeof Ionicons.glyphMap; danger?: boolean }> {
   if (moduleName === "Parish Management") {
     if (record.__adminKind === "parish_edit" && record.status === "pending") {
@@ -2339,40 +2350,42 @@ function ProfileScreen({
               </Pressable>
             </View>
           </SectionCard>
-          {adminLoading ? (
-            <View style={styles.centered}>
-              <ActivityIndicator color={colors.primary} />
-              <Text style={styles.mutedText}>Loading admin data...</Text>
-            </View>
-          ) : adminModuleRows.length ? (
-            adminModuleRows.map((record, index) => (
-              <AdminRecordCard
-                key={`${moduleName}-${record.id || index}`}
-                busy={adminActionKey === `${record.id}-${moduleName}`}
-                moduleName={moduleName}
-                record={record}
-                onAction={async (action) => {
-                  setAdminActionKey(`${record.id}-${moduleName}`);
-                  setAdminSubmit("saving");
-                  const result = await runAdminModuleAction(moduleName, action, record);
-                  setAdminStatus(result.message);
-                  const [overview, data] = await Promise.all([
-                    fetchAdminOverview(),
-                    fetchAdminModuleData(moduleName),
-                  ]);
-                  setAdminOverview(overview);
-                  setAdminModuleRows(data.rows ?? []);
-                  setAdminSubmit(result.ok ? "success" : "idle");
-                  setAdminActionKey("");
-                  if (result.ok) setTimeout(() => setAdminSubmit("idle"), 1200);
-                }}
-              />
-            ))
-          ) : (
-            <View style={styles.noticeBox}>
-              <Text style={styles.postBody}>No records are currently in this admin module.</Text>
-            </View>
-          )}
+          <AdminErrorBoundary resetKey={selectedAdminModule}>
+            {adminLoading ? (
+              <View style={styles.centered}>
+                <ActivityIndicator color={colors.primary} />
+                <Text style={styles.mutedText}>Loading admin data...</Text>
+              </View>
+            ) : adminModuleRows.filter(Boolean).length ? (
+              adminModuleRows.filter(Boolean).map((record, index) => (
+                <AdminRecordCard
+                  key={`${moduleName}-${record?.id || index}`}
+                  busy={adminActionKey === `${record?.id || index}-${moduleName}`}
+                  moduleName={moduleName}
+                  record={record}
+                  onAction={async (action) => {
+                    setAdminActionKey(`${record?.id || index}-${moduleName}`);
+                    setAdminSubmit("saving");
+                    const result = await runAdminModuleAction(moduleName, action, record);
+                    setAdminStatus(result.message);
+                    const [overview, data] = await Promise.all([
+                      fetchAdminOverview(),
+                      fetchAdminModuleData(moduleName),
+                    ]);
+                    setAdminOverview(overview);
+                    setAdminModuleRows(data.rows ?? []);
+                    setAdminSubmit(result.ok ? "success" : "idle");
+                    setAdminActionKey("");
+                    if (result.ok) setTimeout(() => setAdminSubmit("idle"), 1200);
+                  }}
+                />
+              ))
+            ) : (
+              <View style={styles.noticeBox}>
+                <Text style={styles.postBody}>No records are currently in this admin module.</Text>
+              </View>
+            )}
+          </AdminErrorBoundary>
         </View>
       );
     }
@@ -2828,6 +2841,35 @@ function SectionCard({ children }: { children: React.ReactNode }) {
   return <View style={styles.sectionCard}>{children}</View>;
 }
 
+class AdminErrorBoundary extends React.Component<
+  { children: React.ReactNode; resetKey: string | null },
+  { hasError: boolean; message: string }
+> {
+  state = { hasError: false, message: "" };
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, message: error.message };
+  }
+
+  componentDidUpdate(previousProps: { resetKey: string | null }) {
+    if (previousProps.resetKey !== this.props.resetKey && this.state.hasError) {
+      this.setState({ hasError: false, message: "" });
+    }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <View style={styles.noticeBox}>
+          <Text style={styles.postTitle}>Admin module could not render</Text>
+          <Text style={styles.postBody}>{this.state.message || "A record in this module has an unsupported shape."}</Text>
+        </View>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 function SubmitButton({
   icon,
   label,
@@ -2876,14 +2918,14 @@ function InfoRow({
 }: {
   icon: keyof typeof Ionicons.glyphMap;
   label: string;
-  value: string;
+  value: any;
 }) {
   return (
     <View style={styles.infoRow}>
       <Ionicons color={colors.secondary} name={icon} size={22} />
       <View style={styles.flex}>
         <Text style={styles.overline}>{label}</Text>
-        <Text style={styles.infoValue}>{value}</Text>
+        <Text style={styles.infoValue}>{safeDisplayText(value)}</Text>
       </View>
     </View>
   );
