@@ -2014,7 +2014,7 @@ function ProfileScreen({
   setDarkMode: (value: boolean) => void;
 }) {
   const [showAdmin, setShowAdmin] = useState(false);
-  const [selectedAdminModule, setSelectedAdminModule] = useState<string | null>(null);
+  const [selectedAdminModule, setSelectedAdminModule] = useState<AdminModuleName | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -2300,7 +2300,7 @@ function ProfileScreen({
     }
 
     if (selectedAdminModule) {
-      const moduleName = selectedAdminModule as AdminModuleName;
+      const moduleName = selectedAdminModule;
       const moduleRows: Record<string, Array<[keyof typeof Ionicons.glyphMap, string, string]>> = {
         "Content Management": [
           ["book-outline", "Hymns", `${adminOverview?.hymns ?? 0} published hymn(s)`],
@@ -2318,6 +2318,7 @@ function ProfileScreen({
         "Audit Logs": [["reader-outline", "Activity", `${adminOverview?.auditLogs ?? 0} logged action(s)`]],
       };
       return (
+        <AdminErrorBoundary resetKey={selectedAdminModule}>
         <View style={styles.stackLarge}>
           <Pressable style={styles.backButton} onPress={() => setSelectedAdminModule(null)}>
             <Ionicons color={colors.primary} name="arrow-back" size={20} />
@@ -2335,23 +2336,27 @@ function ProfileScreen({
                 <InfoRow key={label} icon={icon} label={label} value={value} />
               ))}
               <Pressable style={styles.secondaryButton} onPress={async () => {
-                setAdminLoading(true);
-                const [overview, data] = await Promise.all([
-                  fetchAdminOverview(),
-                  fetchAdminModuleData(moduleName),
-                ]);
-                setAdminOverview(overview);
-                setAdminModuleRows(data.rows ?? []);
-                setAdminStatus(data.message);
-                setAdminLoading(false);
+                try {
+                  setAdminLoading(true);
+                  const [overview, data] = await Promise.all([
+                    fetchAdminOverview(),
+                    fetchAdminModuleData(moduleName),
+                  ]);
+                  setAdminOverview(overview);
+                  setAdminModuleRows(Array.isArray(data.rows) ? data.rows : []);
+                  setAdminStatus(data.message);
+                } catch (error: any) {
+                  setAdminStatus(error?.message || "Admin data could not be refreshed.");
+                } finally {
+                  setAdminLoading(false);
+                }
               }}>
                 <Ionicons color={colors.primary} name="refresh-outline" size={18} />
                 <Text style={styles.secondaryButtonText}>Refresh Module Data</Text>
               </Pressable>
             </View>
           </SectionCard>
-          <AdminErrorBoundary resetKey={selectedAdminModule}>
-            {adminLoading ? (
+          {adminLoading ? (
               <View style={styles.centered}>
                 <ActivityIndicator color={colors.primary} />
                 <Text style={styles.mutedText}>Loading admin data...</Text>
@@ -2366,17 +2371,23 @@ function ProfileScreen({
                   onAction={async (action) => {
                     setAdminActionKey(`${record?.id || index}-${moduleName}`);
                     setAdminSubmit("saving");
-                    const result = await runAdminModuleAction(moduleName, action, record);
-                    setAdminStatus(result.message);
-                    const [overview, data] = await Promise.all([
-                      fetchAdminOverview(),
-                      fetchAdminModuleData(moduleName),
-                    ]);
-                    setAdminOverview(overview);
-                    setAdminModuleRows(data.rows ?? []);
-                    setAdminSubmit(result.ok ? "success" : "idle");
-                    setAdminActionKey("");
-                    if (result.ok) setTimeout(() => setAdminSubmit("idle"), 1200);
+                    try {
+                      const result = await runAdminModuleAction(moduleName, action, record);
+                      setAdminStatus(result.message);
+                      const [overview, data] = await Promise.all([
+                        fetchAdminOverview(),
+                        fetchAdminModuleData(moduleName),
+                      ]);
+                      setAdminOverview(overview);
+                      setAdminModuleRows(Array.isArray(data.rows) ? data.rows : []);
+                      setAdminSubmit(result.ok ? "success" : "idle");
+                      if (result.ok) setTimeout(() => setAdminSubmit("idle"), 1200);
+                    } catch (error: any) {
+                      setAdminStatus(error?.message || "Admin action failed.");
+                      setAdminSubmit("idle");
+                    } finally {
+                      setAdminActionKey("");
+                    }
                   }}
                 />
               ))
@@ -2385,8 +2396,8 @@ function ProfileScreen({
                 <Text style={styles.postBody}>No records are currently in this admin module.</Text>
               </View>
             )}
-          </AdminErrorBoundary>
         </View>
+        </AdminErrorBoundary>
       );
     }
 
