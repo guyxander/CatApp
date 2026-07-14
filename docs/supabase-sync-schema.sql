@@ -48,3 +48,16 @@ create policy "authenticated users can update parish records" on public.parishes
 create policy "authenticated users can read parish records" on public.parishes
   for select to authenticated
   using (true);
+
+-- Admin portal queue/action support.
+-- Applied as idempotent policies in Supabase so admins can manage review queues.
+grant select, insert, update, delete on
+  public.parish_edit_requests,
+  public.community_reports,
+  public.community_posts,
+  public.identity_verification_requests,
+  public.hymn_correction_requests,
+  public.reading_approval_requests,
+  public.advertisements,
+  public.admin_audit_logs
+to authenticated;

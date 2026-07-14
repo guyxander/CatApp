@@ -72,6 +72,22 @@ export type ParishRecord = Record<string, any> & {
   longitude?: number;
 };
 
+export type AdminModuleName =
+  | "Content Management"
+  | "Daily Reading Approvals"
+  | "Hymn Corrections"
+  | "Parish Management"
+  | "Community Reports"
+  | "Identity Verification"
+  | "Advertisement Management"
+  | "Roles & Access"
+  | "Audit Logs";
+
+export type AdminModuleData = {
+  rows: Record<string, any>[];
+  related?: Record<string, any[]>;
+};
+
 const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -144,7 +160,7 @@ export async function fetchActiveAdvertisements(placement: string): Promise<Arra
     .from("advertisements")
     .select("title,sponsor")
     .eq("placement", placement)
-    .eq("active", true);
+    .eq("status", "active");
   if (error) return null;
   return data ?? [];
 }
@@ -306,6 +322,40 @@ async function currentUserId() {
   return data.user?.id ?? null;
 }
 
+async function currentAdminProfile() {
+  if (!supabase) return null;
+  const { data: userData } = await supabase.auth.getUser();
+  if (!userData.user) return null;
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("id,display_name,email,is_admin,verification_status")
+    .eq("id", userData.user.id)
+    .maybeSingle();
+  const role = userData.user.app_metadata?.role;
+  if (!profile?.is_admin && role !== "superadmin") return null;
+  return { user: userData.user, profile, role };
+}
+
+async function ensureAdmin() {
+  const admin = await currentAdminProfile();
+  if (!admin) throw new Error("Admin access is required.");
+  return admin;
+}
+
+async function logAdminAction(action: string, entityType: string, entityId?: string, metadata: Record<string, any> = {}) {
+  if (!supabase) return;
+  const admin = await currentAdminProfile();
+  if (!admin) return;
+  await supabase.from("admin_audit_logs").insert({
+    actor_id: admin.user.id,
+    actor_name: admin.profile?.display_name || admin.user.email,
+    action,
+    entity_type: entityType,
+    entity_id: entityId,
+    metadata,
+  });
+}
+
 export async function updateCurrentUserProfile(input: Record<string, any>): Promise<ActionResult> {
   if (!supabase) return { ok: false, message: "Supabase profile sync is not configured." };
   const userId = await currentUserId();
@@ -452,19 +502,240 @@ export async function submitIdentityVerification(input: Record<string, any>): Pr
   return error ? { ok: false, message: error.message } : { ok: true, message: "Verification request submitted." };
 }
 
-export async function fetchAdminOverview(): Promise<Record<string, number>> {
-  if (!supabase) return {};
-  const tables = ["parishes", "hymns", "prayers", "advertisements"];
-  const counts = await Promise.all(
-    tables.map(async (table) => {
-      const { count } = await supabase.from(table).select("*", { count: "exact", head: true });
-      return [table, count ?? 0] as const;
-    })
-  );
-  return Object.fromEntries(counts);
+async function countRows(table: string, filters: Record<string, string> = {}) {
+  if (!supabase) return 0;
+  let query = supabase.from(table).select("*", { count: "exact", head: true });
+  Object.entries(filters).forEach(([key, value]) => {
+    query = query.eq(key, value);
+  });
+  const { count } = await query;
+  return count ?? 0;
 }
 
-export async function runAdminModuleAction(moduleName: string): Promise<ActionResult> {
+export async function fetchAdminOverview(): Promise<Record<string, number>> {
+  if (!supabase) return {};
+  try {
+    await ensureAdmin();
+    const [
+      parishes,
+      hymns,
+      prayers,
+      ads,
+      pendingIdentity,
+      pendingPosts,
+      pendingReports,
+      pendingParishEdits,
+      hymnCorrections,
+      readingApprovals,
+      candidateParishes,
+      users,
+      auditLogs,
+    ] = await Promise.all([
+      countRows("parishes"),
+      countRows("hymns"),
+      countRows("prayers"),
+      countRows("advertisements"),
+      countRows("identity_verification_requests", { status: "pending" }),
+      countRows("community_posts", { moderation_status: "pending" }),
+      countRows("community_reports", { status: "pending" }),
+      countRows("parish_edit_requests", { status: "pending" }),
+      countRows("hymn_correction_requests", { status: "pending" }),
+      countRows("reading_approval_requests", { status: "pending" }),
+      countRows("parishes", { verification_status: "candidate" }),
+      countRows("profiles"),
+      countRows("admin_audit_logs"),
+    ]);
+    return {
+      parishes,
+      hymns,
+      prayers,
+      ads,
+      pendingIdentity,
+      pendingPosts,
+      pendingReports,
+      pendingParishEdits,
+      hymnCorrections,
+      readingApprovals,
+      candidateParishes,
+      users,
+      auditLogs,
+    };
+  } catch {
+    return {};
+  }
+}
+
+export async function fetchAdminModuleData(moduleName: AdminModuleName): Promise<ActionResult<AdminModuleData>> {
+  if (!supabase) return { ok: false, message: `${moduleName} requires Supabase configuration.`, rows: [] };
+  try {
+    await ensureAdmin();
+    if (moduleName === "Parish Management") {
+      const [edits, parishes] = await Promise.all([
+        supabase.from("parish_edit_requests").select("*").order("created_at", { ascending: false }).limit(25),
+        supabase.from("parishes").select("*").order("updated_at", { ascending: false }).limit(25),
+      ]);
+      if (edits.error) throw edits.error;
+      return {
+        ok: true,
+        message: "Parish queues loaded.",
+        rows: [
+          ...((edits.data ?? []).map((row) => ({ ...row, __adminKind: "parish_edit" }))),
+          ...((parishes.data ?? []).map((row) => ({ ...row, __adminKind: "parish_record" }))),
+        ],
+      };
+    }
+    if (moduleName === "Community Reports") {
+      const [reports, posts] = await Promise.all([
+        supabase.from("community_reports").select("*").order("created_at", { ascending: false }).limit(25),
+        supabase.from("community_posts").select("*").neq("moderation_status", "published").order("created_at", { ascending: false }).limit(25),
+      ]);
+      if (reports.error) throw reports.error;
+      return {
+        ok: true,
+        message: "Community moderation queues loaded.",
+        rows: [
+          ...((reports.data ?? []).map((row) => ({ ...row, __adminKind: "community_report" }))),
+          ...((posts.data ?? []).map((row) => ({ ...row, __adminKind: "community_post" }))),
+        ],
+      };
+    }
+    if (moduleName === "Roles & Access") {
+      const { data, error } = await supabase.from("profiles").select("*").order("updated_at", { ascending: false }).limit(50);
+      if (error) throw error;
+      return { ok: true, message: "Role list loaded.", rows: data ?? [] };
+    }
+    if (moduleName === "Identity Verification") {
+      const { data, error } = await supabase.from("identity_verification_requests").select("*").order("created_at", { ascending: false }).limit(50);
+      if (error) throw error;
+      return { ok: true, message: "Identity verification queue loaded.", rows: data ?? [] };
+    }
+    if (moduleName === "Hymn Corrections") {
+      const { data, error } = await supabase.from("hymn_correction_requests").select("*").order("created_at", { ascending: false }).limit(50);
+      if (error) throw error;
+      return { ok: true, message: "Hymn correction queue loaded.", rows: data ?? [] };
+    }
+    if (moduleName === "Daily Reading Approvals") {
+      const { data, error } = await supabase.from("reading_approval_requests").select("*").order("created_at", { ascending: false }).limit(50);
+      if (error) throw error;
+      return { ok: true, message: "Reading approval queue loaded.", rows: data ?? [] };
+    }
+    if (moduleName === "Advertisement Management") {
+      const { data, error } = await supabase.from("advertisements").select("*").order("created_at", { ascending: false }).limit(50);
+      if (error) throw error;
+      return { ok: true, message: "Advertisements loaded.", rows: data ?? [] };
+    }
+    if (moduleName === "Audit Logs") {
+      const { data, error } = await supabase.from("admin_audit_logs").select("*").order("created_at", { ascending: false }).limit(75);
+      if (error) throw error;
+      return { ok: true, message: "Audit logs loaded.", rows: data ?? [] };
+    }
+    const [hymns, prayers, parishes] = await Promise.all([
+      supabase.from("hymns").select("id,hymn_code,title,category,updated_at").order("updated_at", { ascending: false }).limit(12),
+      supabase.from("prayers").select("id,title,category,updated_at").order("updated_at", { ascending: false }).limit(12),
+      supabase.from("parishes").select("id,name,verification_status,updated_at").eq("verification_status", "candidate").order("updated_at", { ascending: false }).limit(12),
+    ]);
+    return {
+      ok: true,
+      message: "Content queues loaded.",
+      rows: [
+        ...((hymns.data ?? []).map((row) => ({ ...row, __adminKind: "hymn" }))),
+        ...((prayers.data ?? []).map((row) => ({ ...row, __adminKind: "prayer" }))),
+        ...((parishes.data ?? []).map((row) => ({ ...row, __adminKind: "candidate_parish" }))),
+      ],
+    };
+  } catch (error: any) {
+    return { ok: false, message: error.message ?? "Admin data could not be loaded.", rows: [] };
+  }
+}
+
+export async function runAdminModuleAction(moduleName: AdminModuleName, action: string, record: Record<string, any>): Promise<ActionResult> {
   if (!supabase) return { ok: false, message: `${moduleName} requires Supabase configuration.` };
-  return { ok: true, message: `${moduleName} refreshed.` };
+  try {
+    await ensureAdmin();
+    if (moduleName === "Parish Management") {
+      if (action === "approve_edit") {
+        const update = {
+          name: record.parish_name,
+          address: record.proposed_address || "Address pending",
+          phone: record.proposed_phone || null,
+          mass_times: record.proposed_mass_times || [],
+          confession_times: record.proposed_confession_times || [],
+          verification_status: "verified",
+          last_confirmed_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
+        if (record.parish_id) await supabase.from("parishes").update(update).eq("id", record.parish_id);
+        else await supabase.from("parishes").insert({ ...update, diocese: "Community verified" });
+        await supabase.from("parish_edit_requests").update({ status: "approved", reviewed_at: new Date().toISOString() }).eq("id", record.id);
+        await logAdminAction("approve_edit", "parish_edit_request", record.id, { parishName: record.parish_name });
+        return { ok: true, message: "Parish edit approved." };
+      }
+      if (action === "reject_edit") {
+        await supabase.from("parish_edit_requests").update({ status: "rejected", reviewed_at: new Date().toISOString() }).eq("id", record.id);
+        await logAdminAction("reject_edit", "parish_edit_request", record.id);
+        return { ok: true, message: "Parish edit rejected." };
+      }
+      if (action === "verify_parish") {
+        await supabase.from("parishes").update({ verification_status: "verified", verified_at: new Date().toISOString(), updated_at: new Date().toISOString() }).eq("id", record.id);
+        await logAdminAction("verify_parish", "parish", record.id);
+        return { ok: true, message: "Parish marked verified." };
+      }
+      if (action === "withdraw_parish") {
+        await supabase.from("parishes").update({ verification_status: "withdrawn", updated_at: new Date().toISOString() }).eq("id", record.id);
+        await logAdminAction("withdraw_parish", "parish", record.id);
+        return { ok: true, message: "Parish withdrawn from directory." };
+      }
+    }
+    if (moduleName === "Community Reports") {
+      if (action === "dismiss_report" || action === "action_report") {
+        await supabase.from("community_reports").update({ status: action === "dismiss_report" ? "dismissed" : "actioned", reviewed_at: new Date().toISOString() }).eq("id", record.id);
+        await logAdminAction(action, "community_report", record.id);
+        return { ok: true, message: action === "dismiss_report" ? "Report dismissed." : "Report marked actioned." };
+      }
+      if (action === "publish_post" || action === "hold_post" || action === "remove_post") {
+        const status = action === "publish_post" ? "published" : action === "hold_post" ? "held" : "removed";
+        await supabase.from("community_posts").update({ moderation_status: status, updated_at: new Date().toISOString() }).eq("id", record.id);
+        await logAdminAction(action, "community_post", record.id);
+        return { ok: true, message: `Post marked ${status}.` };
+      }
+    }
+    if (moduleName === "Identity Verification") {
+      if (action === "approve_identity" || action === "reject_identity") {
+        const status = action === "approve_identity" ? "approved" : "rejected";
+        await supabase.from("identity_verification_requests").update({ status, reviewed_at: new Date().toISOString() }).eq("id", record.id);
+        if (record.email) await supabase.from("profiles").update({ verification_status: status === "approved" ? "verified" : "rejected", updated_at: new Date().toISOString() }).eq("email", record.email);
+        await logAdminAction(action, "identity_verification_request", record.id, { email: record.email });
+        return { ok: true, message: `Identity request ${status}.` };
+      }
+    }
+    if (moduleName === "Hymn Corrections") {
+      const status = action === "approve_hymn" ? "approved" : action === "apply_hymn" ? "applied" : "rejected";
+      await supabase.from("hymn_correction_requests").update({ status, reviewed_at: new Date().toISOString() }).eq("id", record.id);
+      await logAdminAction(action, "hymn_correction_request", record.id, { hymnTitle: record.hymn_title });
+      return { ok: true, message: `Hymn correction ${status}.` };
+    }
+    if (moduleName === "Daily Reading Approvals") {
+      const status = action === "approve_reading" ? "approved" : action === "publish_reading" ? "published" : "rejected";
+      await supabase.from("reading_approval_requests").update({ status, reviewed_at: new Date().toISOString() }).eq("id", record.id);
+      await logAdminAction(action, "reading_approval_request", record.id, { title: record.title });
+      return { ok: true, message: `Reading request ${status}.` };
+    }
+    if (moduleName === "Advertisement Management") {
+      const status = action === "activate_ad" ? "active" : action === "pause_ad" ? "paused" : "ended";
+      await supabase.from("advertisements").update({ status }).eq("id", record.id);
+      await logAdminAction(action, "advertisement", record.id, { title: record.title });
+      return { ok: true, message: `Advertisement ${status}.` };
+    }
+    if (moduleName === "Roles & Access") {
+      if (record.id) {
+        const next = action === "promote_admin";
+        await supabase.from("profiles").update({ is_admin: next, updated_at: new Date().toISOString() }).eq("id", record.id);
+        await logAdminAction(action, "profile", record.id, { displayName: record.display_name });
+        return { ok: true, message: next ? "User promoted to admin." : "Admin access removed." };
+      }
+    }
+    return { ok: false, message: "No action was available for this record." };
+  } catch (error: any) {
+    return { ok: false, message: error.message ?? "Admin action failed." };
+  }
 }

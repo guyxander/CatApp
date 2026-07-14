@@ -11,6 +11,7 @@ import {
   createCommunityPost,
   fetchActiveAdvertisements,
   fetchAdminOverview,
+  fetchAdminModuleData,
   fetchCommunityComments,
   fetchCommunityPosts,
   fetchCommunityReactions,
@@ -35,6 +36,7 @@ import {
   updateCurrentUserProfile,
   updateParishDetails,
 } from "./src/supabase";
+import type { AdminModuleName } from "./src/supabase";
 import { addDays, describeCalendar } from "./src/liturgicalCalendar";
 import {
   getAppSettings,
@@ -346,6 +348,97 @@ function saveAndSyncCollectionItem(type: string, id: string, title: string, coll
   const items = collection === "saved" ? saveLocalItem(type, id, title) : recordRecentItem(type, id, title);
   syncUserCollectionItem({ type, itemId: id, title, collection }).catch(() => undefined);
   return items;
+}
+
+const adminModules: AdminModuleName[] = [
+  "Content Management",
+  "Daily Reading Approvals",
+  "Hymn Corrections",
+  "Parish Management",
+  "Community Reports",
+  "Identity Verification",
+  "Advertisement Management",
+  "Roles & Access",
+  "Audit Logs",
+];
+
+function adminRecordTitle(moduleName: AdminModuleName, record: Record<string, any>) {
+  return record.title || record.parish_name || record.name || record.hymn_title || record.celebration_title || record.full_name || record.display_name || record.actor_name || moduleName;
+}
+
+function adminRecordSubtitle(record: Record<string, any>) {
+  return [
+    record.__adminKind,
+    record.status || record.moderation_status || record.verification_status,
+    record.email || record.submitted_by_name || record.author_name || record.sponsor,
+  ].filter(Boolean).join(" - ");
+}
+
+function adminRecordBody(record: Record<string, any>) {
+  return record.body || record.reason || record.note || record.document_note || record.proposed_text || record.proposed_address || record.action || record.category || record.placement || "No extra details.";
+}
+
+function adminActionsForRecord(moduleName: AdminModuleName, record: Record<string, any>): Array<{ action: string; label: string; icon: keyof typeof Ionicons.glyphMap; danger?: boolean }> {
+  if (moduleName === "Parish Management") {
+    if (record.__adminKind === "parish_edit" && record.status === "pending") {
+      return [
+        { action: "approve_edit", label: "Approve", icon: "checkmark-circle-outline" },
+        { action: "reject_edit", label: "Reject", icon: "close-circle-outline", danger: true },
+      ];
+    }
+    if (record.__adminKind === "parish_record") {
+      return [
+        { action: "verify_parish", label: "Verify", icon: "shield-checkmark-outline" },
+        { action: "withdraw_parish", label: "Withdraw", icon: "remove-circle-outline", danger: true },
+      ];
+    }
+  }
+  if (moduleName === "Community Reports") {
+    if (record.__adminKind === "community_report") {
+      return [
+        { action: "action_report", label: "Actioned", icon: "checkmark-done-outline" },
+        { action: "dismiss_report", label: "Dismiss", icon: "close-circle-outline" },
+      ];
+    }
+    return [
+      { action: "publish_post", label: "Publish", icon: "checkmark-circle-outline" },
+      { action: "hold_post", label: "Hold", icon: "pause-circle-outline" },
+      { action: "remove_post", label: "Remove", icon: "trash-outline", danger: true },
+    ];
+  }
+  if (moduleName === "Identity Verification") {
+    return [
+      { action: "approve_identity", label: "Approve", icon: "shield-checkmark-outline" },
+      { action: "reject_identity", label: "Reject", icon: "close-circle-outline", danger: true },
+    ];
+  }
+  if (moduleName === "Hymn Corrections") {
+    return [
+      { action: "approve_hymn", label: "Approve", icon: "checkmark-circle-outline" },
+      { action: "apply_hymn", label: "Applied", icon: "construct-outline" },
+      { action: "reject_hymn", label: "Reject", icon: "close-circle-outline", danger: true },
+    ];
+  }
+  if (moduleName === "Daily Reading Approvals") {
+    return [
+      { action: "approve_reading", label: "Approve", icon: "checkmark-circle-outline" },
+      { action: "publish_reading", label: "Publish", icon: "cloud-upload-outline" },
+      { action: "reject_reading", label: "Reject", icon: "close-circle-outline", danger: true },
+    ];
+  }
+  if (moduleName === "Advertisement Management") {
+    return [
+      { action: "activate_ad", label: "Activate", icon: "play-circle-outline" },
+      { action: "pause_ad", label: "Pause", icon: "pause-circle-outline" },
+      { action: "end_ad", label: "End", icon: "stop-circle-outline", danger: true },
+    ];
+  }
+  if (moduleName === "Roles & Access") {
+    return record.is_admin
+      ? [{ action: "demote_admin", label: "Remove Admin", icon: "person-remove-outline", danger: true }]
+      : [{ action: "promote_admin", label: "Make Admin", icon: "person-add-outline" }];
+  }
+  return [];
 }
 
 function isPlaceholderCommunityPost(post: any) {
@@ -1909,6 +2002,9 @@ function ProfileScreen({
   const [privacyLocation, setPrivacyLocation] = useState(false);
   const [privacyActivity, setPrivacyActivity] = useState(true);
   const [adminOverview, setAdminOverview] = useState<any | null>(null);
+  const [adminModuleRows, setAdminModuleRows] = useState<Record<string, any>[]>([]);
+  const [adminLoading, setAdminLoading] = useState(false);
+  const [adminActionKey, setAdminActionKey] = useState("");
   const [signInSubmit, setSignInSubmit] = useState<SubmitState>("idle");
   const [signUpSubmit, setSignUpSubmit] = useState<SubmitState>("idle");
   const [googleSubmit, setGoogleSubmit] = useState<SubmitState>("idle");
@@ -1926,6 +2022,9 @@ function ProfileScreen({
       setIsAuthenticated(true);
       setEmail(record.user.email || email);
       setFullName((current) => record.profile?.display_name || record.user.user_metadata?.full_name || current);
+      const authRole = record.user.app_metadata?.role;
+      setIsAdmin(Boolean(record.profile?.is_admin || authRole === "superadmin"));
+      setProfileRole(authRole === "superadmin" ? "Superadmin" : record.profile?.is_admin ? "Admin" : record.profile?.verification_status || "Member");
       setProfileStatus(result.message);
     };
 
@@ -1936,8 +2035,25 @@ function ProfileScreen({
 
   useEffect(() => {
     if (!showAdmin) return;
-    fetchAdminOverview().then(setAdminOverview);
+    setAdminLoading(true);
+    fetchAdminOverview()
+      .then((overview) => {
+        setAdminOverview(overview);
+        setAdminStatus(Object.keys(overview).length ? "Admin data refreshed." : "Admin access is required or Supabase did not return admin counts.");
+      })
+      .finally(() => setAdminLoading(false));
   }, [showAdmin]);
+
+  useEffect(() => {
+    if (!showAdmin || !selectedAdminModule || !isAdmin) return;
+    setAdminLoading(true);
+    fetchAdminModuleData(selectedAdminModule as AdminModuleName)
+      .then((result) => {
+        setAdminModuleRows(result.rows ?? []);
+        setAdminStatus(result.message);
+      })
+      .finally(() => setAdminLoading(false));
+  }, [isAdmin, selectedAdminModule, showAdmin]);
 
   useEffect(() => {
     const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
@@ -2122,20 +2238,44 @@ function ProfileScreen({
   }
 
   if (showAdmin) {
+    if (!isAdmin) {
+      return (
+        <View style={styles.stackLarge}>
+          <Pressable style={styles.backButton} onPress={() => setShowAdmin(false)}>
+            <Ionicons color={colors.primary} name="arrow-back" size={20} />
+            <Text style={styles.backButtonText}>Profile</Text>
+          </Pressable>
+          <SectionCard>
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardTitle}>Admin Access</Text>
+              <Text style={styles.smallBadge}>Restricted</Text>
+            </View>
+            <View style={styles.cardBody}>
+              <InfoRow icon="shield-half-outline" label="Current role" value={profileRole} />
+              <Text style={styles.postBody}>Your account must be marked as an admin in Supabase before you can view queues or run admin actions.</Text>
+            </View>
+          </SectionCard>
+        </View>
+      );
+    }
+
     if (selectedAdminModule) {
+      const moduleName = selectedAdminModule as AdminModuleName;
       const moduleRows: Record<string, Array<[keyof typeof Ionicons.glyphMap, string, string]>> = {
         "Content Management": [
           ["book-outline", "Hymns", `${adminOverview?.hymns ?? 0} published hymn(s)`],
           ["sparkles-outline", "Prayers", `${adminOverview?.prayers ?? 0} published prayer(s)`],
+          ["business-outline", "Candidate parishes", `${adminOverview?.candidateParishes ?? 0} candidate parish record(s)`],
           ["calendar-outline", "Daily readings", `${adminOverview?.readingApprovals ?? 0} reading approval item(s)`],
         ],
         "Daily Reading Approvals": [["checkmark-done-outline", "Approval queue", `${adminOverview?.readingApprovals ?? 0} pending item(s)`]],
         "Hymn Corrections": [["musical-notes-outline", "Correction queue", `${adminOverview?.hymnCorrections ?? 0} suggested correction(s)`]],
         "Parish Management": [["business-outline", "Parishes", `${adminOverview?.parishes ?? 0} verified parish records`], ["create-outline", "Parish edits", `${adminOverview?.pendingParishEdits ?? 0} submitted update(s)`]],
         "Community Reports": [["flag-outline", "Reports", `${adminOverview?.pendingReports ?? 0} report(s) waiting`]],
+        "Identity Verification": [["shield-checkmark-outline", "Verification queue", `${adminOverview?.pendingIdentity ?? 0} pending request(s)`]],
         "Advertisement Management": [["megaphone-outline", "Active ads", `${adminOverview?.ads ?? 0} active placement(s)`]],
-        "Roles & Access": [["shield-half-outline", "Current role", profileRole], ["person-add-outline", "Invite admin", "Role assignment workflow"]],
-        "Audit Logs": [["reader-outline", "Activity", "Admin audit log stream"]],
+        "Roles & Access": [["shield-half-outline", "Current role", profileRole], ["people-outline", "Users", `${adminOverview?.users ?? 0} profile(s)`]],
+        "Audit Logs": [["reader-outline", "Activity", `${adminOverview?.auditLogs ?? 0} logged action(s)`]],
       };
       return (
         <View style={styles.stackLarge}>
@@ -2146,7 +2286,7 @@ function ProfileScreen({
           <View>
             <Text style={styles.overline}>Admin Module</Text>
             <Text style={styles.pageTitle}>{selectedAdminModule}</Text>
-            <Text style={styles.secondaryText}>Live counts and working module navigation are connected to the CatApp Supabase admin overview.</Text>
+            <Text style={styles.secondaryText}>Live queue data and admin actions are connected to Supabase.</Text>
             {adminStatus ? <Text style={styles.mutedText}>{adminStatus}</Text> : null}
           </View>
           <SectionCard>
@@ -2154,26 +2294,56 @@ function ProfileScreen({
               {(moduleRows[selectedAdminModule] || []).map(([icon, label, value]) => (
                 <InfoRow key={label} icon={icon} label={label} value={value} />
               ))}
-              <SubmitButton
-                label="Run Module Action"
-                successLabel="Action Complete"
-                state={adminSubmit}
-                onPress={async () => {
-                  setAdminSubmit("saving");
-                  const result = await runAdminModuleAction(selectedAdminModule);
-                  setAdminStatus(result.message);
-                  const overview = await fetchAdminOverview();
-                  setAdminOverview(overview);
-                  setAdminSubmit(result.ok ? "success" : "idle");
-                  if (result.ok) setTimeout(() => setAdminSubmit("idle"), 1800);
-                }}
-              />
-              <Pressable style={styles.secondaryButton} onPress={() => fetchAdminOverview().then(setAdminOverview)}>
+              <Pressable style={styles.secondaryButton} onPress={async () => {
+                setAdminLoading(true);
+                const [overview, data] = await Promise.all([
+                  fetchAdminOverview(),
+                  fetchAdminModuleData(moduleName),
+                ]);
+                setAdminOverview(overview);
+                setAdminModuleRows(data.rows ?? []);
+                setAdminStatus(data.message);
+                setAdminLoading(false);
+              }}>
                 <Ionicons color={colors.primary} name="refresh-outline" size={18} />
                 <Text style={styles.secondaryButtonText}>Refresh Module Data</Text>
               </Pressable>
             </View>
           </SectionCard>
+          {adminLoading ? (
+            <View style={styles.centered}>
+              <ActivityIndicator color={colors.primary} />
+              <Text style={styles.mutedText}>Loading admin data...</Text>
+            </View>
+          ) : adminModuleRows.length ? (
+            adminModuleRows.map((record, index) => (
+              <AdminRecordCard
+                key={`${moduleName}-${record.id || index}`}
+                busy={adminActionKey === `${record.id}-${moduleName}`}
+                moduleName={moduleName}
+                record={record}
+                onAction={async (action) => {
+                  setAdminActionKey(`${record.id}-${moduleName}`);
+                  setAdminSubmit("saving");
+                  const result = await runAdminModuleAction(moduleName, action, record);
+                  setAdminStatus(result.message);
+                  const [overview, data] = await Promise.all([
+                    fetchAdminOverview(),
+                    fetchAdminModuleData(moduleName),
+                  ]);
+                  setAdminOverview(overview);
+                  setAdminModuleRows(data.rows ?? []);
+                  setAdminSubmit(result.ok ? "success" : "idle");
+                  setAdminActionKey("");
+                  if (result.ok) setTimeout(() => setAdminSubmit("idle"), 1200);
+                }}
+              />
+            ))
+          ) : (
+            <View style={styles.noticeBox}>
+              <Text style={styles.postBody}>No records are currently in this admin module.</Text>
+            </View>
+          )}
         </View>
       );
     }
@@ -2187,7 +2357,7 @@ function ProfileScreen({
         <View>
           <Text style={styles.overline}>Role-protected</Text>
           <Text style={styles.pageTitle}>Admin Portal</Text>
-          <Text style={styles.secondaryText}>{isAdmin ? "In-app command center for parish records, content review, reports, identity and ads." : "Preview mode. Supabase admin role is required before actions are enabled."}</Text>
+          <Text style={styles.secondaryText}>In-app command center for parish records, content review, reports, identity and ads.</Text>
         </View>
         <View style={styles.adminGrid}>
           <AdminMetric label="Pending verifications" value={String(adminOverview?.pendingIdentity ?? 0)} icon="shield-checkmark-outline" />
@@ -2209,8 +2379,8 @@ function ProfileScreen({
             <InfoRow icon="alert-circle-outline" label="Community reports" value={`${adminOverview?.pendingReports ?? 0} report(s) waiting for review`} />
             <InfoRow icon="person-add-outline" label="Identity verification" value={`${adminOverview?.pendingIdentity ?? 0} baptismal card/profile request(s)`} />
             <InfoRow icon="business-outline" label="Parish editor queue" value={`${adminOverview?.pendingParishEdits ?? 0} submitted parish correction(s)`} />
-            <InfoRow icon="flag-outline" label="Reports" value={`${adminOverview?.pendingReports ?? 0} community report(s) waiting`} />
-            <InfoRow icon="megaphone-outline" label="Advertisement management" value={`${adminOverview?.ads ?? 0} active placement(s); Today-top placement is live.`} />
+            <InfoRow icon="flag-outline" label="Pending posts" value={`${adminOverview?.pendingPosts ?? 0} post(s) waiting`} />
+            <InfoRow icon="megaphone-outline" label="Advertisement management" value={`${adminOverview?.ads ?? 0} ad record(s)`} />
           </View>
         </SectionCard>
         <SectionCard>
@@ -2219,7 +2389,7 @@ function ProfileScreen({
             <Text style={styles.smallBadge}>App only</Text>
           </View>
           <View style={styles.cardBody}>
-            {["Content Management", "Daily Reading Approvals", "Hymn Corrections", "Parish Management", "Community Reports", "Advertisement Management", "Roles & Access", "Audit Logs"].map((item) => (
+            {adminModules.map((item) => (
               <Pressable key={item} style={styles.preferenceRow} onPress={() => setSelectedAdminModule(item)}>
                 <Text style={styles.preferenceLabel}>{item}</Text>
                 <Ionicons color={colors.muted} name="chevron-forward" size={22} />
@@ -2690,6 +2860,48 @@ function InfoRow({
   );
 }
 
+function AdminRecordCard({
+  moduleName,
+  record,
+  busy,
+  onAction,
+}: {
+  moduleName: AdminModuleName;
+  record: Record<string, any>;
+  busy: boolean;
+  onAction: (action: string) => Promise<void>;
+}) {
+  const actions = adminActionsForRecord(moduleName, record);
+  return (
+    <View style={styles.postCard}>
+      <View style={styles.postMeta}>
+        <Text style={styles.verifiedBadge}>{adminRecordSubtitle(record) || moduleName}</Text>
+        <Text style={styles.mutedText}>{record.created_at ? new Date(record.created_at).toLocaleDateString() : record.updated_at ? new Date(record.updated_at).toLocaleDateString() : ""}</Text>
+      </View>
+      <Text style={styles.postTitle}>{adminRecordTitle(moduleName, record)}</Text>
+      <Text style={styles.postBody}>{String(adminRecordBody(record)).slice(0, 450)}</Text>
+      {record.proposed_phone ? <InfoRow icon="call-outline" label="Proposed phone" value={record.proposed_phone} /> : null}
+      {record.proposed_mass_times?.length ? <InfoRow icon="time-outline" label="Proposed Mass" value={JSON.stringify(record.proposed_mass_times)} /> : null}
+      {record.proposed_confession_times?.length ? <InfoRow icon="chatbubble-outline" label="Proposed confession" value={JSON.stringify(record.proposed_confession_times)} /> : null}
+      {actions.length ? (
+        <View style={styles.adminActionRow}>
+          {actions.map((item) => (
+            <Pressable
+              key={item.action}
+              disabled={busy}
+              onPress={() => onAction(item.action)}
+              style={[styles.adminActionButton, item.danger && styles.adminActionDanger, busy && styles.submitButtonBusy]}
+            >
+              {busy ? <ActivityIndicator color={item.danger ? colors.danger : colors.primary} size="small" /> : <Ionicons color={item.danger ? colors.danger : colors.primary} name={item.icon} size={16} />}
+              <Text style={[styles.adminActionText, item.danger && styles.adminActionDangerText]}>{item.label}</Text>
+            </Pressable>
+          ))}
+        </View>
+      ) : null}
+    </View>
+  );
+}
+
 function AdminMetric({
   label,
   value,
@@ -3035,6 +3247,21 @@ const styles = StyleSheet.create({
     width: "48%",
   },
   metricValue: { color: colors.primary, fontSize: 30, fontWeight: "800" },
+  adminActionRow: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+  adminActionButton: {
+    alignItems: "center",
+    backgroundColor: colors.surfaceLow,
+    borderColor: colors.outline,
+    borderRadius: 10,
+    borderWidth: 1,
+    flexDirection: "row",
+    gap: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+  },
+  adminActionDanger: { backgroundColor: "#fff1f1", borderColor: "#f1b8b8" },
+  adminActionText: { color: colors.primary, fontSize: 12, fontWeight: "800" },
+  adminActionDangerText: { color: colors.danger },
   signOut: { color: colors.danger, fontSize: 18, textAlign: "center" },
   bottomTabs: {
     alignItems: "center",
