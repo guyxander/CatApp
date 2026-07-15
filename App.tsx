@@ -17,9 +17,11 @@ import {
   fetchAdminModuleData,
   fetchCommunityComments,
   fetchCommunityPosts,
+  fetchCommunityPostsByAuthor,
   fetchCommunityReactions,
   fetchMyCommunityPosts,
   fetchDailyReadings,
+  fetchPublicProfile,
   fetchPublishedHymns,
   fetchPublishedPrayers,
   fetchVerifiedParishes,
@@ -42,7 +44,7 @@ import {
   updateCurrentUserProfile,
   updateParishDetails,
 } from "./src/supabase";
-import type { AdminModuleName, AdvertisementRecord } from "./src/supabase";
+import type { AdminModuleName, AdvertisementRecord, PublicProfile } from "./src/supabase";
 import { addDays, describeCalendar } from "./src/liturgicalCalendar";
 import {
   getAppSettings,
@@ -422,6 +424,26 @@ function safeDisplayText(value: any) {
   } catch {
     return "Unsupported value";
   }
+}
+
+function cleanUsername(value: any) {
+  return String(value || "").trim().replace(/^@+/, "");
+}
+
+function communityAuthorIdentity(item: any) {
+  const username = cleanUsername(item.author_username || item.username);
+  const rawName = String(item.author_name || item.display_name || "").trim();
+  const name = rawName && cleanUsername(rawName).toLowerCase() !== username.toLowerCase()
+    ? rawName
+    : item.author_id
+      ? "CatApp Member"
+      : "Guest";
+  return { name, username };
+}
+
+function communityPostLink(post: any) {
+  const id = encodeURIComponent(String(post.id || post.title || "community"));
+  return `catapp://community/post/${id}`;
 }
 
 function adminActionsForRecord(moduleName: AdminModuleName, record: Record<string, any>): Array<{ action: string; label: string; icon: keyof typeof Ionicons.glyphMap; danger?: boolean }> {
@@ -1478,6 +1500,8 @@ function CommunityScreen({
 }) {
   const [composerOpen, setComposerOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState<any | null>(null);
+  const [selectedAuthorProfile, setSelectedAuthorProfile] = useState<PublicProfile | null>(null);
+  const [selectedAuthorPosts, setSelectedAuthorPosts] = useState<any[]>([]);
   const [draft, setDraft] = useState("");
   const [draftTitle, setDraftTitle] = useState("");
   const [communityFeed, setCommunityFeed] = useState<any[]>([]);
@@ -1516,6 +1540,11 @@ function CommunityScreen({
 
   useEffect(() => {
     const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
+      if (selectedAuthorProfile) {
+        setSelectedAuthorProfile(null);
+        setSelectedAuthorPosts([]);
+        return true;
+      }
       if (selectedPost) {
         setSelectedPost(null);
         return true;
@@ -1527,7 +1556,7 @@ function CommunityScreen({
       return false;
     });
     return () => subscription.remove();
-  }, [composerOpen, selectedPost]);
+  }, [composerOpen, selectedAuthorProfile, selectedPost]);
 
   useEffect(() => {
     let isMounted = true;
@@ -1577,8 +1606,45 @@ function CommunityScreen({
     setCommunityStatus(result.message);
   };
 
+  const openAuthorProfile = async (post: any) => {
+    if (!post.author_id) {
+      setCommunityStatus("This author profile is not available yet.");
+      return;
+    }
+    setCommunityStatus("Loading author profile...");
+    const [profile, posts] = await Promise.all([
+      fetchPublicProfile(post.author_id),
+      fetchCommunityPostsByAuthor(post.author_id),
+    ]);
+    if (!profile) {
+      setCommunityStatus("This author profile is not available yet.");
+      return;
+    }
+    setSelectedAuthorProfile({
+      ...profile,
+      username: profile.username || cleanUsername(post.author_username),
+      display_name: profile.display_name || post.author_name,
+    });
+    setSelectedAuthorPosts((posts ?? []).filter((item) => !isPlaceholderCommunityPost(item)));
+    setCommunityStatus("Community profile loaded.");
+  };
+
   const sharePost = async (post: any) => {
-    await Share.share({ message: `${post.title}\n\n${post.body}\n\nShared from CatApp` });
+    await Share.share({ message: communityPostLink(post), url: communityPostLink(post) });
+  };
+
+  const renderAuthorHeader = (post: any) => {
+    const identity = communityAuthorIdentity(post);
+    return (
+      <View>
+        <Text style={styles.postAuthor}>{identity.name}</Text>
+        {identity.username ? (
+          <Pressable disabled={!post.author_id} onPress={() => openAuthorProfile(post)}>
+            <Text style={[styles.usernameLink, !post.author_id && styles.usernameLinkDisabled]}>@{identity.username}</Text>
+          </Pressable>
+        ) : null}
+      </View>
+    );
   };
 
   const removePost = async (post: any) => {
@@ -1601,6 +1667,56 @@ function CommunityScreen({
     });
   }, [selectedPost?.id]);
 
+  if (selectedAuthorProfile) {
+    const identity = communityAuthorIdentity({
+      author_id: selectedAuthorProfile.id,
+      author_name: selectedAuthorProfile.display_name,
+      author_username: selectedAuthorProfile.username,
+    });
+    return (
+      <View style={styles.stackLarge}>
+        <Pressable style={styles.backButton} onPress={() => {
+          setSelectedAuthorProfile(null);
+          setSelectedAuthorPosts([]);
+        }}>
+          <Ionicons color={colors.primary} name="arrow-back" size={20} />
+          <Text style={styles.backButtonText}>{selectedPost ? "Post" : "Community"}</Text>
+        </Pressable>
+        <SectionCard>
+          <View style={styles.cardBody}>
+            <View style={styles.profileInfo}>
+              <View style={styles.avatar}>
+                <Ionicons color="#ffffff" name="person-outline" size={24} />
+              </View>
+              <View style={styles.flex}>
+                <Text style={styles.cardTitle}>{identity.name}</Text>
+                {identity.username ? <Text style={styles.usernameLink}>@{identity.username}</Text> : null}
+                <Text style={styles.mutedText}>{selectedAuthorProfile.verification_status || selectedAuthorProfile.catholic_status || "Community member"}</Text>
+              </View>
+            </View>
+            <InfoRow icon="business-outline" label="Home parish" value={selectedAuthorProfile.home_parish || "Not shared"} />
+            <InfoRow icon="chatbubbles-outline" label="Published posts" value={`${selectedAuthorPosts.length}`} />
+          </View>
+        </SectionCard>
+        {selectedAuthorPosts.length ? selectedAuthorPosts.map((post) => (
+          <Pressable key={post.id ?? post.title} style={styles.postCard} onPress={() => {
+            setSelectedAuthorProfile(null);
+            setSelectedAuthorPosts([]);
+            setSelectedPost(post);
+          }}>
+            <Text style={styles.postTitle}>{post.title}</Text>
+            <Text style={styles.postBody}>{post.body}</Text>
+            <Text style={styles.mutedText}>{post.comment_count ?? 0} Comments</Text>
+          </Pressable>
+        )) : (
+          <View style={styles.noticeBox}>
+            <Text style={styles.mutedText}>No published posts from this user yet.</Text>
+          </View>
+        )}
+      </View>
+    );
+  }
+
   if (selectedPost) {
     return (
       <View style={styles.stackLarge}>
@@ -1610,10 +1726,7 @@ function CommunityScreen({
         </Pressable>
         <View style={[styles.postCard, selectedPost.featured && styles.featuredPost]}>
           <View style={styles.postMeta}>
-            <View>
-              <Text style={styles.postAuthor}>{selectedPost.author_name || "Guest"}</Text>
-              {selectedPost.author_username ? <Text style={styles.mutedText}>@{selectedPost.author_username}</Text> : null}
-            </View>
+            {renderAuthorHeader(selectedPost)}
             {selectedPost.author_badge ? <Text style={styles.verifiedBadge}>{selectedPost.author_badge}</Text> : null}
             {selectedPost.clergy_attribution ? <Text style={styles.verifiedBadge}>{selectedPost.clergy_attribution}</Text> : null}
           </View>
@@ -1725,10 +1838,7 @@ function CommunityScreen({
         <React.Fragment key={post.id ?? post.title}>
         <Pressable key={post.id ?? post.title} style={[styles.postCard, post.featured && styles.featuredPost]} onPress={() => setSelectedPost(post)}>
           <View style={styles.postMeta}>
-            <View>
-              <Text style={styles.postAuthor}>{post.author_name || "Guest"}</Text>
-              {post.author_username ? <Text style={styles.mutedText}>@{post.author_username}</Text> : null}
-            </View>
+            {renderAuthorHeader(post)}
             {post.author_badge ? <Text style={styles.verifiedBadge}>{post.author_badge}</Text> : null}
             {post.clergy_attribution ? <Text style={styles.verifiedBadge}>{post.clergy_attribution}</Text> : null}
           </View>
@@ -2856,7 +2966,7 @@ function ProfileScreen({
               <Text style={styles.hymnTitle}>{post.title}</Text>
               <Text style={styles.postBody}>{post.body}</Text>
               <View style={styles.adminActionRow}>
-                <Pressable style={styles.adminActionButton} onPress={() => Share.share({ message: `${post.title}\n\n${post.body}\n\nShared from CatApp` })}>
+                <Pressable style={styles.adminActionButton} onPress={() => Share.share({ message: communityPostLink(post), url: communityPostLink(post) })}>
                   <Ionicons color={colors.primary} name="logo-whatsapp" size={16} />
                   <Text style={styles.adminActionText}>Share</Text>
                 </Pressable>
@@ -3638,6 +3748,8 @@ const styles = StyleSheet.create({
   featuredPost: { backgroundColor: "#f3ede4", borderLeftColor: colors.primary, borderLeftWidth: 4 },
   postMeta: { alignItems: "center", flexDirection: "row", justifyContent: "space-between" },
   postAuthor: { color: colors.secondary, fontSize: 13, fontWeight: "800" },
+  usernameLink: { color: colors.primary, fontSize: 13, fontWeight: "800", lineHeight: 20 },
+  usernameLinkDisabled: { color: colors.muted },
   verifiedBadge: { backgroundColor: "#fae5fa", borderRadius: 14, color: colors.secondary, fontSize: 11, fontWeight: "700", paddingHorizontal: 10, paddingVertical: 5 },
   postTitle: { color: colors.text, fontSize: 22, fontWeight: "600", lineHeight: 29 },
   postBody: { color: colors.text, fontSize: 16, lineHeight: 25 },

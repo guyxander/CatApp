@@ -68,6 +68,16 @@ export type CommunityReaction = {
   count: number;
 };
 
+export type PublicProfile = {
+  id: string;
+  display_name?: string | null;
+  username?: string | null;
+  avatar_url?: string | null;
+  home_parish?: string | null;
+  catholic_status?: string | null;
+  verification_status?: string | null;
+};
+
 export type ParishRecord = Record<string, any> & {
   id?: string;
   name: string;
@@ -262,6 +272,25 @@ export async function fetchCommunityReactions(postIds: string[]): Promise<Commun
     .from("community_reactions")
     .select("post_id,reaction,count")
     .in("post_id", postIds);
+  if (error) return null;
+  return data ?? [];
+}
+
+export async function fetchPublicProfile(userId: string): Promise<PublicProfile | null> {
+  if (!supabase || !userId) return null;
+  const { data, error } = await supabase.rpc("get_public_community_profile", { p_user_id: userId });
+  if (error) return null;
+  return Array.isArray(data) ? data[0] ?? null : data;
+}
+
+export async function fetchCommunityPostsByAuthor(userId: string): Promise<CommunityPost[] | null> {
+  if (!supabase || !userId) return [];
+  const { data, error } = await supabase
+    .from("community_posts")
+    .select("*")
+    .eq("author_id", userId)
+    .eq("moderation_status", "published")
+    .order("created_at", { ascending: false });
   if (error) return null;
   return data ?? [];
 }
