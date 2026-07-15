@@ -30,6 +30,7 @@ import {
   isSupabaseConfigured,
   reportCommunityPost,
   incrementCommunityReaction,
+  incrementCommunityPostView,
   runAdminModuleAction,
   signInWithEmail,
   signInWithGoogle,
@@ -301,6 +302,9 @@ const novenas = novenasData as Novena[];
 const prayers = prayersData as Prayer[];
 
 const communityPosts: Array<{ author: string; badge?: string; title: string; body: string; comments: number; featured: boolean }> = [];
+const currentAppVersion = "0.1.0";
+const appUpdateManifestUrl = "https://catapp-download.ngbridz.chatgpt.site/version.json";
+const appDownloadPageUrl = "https://catapp-download.ngbridz.chatgpt.site";
 const placeholderPostTitles = new Set([
   "Reflections on the Sunday Gospel: The Bread of Life",
   "Asking for prayers for my grandmother",
@@ -444,6 +448,30 @@ function communityAuthorIdentity(item: any) {
 function communityPostLink(post: any) {
   const id = encodeURIComponent(String(post.id || post.title || "community"));
   return `catapp://community/post/${id}`;
+}
+
+function compareVersions(left: string, right: string) {
+  const leftParts = left.split(".").map((part) => Number(part) || 0);
+  const rightParts = right.split(".").map((part) => Number(part) || 0);
+  const length = Math.max(leftParts.length, rightParts.length);
+  for (let index = 0; index < length; index += 1) {
+    const diff = (leftParts[index] ?? 0) - (rightParts[index] ?? 0);
+    if (diff !== 0) return diff;
+  }
+  return 0;
+}
+
+function formatPostDateTime(value: any) {
+  if (!value) return "Date pending";
+  const date = new Date(String(value));
+  if (Number.isNaN(date.getTime())) return "Date pending";
+  return date.toLocaleString(undefined, {
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 function adminActionsForRecord(moduleName: AdminModuleName, record: Record<string, any>): Array<{ action: string; label: string; icon: keyof typeof Ionicons.glyphMap; danger?: boolean }> {
@@ -1133,20 +1161,7 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
           </Pressable>
         ) : null}
       </SectionCard>
-      <SectionCard>
-        <View style={styles.cardHeader}>
-          <View style={styles.row}>
-            <Ionicons color={colors.primary} name="cloud-download-outline" size={20} />
-            <Text style={styles.cardTitle}>Readings API</Text>
-          </View>
-          <Text style={styles.smallBadge}>Ready</Text>
-        </View>
-        <View style={styles.cardBody}>
-          <InfoRow icon="server-outline" label="Status" value={readingSource} />
-          <InfoRow icon="map-outline" label="Calendar" value="Nigeria territory with diocesan overrides" />
-          <InfoRow icon="file-tray-full-outline" label="Content" value="Collect, readings, psalm, acclamation and Gospel" />
-        </View>
-      </SectionCard>
+      <AdBanner placement="today_top" refreshToken={refreshToken + selectedDate.length} />
     </View>
   );
 }
@@ -1665,6 +1680,11 @@ function CommunityScreen({
         ...localComments.filter((local) => !remoteComments.some((remote) => remote.id === local.id)),
       ]);
     });
+    incrementCommunityPostView(selectedPost.id).then((viewCount) => {
+      if (viewCount === null || !Number.isFinite(viewCount)) return;
+      setSelectedPost((post: any) => post?.id === selectedPost.id ? { ...post, view_count: viewCount } : post);
+      setCommunityFeed((items) => items.map((post) => post.id === selectedPost.id ? { ...post, view_count: viewCount } : post));
+    });
   }, [selectedPost?.id]);
 
   if (selectedAuthorProfile) {
@@ -1705,6 +1725,9 @@ function CommunityScreen({
             setSelectedPost(post);
           }}>
             <Text style={styles.postTitle}>{post.title}</Text>
+            <Text style={styles.postMetaText}>
+              Posted {formatPostDateTime(post.created_at)} - {post.view_count ?? 0} view{Number(post.view_count ?? 0) === 1 ? "" : "s"}
+            </Text>
             <Text style={styles.postBody}>{post.body}</Text>
             <Text style={styles.mutedText}>{post.comment_count ?? 0} Comments</Text>
           </Pressable>
@@ -1731,6 +1754,9 @@ function CommunityScreen({
             {selectedPost.clergy_attribution ? <Text style={styles.verifiedBadge}>{selectedPost.clergy_attribution}</Text> : null}
           </View>
           <Text style={styles.postTitle}>{selectedPost.title}</Text>
+          <Text style={styles.postMetaText}>
+            Posted {formatPostDateTime(selectedPost.created_at)} - {selectedPost.view_count ?? 0} view{Number(selectedPost.view_count ?? 0) === 1 ? "" : "s"}
+          </Text>
           <Text style={styles.postBody}>{selectedPost.body}</Text>
           {renderReactions(selectedPost)}
           <Text style={styles.mutedText}>{communityStatus}</Text>
@@ -1843,6 +1869,9 @@ function CommunityScreen({
             {post.clergy_attribution ? <Text style={styles.verifiedBadge}>{post.clergy_attribution}</Text> : null}
           </View>
           <Text style={styles.postTitle}>{post.title}</Text>
+          <Text style={styles.postMetaText}>
+            Posted {formatPostDateTime(post.created_at)} - {post.view_count ?? 0} view{Number(post.view_count ?? 0) === 1 ? "" : "s"}
+          </Text>
           <Text style={styles.postBody}>{post.body}</Text>
           {renderReactions(post)}
           <View style={styles.postFooter}>
@@ -2273,6 +2302,7 @@ function ProfileScreen({
   const [profileSubmit, setProfileSubmit] = useState<SubmitState>("idle");
   const [identitySubmit, setIdentitySubmit] = useState<SubmitState>("idle");
   const [adminSubmit, setAdminSubmit] = useState<SubmitState>("idle");
+  const [availableUpdate, setAvailableUpdate] = useState<{ version: string; apkUrl?: string; pageUrl?: string } | null>(null);
   const [adTitle, setAdTitle] = useState("");
   const [adSponsor, setAdSponsor] = useState("");
   const [adPlacement, setAdPlacement] = useState("today_top");
@@ -2399,6 +2429,26 @@ function ProfileScreen({
       if (isMounted) setProfileHydrated(true);
     });
 
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch(appUpdateManifestUrl)
+      .then((response) => response.ok ? response.json() : null)
+      .then((manifest) => {
+        if (!isMounted || !manifest?.version) return;
+        if (compareVersions(String(manifest.version), currentAppVersion) > 0) {
+          setAvailableUpdate({
+            version: String(manifest.version),
+            apkUrl: manifest.apkUrl,
+            pageUrl: manifest.pageUrl,
+          });
+        }
+      })
+      .catch(() => undefined);
     return () => {
       isMounted = false;
     };
@@ -2857,6 +2907,15 @@ function ProfileScreen({
         <Text style={styles.secondaryText}>{email}</Text>
         <Text style={styles.mutedText}>{profileRole} - {profileStatus}</Text>
       </View>
+      {availableUpdate ? (
+        <Pressable
+          style={styles.primaryButtonWide}
+          onPress={() => Linking.openURL(availableUpdate.pageUrl || appDownloadPageUrl)}
+        >
+          <Ionicons color="#ffffff" name="cloud-download-outline" size={18} />
+          <Text style={styles.primaryButtonText}>Download CatApp {availableUpdate.version}</Text>
+        </Pressable>
+      ) : null}
       {profileCompleted && !profileEditing ? (
         <SectionCard>
           <View style={styles.cardHeader}>
@@ -2964,6 +3023,9 @@ function ProfileScreen({
           {myCommunityPosts.length ? myCommunityPosts.map((post) => (
             <View key={post.id} style={styles.noticeBox}>
               <Text style={styles.hymnTitle}>{post.title}</Text>
+              <Text style={styles.postMetaText}>
+                Posted {formatPostDateTime(post.created_at)} - {post.view_count ?? 0} view{Number(post.view_count ?? 0) === 1 ? "" : "s"}
+              </Text>
               <Text style={styles.postBody}>{post.body}</Text>
               <View style={styles.adminActionRow}>
                 <Pressable style={styles.adminActionButton} onPress={() => Share.share({ message: communityPostLink(post), url: communityPostLink(post) })}>
@@ -3752,6 +3814,7 @@ const styles = StyleSheet.create({
   usernameLinkDisabled: { color: colors.muted },
   verifiedBadge: { backgroundColor: "#fae5fa", borderRadius: 14, color: colors.secondary, fontSize: 11, fontWeight: "700", paddingHorizontal: 10, paddingVertical: 5 },
   postTitle: { color: colors.text, fontSize: 22, fontWeight: "600", lineHeight: 29 },
+  postMetaText: { color: colors.muted, fontSize: 12, fontWeight: "700", lineHeight: 18 },
   postBody: { color: colors.text, fontSize: 16, lineHeight: 25 },
   postFooter: { borderTopColor: "#f0e6dd", borderTopWidth: 1, flexDirection: "row", justifyContent: "space-between", paddingTop: 12 },
   reactionRow: { flexDirection: "row", flexWrap: "wrap", gap: 8 },

@@ -46,6 +46,7 @@ export type CommunityPost = {
   body: string;
   category?: string;
   comment_count?: number;
+  view_count?: number;
   featured?: boolean;
   moderation_status?: string;
   created_at?: string;
@@ -364,6 +365,13 @@ export async function fetchMyCommunityPosts(): Promise<CommunityPost[] | null> {
 export async function incrementCommunityReaction(postId: string, reaction: string): Promise<void> {
   if (!supabase) return;
   await supabase.from("community_reactions").insert({ post_id: postId, reaction, count: 1 });
+}
+
+export async function incrementCommunityPostView(postId: string): Promise<number | null> {
+  if (!supabase || !postId || postId.startsWith("local-")) return null;
+  const { data, error } = await supabase.rpc("increment_community_post_view", { p_post_id: postId });
+  if (error) return null;
+  return typeof data === "number" ? data : Number(data);
 }
 
 export async function reportCommunityPost(postId: string, note: string): Promise<ActionResult> {
