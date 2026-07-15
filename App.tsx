@@ -10,6 +10,7 @@ import prayersData from "./assets/data/prayers.json";
 import {
   createCommunityComment,
   createCommunityPost,
+  deleteCommunityPost,
   createAdvertisement,
   fetchActiveAdvertisements,
   fetchAdminOverview,
@@ -17,11 +18,13 @@ import {
   fetchCommunityComments,
   fetchCommunityPosts,
   fetchCommunityReactions,
+  fetchMyCommunityPosts,
   fetchDailyReadings,
   fetchPublishedHymns,
   fetchPublishedPrayers,
   fetchVerifiedParishes,
   getCurrentUserProfile,
+  followCommunityUser,
   isSupabaseConfigured,
   reportCommunityPost,
   incrementCommunityReaction,
@@ -78,6 +81,7 @@ import {
   Text,
   TextInput,
   StatusBar as NativeStatusBar,
+  Share,
   View,
 } from "react-native";
 
@@ -755,6 +759,9 @@ export default function App() {
           {activeTab === "parishes" && <ParishesScreen />}
           {activeTab === "profile" && <ProfileScreen darkMode={darkMode} setDarkMode={setDarkMode} />}
         </ScrollView>
+        <View style={styles.bottomAdContainer}>
+          <AdBanner placement="bottom_banner" refreshToken={todayRefreshToken + communityRefreshToken} />
+        </View>
         <BottomTabs activeTab={activeTab} onChange={changeTab} />
       </View>
     </SafeAreaView>
@@ -775,6 +782,32 @@ function Header({ title, darkMode }: { title: string; darkMode: boolean }) {
   );
 }
 
+function AdBanner({ placement, refreshToken = 0 }: { placement: string; refreshToken?: number }) {
+  const [activeAd, setActiveAd] = useState<AdvertisementRecord | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    fetchActiveAdvertisements(placement).then((records) => {
+      if (mounted && records?.[0]) setActiveAd(records[0]);
+    });
+    return () => {
+      mounted = false;
+    };
+  }, [placement, refreshToken]);
+
+  if (!activeAd) return null;
+  return (
+    <Pressable
+      disabled={!activeAd.target_url}
+      onPress={() => activeAd.target_url ? Linking.openURL(activeAd.target_url) : undefined}
+      style={styles.adBar}
+    >
+      <Text style={styles.adText}>{activeAd.title}{activeAd.sponsor ? ` - ${activeAd.sponsor}` : ""}</Text>
+      {activeAd.body ? <Text style={styles.adSubText}>{activeAd.body}</Text> : null}
+    </Pressable>
+  );
+}
+
 function TodayScreen({ refreshToken }: { refreshToken: number }) {
   const [bookmarked, setBookmarked] = useState(false);
   const [largeText, setLargeText] = useState(false);
@@ -786,12 +819,9 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
   const [nigeriaTime, setNigeriaTime] = useState(nigeriaTimeString());
   const [selectedDevotion, setSelectedDevotion] = useState<"morning" | "rosary" | null>(null);
   const [readings, setReadings] = useState<ReadingSection[] | null>(null);
-  const [readingSource, setReadingSource] = useState(isSupabaseConfigured ? "Loading readings..." : "Local fallback content");
+  const [readingSource, setReadingSource] = useState("Loading readings...");
   const [readingSourceUrl, setReadingSourceUrl] = useState<string | null>(null);
-  const [activeAd, setActiveAd] = useState<AdvertisementRecord>({
-    title: "Support the Mission: St. Jude's Annual Appeal 2026",
-    sponsor: "CatApp Ads",
-  });
+  const [saintOfTheDay, setSaintOfTheDay] = useState("Today in the Church");
   const calendarInfo = describeCalendar(selectedDate);
   const calendarCells = useMemo(() => buildMonthCalendar(calendarMonth), [calendarMonth]);
   const displayedReadings = readings ? (showFull ? readings : readings.slice(0, 1)) : [];
@@ -807,8 +837,9 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
 
     setReadings(null);
     setShowFull(false);
-    setReadingSource(isSupabaseConfigured ? "Loading readings..." : "Local fallback content");
+    setReadingSource("Loading readings...");
     setReadingSourceUrl(null);
+    setSaintOfTheDay("Today in the Church");
 
     fetchDailyReadings(selectedDate).then(async (response) => {
       if (!isMounted) return;
@@ -825,12 +856,13 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
           optional: section.optional,
         }))
       );
-      setReadingSource(response ? offlineResponse.sourceSummary || "Supabase daily_readings table" : offlineResponse.sourceSummary || "Offline cached reading");
+      setReadingSource(response ? "Daily readings loaded." : "Offline readings loaded.");
+      setSaintOfTheDay(offlineResponse.celebrationTitle || offlineResponse.celebration_title || offlineResponse.title || "Today in the Church");
       setReadingSourceUrl(offlineResponse.sections.find((section: any) => section.source?.startsWith("http"))?.source ?? null);
       if (response) setOfflineCache(`readings:${selectedDate}`, response);
     }).finally(() => {
       if (isMounted && isSupabaseConfigured) {
-        setReadingSource((source) => source === "Loading readings..." ? "Approved local reading cycle" : source);
+        setReadingSource((source) => source === "Loading readings..." ? "Readings ready." : source);
       }
     });
 
@@ -838,12 +870,6 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
       isMounted = false;
     };
   }, [selectedDate]);
-
-  useEffect(() => {
-    fetchActiveAdvertisements("today_top").then((records) => {
-      if (records?.[0]) setActiveAd(records[0]);
-    });
-  }, [refreshToken]);
 
   if (selectedDevotion) {
     const isRosary = selectedDevotion === "rosary";
@@ -915,7 +941,15 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
           <Text style={styles.pageTitle}>{isRosary ? "The Rosary" : "Morning Prayer"}</Text>
           <Text style={styles.secondaryText}>{isRosary ? "Core prayers and concluding prayer." : "A complete morning prayer for the start of the day."}</Text>
         </View>
-        <SectionCard>
+        {!isRosary ? (
+          <SectionCard>
+            <View style={styles.cardBody}>
+              <Text style={styles.cardTitle}>Coming Soon</Text>
+              <Text style={styles.mutedText}>The full morning prayer page is being prepared.</Text>
+            </View>
+          </SectionCard>
+        ) : null}
+        {isRosary ? <SectionCard>
           <View style={styles.cardBody}>
             {sections.map((section) => (
               <View key={section.label} style={styles.readingBlock}>
@@ -924,27 +958,21 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
               </View>
             ))}
           </View>
-        </SectionCard>
+        </SectionCard> : null}
       </View>
     );
   }
 
   return (
     <View style={styles.stackLarge}>
-      <Pressable
-        disabled={!activeAd.target_url}
-        onPress={() => activeAd.target_url ? Linking.openURL(activeAd.target_url) : undefined}
-        style={styles.adBar}
-      >
-        <Text style={styles.adText}>{activeAd.title}{activeAd.sponsor ? ` - ${activeAd.sponsor}` : ""}</Text>
-        {activeAd.body ? <Text style={styles.adSubText}>{activeAd.body}</Text> : null}
-      </Pressable>
+      <AdBanner placement="today_top" refreshToken={refreshToken} />
       <View>
         <View style={styles.metaRow}>
           <View style={styles.greenDot} />
         <Text style={styles.overline}>{calendarInfo.territory} - {calendarInfo.dayName}</Text>
         </View>
         <Text style={styles.pageTitle}>{selectedDate}</Text>
+        <Text style={styles.secondaryText}>Saint of the Day: {saintOfTheDay}</Text>
         <Text style={styles.secondaryText}>Nigeria time: {nigeriaTime} - Year {calendarInfo.sundayCycle} Sundays - Weekday Cycle {calendarInfo.weekdayCycle}</Text>
       </View>
       <View style={styles.controlRow}>
@@ -1076,26 +1104,14 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
             <Ionicons color={colors.primary} name="cloud-download-outline" size={20} />
             <Text style={styles.cardTitle}>Readings API</Text>
           </View>
-          <Text style={styles.smallBadge}>Supabase</Text>
+          <Text style={styles.smallBadge}>Ready</Text>
         </View>
         <View style={styles.cardBody}>
-          <InfoRow icon="server-outline" label="Active source" value={readingSource} />
+          <InfoRow icon="server-outline" label="Status" value={readingSource} />
           <InfoRow icon="map-outline" label="Calendar" value="Nigeria territory with diocesan overrides" />
-          <InfoRow icon="file-tray-full-outline" label="Payload" value="Collect, readings, psalm, acclamation, Gospel, source and copyright status" />
+          <InfoRow icon="file-tray-full-outline" label="Content" value="Collect, readings, psalm, acclamation and Gospel" />
         </View>
       </SectionCard>
-      <ImageBackground
-        source={require("./assets/sacred-grace-banner.png")}
-        imageStyle={styles.spotlightImage}
-        style={styles.spotlight}
-      >
-        <View style={styles.spotlightOverlay} />
-        <View style={styles.spotlightContent}>
-          <Text style={styles.spotlightLabel}>Community Spotlight</Text>
-          <Text style={styles.spotlightTitle}>Lagos Youth Rosary Walk</Text>
-          <Text style={styles.spotlightBody}>Join 400+ faithful this Saturday at St. Dominic's.</Text>
-        </View>
-      </ImageBackground>
     </View>
   );
 }
@@ -1105,11 +1121,11 @@ function LibraryScreen() {
   const [selectedHymn, setSelectedHymn] = useState<Hymn | null>(null);
   const [selectedNovena, setSelectedNovena] = useState<Novena | null>(null);
   const [selectedPrayer, setSelectedPrayer] = useState<Prayer | null>(null);
-  const [libraryMode, setLibraryMode] = useState<"hymns" | "prayers" | "rosary" | "novenas" | "reference" | "saved">("hymns");
+  const [libraryMode, setLibraryMode] = useState<"hymns" | "prayers" | "novenas" | "reference" | "saved">("hymns");
   const [visibleLimit, setVisibleLimit] = useState(5);
   const [libraryHymns, setLibraryHymns] = useState<Hymn[]>(hymns);
   const [libraryPrayers, setLibraryPrayers] = useState<Prayer[]>(prayers);
-  const [librarySource, setLibrarySource] = useState(isSupabaseConfigured ? "Checking Supabase..." : "Local PDF import");
+  const [librarySource, setLibrarySource] = useState("Checking library content...");
   const [savedItems, setSavedItems] = useState(getSavedItems());
   const [recentItems, setRecentItems] = useState(getRecentItems());
   const [hymnCorrection, setHymnCorrection] = useState("");
@@ -1151,10 +1167,10 @@ function LibraryScreen() {
         }))
       );
       setOfflineCache("library:hymns", records);
-      setLibrarySource("Supabase hymns table - Word document import");
+      setLibrarySource("Library content loaded.");
     }).finally(() => {
       if (isMounted && isSupabaseConfigured) {
-        setLibrarySource((source) => source === "Checking Supabase..." ? "Local Word document import - no remote hymns yet" : source);
+        setLibrarySource((source) => source === "Checking library content..." ? "Library content loaded." : source);
       }
     });
 
@@ -1169,7 +1185,7 @@ function LibraryScreen() {
         }))
       );
       setOfflineCache("library:prayers", records);
-      setLibrarySource("Supabase content tables - Word document import");
+      setLibrarySource("Library content loaded.");
     });
 
     return () => {
@@ -1238,7 +1254,7 @@ function LibraryScreen() {
             />
             <View style={styles.noticeBox}>
               <Text style={styles.mutedText}>
-                Approved hymn text imported from the supplied daily Mass readings, hymns and prayers Word document. Corrections can be reviewed in future admin tools.
+                Hymn corrections can be reviewed by admins.
               </Text>
             </View>
           </View>
@@ -1269,7 +1285,7 @@ function LibraryScreen() {
               <Text style={styles.secondaryButtonText}>Save Prayer</Text>
             </Pressable>
             <View style={styles.noticeBox}>
-              <Text style={styles.mutedText}>Approved prayer text imported from the supplied daily Mass readings, hymns and prayers Word document.</Text>
+              <Text style={styles.mutedText}>Prayer text is available for offline use.</Text>
             </View>
           </View>
         </SectionCard>
@@ -1297,12 +1313,12 @@ function LibraryScreen() {
           <View style={styles.cardBody}>
             <InfoRow icon="calendar-outline" label="Starts" value={selectedNovena.starts} />
             <InfoRow icon="flag-outline" label="Feast" value={selectedNovena.feast} />
-            <InfoRow icon="link-outline" label="Source" value={selectedNovena.sourceName} />
             {fullPrayer ? (
               <Text style={styles.readingText}>{fullPrayer}</Text>
             ) : (
               <View style={styles.noticeBox}>
-                <Text style={styles.postBody}>The full prayer text for this novena has not been imported yet. Use the source link below for the verified novena text.</Text>
+                <Text style={styles.cardTitle}>Coming Soon</Text>
+                <Text style={styles.postBody}>The full prayer text for this novena is being prepared.</Text>
               </View>
             )}
             {days.length ? days.map((day, index) => (
@@ -1314,10 +1330,6 @@ function LibraryScreen() {
                 {day.reflection ? <Text style={styles.mutedText}>{day.reflection}</Text> : null}
               </View>
             )) : null}
-            <Pressable style={styles.secondaryButton} onPress={() => Linking.openURL(selectedNovena.sourceUrl)}>
-              <Ionicons color={colors.primary} name="open-outline" size={18} />
-              <Text style={styles.secondaryButtonText}>Read Full Novena</Text>
-            </Pressable>
           </View>
         </SectionCard>
       </View>
@@ -1340,7 +1352,6 @@ function LibraryScreen() {
       </ImageBackground>
       <View style={styles.resourceGrid}>
         <ResourceTile title="Prayers" subtitle="Approved texts" onPress={() => setLibraryMode("prayers")} />
-        <ResourceTile title="Rosary" subtitle="Mysteries" onPress={() => setLibraryMode("rosary")} />
         <ResourceTile title="Novenas" subtitle="Nine-day prayers" onPress={() => setLibraryMode("novenas")} />
         <ResourceTile title="Catechism" subtitle="Reference" onPress={() => setLibraryMode("reference")} />
       </View>
@@ -1350,6 +1361,9 @@ function LibraryScreen() {
         </Pressable>
         <Pressable onPress={() => setLibraryMode("prayers")}>
           <Text style={libraryMode === "prayers" ? styles.segmentActive : styles.segment}>Prayers</Text>
+        </Pressable>
+        <Pressable onPress={() => setLibraryMode("novenas")}>
+          <Text style={libraryMode === "novenas" ? styles.segmentActive : styles.segment}>Novenas</Text>
         </Pressable>
         <Pressable onPress={() => setLibraryMode("saved")}>
           <Text style={libraryMode === "saved" ? styles.segmentActive : styles.segment}>Saved</Text>
@@ -1410,16 +1424,11 @@ function LibraryScreen() {
             </>
           ) : (
             <>
-              {(libraryMode === "rosary" ? [
-                ["Joyful Mysteries", "Monday and Saturday"],
-                ["Sorrowful Mysteries", "Tuesday and Friday"],
-                ["Glorious Mysteries", "Wednesday and Sunday"],
-                ["Luminous Mysteries", "Thursday"],
-              ] : [
-                ["Catechism", "Reference material placeholder for licensed/imported text"],
+              {[
+                ["Catechism", "Coming soon"],
                 ["Order of Mass", "Approved Mass responses and gestures"],
                 ["Catholic Calendar", "Nigeria calendar, diocesan overrides and cycles"],
-              ]).map(([title, subtitle]) => (
+              ].map(([title, subtitle]) => (
                 <View key={title} style={styles.hymnRow}>
                   <Ionicons color={colors.secondary} name="book-outline" size={22} />
                   <View style={styles.flex}>
@@ -1441,7 +1450,7 @@ function LibraryScreen() {
       </SectionCard>
       <View style={styles.missionCard}>
         <Text style={styles.missionTitle}>Parish Resources</Text>
-        <Text style={styles.missionText}>Find bulletins and approved prayers from your Nigerian parish. Source: {librarySource}.</Text>
+        <Text style={styles.missionText}>Find bulletins and approved prayers from your Nigerian parish. {librarySource}</Text>
       </View>
     </View>
   );
@@ -1461,7 +1470,8 @@ function CommunityScreen({
   const [communityFeed, setCommunityFeed] = useState<any[]>([]);
   const [comments, setComments] = useState<any[]>([]);
   const [commentDraft, setCommentDraft] = useState("");
-  const [communityStatus, setCommunityStatus] = useState(isSupabaseConfigured ? "Loading live community..." : "Local community preview");
+  const [communityStatus, setCommunityStatus] = useState("Loading community...");
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [postReactions, setPostReactions] = useState<Record<string, Record<string, number>>>({});
   const [reportSubmit, setReportSubmit] = useState<SubmitState>("idle");
   const [commentSubmit, setCommentSubmit] = useState<SubmitState>("idle");
@@ -1510,9 +1520,10 @@ function CommunityScreen({
     let isMounted = true;
 
     const loadCommunity = async () => {
-      setCommunityStatus(isSupabaseConfigured ? "Loading live community..." : "Local community preview");
-      const [records, localPosts, reactions] = await Promise.all([fetchCommunityPosts(), getLocalCommunityPosts(), getLocalCommunityReactions()]);
+      setCommunityStatus("Loading community...");
+      const [records, localPosts, reactions, profile] = await Promise.all([fetchCommunityPosts(), getLocalCommunityPosts(), getLocalCommunityReactions(), getCurrentUserProfile()]);
       if (!isMounted) return;
+      setCurrentUserId(profile?.user?.id ?? null);
       const remotePosts = (records ?? []).filter((post) => !isPlaceholderCommunityPost(post));
       const devicePosts = localPosts.filter((post) => !isPlaceholderCommunityPost(post));
       const mergedPosts = [
@@ -1529,15 +1540,13 @@ function CommunityScreen({
         };
       }
       setPostReactions(mergedReactions);
-      setCommunityStatus(mergedPosts.length ? "Live Supabase community" : "No community posts yet.");
+      setCommunityStatus(mergedPosts.length ? "Community posts loaded." : "No community posts yet.");
     };
 
     loadCommunity().finally(() => {
       if (isMounted) {
         setRefreshing(false);
-        if (isSupabaseConfigured) {
-          setCommunityStatus((status) => status === "Loading live community..." ? "Live community is ready for instant posts" : status);
-        }
+        setCommunityStatus((status) => status === "Loading community..." ? "Community is ready." : status);
       }
     });
 
@@ -1545,6 +1554,28 @@ function CommunityScreen({
       isMounted = false;
     };
   }, [refreshToken, setRefreshing]);
+
+  const followAuthor = async (post: any) => {
+    if (!post.author_id) {
+      setCommunityStatus("This author cannot be followed yet.");
+      return;
+    }
+    const result = await followCommunityUser(post.author_id);
+    setCommunityStatus(result.message);
+  };
+
+  const sharePost = async (post: any) => {
+    await Share.share({ message: `${post.title}\n\n${post.body}\n\nShared from CatApp` });
+  };
+
+  const removePost = async (post: any) => {
+    const result = await deleteCommunityPost(post.id);
+    setCommunityStatus(result.message);
+    if (result.ok) {
+      setCommunityFeed((items) => items.filter((item) => item.id !== post.id));
+      setSelectedPost(null);
+    }
+  };
 
   useEffect(() => {
     if (!selectedPost?.id) return;
@@ -1566,7 +1597,10 @@ function CommunityScreen({
         </Pressable>
         <View style={[styles.postCard, selectedPost.featured && styles.featuredPost]}>
           <View style={styles.postMeta}>
-            <Text style={styles.postAuthor}>{selectedPost.author_name}</Text>
+            <View>
+              <Text style={styles.postAuthor}>{selectedPost.author_name || "Guest"}</Text>
+              {selectedPost.author_username ? <Text style={styles.mutedText}>@{selectedPost.author_username}</Text> : null}
+            </View>
             {selectedPost.author_badge ? <Text style={styles.verifiedBadge}>{selectedPost.author_badge}</Text> : null}
             {selectedPost.clergy_attribution ? <Text style={styles.verifiedBadge}>{selectedPost.clergy_attribution}</Text> : null}
           </View>
@@ -1574,6 +1608,24 @@ function CommunityScreen({
           <Text style={styles.postBody}>{selectedPost.body}</Text>
           {renderReactions(selectedPost)}
           <Text style={styles.mutedText}>{communityStatus}</Text>
+          <View style={styles.adminActionRow}>
+            {selectedPost.author_id && selectedPost.author_id !== currentUserId ? (
+              <Pressable style={styles.adminActionButton} onPress={() => followAuthor(selectedPost)}>
+                <Ionicons color={colors.primary} name="person-add-outline" size={16} />
+                <Text style={styles.adminActionText}>Follow</Text>
+              </Pressable>
+            ) : null}
+            <Pressable style={styles.adminActionButton} onPress={() => sharePost(selectedPost)}>
+              <Ionicons color={colors.primary} name="logo-whatsapp" size={16} />
+              <Text style={styles.adminActionText}>Share</Text>
+            </Pressable>
+            {selectedPost.author_id && selectedPost.author_id === currentUserId ? (
+              <Pressable style={[styles.adminActionButton, styles.adminActionDanger]} onPress={() => removePost(selectedPost)}>
+                <Ionicons color={colors.danger} name="trash-outline" size={16} />
+                <Text style={[styles.adminActionText, styles.adminActionDangerText]}>Delete</Text>
+              </Pressable>
+            ) : null}
+          </View>
           <SubmitButton
             icon="flag-outline"
             label="Report Post"
@@ -1597,10 +1649,11 @@ function CommunityScreen({
           <View style={styles.cardBody}>
             {comments.length ? comments.map((comment) => (
               <View key={comment.id} style={styles.noticeBox}>
-                <Text style={styles.postAuthor}>{comment.author_name}</Text>
+                <Text style={styles.postAuthor}>{comment.author_name || "Guest"}{comment.author_username ? ` @${comment.author_username}` : ""}</Text>
                 <Text style={styles.postBody}>{comment.body}</Text>
               </View>
             )) : <Text style={styles.mutedText}>No comments yet.</Text>}
+            <AdBanner placement="community_comment" refreshToken={comments.length} />
             <TextInput
               multiline
               onChangeText={setCommentDraft}
@@ -1628,7 +1681,7 @@ function CommunityScreen({
                     id: `local-comment-${Date.now()}`,
                     post_id: selectedPost.id,
                     body: commentDraft,
-                    author_name: "CatApp User",
+                    author_name: "Guest",
                     moderation_status: "published",
                     created_at: new Date().toISOString(),
                   };
@@ -1654,10 +1707,15 @@ function CommunityScreen({
         <Text style={styles.segment}>Popular</Text>
       </View>
       <Text style={styles.mutedText}>{communityStatus}</Text>
-      {communityFeed.map((post) => (
+      <AdBanner placement="community_top" refreshToken={refreshToken} />
+      {communityFeed.map((post, index) => (
+        <React.Fragment key={post.id ?? post.title}>
         <Pressable key={post.id ?? post.title} style={[styles.postCard, post.featured && styles.featuredPost]} onPress={() => setSelectedPost(post)}>
           <View style={styles.postMeta}>
-            <Text style={styles.postAuthor}>{post.author_name}</Text>
+            <View>
+              <Text style={styles.postAuthor}>{post.author_name || "Guest"}</Text>
+              {post.author_username ? <Text style={styles.mutedText}>@{post.author_username}</Text> : null}
+            </View>
             {post.author_badge ? <Text style={styles.verifiedBadge}>{post.author_badge}</Text> : null}
             {post.clergy_attribution ? <Text style={styles.verifiedBadge}>{post.clergy_attribution}</Text> : null}
           </View>
@@ -1666,9 +1724,11 @@ function CommunityScreen({
           {renderReactions(post)}
           <View style={styles.postFooter}>
             <Text style={styles.mutedText}>{post.comment_count ?? 0} Comments</Text>
-            <Text style={styles.mutedText}>Live</Text>
+            {post.author_id && post.author_id !== currentUserId ? <Text style={styles.mutedText}>Follow available</Text> : <Text style={styles.mutedText}>Community</Text>}
           </View>
         </Pressable>
+        {(index + 1) % 3 === 0 ? <AdBanner placement="community_inline" refreshToken={refreshToken + index} /> : null}
+        </React.Fragment>
       ))}
       {!communityFeed.length ? (
         <SectionCard>
@@ -1716,7 +1776,7 @@ function CommunityScreen({
                 if (!result.ok) {
                   const localPost = {
                     id: `local-post-${Date.now()}`,
-                    author_name: "CatApp User",
+                    author_name: "Guest",
                     title: draftTitle,
                     body: draft,
                     comment_count: 0,
@@ -1768,7 +1828,7 @@ function formatParishRecord(record: any, index = 0, userCoords?: { latitude: num
   const distanceKm = hasCoords
     ? userCoords
       ? distanceBetween(userCoords.latitude, userCoords.longitude, latitude, longitude)
-      : distanceFromLagos(latitude, longitude)
+      : null
     : null;
 
   return {
@@ -1776,7 +1836,7 @@ function formatParishRecord(record: any, index = 0, userCoords?: { latitude: num
     name: record.name,
     diocese: record.diocese,
     mass: record.mass_times?.[0]?.times?.[0] ?? record.massTimes?.[0]?.times?.[0] ?? record.mass ?? "Schedule pending",
-    distance: record.distance ?? (distanceKm === null ? `${(index + 1) * 2}.0 km` : `${distanceKm.toFixed(1)} km`),
+    distance: distanceKm === null ? "Use location" : `${distanceKm.toFixed(1)} km`,
     distanceKm,
     address: record.address ?? record.location ?? "Address pending",
     confession: record.confession_times?.[0]?.times?.[0] ?? record.confessionTimes?.[0]?.times?.[0] ?? record.confession ?? "By appointment",
@@ -1798,7 +1858,7 @@ function ParishesScreen() {
   const [editorPhone, setEditorPhone] = useState("");
   const [editorMassTimes, setEditorMassTimes] = useState("");
   const [editorConfessionTimes, setEditorConfessionTimes] = useState("");
-  const [parishStatus, setParishStatus] = useState("Location optional. Showing Lagos reference distances.");
+  const [parishStatus, setParishStatus] = useState("Location optional. Use location for accurate parish distance.");
   const [directoryParishes, setDirectoryParishes] = useState<any[]>(parishes);
   const [allDirectoryParishes, setAllDirectoryParishes] = useState<any[]>(parishes);
   const [rawParishRecords, setRawParishRecords] = useState<any[]>([]);
@@ -1845,9 +1905,9 @@ function ParishesScreen() {
       setDirectoryParishes(mapped);
       const savedCount = (localRecords?.length ?? 0) + (profileParish ? 1 : 0);
       if (savedCount) {
-        setParishStatus(`${savedCount} saved/profile parish${savedCount === 1 ? "" : "es"} available. Showing Lagos reference distances.`);
+        setParishStatus(`${savedCount} saved/profile parish${savedCount === 1 ? "" : "es"} available. Use location for accurate distance.`);
       } else if (remoteRecords.length) {
-        setParishStatus(`${remoteRecords.length} parish${remoteRecords.length === 1 ? "" : "es"} loaded from the database. Showing Lagos reference distances.`);
+        setParishStatus(`${remoteRecords.length} parish${remoteRecords.length === 1 ? "" : "es"} loaded from the directory. Use location for accurate distance.`);
       } else {
         setParishStatus("Showing the bundled parish directory. Saved profile parishes and database updates will appear here.");
       }
@@ -2071,6 +2131,7 @@ function ProfileScreen({
   const [adminModuleRows, setAdminModuleRows] = useState<Record<string, any>[]>([]);
   const [adminLoading, setAdminLoading] = useState(false);
   const [adminActionKey, setAdminActionKey] = useState("");
+  const [myCommunityPosts, setMyCommunityPosts] = useState<any[]>([]);
   const [signInSubmit, setSignInSubmit] = useState<SubmitState>("idle");
   const [signUpSubmit, setSignUpSubmit] = useState<SubmitState>("idle");
   const [googleSubmit, setGoogleSubmit] = useState<SubmitState>("idle");
@@ -2112,7 +2173,7 @@ function ProfileScreen({
     fetchAdminOverview()
       .then((overview) => {
         setAdminOverview(overview);
-        setAdminStatus(Object.keys(overview).length ? "Admin data refreshed." : "Admin access is required or Supabase did not return admin counts.");
+        setAdminStatus(Object.keys(overview).length ? "Admin data refreshed." : "Admin access is required.");
       })
       .finally(() => setAdminLoading(false));
   }, [showAdmin]);
@@ -2160,7 +2221,7 @@ function ProfileScreen({
     let isMounted = true;
 
     const hydrateProfile = async () => {
-      const [settings, record] = await Promise.all([getAppSettings(), getCurrentUserProfile()]);
+      const [settings, record, posts] = await Promise.all([getAppSettings(), getCurrentUserProfile(), fetchMyCommunityPosts()]);
       if (!isMounted) return;
 
       setPrayerReminder(settings.prayerReminder);
@@ -2192,8 +2253,9 @@ function ProfileScreen({
         const authRole = record.user.app_metadata?.role;
         setIsAdmin(Boolean(record.profile?.is_admin || authRole === "superadmin"));
         setProfileRole(authRole === "superadmin" ? "Superadmin" : record.profile?.is_admin ? "Admin" : record.profile?.verification_status || "Member");
-        setProfileStatus("Signed in with Supabase Auth.");
+        setProfileStatus("Signed in.");
       }
+      setMyCommunityPosts(posts ?? []);
 
       setProfileHydrated(true);
     };
@@ -2334,7 +2396,7 @@ function ProfileScreen({
             </View>
             <View style={styles.cardBody}>
               <InfoRow icon="shield-half-outline" label="Current role" value={profileRole} />
-              <Text style={styles.postBody}>Your account must be marked as an admin in Supabase before you can view queues or run admin actions.</Text>
+              <Text style={styles.postBody}>Your account must be marked as an admin before you can view queues or run admin actions.</Text>
             </View>
           </SectionCard>
         </View>
@@ -2369,7 +2431,7 @@ function ProfileScreen({
           <View>
             <Text style={styles.overline}>Admin Module</Text>
             <Text style={styles.pageTitle}>{selectedAdminModule}</Text>
-            <Text style={styles.secondaryText}>Live queue data and admin actions are connected to Supabase.</Text>
+            <Text style={styles.secondaryText}>Review queues, records and moderation actions.</Text>
             {adminStatus ? <Text style={styles.mutedText}>{adminStatus}</Text> : null}
           </View>
           <SectionCard>
@@ -2759,6 +2821,34 @@ function ProfileScreen({
       </SectionCard>
       )}
       <SectionCard>
+        <View style={styles.cardHeader}>
+          <Text style={styles.cardTitle}>My Community Posts</Text>
+          <Text style={styles.smallBadge}>{myCommunityPosts.length}</Text>
+        </View>
+        <View style={styles.cardBody}>
+          {myCommunityPosts.length ? myCommunityPosts.map((post) => (
+            <View key={post.id} style={styles.noticeBox}>
+              <Text style={styles.hymnTitle}>{post.title}</Text>
+              <Text style={styles.postBody}>{post.body}</Text>
+              <View style={styles.adminActionRow}>
+                <Pressable style={styles.adminActionButton} onPress={() => Share.share({ message: `${post.title}\n\n${post.body}\n\nShared from CatApp` })}>
+                  <Ionicons color={colors.primary} name="logo-whatsapp" size={16} />
+                  <Text style={styles.adminActionText}>Share</Text>
+                </Pressable>
+                <Pressable style={[styles.adminActionButton, styles.adminActionDanger]} onPress={async () => {
+                  const result = await deleteCommunityPost(post.id);
+                  setProfileStatus(result.message);
+                  if (result.ok) setMyCommunityPosts((items) => items.filter((item) => item.id !== post.id));
+                }}>
+                  <Ionicons color={colors.danger} name="trash-outline" size={16} />
+                  <Text style={[styles.adminActionText, styles.adminActionDangerText]}>Delete</Text>
+                </Pressable>
+              </View>
+            </View>
+          )) : <Text style={styles.mutedText}>Your published posts will appear here.</Text>}
+        </View>
+      </SectionCard>
+      <SectionCard>
         <View style={styles.identityHeader}>
           <View style={styles.goldIcon}>
             <Ionicons color={colors.primary} name="shield-checkmark-outline" size={24} />
@@ -2970,14 +3060,14 @@ function ProfileScreen({
           />
         </View>
       </View>
-      <Pressable style={styles.adminCard} onPress={() => setShowAdmin(true)}>
+      {isAdmin ? <Pressable style={styles.adminCard} onPress={() => setShowAdmin(true)}>
         <Ionicons color="#ffd6fd" name="shield-half-outline" size={26} />
         <View style={styles.flex}>
           <Text style={styles.adminTitle}>Admin Portal</Text>
-          <Text style={styles.adminText}>{isAdmin ? "Parish Management & Analytics" : "Role required - preview available"}</Text>
+          <Text style={styles.adminText}>Parish Management & Analytics</Text>
         </View>
         <Ionicons color="#ffd6fd" name="open-outline" size={25} />
-      </Pressable>
+      </Pressable> : null}
       <Pressable style={styles.aboutCard} onPress={() => setShowAbout(true)}>
         <Ionicons color={colors.primary} name="information-circle-outline" size={25} />
         <View style={styles.flex}>
@@ -3296,8 +3386,9 @@ const styles = StyleSheet.create({
   logo: { color: colors.primary, fontFamily: "serif", fontSize: 23, fontWeight: "700" },
   logoDark: { color: "#ffffff" },
   iconButton: { alignItems: "center", height: 34, justifyContent: "center", width: 34 },
-  screen: { paddingBottom: 112, paddingHorizontal: 14, paddingTop: 0 },
+  screen: { paddingBottom: 152, paddingHorizontal: 14, paddingTop: 0 },
   stackLarge: { gap: 14 },
+  bottomAdContainer: { backgroundColor: colors.background, paddingHorizontal: 14, paddingTop: 6 },
   adBar: {
     backgroundColor: colors.primary,
     borderRadius: 8,

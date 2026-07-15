@@ -37,7 +37,9 @@ export type PrayerRecord = {
 
 export type CommunityPost = {
   id: string;
+  author_id?: string | null;
   author_name: string;
+  author_username?: string | null;
   author_badge?: string | null;
   clergy_attribution?: string | null;
   title: string;
@@ -52,8 +54,10 @@ export type CommunityPost = {
 export type CommunityComment = {
   id: string;
   post_id: string;
+  author_id?: string | null;
   body: string;
   author_name: string;
+  author_username?: string | null;
   moderation_status?: string;
   created_at?: string;
 };
@@ -170,25 +174,30 @@ export async function fetchVerifiedParishes(): Promise<ParishRecord[] | null> {
 
 export async function fetchActiveAdvertisements(placement: string): Promise<AdvertisementRecord[] | null> {
   if (!supabase) return null;
-  const { data, error } = await supabase
+  const now = new Date().toISOString();
+  const runQuery = (targetPlacement: string) => supabase
     .from("advertisements")
     .select("id,title,sponsor,body,placement,target_url,status,starts_at,ends_at,created_at,priority")
-    .eq("placement", placement)
+    .eq("placement", targetPlacement)
     .eq("status", "active")
-    .or(`starts_at.is.null,starts_at.lte.${new Date().toISOString()}`)
-    .or(`ends_at.is.null,ends_at.gte.${new Date().toISOString()}`)
+    .or(`starts_at.is.null,starts_at.lte.${now}`)
+    .or(`ends_at.is.null,ends_at.gte.${now}`)
     .order("priority", { ascending: false })
     .order("created_at", { ascending: false })
     .limit(3);
+  const { data, error } = await runQuery(placement);
   if (error) {
     console.warn("CatApp advert fetch failed", error.message);
     return null;
   }
-  return data ?? [];
+  if (data?.length || placement === "today_top") return data ?? [];
+  const fallback = await runQuery("today_top");
+  if (fallback.error) return [];
+  return fallback.data ?? [];
 }
 
 export async function createAdvertisement(input: Record<string, any>): Promise<ActionResult<{ advertisement?: Record<string, any> }>> {
-  if (!supabase) return { ok: false, message: "Advertisement management requires Supabase configuration." };
+  if (!supabase) return { ok: false, message: "Advertisement management is not available yet." };
   try {
     const admin = await ensureAdmin();
     const payload = {
@@ -215,7 +224,7 @@ export async function createAdvertisement(input: Record<string, any>): Promise<A
     });
     if (error) {
       const detail = error.code === "42501"
-        ? "Supabase blocked the advert insert. Confirm this account is marked as admin or superadmin."
+        ? "Advert posting is blocked for this account. Confirm this account is marked as admin."
         : error.message;
       return { ok: false, message: detail };
     }
@@ -227,7 +236,14 @@ export async function createAdvertisement(input: Record<string, any>): Promise<A
 }
 
 export async function fetchCommunityPosts(): Promise<CommunityPost[] | null> {
-  return selectTable<CommunityPost>("community_posts");
+  if (!supabase) return null;
+  const { data, error } = await supabase
+    .from("community_posts")
+    .select("*")
+    .eq("moderation_status", "published")
+    .order("created_at", { ascending: false });
+  if (error) return null;
+  return data ?? [];
 }
 
 export async function fetchCommunityComments(postId: string): Promise<CommunityComment[] | null> {
@@ -253,7 +269,7 @@ export async function fetchCommunityReactions(postIds: string[]): Promise<Commun
 export async function createCommunityPost(input: { title: string; body: string; category: string }): Promise<ActionResult<{ post?: CommunityPost }>> {
   const post: CommunityPost = {
     id: `local-post-${Date.now()}`,
-    author_name: "CatApp User",
+    author_name: "Guest",
     title: input.title,
     body: input.body,
     category: input.category,
@@ -262,8 +278,12 @@ export async function createCommunityPost(input: { title: string; body: string; 
     moderation_status: "published",
     created_at: new Date().toISOString(),
   };
-  if (!supabase) return { ok: false, message: "Supabase is not configured.", post };
-  const { data, error } = await supabase.from("community_posts").insert(input).select("*").single();
+  if (!supabase) return { ok: false, message: "Community posting is not available yet.", post };
+  const { data, error } = await supabase.rpc("create_catapp_community_post", {
+    p_title: input.title,
+    p_body: input.body,
+    p_category: input.category,
+  });
   if (error) return { ok: false, message: error.message, post };
   return { ok: true, message: "Post published.", post: data as CommunityPost };
 }
@@ -273,14 +293,43 @@ export async function createCommunityComment(postId: string, body: string): Prom
     id: `local-comment-${Date.now()}`,
     post_id: postId,
     body,
-    author_name: "CatApp User",
+    author_name: "Guest",
     moderation_status: "published",
     created_at: new Date().toISOString(),
   };
-  if (!supabase) return { ok: false, message: "Supabase is not configured.", comment };
-  const { data, error } = await supabase.from("community_comments").insert({ post_id: postId, body }).select("*").single();
+  if (!supabase) return { ok: false, message: "Community comments are not available yet.", comment };
+  const { data, error } = await supabase.rpc("create_catapp_community_comment", {
+    p_post_id: postId,
+    p_body: body,
+  });
   if (error) return { ok: false, message: error.message, comment };
   return { ok: true, message: "Comment posted.", comment: data as CommunityComment };
+}
+
+export async function followCommunityUser(userId: string): Promise<ActionResult> {
+  if (!supabase) return { ok: false, message: "Sign in to follow people." };
+  const { error } = await supabase.rpc("follow_catapp_user", { p_followed_id: userId });
+  return error ? { ok: false, message: error.message } : { ok: true, message: "Following." };
+}
+
+export async function deleteCommunityPost(postId: string): Promise<ActionResult> {
+  if (!supabase) return { ok: false, message: "Sign in to delete posts." };
+  const { error } = await supabase.rpc("delete_own_community_post", { p_post_id: postId });
+  return error ? { ok: false, message: error.message } : { ok: true, message: "Post deleted." };
+}
+
+export async function fetchMyCommunityPosts(): Promise<CommunityPost[] | null> {
+  if (!supabase) return null;
+  const userId = await currentUserId();
+  if (!userId) return [];
+  const { data, error } = await supabase
+    .from("community_posts")
+    .select("*")
+    .eq("author_id", userId)
+    .neq("moderation_status", "removed")
+    .order("created_at", { ascending: false });
+  if (error) return null;
+  return data ?? [];
 }
 
 export async function incrementCommunityReaction(postId: string, reaction: string): Promise<void> {
@@ -289,13 +338,13 @@ export async function incrementCommunityReaction(postId: string, reaction: strin
 }
 
 export async function reportCommunityPost(postId: string, note: string): Promise<ActionResult> {
-  if (!supabase) return { ok: false, message: "Report saved locally until Supabase is configured." };
+  if (!supabase) return { ok: false, message: "Reports are not available yet." };
   const { error } = await supabase.from("community_reports").insert({ post_id: postId, reason: note });
   return error ? { ok: false, message: error.message } : { ok: true, message: "Post reported for review." };
 }
 
 export async function submitHymnCorrection(input: Record<string, any>): Promise<ActionResult> {
-  if (!supabase) return { ok: false, message: "Hymn correction saved locally until Supabase is configured." };
+  if (!supabase) return { ok: false, message: "Hymn corrections are not available yet." };
   const { error } = await supabase.from("hymn_correction_requests").insert({
     hymn_code: input.hymnCode,
     hymn_title: input.hymnTitle,
@@ -314,13 +363,13 @@ export async function getCurrentUserProfile(): Promise<any | null> {
 }
 
 export async function signInWithEmail(email: string, password: string): Promise<ActionResult> {
-  if (!supabase) return { ok: false, message: "Supabase Auth is not configured." };
+  if (!supabase) return { ok: false, message: "Sign in is not configured." };
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   return error ? { ok: false, message: error.message } : { ok: true, message: "Signed in." };
 }
 
 export async function signInWithGoogle(): Promise<ActionResult> {
-  if (!supabase) return { ok: false, message: "Supabase Auth is not configured." };
+  if (!supabase) return { ok: false, message: "Sign in is not configured." };
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
@@ -337,9 +386,9 @@ export async function signInWithGoogle(): Promise<ActionResult> {
 }
 
 export async function handleSupabaseAuthCallback(url: string): Promise<ActionResult> {
-  if (!supabase) return { ok: false, message: "Supabase Auth is not configured." };
+  if (!supabase) return { ok: false, message: "Sign in is not configured." };
   if (!url.startsWith(oauthRedirectTo) && !url.includes("auth/callback")) {
-    return { ok: false, message: "No Supabase auth callback to handle." };
+    return { ok: false, message: "No sign-in callback to handle." };
   }
   const params = readAuthCallbackParams(url);
   const authError = params.get("error_description") || params.get("error");
@@ -358,11 +407,11 @@ export async function handleSupabaseAuthCallback(url: string): Promise<ActionRes
     });
     return error ? { ok: false, message: error.message } : { ok: true, message: "Signed in with Google." };
   }
-  return { ok: false, message: "Google sign-in returned without a usable auth code. Check the Supabase redirect URL allow-list for catapp://auth/callback." };
+  return { ok: false, message: "Google sign-in returned without a usable auth code. Check the redirect URL allow-list for catapp://auth/callback." };
 }
 
 export async function signUpWithEmail(email: string, password: string, fullName: string): Promise<ActionResult> {
-  if (!supabase) return { ok: false, message: "Supabase Auth is not configured." };
+  if (!supabase) return { ok: false, message: "Sign up is not configured." };
   const { error } = await supabase.auth.signUp({
     email,
     password,
@@ -418,7 +467,7 @@ async function logAdminAction(action: string, entityType: string, entityId?: str
 }
 
 export async function updateCurrentUserProfile(input: Record<string, any>): Promise<ActionResult> {
-  if (!supabase) return { ok: false, message: "Supabase profile sync is not configured." };
+  if (!supabase) return { ok: false, message: "Profile sync is not available yet." };
   const userId = await currentUserId();
   const { error } = await supabase.auth.updateUser({
     data: {
@@ -519,7 +568,7 @@ export async function updateParishDetails(input: Record<string, any>): Promise<A
   Object.keys(parish).forEach((key) => parish[key] === undefined && delete parish[key]);
 
   if (!parishName) return { ok: false, message: "Add a parish name before saving parish details." };
-  if (!supabase) return { ok: false, message: "Parish saved locally until Supabase is configured.", parish };
+  if (!supabase) return { ok: false, message: "Parish saved locally until sync is available.", parish };
 
   await supabase.from("parish_edit_requests").insert({
     parish_id: input.parishId && !String(input.parishId).startsWith("local-") ? input.parishId : null,
@@ -587,7 +636,7 @@ async function uploadVerificationDocument(input: Record<string, any>) {
 }
 
 export async function submitIdentityVerification(input: Record<string, any>): Promise<ActionResult> {
-  if (!supabase) return { ok: false, message: "Identity verification requires Supabase configuration." };
+  if (!supabase) return { ok: false, message: "Identity verification is not available yet." };
   try {
     const upload = await uploadVerificationDocument(input);
   const { error } = await supabase.from("identity_verification_requests").insert({
@@ -670,7 +719,7 @@ export async function fetchAdminOverview(): Promise<Record<string, number>> {
 }
 
 export async function fetchAdminModuleData(moduleName: AdminModuleName): Promise<ActionResult<AdminModuleData>> {
-  if (!supabase) return { ok: false, message: `${moduleName} requires Supabase configuration.`, rows: [] };
+  if (!supabase) return { ok: false, message: `${moduleName} is not available yet.`, rows: [] };
   try {
     await ensureAdmin();
     if (moduleName === "Parish Management") {
@@ -753,7 +802,7 @@ export async function fetchAdminModuleData(moduleName: AdminModuleName): Promise
 }
 
 export async function runAdminModuleAction(moduleName: AdminModuleName, action: string, record: Record<string, any>): Promise<ActionResult> {
-  if (!supabase) return { ok: false, message: `${moduleName} requires Supabase configuration.` };
+  if (!supabase) return { ok: false, message: `${moduleName} is not available yet.` };
   try {
     await ensureAdmin();
     if (moduleName === "Parish Management") {
