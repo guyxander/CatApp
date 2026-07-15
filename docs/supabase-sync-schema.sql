@@ -106,6 +106,63 @@ create policy "Admins can manage admin_audit_logs" on public.admin_audit_logs
   using (public.is_catapp_admin())
   with check (public.is_catapp_admin());
 
+create or replace function public.create_catapp_ad(
+  p_title text,
+  p_sponsor text default null,
+  p_placement text default 'today_top',
+  p_body text default null,
+  p_target_url text default null,
+  p_status text default 'active',
+  p_starts_at timestamptz default null,
+  p_ends_at timestamptz default null
+)
+returns public.advertisements
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  inserted_ad public.advertisements;
+begin
+  if not public.is_catapp_admin() then
+    raise exception 'Admin access is required.' using errcode = '42501';
+  end if;
+
+  if length(trim(coalesce(p_title, ''))) = 0 then
+    raise exception 'Add an advert title before saving.' using errcode = '22023';
+  end if;
+
+  insert into public.advertisements (
+    title,
+    sponsor,
+    placement,
+    body,
+    target_url,
+    status,
+    starts_at,
+    ends_at,
+    updated_at
+  ) values (
+    trim(p_title),
+    nullif(trim(coalesce(p_sponsor, '')), ''),
+    coalesce(nullif(trim(coalesce(p_placement, '')), ''), 'today_top'),
+    nullif(trim(coalesce(p_body, '')), ''),
+    nullif(trim(coalesce(p_target_url, '')), ''),
+    coalesce(nullif(trim(coalesce(p_status, '')), ''), 'active'),
+    coalesce(p_starts_at, now()),
+    p_ends_at,
+    now()
+  )
+  returning * into inserted_ad;
+
+  return inserted_ad;
+end;
+$$;
+
+revoke all on function public.create_catapp_ad(text, text, text, text, text, text, timestamptz, timestamptz) from public;
+revoke execute on function public.create_catapp_ad(text, text, text, text, text, text, timestamptz, timestamptz) from anon;
+grant execute on function public.create_catapp_ad(text, text, text, text, text, text, timestamptz, timestamptz) to authenticated;
+
 insert into storage.buckets (id, name, public)
 values ('baptismal-cards', 'baptismal-cards', true)
 on conflict (id) do update set public = true;

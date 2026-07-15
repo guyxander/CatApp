@@ -193,7 +193,16 @@ export async function createAdvertisement(input: Record<string, any>): Promise<A
       updated_at: new Date().toISOString(),
     };
     if (!payload.title) return { ok: false, message: "Add an advert title before saving." };
-    const { data, error } = await supabase.from("advertisements").insert(payload).select("*").maybeSingle();
+    const { data, error } = await supabase.rpc("create_catapp_ad", {
+      p_title: payload.title,
+      p_sponsor: payload.sponsor,
+      p_placement: payload.placement,
+      p_body: payload.body,
+      p_target_url: payload.target_url,
+      p_status: payload.status,
+      p_starts_at: payload.starts_at,
+      p_ends_at: payload.ends_at,
+    });
     if (error) {
       const detail = error.code === "42501"
         ? "Supabase blocked the advert insert. Confirm this account is marked as admin or superadmin."
