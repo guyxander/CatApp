@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 const SUPABASE_URL = "https://nntlgxqwngsewmpkajls.supabase.co";
 const SUPABASE_ANON_KEY =
@@ -61,23 +61,42 @@ function formatCount(value: number) {
   return new Intl.NumberFormat("en").format(value);
 }
 
+function copyWithFallback(text: string) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.setAttribute("readonly", "true");
+  textArea.style.position = "fixed";
+  textArea.style.left = "-9999px";
+  textArea.style.top = "0";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  const didCopy = document.execCommand("copy");
+  document.body.removeChild(textArea);
+
+  if (!didCopy) {
+    return Promise.reject(new Error("Copy command failed"));
+  }
+
+  return Promise.resolve();
+}
+
 export default function Home() {
   const [metrics, setMetrics] = useState<Metrics>(emptyMetrics);
   const [isLoading, setIsLoading] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
   const [copyStatus, setCopyStatus] = useState("Copy link");
+  const [pageUrl, setPageUrl] = useState("");
   const [error, setError] = useState("");
-
-  const downloadUrl = useMemo(() => {
-    if (typeof window === "undefined") {
-      return APK_PATH;
-    }
-
-    return new URL(APK_PATH, window.location.origin).toString();
-  }, []);
 
   useEffect(() => {
     let isMounted = true;
+    setPageUrl(window.location.href);
 
     callMetricRpc("get_app_download_metrics", { p_key: METRIC_KEY })
       .then((payload) => {
@@ -125,13 +144,15 @@ export default function Home() {
   }
 
   async function handleCopyLink() {
+    const shareUrl = pageUrl || window.location.href;
+
     try {
-      await navigator.clipboard.writeText(downloadUrl);
+      await copyWithFallback(shareUrl);
       await recordEvent("click");
       setCopyStatus("Copied");
       window.setTimeout(() => setCopyStatus("Copy link"), 2200);
     } catch {
-      setCopyStatus("Copy failed");
+      setCopyStatus("Copy blocked");
       window.setTimeout(() => setCopyStatus("Copy link"), 2200);
     }
   }
@@ -172,6 +193,14 @@ export default function Home() {
               {copyStatus}
             </button>
           </div>
+
+          <input
+            className="share-link"
+            readOnly
+            aria-label="CatApp download page link"
+            value={pageUrl || "https://catapp-download.ngbridz.chatgpt.site"}
+            onFocus={(event) => event.currentTarget.select()}
+          />
 
           <p className="install-note">
             If your phone asks for permission, allow installation from your

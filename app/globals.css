@@ -168,6 +168,23 @@ h1 {
   line-height: 1.55;
 }
 
+.share-link {
+  width: min(100%, 560px);
+  min-height: 46px;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdf9;
+  color: #4a3d34;
+  padding: 0 14px;
+  font-size: 0.95rem;
+}
+
+.share-link:focus {
+  border-color: var(--accent);
+  outline: 3px solid rgba(143, 29, 29, 0.14);
+}
+
 .stats-panel {
   display: grid;
   align-content: center;
