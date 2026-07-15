@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useMemo, useState } from "react";
 import dailyReadingEntriesData from "./assets/data/daily-readings-docx-entries.json";
 import nigeriaOrdo2026Data from "./assets/data/nigeria-ordo-2026.json";
@@ -9,6 +10,7 @@ import prayersData from "./assets/data/prayers.json";
 import {
   createCommunityComment,
   createCommunityPost,
+  createAdvertisement,
   fetchActiveAdvertisements,
   fetchAdminOverview,
   fetchAdminModuleData,
@@ -33,6 +35,7 @@ import {
   syncUserSettings,
   submitHymnCorrection,
   submitIdentityVerification,
+  syncHomeParishFromProfile,
   updateCurrentUserProfile,
   updateParishDetails,
 } from "./src/supabase";
@@ -1810,17 +1813,28 @@ function ParishesScreen() {
   useEffect(() => {
     let isMounted = true;
 
-    Promise.all([fetchVerifiedParishes(), getLocalParishes()]).then(([records, localRecords]) => {
+    Promise.all([fetchVerifiedParishes(), getLocalParishes(), getAppSettings()]).then(([records, localRecords, settings]) => {
       if (!isMounted) return;
 
+      const profileParish = settings.profile?.homeParish?.trim()
+        ? localParishFromProfile({
+            fullName: settings.profile.fullName,
+            homeParish: settings.profile.homeParish,
+            homeParishAddress: settings.profile.homeParishAddress,
+            homeParishPhone: settings.profile.homeParishPhone,
+            homeParishMassTimes: settings.profile.homeParishMassTimes,
+            homeParishConfessionTimes: settings.profile.homeParishConfessionTimes,
+          })
+        : null;
       const remoteRecords = records?.length ? records : [];
-      const mergedRecords = mergeUniqueById([...(localRecords ?? []), ...remoteRecords, ...parishes]);
+      const mergedRecords = mergeUniqueById([...(profileParish ? [profileParish] : []), ...(localRecords ?? []), ...remoteRecords, ...parishes]);
       setRawParishRecords(mergedRecords);
       const mapped = mergedRecords.map((record, index) => formatParishRecord(record, index));
       setAllDirectoryParishes(mapped);
       setDirectoryParishes(mapped);
-      if (localRecords.length) {
-        setParishStatus(`${localRecords.length} saved parish${localRecords.length === 1 ? "" : "es"} available offline. Showing Lagos reference distances.`);
+      const savedCount = (localRecords?.length ?? 0) + (profileParish ? 1 : 0);
+      if (savedCount) {
+        setParishStatus(`${savedCount} saved/profile parish${savedCount === 1 ? "" : "es"} available. Showing Lagos reference distances.`);
       } else if (remoteRecords.length) {
         setParishStatus(`${remoteRecords.length} parish${remoteRecords.length === 1 ? "" : "es"} loaded from the database. Showing Lagos reference distances.`);
       } else {
@@ -2050,6 +2064,13 @@ function ProfileScreen({
   const [profileSubmit, setProfileSubmit] = useState<SubmitState>("idle");
   const [identitySubmit, setIdentitySubmit] = useState<SubmitState>("idle");
   const [adminSubmit, setAdminSubmit] = useState<SubmitState>("idle");
+  const [adTitle, setAdTitle] = useState("");
+  const [adSponsor, setAdSponsor] = useState("");
+  const [adPlacement, setAdPlacement] = useState("today_top");
+  const [adBody, setAdBody] = useState("");
+  const [adTargetUrl, setAdTargetUrl] = useState("");
+  const [adSubmit, setAdSubmit] = useState<SubmitState>("idle");
+  const [baptismalCard, setBaptismalCard] = useState<ImagePicker.ImagePickerAsset | null>(null);
 
   useEffect(() => {
     const finishAuth = async (url: string | null) => {
@@ -2356,6 +2377,59 @@ function ProfileScreen({
               </Pressable>
             </View>
           </SectionCard>
+          {moduleName === "Advertisement Management" ? (
+            <SectionCard>
+              <View style={styles.cardHeader}>
+                <Text style={styles.cardTitle}>Post Advertisement</Text>
+                <Text style={styles.smallBadge}>Live placement</Text>
+              </View>
+              <View style={styles.cardBody}>
+                <TextInput value={adTitle} onChangeText={setAdTitle} style={styles.searchInputBox} placeholder="Advert title" placeholderTextColor="#77717d" />
+                <TextInput value={adSponsor} onChangeText={setAdSponsor} style={styles.searchInputBox} placeholder="Sponsor or parish name" placeholderTextColor="#77717d" />
+                <TextInput value={adPlacement} onChangeText={setAdPlacement} autoCapitalize="none" style={styles.searchInputBox} placeholder="Placement, e.g. today_top" placeholderTextColor="#77717d" />
+                <TextInput value={adTargetUrl} onChangeText={setAdTargetUrl} autoCapitalize="none" keyboardType="url" style={styles.searchInputBox} placeholder="Target URL (optional)" placeholderTextColor="#77717d" />
+                <TextInput value={adBody} onChangeText={setAdBody} multiline style={styles.composerInput} placeholder="Advert body or admin note" placeholderTextColor="#77717d" />
+                <SubmitButton
+                  icon="megaphone-outline"
+                  label="Post Advert"
+                  successLabel="Advert Posted"
+                  state={adSubmit}
+                  variant="secondary"
+                  onPress={async () => {
+                    if (!adTitle.trim()) {
+                      setAdminStatus("Add an advert title before posting.");
+                      return;
+                    }
+                    setAdSubmit("saving");
+                    const result = await createAdvertisement({
+                      title: adTitle,
+                      sponsor: adSponsor,
+                      placement: adPlacement,
+                      body: adBody,
+                      targetUrl: adTargetUrl,
+                      status: "active",
+                    });
+                    setAdminStatus(result.message);
+                    if (result.ok) {
+                      const [overview, data] = await Promise.all([
+                        fetchAdminOverview(),
+                        fetchAdminModuleData(moduleName),
+                      ]);
+                      setAdminOverview(overview);
+                      setAdminModuleRows(Array.isArray(data.rows) ? data.rows : []);
+                      setAdTitle("");
+                      setAdSponsor("");
+                      setAdPlacement("today_top");
+                      setAdBody("");
+                      setAdTargetUrl("");
+                    }
+                    setAdSubmit(result.ok ? "success" : "idle");
+                    if (result.ok) setTimeout(() => setAdSubmit("idle"), 1200);
+                  }}
+                />
+              </View>
+            </SectionCard>
+          ) : null}
           {adminLoading ? (
               <View style={styles.centered}>
                 <ActivityIndicator color={colors.primary} />
@@ -2537,15 +2611,14 @@ function ProfileScreen({
                 homeParishConfessionTimes,
               });
               const result = localParish
-                ? await updateParishDetails({
-                    parishName: homeParish,
-                    submittedByName: fullName,
-                    proposedAddress: homeParishAddress,
-                    proposedPhone: homeParishPhone,
-                    proposedMassTimes: homeParishMassTimes,
-                    proposedConfessionTimes: homeParishConfessionTimes,
-                    sourceContext: "profile_home_parish",
-                    note: `Home parish details updated from ${fullName || email || "a CatApp user"}'s profile.`,
+                ? await syncHomeParishFromProfile({
+                    fullName,
+                    email,
+                    homeParish,
+                    homeParishAddress,
+                    homeParishPhone,
+                    homeParishMassTimes,
+                    homeParishConfessionTimes,
                   })
                 : { ok: true, message: "Profile saved." };
               setProfileStatus(profileResult.ok ? result.message : `${profileResult.message} Local profile saved.`);
@@ -2580,6 +2653,36 @@ function ProfileScreen({
           </Pressable>
           {showVerificationForm ? (
             <>
+              <Pressable
+                style={styles.secondaryButton}
+                onPress={async () => {
+                  const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                  if (!permission.granted) {
+                    setProfileStatus("Photo access is required to upload a baptismal card.");
+                    return;
+                  }
+                  const result = await ImagePicker.launchImageLibraryAsync({
+                    allowsEditing: false,
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                    quality: 0.8,
+                  });
+                  if (!result.canceled && result.assets?.[0]) {
+                    setBaptismalCard(result.assets[0]);
+                    setProfileStatus("Baptismal card selected. Submit it for admin verification.");
+                  }
+                }}
+              >
+                <Ionicons color={colors.primary} name="image-outline" size={18} />
+                <Text style={styles.secondaryButtonText}>{baptismalCard ? "Change Baptismal Card Photo" : "Choose Baptismal Card Photo"}</Text>
+              </Pressable>
+              {baptismalCard ? (
+                <View style={styles.noticeBox}>
+                  <Image source={{ uri: baptismalCard.uri }} style={styles.verificationPreview} />
+                  <Text style={styles.mutedText}>{baptismalCard.fileName || "Selected baptismal card image"}</Text>
+                </View>
+              ) : (
+                <Text style={styles.mutedText}>Upload a clear photo of the baptismal card so admins can verify it.</Text>
+              )}
               <TextInput
                 multiline
                 onChangeText={setDocumentNote}
@@ -2594,14 +2697,27 @@ function ProfileScreen({
                 successLabel="Submitted"
                 state={identitySubmit}
                 variant="secondary"
-                onPress={async () => {
+                 onPress={async () => {
+                  if (!baptismalCard) {
+                    setProfileStatus("Choose a baptismal card photo before submitting verification.");
+                    return;
+                  }
                   setIdentitySubmit("saving");
-                  const result = await submitIdentityVerification({ fullName, email, parishName: homeParish, documentNote });
+                  const result = await submitIdentityVerification({
+                    fullName,
+                    email,
+                    parishName: homeParish,
+                    documentNote,
+                    documentUri: baptismalCard.uri,
+                    documentFileName: baptismalCard.fileName,
+                    documentMimeType: baptismalCard.mimeType,
+                  });
                   setProfileStatus(result.message);
                   setIdentitySubmit(result.ok ? "success" : "idle");
                   if (result.ok) {
                     setTimeout(() => {
                       setDocumentNote("");
+                      setBaptismalCard(null);
                       setShowVerificationForm(false);
                       setIdentitySubmit("idle");
                     }, 1100);
@@ -2962,6 +3078,16 @@ function AdminRecordCard({
       </View>
       <Text style={styles.postTitle}>{adminRecordTitle(moduleName, record)}</Text>
       <Text style={styles.postBody}>{adminRecordBody(record).slice(0, 450)}</Text>
+      {record.sponsor ? <InfoRow icon="person-outline" label="Sponsor" value={record.sponsor} /> : null}
+      {record.placement ? <InfoRow icon="phone-portrait-outline" label="Placement" value={record.placement} /> : null}
+      {record.target_url ? <InfoRow icon="link-outline" label="Target URL" value={record.target_url} /> : null}
+      {record.document_file_name ? <InfoRow icon="document-attach-outline" label="Baptismal card file" value={record.document_file_name} /> : null}
+      {record.document_url ? (
+        <Pressable style={styles.secondaryButton} onPress={() => Linking.openURL(String(record.document_url))}>
+          <Ionicons color={colors.primary} name="open-outline" size={18} />
+          <Text style={styles.secondaryButtonText}>Open Baptismal Card</Text>
+        </Pressable>
+      ) : null}
       {record.proposed_phone ? <InfoRow icon="call-outline" label="Proposed phone" value={safeAdminText(record.proposed_phone)} /> : null}
       {safeAdminJson(record.proposed_mass_times) ? <InfoRow icon="time-outline" label="Proposed Mass" value={safeAdminJson(record.proposed_mass_times)} /> : null}
       {safeAdminJson(record.proposed_confession_times) ? <InfoRow icon="chatbubble-outline" label="Proposed confession" value={safeAdminJson(record.proposed_confession_times)} /> : null}
@@ -3311,6 +3437,7 @@ const styles = StyleSheet.create({
   progressTrack: { backgroundColor: colors.surfaceContainer, borderRadius: 5, height: 8, width: 82 },
   progressFill: { backgroundColor: colors.gold, borderRadius: 5, height: 8, width: 58 },
   uploadBox: { borderColor: colors.outline, borderRadius: 12, borderStyle: "dashed", borderWidth: 1, gap: 16, margin: 16, marginTop: 0, padding: 18 },
+  verificationPreview: { borderRadius: 10, height: 190, resizeMode: "cover", width: "100%" },
   profileInfo: { alignItems: "center", backgroundColor: colors.surfaceContainer, borderRadius: 12, flexDirection: "row", gap: 16, padding: 18 },
   preferenceCard: { backgroundColor: colors.surface, borderColor: colors.outline, borderRadius: 12, borderWidth: 1, paddingHorizontal: 16 },
   preferenceRow: { alignItems: "center", borderBottomColor: "#eadce1", borderBottomWidth: 1, flexDirection: "row", justifyContent: "space-between", paddingVertical: 17 },

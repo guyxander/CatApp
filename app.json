@@ -36,6 +36,12 @@
           "icon": "./assets/catapp-logo.png",
           "color": "#ffb743"
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "CatApp uses your photo library so you can upload a baptismal card for Catholic identity verification."
+        }
       ]
     ],
     "extra": {

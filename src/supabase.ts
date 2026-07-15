@@ -165,6 +165,31 @@ export async function fetchActiveAdvertisements(placement: string): Promise<Arra
   return data ?? [];
 }
 
+export async function createAdvertisement(input: Record<string, any>): Promise<ActionResult<{ advertisement?: Record<string, any> }>> {
+  if (!supabase) return { ok: false, message: "Advertisement management requires Supabase configuration." };
+  try {
+    await ensureAdmin();
+    const payload = {
+      title: String(input.title || "").trim(),
+      sponsor: String(input.sponsor || "").trim() || null,
+      placement: String(input.placement || "today_top").trim(),
+      status: String(input.status || "active").trim(),
+      body: String(input.body || "").trim() || null,
+      target_url: String(input.targetUrl || "").trim() || null,
+      starts_at: input.startsAt || new Date().toISOString(),
+      ends_at: input.endsAt || null,
+      updated_at: new Date().toISOString(),
+    };
+    if (!payload.title) return { ok: false, message: "Add an advert title before saving." };
+    const { data, error } = await supabase.from("advertisements").insert(payload).select("*").maybeSingle();
+    if (error) return { ok: false, message: error.message };
+    await logAdminAction("create_ad", "advertisement", data?.id, { title: payload.title, placement: payload.placement });
+    return { ok: true, message: "Advertisement posted.", advertisement: data ?? payload };
+  } catch (error: any) {
+    return { ok: false, message: error.message ?? "Advertisement could not be posted." };
+  }
+}
+
 export async function fetchCommunityPosts(): Promise<CommunityPost[] | null> {
   return selectTable<CommunityPost>("community_posts");
 }
@@ -387,6 +412,21 @@ export async function updateCurrentUserProfile(input: Record<string, any>): Prom
   return { ok: true, message: "Profile synced to the database." };
 }
 
+export async function syncHomeParishFromProfile(input: Record<string, any>): Promise<ActionResult<{ parish?: ParishRecord }>> {
+  const parishName = String(input.homeParish || input.parishName || "").trim();
+  if (!parishName) return { ok: false, message: "Add a home parish before syncing it to the parish database." };
+  return updateParishDetails({
+    parishName,
+    submittedByName: input.fullName || input.email || "CatApp profile",
+    proposedAddress: input.homeParishAddress,
+    proposedPhone: input.homeParishPhone,
+    proposedMassTimes: input.homeParishMassTimes,
+    proposedConfessionTimes: input.homeParishConfessionTimes,
+    sourceContext: "profile_home_parish",
+    note: `Home parish details updated from ${input.fullName || input.email || "a CatApp user"}'s profile.`,
+  });
+}
+
 export async function syncUserSettings(settings: Record<string, any>): Promise<ActionResult> {
   const userId = await currentUserId();
   if (!supabase || !userId) return { ok: false, message: "Settings saved locally until you sign in." };
@@ -491,15 +531,43 @@ export async function updateParishDetails(input: Record<string, any>): Promise<A
     : { ok: true, message: "Parish added to the parish database.", parish: data as ParishRecord };
 }
 
+async function uploadVerificationDocument(input: Record<string, any>) {
+  if (!supabase || !input.documentUri) return null;
+  const userId = await currentUserId();
+  const extension = String(input.documentFileName || input.documentUri).split(".").pop()?.split("?")[0] || "jpg";
+  const safeExtension = extension.replace(/[^a-zA-Z0-9]/g, "") || "jpg";
+  const path = `${userId || "anonymous"}/${Date.now()}-${Math.random().toString(36).slice(2)}.${safeExtension}`;
+  const response = await fetch(input.documentUri);
+  const body = await response.arrayBuffer();
+  const { data, error } = await supabase.storage
+    .from("baptismal-cards")
+    .upload(path, body, {
+      contentType: input.documentMimeType || "image/jpeg",
+      upsert: false,
+    });
+  if (error) throw error;
+  const { data: publicUrl } = supabase.storage.from("baptismal-cards").getPublicUrl(data.path);
+  return { path: data.path, publicUrl: publicUrl.publicUrl };
+}
+
 export async function submitIdentityVerification(input: Record<string, any>): Promise<ActionResult> {
   if (!supabase) return { ok: false, message: "Identity verification requires Supabase configuration." };
+  try {
+    const upload = await uploadVerificationDocument(input);
   const { error } = await supabase.from("identity_verification_requests").insert({
     full_name: input.fullName,
     email: input.email,
     parish_name: input.parishName,
     document_note: input.documentNote,
+      document_url: upload?.publicUrl || input.documentUrl || null,
+      document_path: upload?.path || null,
+      document_file_name: input.documentFileName || null,
+      document_mime_type: input.documentMimeType || null,
   });
   return error ? { ok: false, message: error.message } : { ok: true, message: "Verification request submitted." };
+  } catch (error: any) {
+    return { ok: false, message: error.message ?? "Verification request could not be submitted." };
+  }
 }
 
 async function countRows(table: string, filters: Record<string, string> = {}) {

@@ -61,3 +61,31 @@ grant select, insert, update, delete on
   public.advertisements,
   public.admin_audit_logs
 to authenticated;
+
+alter table public.identity_verification_requests
+  add column if not exists document_url text,
+  add column if not exists document_path text,
+  add column if not exists document_file_name text,
+  add column if not exists document_mime_type text;
+
+alter table public.advertisements
+  add column if not exists body text,
+  add column if not exists target_url text,
+  add column if not exists starts_at timestamptz,
+  add column if not exists ends_at timestamptz,
+  add column if not exists updated_at timestamptz not null default now();
+
+insert into storage.buckets (id, name, public)
+values ('baptismal-cards', 'baptismal-cards', true)
+on conflict (id) do update set public = true;
+
+create policy "authenticated users can upload own baptismal cards" on storage.objects
+  for insert to authenticated
+  with check (
+    bucket_id = 'baptismal-cards'
+    and (select auth.uid())::text = (storage.foldername(name))[1]
+  );
+
+create policy "authenticated users can read baptismal card uploads" on storage.objects
+  for select to authenticated
+  using (bucket_id = 'baptismal-cards');
