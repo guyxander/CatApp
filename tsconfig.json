@@ -5,5 +5,5 @@
     "resolveJsonModule": true,
     "noEmit": true
   },
-  "exclude": ["supabase/functions"]
+  "exclude": ["supabase/functions", "landing"]
 }

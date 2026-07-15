@@ -522,7 +522,13 @@ function localParishFromProfile(profile: {
     last_confirmed_at: new Date().toISOString(),
     latitude: null,
     longitude: null,
+    isProfileParish: true,
   };
+}
+
+function nigeriaOrdoCelebrationForDate(date: string) {
+  const mapping = nigeriaOrdo2026.find((entry) => entry.date === date);
+  return mapping?.primaryCelebration || mapping?.celebration || "";
 }
 
 function approvedLocalReadingForDate(date: string) {
@@ -839,7 +845,7 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
     setShowFull(false);
     setReadingSource("Loading readings...");
     setReadingSourceUrl(null);
-    setSaintOfTheDay("Today in the Church");
+    setSaintOfTheDay(nigeriaOrdoCelebrationForDate(selectedDate) || "Today in the Church");
 
     fetchDailyReadings(selectedDate).then(async (response) => {
       if (!isMounted) return;
@@ -857,7 +863,14 @@ function TodayScreen({ refreshToken }: { refreshToken: number }) {
         }))
       );
       setReadingSource(response ? "Daily readings loaded." : "Offline readings loaded.");
-      setSaintOfTheDay(offlineResponse.celebrationTitle || offlineResponse.celebration_title || offlineResponse.title || "Today in the Church");
+      setSaintOfTheDay(
+        nigeriaOrdoCelebrationForDate(selectedDate)
+          || offlineResponse.celebration?.title
+          || offlineResponse.celebrationTitle
+          || offlineResponse.celebration_title
+          || offlineResponse.title
+          || "Today in the Church",
+      );
       setReadingSourceUrl(offlineResponse.sections.find((section: any) => section.source?.startsWith("http"))?.source ?? null);
       if (response) setOfflineCache(`readings:${selectedDate}`, response);
     }).finally(() => {
@@ -1822,8 +1835,10 @@ function distanceBetween(fromLatitude: number, fromLongitude: number, latitude: 
 }
 
 function formatParishRecord(record: any, index = 0, userCoords?: { latitude: number; longitude: number }) {
-  const latitude = Number(record.latitude);
-  const longitude = Number(record.longitude);
+  const hasLatitude = record.latitude !== null && record.latitude !== undefined && String(record.latitude).trim() !== "";
+  const hasLongitude = record.longitude !== null && record.longitude !== undefined && String(record.longitude).trim() !== "";
+  const latitude = hasLatitude ? Number(record.latitude) : Number.NaN;
+  const longitude = hasLongitude ? Number(record.longitude) : Number.NaN;
   const hasCoords = Number.isFinite(latitude) && Number.isFinite(longitude);
   const distanceKm = hasCoords
     ? userCoords
@@ -1845,6 +1860,8 @@ function formatParishRecord(record: any, index = 0, userCoords?: { latitude: num
     dataQualityNotes: record.data_quality_notes,
     latitude: record.latitude,
     longitude: record.longitude,
+    isProfileParish: Boolean(record.isProfileParish || record.id?.startsWith?.("local-profile-") || record.diocese === "Saved Parish"),
+    isLocalParish: Boolean(record.isLocalParish || record.id?.startsWith?.("local-") || record.id?.startsWith?.("local-profile-")),
   };
 }
 
@@ -2050,13 +2067,21 @@ function ParishesScreen() {
         const result = await requestCurrentLocation();
         setParishStatus(result.message);
         if (!result.ok || !result.coords || !rawParishRecords.length) return;
-        const nearby = rawParishRecords
-          .map((record, index) => formatParishRecord(record, index, result.coords))
+        const formatted = rawParishRecords.map((record, index) => formatParishRecord(record, index, result.coords));
+        const nearby = formatted
           .filter((record) => record.distanceKm !== null && record.distanceKm <= 10)
           .sort((a, b) => (a.distanceKm ?? 999) - (b.distanceKm ?? 999));
+        const savedOrProfile = formatted.filter((record) => record.isProfileParish || record.isLocalParish);
+        const nextParishes = mergeUniqueById([...savedOrProfile, ...nearby]);
 
-        setDirectoryParishes(nearby);
-        setParishStatus(nearby.length ? "Showing parishes within 10 km of your location." : "No geocoded parishes were found within 10 km.");
+        setDirectoryParishes(nextParishes);
+        setParishStatus(
+          nearby.length
+            ? `Showing ${nearby.length} geocoded parish${nearby.length === 1 ? "" : "es"} within 10 km. Saved/profile parishes stay visible even while coordinates are pending.`
+            : savedOrProfile.length
+              ? "No geocoded parishes were found within 10 km. Your saved/profile parish is still shown while coordinates are pending."
+              : "No geocoded parishes were found within 10 km.",
+        );
       }}>
         <Ionicons color={colors.primary} name="navigate-outline" size={18} />
         <Text style={styles.secondaryButtonText}>Use My Location</Text>
