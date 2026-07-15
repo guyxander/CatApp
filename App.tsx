@@ -2029,6 +2029,7 @@ function ProfileScreen({
 }) {
   const [showAdmin, setShowAdmin] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [aboutPage, setAboutPage] = useState<"main" | "privacy" | "terms">("main");
   const [selectedAdminModule, setSelectedAdminModule] = useState<AdminModuleName | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [fullName, setFullName] = useState("");
@@ -2128,6 +2129,10 @@ function ProfileScreen({
         return true;
       }
       if (showAbout) {
+        if (aboutPage !== "main") {
+          setAboutPage("main");
+          return true;
+        }
         setShowAbout(false);
         return true;
       }
@@ -2138,7 +2143,7 @@ function ProfileScreen({
       return false;
     });
     return () => subscription.remove();
-  }, [profileEditing, selectedAdminModule, showAbout, showAdmin]);
+  }, [aboutPage, profileEditing, selectedAdminModule, showAbout, showAdmin]);
 
   useEffect(() => {
     let isMounted = true;
@@ -2534,9 +2539,64 @@ function ProfileScreen({
   }
 
   if (showAbout) {
+    if (aboutPage === "privacy") {
+      return (
+        <View style={styles.stackLarge}>
+          <Pressable style={styles.backButton} onPress={() => setAboutPage("main")}>
+            <Ionicons color={colors.primary} name="arrow-back" size={20} />
+            <Text style={styles.backButtonText}>About</Text>
+          </Pressable>
+          <View>
+            <Text style={styles.overline}>CatApp</Text>
+            <Text style={styles.pageTitle}>Privacy Policy</Text>
+            <Text style={styles.secondaryText}>How CatApp handles profile, parish, community and verification data.</Text>
+          </View>
+          <SectionCard>
+            <View style={styles.cardBody}>
+              <InfoRow icon="person-outline" label="Account Data" value="We use your name, email and home parish to personalize your profile and sync your saved parish details." />
+              <InfoRow icon="business-outline" label="Parish Data" value="Parish details you submit may be stored as community parish records or admin review requests." />
+              <InfoRow icon="shield-checkmark-outline" label="Baptismal Card" value="Uploaded baptismal card images are used only for Catholic identity verification by authorized admins." />
+              <InfoRow icon="chatbubbles-outline" label="Community Content" value="Posts, comments, reports and reactions may be stored to run community moderation and safety features." />
+              <InfoRow icon="location-outline" label="Location" value="Location is optional and used to estimate parish distance when you enable it." />
+              <Text style={styles.postBody}>For privacy questions or deletion requests, contact Nadbooks Ventures at hello@hazi.ng or WhatsApp +234 902 984 0305.</Text>
+            </View>
+          </SectionCard>
+        </View>
+      );
+    }
+
+    if (aboutPage === "terms") {
+      return (
+        <View style={styles.stackLarge}>
+          <Pressable style={styles.backButton} onPress={() => setAboutPage("main")}>
+            <Ionicons color={colors.primary} name="arrow-back" size={20} />
+            <Text style={styles.backButtonText}>About</Text>
+          </Pressable>
+          <View>
+            <Text style={styles.overline}>CatApp</Text>
+            <Text style={styles.pageTitle}>Terms of Use</Text>
+            <Text style={styles.secondaryText}>Guidelines for using CatApp respectfully and responsibly.</Text>
+          </View>
+          <SectionCard>
+            <View style={styles.cardBody}>
+              <InfoRow icon="heart-outline" label="Catholic Community" value="Use CatApp for prayer, parish discovery, readings, hymns and respectful Catholic community participation." />
+              <InfoRow icon="create-outline" label="Submitted Content" value="Only submit parish, profile, advert or community information you believe is accurate and appropriate." />
+              <InfoRow icon="megaphone-outline" label="Advertisements" value="Advert placements are subject to review and may be accepted, paused or removed by CatApp admins." />
+              <InfoRow icon="shield-outline" label="Moderation" value="Admins may review, reject or remove content that is misleading, abusive, unsafe or inconsistent with the purpose of the app." />
+              <InfoRow icon="alert-circle-outline" label="No Official Parish Guarantee" value="Community-submitted parish data may need verification. Confirm critical schedules directly with the parish." />
+              <Text style={styles.postBody}>By using CatApp, you agree to use it lawfully, protect other users' dignity, and contact Nadbooks Ventures for support where needed.</Text>
+            </View>
+          </SectionCard>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.stackLarge}>
-        <Pressable style={styles.backButton} onPress={() => setShowAbout(false)}>
+        <Pressable style={styles.backButton} onPress={() => {
+          setAboutPage("main");
+          setShowAbout(false);
+        }}>
           <Ionicons color={colors.primary} name="arrow-back" size={20} />
           <Text style={styles.backButtonText}>Profile</Text>
         </Pressable>
@@ -2554,6 +2614,20 @@ function ProfileScreen({
             <InfoRow icon="business-outline" label="Name" value="Nadbooks Ventures" />
             <InfoRow icon="mail-outline" label="Email" value="hello@hazi.ng" />
             <InfoRow icon="logo-whatsapp" label="Phone / WhatsApp" value="+234 902 984 0305" />
+            <Pressable style={styles.preferenceRow} onPress={() => setAboutPage("privacy")}>
+              <View style={styles.row}>
+                <Ionicons color={colors.secondary} name="lock-closed-outline" size={22} />
+                <Text style={styles.preferenceLabel}>Privacy Policy</Text>
+              </View>
+              <Ionicons color={colors.muted} name="chevron-forward" size={22} />
+            </Pressable>
+            <Pressable style={styles.preferenceRow} onPress={() => setAboutPage("terms")}>
+              <View style={styles.row}>
+                <Ionicons color={colors.secondary} name="document-text-outline" size={22} />
+                <Text style={styles.preferenceLabel}>Terms of Use</Text>
+              </View>
+              <Ionicons color={colors.muted} name="chevron-forward" size={22} />
+            </Pressable>
             <Pressable style={styles.primaryButtonWide} onPress={() => Linking.openURL("mailto:hello@hazi.ng?subject=CatApp%20advert%20enquiry")}>
               <Ionicons color="#ffffff" name="mail-outline" size={18} />
               <Text style={styles.primaryButtonText}>Contact Us for Ads</Text>
