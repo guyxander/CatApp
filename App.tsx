@@ -302,7 +302,7 @@ const novenas = novenasData as Novena[];
 const prayers = prayersData as Prayer[];
 
 const communityPosts: Array<{ author: string; badge?: string; title: string; body: string; comments: number; featured: boolean }> = [];
-const currentAppVersion = "0.1.0";
+const currentAppVersion = "0.1.1";
 const appUpdateManifestUrl = "https://catapp-download.ngbridz.chatgpt.site/version.json";
 const appDownloadPageUrl = "https://catapp-download.ngbridz.chatgpt.site";
 const placeholderPostTitles = new Set([

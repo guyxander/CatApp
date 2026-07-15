@@ -4,7 +4,7 @@
     "owner": "guyxander",
     "slug": "catapp",
     "scheme": "catapp",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "orientation": "portrait",
     "icon": "./assets/catapp-logo.png",
     "userInterfaceStyle": "light",
@@ -13,6 +13,7 @@
     ],
     "android": {
       "package": "ng.catholic.catapp",
+      "versionCode": 2,
       "permissions": [
         "POST_NOTIFICATIONS",
         "android.permission.ACCESS_COARSE_LOCATION",
