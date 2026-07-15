@@ -51,6 +51,25 @@ create policy "authenticated users can read parish records" on public.parishes
 
 -- Admin portal queue/action support.
 -- Applied as idempotent policies in Supabase so admins can manage review queues.
+create or replace function public.is_catapp_admin()
+returns boolean
+language sql
+stable
+security invoker
+set search_path = public
+as $$
+  select coalesce((auth.jwt() -> 'app_metadata' ->> 'role') = 'superadmin', false)
+    or exists (
+      select 1
+      from public.profiles p
+      where p.id = (select auth.uid())
+        and p.is_admin = true
+    );
+$$;
+
+revoke all on function public.is_catapp_admin() from public;
+grant execute on function public.is_catapp_admin() to authenticated;
+
 grant select, insert, update, delete on
   public.parish_edit_requests,
   public.community_reports,
@@ -74,6 +93,18 @@ alter table public.advertisements
   add column if not exists starts_at timestamptz,
   add column if not exists ends_at timestamptz,
   add column if not exists updated_at timestamptz not null default now();
+
+drop policy if exists "Admins can manage advertisements" on public.advertisements;
+create policy "Admins can manage advertisements" on public.advertisements
+  for all to authenticated
+  using (public.is_catapp_admin())
+  with check (public.is_catapp_admin());
+
+drop policy if exists "Admins can manage admin_audit_logs" on public.admin_audit_logs;
+create policy "Admins can manage admin_audit_logs" on public.admin_audit_logs
+  for all to authenticated
+  using (public.is_catapp_admin())
+  with check (public.is_catapp_admin());
 
 insert into storage.buckets (id, name, public)
 values ('baptismal-cards', 'baptismal-cards', true)

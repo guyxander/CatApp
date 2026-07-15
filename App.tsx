@@ -39,7 +39,7 @@ import {
   updateCurrentUserProfile,
   updateParishDetails,
 } from "./src/supabase";
-import type { AdminModuleName } from "./src/supabase";
+import type { AdminModuleName, AdvertisementRecord } from "./src/supabase";
 import { addDays, describeCalendar } from "./src/liturgicalCalendar";
 import {
   getAppSettings,
@@ -785,7 +785,10 @@ function TodayScreen() {
   const [readings, setReadings] = useState<ReadingSection[] | null>(null);
   const [readingSource, setReadingSource] = useState(isSupabaseConfigured ? "Loading readings..." : "Local fallback content");
   const [readingSourceUrl, setReadingSourceUrl] = useState<string | null>(null);
-  const [adTitle, setAdTitle] = useState("Support the Mission: St. Jude's Annual Appeal 2026");
+  const [activeAd, setActiveAd] = useState<AdvertisementRecord>({
+    title: "Support the Mission: St. Jude's Annual Appeal 2026",
+    sponsor: "CatApp Ads",
+  });
   const calendarInfo = describeCalendar(selectedDate);
   const calendarCells = useMemo(() => buildMonthCalendar(calendarMonth), [calendarMonth]);
   const displayedReadings = readings ? (showFull ? readings : readings.slice(0, 1)) : [];
@@ -835,7 +838,7 @@ function TodayScreen() {
 
   useEffect(() => {
     fetchActiveAdvertisements("today_top").then((records) => {
-      if (records?.[0]) setAdTitle(`${records[0].title}${records[0].sponsor ? ` - ${records[0].sponsor}` : ""}`);
+      if (records?.[0]) setActiveAd(records[0]);
     });
   }, []);
 
@@ -925,9 +928,14 @@ function TodayScreen() {
 
   return (
     <View style={styles.stackLarge}>
-      <View style={styles.adBar}>
-        <Text style={styles.adText}>{adTitle}</Text>
-      </View>
+      <Pressable
+        disabled={!activeAd.target_url}
+        onPress={() => activeAd.target_url ? Linking.openURL(activeAd.target_url) : undefined}
+        style={styles.adBar}
+      >
+        <Text style={styles.adText}>{activeAd.title}{activeAd.sponsor ? ` - ${activeAd.sponsor}` : ""}</Text>
+        {activeAd.body ? <Text style={styles.adSubText}>{activeAd.body}</Text> : null}
+      </Pressable>
       <View>
         <View style={styles.metaRow}>
           <View style={styles.greenDot} />
@@ -3290,10 +3298,12 @@ const styles = StyleSheet.create({
   adBar: {
     backgroundColor: colors.primary,
     borderRadius: 8,
+    gap: 3,
     paddingHorizontal: 10,
     paddingVertical: 6,
   },
   adText: { color: "#ffffff", fontSize: 10, fontWeight: "700", letterSpacing: 1, textAlign: "center", textTransform: "uppercase" },
+  adSubText: { color: "#fff6e6", fontSize: 12, lineHeight: 16, textAlign: "center" },
   metaRow: { alignItems: "center", flexDirection: "row", gap: 7, marginBottom: 4 },
   greenDot: { backgroundColor: colors.green, borderRadius: 5, height: 10, width: 10 },
   overline: { color: colors.muted, fontSize: 11, fontWeight: "700", letterSpacing: 1.1, textTransform: "uppercase" },

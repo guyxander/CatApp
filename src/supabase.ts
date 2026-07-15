@@ -72,6 +72,16 @@ export type ParishRecord = Record<string, any> & {
   longitude?: number;
 };
 
+export type AdvertisementRecord = {
+  id?: string;
+  title: string;
+  sponsor?: string | null;
+  body?: string | null;
+  placement?: string;
+  target_url?: string | null;
+  status?: string;
+};
+
 export type AdminModuleName =
   | "Content Management"
   | "Daily Reading Approvals"
@@ -154,13 +164,15 @@ export async function fetchVerifiedParishes(): Promise<ParishRecord[] | null> {
   return selectTable<ParishRecord>("parishes");
 }
 
-export async function fetchActiveAdvertisements(placement: string): Promise<Array<{ title: string; sponsor?: string }> | null> {
+export async function fetchActiveAdvertisements(placement: string): Promise<AdvertisementRecord[] | null> {
   if (!supabase) return null;
   const { data, error } = await supabase
     .from("advertisements")
-    .select("title,sponsor")
+    .select("id,title,sponsor,body,placement,target_url,status")
     .eq("placement", placement)
-    .eq("status", "active");
+    .eq("status", "active")
+    .order("priority", { ascending: false })
+    .order("created_at", { ascending: false });
   if (error) return null;
   return data ?? [];
 }
@@ -168,7 +180,7 @@ export async function fetchActiveAdvertisements(placement: string): Promise<Arra
 export async function createAdvertisement(input: Record<string, any>): Promise<ActionResult<{ advertisement?: Record<string, any> }>> {
   if (!supabase) return { ok: false, message: "Advertisement management requires Supabase configuration." };
   try {
-    await ensureAdmin();
+    const admin = await ensureAdmin();
     const payload = {
       title: String(input.title || "").trim(),
       sponsor: String(input.sponsor || "").trim() || null,
@@ -182,9 +194,14 @@ export async function createAdvertisement(input: Record<string, any>): Promise<A
     };
     if (!payload.title) return { ok: false, message: "Add an advert title before saving." };
     const { data, error } = await supabase.from("advertisements").insert(payload).select("*").maybeSingle();
-    if (error) return { ok: false, message: error.message };
+    if (error) {
+      const detail = error.code === "42501"
+        ? "Supabase blocked the advert insert. Confirm this account is marked as admin or superadmin."
+        : error.message;
+      return { ok: false, message: detail };
+    }
     await logAdminAction("create_ad", "advertisement", data?.id, { title: payload.title, placement: payload.placement });
-    return { ok: true, message: "Advertisement posted.", advertisement: data ?? payload };
+    return { ok: true, message: `Advertisement posted by ${admin.profile?.display_name || admin.user.email || "admin"}.`, advertisement: data ?? payload };
   } catch (error: any) {
     return { ok: false, message: error.message ?? "Advertisement could not be posted." };
   }
