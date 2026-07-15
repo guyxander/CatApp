@@ -695,6 +695,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<TabKey>("today");
   const [tabHistory, setTabHistory] = useState<TabKey[]>([]);
   const [darkMode, setDarkMode] = useState(false);
+  const [todayRefreshToken, setTodayRefreshToken] = useState(0);
   const [communityRefreshToken, setCommunityRefreshToken] = useState(0);
   const [communityRefreshing, setCommunityRefreshing] = useState(false);
   const title = useMemo(() => tabs.find((tab) => tab.key === activeTab)?.label ?? "CatApp", [activeTab]);
@@ -712,6 +713,7 @@ export default function App() {
         return true;
       }
       if (activeTab !== "today") {
+        setTodayRefreshToken((token) => token + 1);
         setActiveTab("today");
         return true;
       }
@@ -723,6 +725,7 @@ export default function App() {
   const changeTab = (tab: TabKey) => {
     if (tab === activeTab) return;
     setTabHistory((history) => [...history, activeTab].slice(-8));
+    if (tab === "today") setTodayRefreshToken((token) => token + 1);
     setActiveTab(tab);
   };
 
@@ -746,7 +749,7 @@ export default function App() {
           ) : undefined}
           showsVerticalScrollIndicator={false}
         >
-          {activeTab === "today" && <TodayScreen />}
+          {activeTab === "today" && <TodayScreen refreshToken={todayRefreshToken} />}
           {activeTab === "library" && <LibraryScreen />}
           {activeTab === "community" && <CommunityScreen refreshToken={communityRefreshToken} setRefreshing={setCommunityRefreshing} />}
           {activeTab === "parishes" && <ParishesScreen />}
@@ -772,7 +775,7 @@ function Header({ title, darkMode }: { title: string; darkMode: boolean }) {
   );
 }
 
-function TodayScreen() {
+function TodayScreen({ refreshToken }: { refreshToken: number }) {
   const [bookmarked, setBookmarked] = useState(false);
   const [largeText, setLargeText] = useState(false);
   const [showFull, setShowFull] = useState(false);
@@ -840,7 +843,7 @@ function TodayScreen() {
     fetchActiveAdvertisements("today_top").then((records) => {
       if (records?.[0]) setActiveAd(records[0]);
     });
-  }, []);
+  }, [refreshToken]);
 
   if (selectedDevotion) {
     const isRosary = selectedDevotion === "rosary";

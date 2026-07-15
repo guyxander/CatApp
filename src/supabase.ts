@@ -80,6 +80,10 @@ export type AdvertisementRecord = {
   placement?: string;
   target_url?: string | null;
   status?: string;
+  starts_at?: string | null;
+  ends_at?: string | null;
+  created_at?: string | null;
+  priority?: number | null;
 };
 
 export type AdminModuleName =
@@ -168,12 +172,18 @@ export async function fetchActiveAdvertisements(placement: string): Promise<Adve
   if (!supabase) return null;
   const { data, error } = await supabase
     .from("advertisements")
-    .select("id,title,sponsor,body,placement,target_url,status")
+    .select("id,title,sponsor,body,placement,target_url,status,starts_at,ends_at,created_at,priority")
     .eq("placement", placement)
     .eq("status", "active")
+    .or(`starts_at.is.null,starts_at.lte.${new Date().toISOString()}`)
+    .or(`ends_at.is.null,ends_at.gte.${new Date().toISOString()}`)
     .order("priority", { ascending: false })
-    .order("created_at", { ascending: false });
-  if (error) return null;
+    .order("created_at", { ascending: false })
+    .limit(3);
+  if (error) {
+    console.warn("CatApp advert fetch failed", error.message);
+    return null;
+  }
   return data ?? [];
 }
 
