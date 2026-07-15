@@ -2028,6 +2028,7 @@ function ProfileScreen({
   setDarkMode: (value: boolean) => void;
 }) {
   const [showAdmin, setShowAdmin] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
   const [selectedAdminModule, setSelectedAdminModule] = useState<AdminModuleName | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [fullName, setFullName] = useState("");
@@ -2126,6 +2127,10 @@ function ProfileScreen({
         setShowAdmin(false);
         return true;
       }
+      if (showAbout) {
+        setShowAbout(false);
+        return true;
+      }
       if (profileEditing) {
         setProfileEditing(false);
         return true;
@@ -2133,7 +2138,7 @@ function ProfileScreen({
       return false;
     });
     return () => subscription.remove();
-  }, [profileEditing, selectedAdminModule, showAdmin]);
+  }, [profileEditing, selectedAdminModule, showAbout, showAdmin]);
 
   useEffect(() => {
     let isMounted = true;
@@ -2528,6 +2533,41 @@ function ProfileScreen({
     );
   }
 
+  if (showAbout) {
+    return (
+      <View style={styles.stackLarge}>
+        <Pressable style={styles.backButton} onPress={() => setShowAbout(false)}>
+          <Ionicons color={colors.primary} name="arrow-back" size={20} />
+          <Text style={styles.backButtonText}>Profile</Text>
+        </Pressable>
+        <View>
+          <Text style={styles.overline}>About CatApp</Text>
+          <Text style={styles.pageTitle}>Nadbooks Ventures</Text>
+          <Text style={styles.secondaryText}>For support, partnerships and Catholic advert placements.</Text>
+        </View>
+        <SectionCard>
+          <View style={styles.cardHeader}>
+            <Text style={styles.cardTitle}>Contact Details</Text>
+            <Text style={styles.smallBadge}>Official</Text>
+          </View>
+          <View style={styles.cardBody}>
+            <InfoRow icon="business-outline" label="Name" value="Nadbooks Ventures" />
+            <InfoRow icon="mail-outline" label="Email" value="hello@hazi.ng" />
+            <InfoRow icon="logo-whatsapp" label="Phone / WhatsApp" value="+234 902 984 0305" />
+            <Pressable style={styles.primaryButtonWide} onPress={() => Linking.openURL("mailto:hello@hazi.ng?subject=CatApp%20advert%20enquiry")}>
+              <Ionicons color="#ffffff" name="mail-outline" size={18} />
+              <Text style={styles.primaryButtonText}>Contact Us for Ads</Text>
+            </Pressable>
+            <Pressable style={styles.secondaryButton} onPress={() => Linking.openURL("https://wa.me/2349029840305?text=Hello%20Nadbooks%20Ventures%2C%20I%20want%20to%20advertise%20on%20CatApp.")}>
+              <Ionicons color={colors.primary} name="logo-whatsapp" size={18} />
+              <Text style={styles.secondaryButtonText}>Message on WhatsApp</Text>
+            </Pressable>
+          </View>
+        </SectionCard>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.stackLarge}>
       <View style={styles.centered}>
@@ -2852,6 +2892,14 @@ function ProfileScreen({
           <Text style={styles.adminText}>{isAdmin ? "Parish Management & Analytics" : "Role required - preview available"}</Text>
         </View>
         <Ionicons color="#ffd6fd" name="open-outline" size={25} />
+      </Pressable>
+      <Pressable style={styles.aboutCard} onPress={() => setShowAbout(true)}>
+        <Ionicons color={colors.primary} name="information-circle-outline" size={25} />
+        <View style={styles.flex}>
+          <Text style={styles.aboutTitle}>About & Contact</Text>
+          <Text style={styles.mutedText}>Support, WhatsApp and advert enquiries</Text>
+        </View>
+        <Ionicons color={colors.muted} name="chevron-forward" size={22} />
       </Pressable>
       <Pressable onPress={async () => {
         const result = await signOut();
@@ -3445,6 +3493,8 @@ const styles = StyleSheet.create({
   adminCard: { alignItems: "center", backgroundColor: "#884b8f", borderRadius: 12, flexDirection: "row", gap: 14, padding: 20 },
   adminTitle: { color: "#ffd6fd", fontSize: 24, fontWeight: "800" },
   adminText: { color: "#f0c1ef", fontSize: 15 },
+  aboutCard: { alignItems: "center", backgroundColor: colors.surface, borderColor: colors.outline, borderRadius: 12, borderWidth: 1, flexDirection: "row", gap: 14, padding: 18 },
+  aboutTitle: { color: colors.primary, fontSize: 20, fontWeight: "800" },
   adminGrid: { flexDirection: "row", flexWrap: "wrap", gap: 12 },
   adminMetric: {
     backgroundColor: colors.surface,
